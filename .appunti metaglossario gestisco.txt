@@ -1,0 +1,121 @@
+
+<!-- """ sintassi:  <a href="{% url 'nome_dell'url messo in urls.py %}">Pagina iniziale</a> """ -->
+
+django è in grado di parsare il testo attraverso i commenti per trovare i tag di tipo {%  %}
+
+<li class="nav-item"> scritta normale
+<li class="nav-item active"> scritta evidenziata
+
+home originariamente è class="navbar-brand"
+
+heroku git:remote -a Glossario_Gestisco
+
+
+# print("%s is %d years old." % (name, age))    
+return  "%s / %s - %s"  %  (self.Lemma_it, self.Lemma_ch, self.Id_statico_entry)  #quello che fa apparire nella sezione admin, attributo che riassume tutti gli altri, quindi una primary key presumibilmente, pouò anche esesere la combinazione degli altri
+
+In case you want to sort the set with respect to two attributes, this is the command:
+
+    class Meta:
+        ordering = ['last_name', 'first_name']
+
+git push heroku master vuol dire: spingi il codice sul ramo master (main) di heroku
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="www.metaglossario.polimi.it/img/favicon/gestisco_logo_round_favicon2.png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+
+        <div class="glossary-form"></div>
+
+            <div class="form-group" style="display:inline-block; width:48%;">
+              <label for="glossary_entry_input_1">Lemma IT</label>
+              <input type="text" class="form-control" id="glossary_entry_input_1" placeholder="">              
+            </div>
+
+            <div class="form-group" style="display:inline-block; width:48%; float: right;">
+                    <label for="glossary_entry_input_2">Lemma CH</label>
+                    <input type="text" class="form-control" id="glossary_entry_input_2" placeholder="">              
+            </div>
+
+    a capo e non a capo è "toggle words wrap"
+
+    <input name="Id_statico_entry" value="ciaone" type="text" class="form-control" id="glossary_entry_input_22" placeholder="">              
+         
+<!-- django vuole lo spazio tra gli operatori di uguaglianza o disuguaglianza -->
+
+
+A POST bundles up form data, encodes it for transmission, sends it to the server, and then receives a response. Any request that changes the state of the database–creates, edits, or deletes data–should use a POST.
+
+A GET bundles form data into a string that is added to the destination URL. GET should only be used for requests that do not affect the state of the application, such as a search where nothing within the database is changing, we’re just doing a filtered list view basically.
+
+
+***
+
+modificare l'apparenza di glossario.html in moodo che :
+
+se esiste almeno un campo svizzero
+e contemporaneamente
+esiste almeno un campo italiano
+
+mostra la view di quel singolo elemento appaiata
+
+altrimenti
+
+mostra la view di quel singolo elemento su una sla linea
+
+
+far funzionare le funzioni javascript in un file esterno:
+
+HTML, prima del body closing tag:
+
+    <script type="text/javascript" src={% static "js/prova.js" %}></script>
+
+    <script>
+    funprova();
+    </script> 
+
+Nel file javascript chiamato prova.js , situato nella directory static/js/prova.js:
+
+    function funprova() {
+        alert("Hello! I am an alert box from remote js file!!");
+        }
+
+vedi https://stackoverflow.com/questions/57953127/how-to-have-javascript-presets-todays-date-in-html-form/57989051#57989051
+
+
+
+clonare progetti da github verso il locale
+
+https://help.github.com/en/articles/cloning-a-repository
+
+
+funzionamento del block content, per aggiungere a tutte le pagine la stessa cosa
+
+
+    <div class="container">
+
+      <!-- INSERISCI QUI L'INIZIO PAGINA -->
+
+        {% block content %}
+
+        <!-- INCOLLARE COSE QUI IN MEZZO NON SERVE PERCHè NON LE RAPPRESENTA -->
+
+        {% endblock %}
+
+        
+        <!-- INSERISCI QUI IL PIè DI PAGINA -->
+
+      </div>
+
+nelle pagine dove copiare le cose inserisco
+
+{% extends 'base.html'%} <!-- vuol dire inserisci contenuti da base.html -->
+
+{% block content %} (dove voglio che inizi)
+
+{% endblock %} (dove voglio che finisca)

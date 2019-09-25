@@ -1,0 +1,37 @@
+﻿cd "C:\Users\Tommaso\Django rest framework\Udemy Django\"
+
+conda activate met5
+
+django-admin startproject Metaglossario_Gestisco
+
+cd "C:\Users\Tommaso\Django rest framework\Udemy Django\Metaglossario_Gestisco"
+
+Inizializzare git al version control
+
+git init
+
+vs studio si tinge di verde e fa comparire master in git bash, che significa che siamo nel ramo master della nostra git repository
+
+git add .
+aggiunge tutto alla nostra repository
+
+git commit -m "initial commit"
+
+ora heroku
+
+shh keys skippate
+
+crea app metaglossario_gestisco  manualmente su heroku
+
+heroku git:remote -a metaglossario_gestisco 
+
+#è il nome dell'app creata su heroku
+gli sto dicendo che le cose le voglio caricare lì e non su un altra app
+
+decoupling della secret key:
+
+Heroku > app metaglossario > settings > reveal config vars > key=SECRET_KEY , Value =nv5f(pbo#92(e24l#)oqgbx2sjv6*7_kp)u8uswjmyg$mju(r&
+
+
+
+KEY=SECRET_KEY
