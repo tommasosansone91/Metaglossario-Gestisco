@@ -1,0 +1,232 @@
+{% extends 'base.html'%} <!-- vuol dire inserisci qui la navigation toolbar contenuta in base -->
+
+{% block content %}
+
+    <h1>Aggiungi terminologia</h1>
+    <br>
+    <p id="firstpar">
+        Questo form serve ad inserire nuova terminologia nel <a href={% url "glossario" %}>glossario</a> del progetto GESTI.S.CO Interreg IT-CH.<br>
+        Tutti i campi sono facoltativi, <u>tranne la data di inserimento della terminologia</u>.<br> <!--qua devo fare l'autogenerazione di id statico e data di inserimento-->
+        Il form è pensato per accogliere terminologia proveniente sia da fonti italiane, sia da fonti svizzere.<br>
+        Inserire le informazioni nei campi IT o CH a seconda che la fonte di provenienza sia italiana o svizzera.<br>
+        La terminologia inserita dagli utenti sarà soggetta a revisione da parte dell'amministratore del sito prima di essere mostrata nel glossario.<br>
+    </p>
+
+    <br>
+
+    
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="glossary-form"></div>
+
+            <div class="form-group" style="display:inline-block; width:48%;">
+                  <label for="glossary_entry_input_1">Lemma IT</label>
+                  <input name="Lemma_it" type="text" class="form-control" id="glossary_entry_input_1" placeholder="">              
+            </div>
+
+
+            <div class="form-group" style="width:48%; float: right;">
+                  <label for="glossary_entry_input_2">Lemma CH</label>
+                  <input name="Lemma_ch" type="text" class="form-control" id="glossary_entry_input_2" placeholder="">              
+            </div>
+
+
+            <div class="form-group" style="display:inline-block; width:48%;">
+                  <label for="glossary_entry_input_3">Acronimo IT</label>
+                  <small id="inputHelp" class="form-text text-muted">Sigla abbreviativa del Lemma. Nel caso in cui il lemma sia una grandezza fisica, inserire la lettera o il simbolo che la identifica.</small>
+                  <input name="Acronimo_it" type="text" class="form-control" id="glossary_entry_input_3" placeholder="">              
+            </div>  
+            
+
+            <div class="form-group" style="width:48%; float: right;">
+                  <label for="glossary_entry_input_4">Acronimo CH</label>
+                  <small id="inputHelp" class="form-text text-muted">Sigla abbreviativa del Lemma. Nel caso in cui il lemma sia una grandezza fisica, inserire la lettera o il simbolo che la identifica.</small>
+                  <input name="Acronimo_ch" type="text" class="form-control" id="glossary_entry_input_4" placeholder="">              
+            </div> 
+
+
+            <div class="form-group" style="display:inline-block; width:48%;height: 20%">
+                  <label for="glossary_entry_input_5">Definizione IT</label>
+                  <small id="inputHelp" class="form-text text-muted">Non inserire testo proveniente da due o più fonti diverse.</small>
+                  <textarea style="height:200px" name="Definizione_it" type="text" class="form-control" id="glossary_entry_input_5" placeholder=""></textarea>               
+            </div>
+
+
+            <div class="form-group" style="width:48%; float: right;">
+                  <label for="glossary_entry_input_6">Definizione CH</label>
+                  <small id="inputHelp" class="form-text text-muted">Non inserire testo proveniente da due o più fonti diverse.</small>
+                  <textarea style="height:200px" name="Definizione_ch" type="text" class="form-control" id="glossary_entry_input_6" placeholder=""></textarea>               
+            </div>
+
+
+            <div class="form-group" style="display:inline-block; width:48%;">
+                  <label for="glossary_entry_input_7">Ambito di riferimento della definizione IT</label>
+                  <small id="inputHelp" class="form-text text-muted">Branca scientifica o ramo tecnico nella quale rientra il concetto che si vuole inserire. (es. Idraulica, idrologia, sismologia, ecc.)</small>
+                  <input name="Ambito_riferimento_it" type="text" class="form-control" id="glossary_entry_input_7" placeholder="">              
+            </div>
+
+
+            <div class="form-group" style="width:48%; float: right;">
+                  <label for="glossary_entry_input_8">Ambito di riferimento della definizione CH</label>
+                  <small id="inputHelp" class="form-text text-muted">Branca scientifica o ramo tecnico nella quale rientra il concetto che si vuole inserire. (es. Idraulica, idrologia, sismologia, ecc.)</small>
+                  <input name="Ambito_riferimento_ch" type="text" class="form-control" id="glossary_entry_input_8" placeholder="">              
+            </div>
+
+
+            <div class="form-group" style="display:inline-block; width:48%;">
+                    <label for="glossary_entry_input_7b">Autore della definizione IT</label>
+                    <small id="inputHelp" class="form-text text-muted">Compilare solo se il testo della definizione riporta espressamente l'autore.</small>
+                    <input name="Autore_definizione_it" type="text" class="form-control" id="glossary_entry_input_7b" placeholder="">              
+            </div>
+
+
+            <div class="form-group" style="width:48%; float: right;">
+                    <label for="glossary_entry_input_8b">Autore della definizione CH</label>
+                    <small id="inputHelp" class="form-text text-muted">Compilare solo se il testo della definizione riporta espressamente l'autore.</small>
+                    <input name="Autore_definizione_ch" type="text" class="form-control" id="glossary_entry_input_8b" placeholder="">              
+            </div>          
+
+
+            <div class="form-group" style="display:inline-block; width:48%;">
+                    <label for="glossary_entry_input_9">Posizione della definizione nel documento fonte IT</label>
+                    <small id="inputHelp" class="form-text text-muted">Riferimento che indichi dove è posizionata la definizione nel documento fonte.<br>Ad esempio il titolo del paragrafo, il numero di pagina, il numero di un elenco, per le leggi la sequenza [art, comma, lettera], il tempo di riproduzione se la fonte è un file audio o video, ecc.<br>Evitare informazioni generiche come "a metà documento", all'inizio", ecc.</small>
+                    <input name="Posizione_definizione_it" type="text" class="form-control" id="glossary_entry_input_9" placeholder="">              
+            </div>
+
+
+            <div class="form-group" style="width:48%; float: right;">
+                    <label for="glossary_entry_input_10">Posizione della definizione nel documento fonte CH</label>
+                    <small id="inputHelp" class="form-text text-muted">Riferimento che indichi dove è posizionata la definizione nel documento fonte.<br>Ad esempio il titolo del paragrafo, il numero di pagina, il numero di un elenco, per le leggi la sequenza [art, comma, lettera], il tempo di riproduzione se la fonte è un file audio o video, ecc.<br>Evitare informazioni generiche come "a metà documento", all'inizio", ecc.</small>
+                    <input name="Posizione_definizione_ch" type="text" class="form-control" id="glossary_entry_input_10" placeholder="">              
+            </div>
+
+
+            <div class="form-group" style="display:inline-block; width:48%;">
+                    <label for="glossary_entry_input_11">URI della definizione IT</label>
+                    <small id="inputHelp" class="form-text text-muted">URL che rimanda al punto in cui è posizionata la definizione nel documento fonte. <a href="https://it.wikipedia.org/wiki/Uniform_Resource_Identifier#Esempi_di_URI" target="_blank">Esempio</a></small>
+                    <input name="Url_definizione_it" type="url" class="form-control" id="glossary_entry_input_11" placeholder="">              
+            </div>
+  
+
+            <div class="form-group" style="width:48%; float: right;">
+                    <label for="glossary_entry_input_12">URI della definizione CH</label>
+                    <small id="inputHelp" class="form-text text-muted">URL che rimanda al punto in cui è posizionata la definizione nel documento fonte. <a href="https://it.wikipedia.org/wiki/Uniform_Resource_Identifier#Esempi_di_URI" target="_blank">Esempio</a></small>
+                    <input name="Url_definizione_ch" type="url" class="form-control" id="glossary_entry_input_12" placeholder="">              
+            </div>
+
+
+            <div class="form-group" style="display:inline-block; width:48%;">
+                   <label for="glossary_entry_input_13">Titolo del documento fonte IT</label>
+                   <input name="Titolo_documento_fonte_it" type="text" class="form-control" id="glossary_entry_input_13" placeholder="">              
+            </div>
+
+              
+            <div class="form-group" style="width:48%; float: right;">
+                  <label for="glossary_entry_input_14">Titolo del documento fonte CH</label>
+                  <input name="Titolo_documento_fonte_ch" type="text" class="form-control" id="glossary_entry_input_14" placeholder="">              
+            </div>
+
+
+            <div class="form-group" style="display:inline-block; width:48%;">
+                  <label for="glossary_entry_input_15">Autore del documento fonte IT</label>
+                  <small id="inputHelp" class="form-text text-muted">Compilare solo se il documento fonte riporta espressamente l'autore.</small>
+                  <input name="Autore_documento_fonte_it" type="text" class="form-control" id="glossary_entry_input_15" placeholder="">              
+            </div>
+
+            <div class="form-group" style="width:48%; float: right;">
+                  <label for="glossary_entry_input_16">Autore del documento fonte CH</label>
+                  <small id="inputHelp" class="form-text text-muted">Compilare solo se il documento fonte riporta espressamente l'autore..</small>
+                  <input name="Autore_documento_fonte_ch" type="text" class="form-control" id="glossary_entry_input_16" placeholder="">              
+            </div>
+
+
+            <div class="form-group" style="display:inline-block; width:48%;">
+                  <label for="glossary_entry_input_17">Host del documento fonte IT</label>
+                  <small id="inputHelp" class="form-text text-muted">Soggetto che detiene il dominio del sito web su cui è caricato il documento fonte.<br>Ad esempio, per un glossario caricato sul sito https://www.polimi.it/, inserire Politecnico di Milano.</small>
+                  <input name="Host_documento_fonte_it" type="text" class="form-control" id="glossary_entry_input_17" placeholder="">              
+            </div>
+
+
+            <div class="form-group" style="width:48%; float: right;">
+                  <label for="glossary_entry_input_18">Host del documento fonte CH</label>
+                  <small id="inputHelp" class="form-text text-muted">Soggetto che detiene il dominio del sito web su cui è caricato il documento fonte.<br>Ad esempio, per un glossario caricato sul sito https://www.polimi.it/, inserire Politecnico di Milano.</small>
+                  <input name="Host_documento_fonte_ch" type="text" class="form-control" id="glossary_entry_input_18" placeholder="">              
+            </div>
+
+
+            <div class="form-group" style="display:inline-block; width:48%;">
+                  <label for="glossary_entry_input_19">URL del documento fonte IT</label>
+                  <input name="Url_documento_fonte_it" type="url" class="form-control" id="glossary_entry_input_19" placeholder="">              
+            </div>
+          
+
+            <div class="form-group" style="width:48%; float: right;">
+                  <label for="glossary_entry_input_20">URL del documento fonte CH</label>
+                  <input name="Url_documento_fonte_ch" type="url" class="form-control" id="glossary_entry_input_20" placeholder="">              
+            </div>
+
+
+        <!-- faccio una funzione save che sovrascrive la normale funzione save per il salvataggio 
+            del modello, in views.py, in modo tale che la data viene generata dalla funzione di vista e 
+        poi subito salvata nel modello automaticamente senza passare dal form -->
+
+        <!-- Eventualmente in futuro posso nascondere il campo data alla vista del lettore -->
+
+        <div class="form-group">
+              <label for="glossary_entry_input_21">Data di inserimento della terminologia</label>
+              <small id="inputHelp" class="form-text text-muted">Compilare solo se è nota la data di pubblicazione del documento fonte, altrimenti inserire la data di oggi.</small>
+              <input name="Data_inserimento_entry" type="date" class="form-control" id="date_to_turn_into_toda">              
+        </div>
+
+        <!-- id="date_to_turn_into_today" -->
+
+        <!-- <input name="Data_inserimento_entry" type="hidden" value="09/09/1991" class="form-control" id="date_to_turn_into_today" placeholder="">               -->
+
+        <!-- value=09/09/1991 -->
+        <!-- il formato della data per value="" deve essere gg/mm/2009 trattini non accettati! -->
+
+        <div class="form-group">
+            <!-- <label type="hidden" for="glossary_entry_input_22">Id statico delle informazioni</label> -->
+            <input type="hidden" name="Id_statico_entry" value="ITCH00000" type="text" class="form-control" id="glossary_entry_input_22" placeholder="">              
+         </div>
+
+         <!-- interruttore che rende visibile o meno il contenuto inserito
+        nei form all'inizio lo setto autmaticamente su "hide" -->
+         <div class="form-group">
+                <!-- <label type="hidden" for="glossary_entry_input_22">Id statico delle informazioni</label> -->
+                <input type="hidden" name="Admin_approval_switch" value="hide" type="text" class="form-control" id="glossary_entry_input_22" placeholder="">              
+        </div>
+
+          <br><br><br>
+
+          
+          <div class="form-button" style="display:inline-block;padding-left:36%;"></div>
+              <button type="submit" style="width: 300px;height: 60px;" class="btn btn-primary">Inserisci terminologia</button>
+          </div>
+        
+
+    </form>
+
+    <br><br><br><br>
+
+
+
+
+<!-- {% load static %} --> <!-- questa riga c'è già in base.html -->
+
+
+
+<script type="text/javascript" src={% static "js/get_today_date.js" %}></script>
+<script> get_today_date() </script> 
+
+<!-- <script type="text/javascript" src={% static "js/prova.js" %}></script>
+<script> funprova() </script>  -->
+
+<link rel="stylesheet" type="text/css" href={% static "css/prova.css" %}>
+
+
+
+    
+{% endblock %}

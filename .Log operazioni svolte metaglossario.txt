@@ -132,8 +132,10 @@ gitingnore: lascia none
 git remote add origin https://github.com/tommasosansone91/Metaglossario-Gestisco.git
 git push -u origin master
 
-creo l'app (views, models, urls)
+creo l'app (quella che avrà views, models, urls)
 python manage.py startapp app_metaglossario
+
+
 
 
 costruisco il database:
@@ -151,20 +153,13 @@ ora se cerco di entrare nell admin dall'app di heroku non va bene il superuser d
 perche prima l'avevo creato in locale, quindi era stato immagazzinato nel database locale, ossia sqlite3,
 ora invece devo crearne uno online dove verrà immagazzinato nel postgres database.
 
-heroku run python manage.py migrate
-
-quando tento di connettermi a heroku tramite il comando heroku run arriva l'errore
-ECONNRESET: read ECONNRESET
-che bypasso connettendomi al'internet del cellulare.
-
-Cannot run more than 1 Free size dynos.
-chiudo le finestre con heroku app aperte
 
 heroku run python manage.py migrate
+
 changes applicate
 
 heroku run python manage.py makemigrations
-no cambiamenti
+no cambiamenti (ovvio, non c'è il modello!)
 
 esattamente come era avvenuto in locale
 
@@ -174,19 +169,18 @@ H_admin
 tommaso.sansone@mail.polimi.it
 password
 
-nota: migrate "we want to migrate the database"
+i due superuser sonbo ancora distinti perchè non ho eseguito l'accoppiamento
 
-nel postgres database ora se vado a controllare da heroku abbiamo aggiunto delle info (row, ...)
-non ho capito cosa sono
 
-ora vado a modificare i settings> database
-"locally we are still usong sqlite3, but for production we will use postgres"
 
-requirements.txt dice a heroku cosa installare ?
+ ACCOPPIAMENTO
+***************
 
-ora vado di nuovo in datastores di psotgres > settings > db credentials > uri
+ora vado di nuovo in datastores di psotgres > settings > db credentials > database_uri
 copio uri
-la incollo nel default di databases in settings.py
+la incollo nel default di databases in settings.py, sotto DATABASES
+
+DATABASES['default']=dj_database_url.config(default='postgres://zogpunyhfdizcj:e4e8bbb8ef02572179d0ccdc1a146d4f2eba03e587525349bb4436a80b87f4ec@ec2-46-51-190-87.eu-west-1.compute.amazonaws.com:5432/dfibp7p1uu70v7')
 
 #postgres://user:password@host:porta/database_name
 incollare la uri del db in settings.py ci permette che quando runno il server localmente in realtà si connette al cloud di heroku
@@ -204,216 +198,15 @@ quindi non la posso hardcodificare, come ho fatto adesso.
 
 quando la chaive sarà scaduta, posso commentare quella linea e la desincronizzazione mi permette di andare avanti a codificare
 
-creo il modello della terminologia
 
-aggiungo ad admin l'accesso al db del modello terminologia
-dal modello importa la classe
-from .models import double_advanced_glossary_entry 
+COPIO DALLA APP GLOSSARIO TUTTI I FILES
+*****************************************
 
-NB: fai attenzione al puntino
+faccio il copia aincolla a mano avendo cura di non sovrascrivere le linee identitarie tipo password ecc
+in particolare cambio i settings del database
 
-dopo la sincronizzazione si ricorda solo H_admin, il superuser creato dal cloud di heroku
+copio e incollo la cartella templates da app_glossario ad app_metaglossario
+copio e incollo il contenuto della cartella static nella directory principale dell metaglossario
 
-quindi il model permette l'inserimento da parte dell'admin, il form anche da parte degli utenti
-il form richiede il model, ma il model non richiede il form
-
-
-#Propongo un modello di tipo "biterminale", o meglio "duetto"
-
-# Il duetto è un brano musicale per due voci soliste, con o senza accompagnamento strumentale.
-# Il termine nasce per indicare interpretazioni vocali a due che cantano alternandosi od insieme.
-#Fare uno switch che permetta di inserire in modalità standard o avanzata
-
-richiesto default nel textfield ma posso aggirarlo con l'attributo blank
-If blank=True then the field will not be required, whereas if it's False the field cannot be blank.
-https://stackoverflow.com/questions/8609192/differentiate-null-true-blank-true-in-django
-
-
-
-# If blank=True then the field will not be required, whereas if it's False the field cannot be blank.
-    #This includes the admin and your own custom forms.
-    # The combo of the two is so frequent because typically if you're going to allow a field to be blank in your form, you're going to also need your database to allow NULL values for that field. The exception is CharFields and TextFields, which in Django are never saved as NULL. Blank values are stored in the DB as an empty string ('').
-    
-
-    blank=true permette all'admin e agli user tramite il form di lasciare vuoto il campo
-    
-
-aggiungo elemento nel db
-
-ora importo il modello nelle views per vederlo
-
-nelle views devo creare una var da passare al dizionario
-
-non lasciare mai spazi tra {% oppure %} nei django tag
-
-
-Git hub
-crea nuova repository, !! senza readme
-uso i comandi taulati per pushare il codice su github
-
-git remote add origin https://github.com/tommasosansone91/Glossario-Gestisco.git
-git push -u origin master
-
-nota che il gitignore è stato caricato, ma .env, che era listato in gitignore, invece no: la chiave segreta dell'app è al sicuro
-
-a questo punto posso cambiare il debug in True. (solo quando finisco l'app, io non lo faccio ancora )
-
-upload su git hub
-
-creo forms.py
-
-from django import forms
-from .models import glossary_entry
-
-class glossary_entry_form(forms.ModelForm):
-        class Meta:
-            model=glossary_entry
-            fields=["Lemma_it", "Lemma_ch", "Acronimo_it", "Acronimo_ch", "Definizione_it", "Definizione_ch", "Ambito_riferimento_it", "Ambito_riferimento_ch", "Autore_definizione_it", "Autore_definizione_ch", "Posizione_definizione_it", "Posizione_definizione_ch", "Url_definizione_it", "Url_definizione_ch", "Titolo_documento_fonte_it", "Titolo_documento_fonte_ch", "Autore_documento_fonte_it", "Autore_documento_fonte_ch", "Host_documento_fonte_it", "Host_documento_fonte_ch", "Url_documento_fonte_it", "Url_documento_fonte_ch", "Data_inserimento_entry", "Id_statico_entry"]
-
-uso la classe meta per richiamare il modello già creato
-
-Aggiungi_terminologia.html
-incolla form da bootstrap, metto method)"POST" nel ramo <> di form
-{% csrf_token %}
-
-fatto il form
-
-ora lo rendo operativo attraverso la connessione in views.py
-
-negli input tag della pagina html dove costruisco il <form> è fondamentale mettere name="" e tra le virgolette la variabile del modello da compilare
-
-
-se abilito l'inserimento di data e id dal form dell'utente mi prende i dati e li inserisce ma non passa il messaggio
-
-nel modello ho messaggio
-import datetime
-Data_inserimento_entry = models.DateField(blank=False, null=False, default=datetime.date.today())
-
-nel form mantengo data entry nei fields passati al forms
-
-con queste ultime due mosse funziona se tengo hidden come typo di data e value=valore fissato+
-tassativo il formato gg/mm/yyyy - i trattini sono respinti!
-
-ora devo capire come precompilarla con javascript con la data di oggi
-
-su suggerimento di django ho messo, in models:
-
-from django.utils import timezone
-Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now().date)
-
-
-         nell html form value="" va in conflitto col type "date", quindi devo mettere hidden x forza x farlo funzionare con / formato
-
-
-per qualche strano motivo devo mettere sia la generazione di default della data nel modello che il value di default nei html
-se cerco solo di mettere il default value nei form non funziona
-
-git push -u origin master
-
-<!-- django vuole lo spazio tra gli operatori di uguaglianza o disuguaglianza -->
-
-aggunto un attributo per fermare la visualizzazione che non ha ricevuto l'ok dell'admin
-
-aggiungo la classe nel modello e creo un set di liste che mi indicano valore della variabile e del valore corrispondente
-nel modello seleziono automaticmanete.
-la variabile set viene messa nel modello come CHO, attributo nome è choices  --> choices=CHO
-
-    # il default nel mODello fa comparire il valore selazionato quando creo il contenuto dall'admin 
-    # e quando aggiungo l'attributo: viene automaticamente aggiunto a tutti gli elementi del modello
-
-assegnato defautl a id statico nel modello per farlo comparire al momento creazione dell'admin
-
-aggiunto nei form il campo  admin switch
-aggiuno nell html della temrinologic il campo hidden che setta il default per gli utenti, 
-di admin switch, su hide.
-
-push su heroku e oush su git hub
-
----
-
-faccio le prove a usare javascript per mettere la data nel form
-
-i javascript vanno inseritti con strignhe del tipo
-
-<script> type="text/javascript" src="{% static 'try.js' %}"</script>
-
-prima della fine del body html
-
-dove dentro il foglio try.js c'è la funzione che voglio far partire, in questo caso 
-
-function try() {
-    alert("Hello! I am an alert box!!");
-    }
-
-però per ora non riesco a farlo andare :( 
-
-
-se scrivo diretto dentr l'html
-
-        <script type="text/javascript">
-            document.getElementById("glossary_entry_input_2").value = "CIAONE";
-        </script>  
-
-mi scrive perfwttamente ciaone dentro il campo input che ho scelto
-perchè non funziona con la data?
-
-se copioincollo questo a fondo pagina funziona e me la compila e poi premo il pulsante e la acquisisce
-
-    <script type="text/javascript">
-        function get_today_date() {
-        var now = new Date();
-        var day = ("0" + now.getDate()).slice(-2);
-        var month = ("0" + (now.getMonth() + 1)).slice(-2);
-        var today = now.getFullYear()+"-"+(month)+"-"+(day);
-        document.getElementById("inputDate").value = today;
-        }
-        get_today_date()
-    </script> 
-
-ok.
-
-
-ho aggiunto il metodo clean dentro model.py per far si che se almeno un campo oltre la data è vuto non inserisce la terminologia.
-tuttavia il validation error fa partire il messaggio di errore di un altro caso...
-
-    def clean(self):
-        if not (self.Lemma_it or self.Lemma_ch or self.Acronimo_it or self.Acronimo_ch or self.Definizione_it or self.Definizione_ch  or self.Ambito_riferimento_it or self.Ambito_riferimento_ch or self.Autore_definizione_it or self.Autore_definizione_ch or self.Posizione_definizione_it or self.Posizione_definizione_ch or self.Url_definizione_it or self.Url_definizione_ch or self.Titolo_documento_fonte_it or self.Titolo_documento_fonte_ch or self.Autore_documento_fonte_it or self.Autore_documento_fonte_ch or self.Host_documento_fonte_it or self.Host_documento_fonte_ch or self.Url_documento_fonte_it or self.Url_documento_fonte_ch):
-            raise ValidationError("Non è stata inserita alcuna terminologia. Compilare lameno un campo del form.")
-
-
-ho runnato 
-python manage.py collectstatic
-
-da qualche prima ho installato moments modulo javascript
-
-problema risolto non so come, 'moment' eliminato da intalled apps in settings.py
-
-progetto caricato su github
-
-
-
-
-
-Il problema della data è stato risolto così:
-https://stackoverflow.com/questions/57953127/how-to-have-javascript-presets-todays-date-in-html-form/57989051#57989051
-
-se da errore heroku e dice collect static files il problema si potrebbe risolvere con 
-
-pip freeze > requirements.txt
-https://stackoverflow.com/questions/29929178/importerror-no-module-named-django-filters
-
-
-Implementato lo switch mostra o non mostrare dell'admin con menu tendina:
-
-metti la lista delle scelte fuori dal modello , ossia class nomemodello(models.model)
-
-Admin_approval_switch_choices=[
-    ("show","show"), # 1=valore da inserire negli script (=variabile), 2=valore assunto in relatà nel db
-    ("hide","hide"),
-    ]
-
-poi nel modello, nel campo che voglio rendere menu a tendina metto l'attr choices
-
-Admin_approval_switch = models.CharField(max_length=30,blank=False, null=False, default=Admin_approval_switch_choices[0], choices=Admin_approval_switch_choices)
-
+Solo il contenuto del database non viene copiato
 
