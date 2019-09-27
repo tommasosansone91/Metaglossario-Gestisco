@@ -4,6 +4,8 @@ conda activate met5
 
 django-admin startproject Metaglossario_Gestisco
 
+
+
 cd "C:\Users\Tommaso\Django rest framework\Udemy Django\Metaglossario_Gestisco"
 
 Inizializzare git al version control
@@ -23,7 +25,7 @@ shh keys skippate
 
 crea app metaglossario_gestisco  manualmente su heroku
 
-heroku git:remote -a metaglossario_gestisco 
+heroku git:remote -a metaglossario-gestisco
 
 #è il nome dell'app creata su heroku
 gli sto dicendo che le cose le voglio caricare lì e non su un altra app
@@ -77,7 +79,9 @@ ora il whitenoise vero e proprio, dentro le installed apps di settings.py
 procfile
 
 nella directory principale creo un file Procfile senza estensione e ci scrivo dentro
-web: gunicorn Glossario_Gestisco.wsgi
+web: gunicorn Metaglossario_Gestisco.wsgi
+devi metterci la stessa cosa che trovi in wsgi.py : WSGI config for Metaglossario_Gestisco project.
+
 
 il procfile mi indica che server viene usato (gunicorn)
 se ho fatto bene, il Procfile prende la icona di heroku in vs code
@@ -87,11 +91,17 @@ requirements
 pip freeze > requirements.txt
 devo farlo ogni volta che installo un nuovo modulo, altrimenti heroku potrebbe dirmi che ha dei problemi e indica il collectstatics,
 e spesso mi dice anche che non può trovare un modulo, quel modulo va inserito dentor requirements.txt
+Nota che requirements prende i moduli installati in generale in python.
+
+git add .
+git commit -m "aggiunta app"
+git push heroku master
 
 
 Implementare il database
 crea il superuser, ma prima devo fare migrate makemigrate
-me l'aveva cancellato, lo rifaccio 
+
+python manage.py createsuperuser
 
 tommaso
 tommaso.sansone@mail.polimi.ti
@@ -102,6 +112,9 @@ push del codice su heroku
 git add .
 git commit -m "second commit"
 git push heroku master
+
+in questo modo su heroku appare un database postgres che è psycopg2
+
 
 Nota: ho pushato su heroku e non ho ancora il database
 
@@ -119,10 +132,13 @@ gitingnore: lascia none
 git remote add origin https://github.com/tommasosansone91/Metaglossario-Gestisco.git
 git push -u origin master
 
+creo l'app (views, models, urls)
+python manage.py startapp app_metaglossario
+
 
 costruisco il database:
 il mio postgres database (psycopg2) è già installato tra gli add ons di heroku
-resources>add ons
+heroku > metaglossario-gestisco > resources > add ons
 e l'url del database è stato generato, con al sintassi dell'ultima volta
 
 se vado su post gres database negli addons e ci clicco apre una finestra di dialogo del database corrente
