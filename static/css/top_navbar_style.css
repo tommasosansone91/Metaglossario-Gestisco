@@ -6,3 +6,8 @@
     
     /* border: 0px; */
 }
+
+.nav-item-right {
+    
+    float:right;
+}
