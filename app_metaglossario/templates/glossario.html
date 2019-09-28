@@ -52,106 +52,61 @@
                     <div class="card">
                         <div class="card-body"> 
                             
-                            <!-- se ci sono campi italiani e svizzeri -->
-                        {% if entry.Lemma_it and entry.Lemma_ch %}   
 
-                            <h5 class="card-title"><element style="font-weight: bold">Lemma IT: </element>{{ entry.Lemma_it }}</h5>                          
-                                                
-                            <h5 class="card-title"><element style="font-weight: bold">Lemma CH: </element>{{ entry.Lemma_ch }}</h5>    
+                        {% if entry.Lemma %}  
+                            <p class="card-text"><h4 class="card-title">{{ entry.Lemma }}</h4></p>                           
+                        {% endif %}
+
+
+                        {% if entry.Acronimo %}                
+                            <p class="card-text"><b>AcronimoIT:</b> {{ entry.Acronimo }}</p>                             
+                        {% endif %}
+
+            
+                        {% if entry.Definizione %}                
+                            <p class="card-text"><b>Definizione IT:</b> {{ entry.Definizione }}</p>                             
+                        {% endif %}            
+
+            
+                        {% if entry.Ambito_riferimento %}                
+                            <p class="card-text"><b>Ambito di riferimento del concetto IT:</b> {{ entry.Ambito_riferimento }}</p>                             
+                        {% endif %}            
+
+            
+                        {% if entry.Autore_definizione %}                
+                            <p class="card-text"><b>Autore della definizione IT:</b> {{ entry.Autore_definizione }}</p>                             
+                        {% endif %}            
+
+            
+                        {% if entry.Posizione_definizione %}                
+                            <p class="card-text"><b>Posizione della definizione nel documento fonte IT:</b> {{ entry.Posizione_definizione }}</p>                             
+                        {% endif %}            
+
                         
-                        {% else %}
+                        {% if entry.Url_definizione %}                
+                            <p class="card-text"><b>URL della definizione IT:</b> <a href="{{ entry.Url_definizione }}" target="_blank">{{ entry.Url_definizione }}</a></p>                          
+                        {% endif %}            
 
-                            {% if entry.Lemma_it %}  
-                                <p class="card-text"><h4 class="card-title">{{ entry.Lemma_it }}</h4></p>                           
-                            {% endif %}
+            
+                        {% if entry.Titolo_documento_fonte %}                
+                            <p class="card-text"><b>Titolo del documento fonte IT:</b> {{ entry.Titolo_documento_fonte }}</p>                             
+                        {% endif %}            
 
-                
-                            {% if entry.Lemma_ch %}                
-                                <p class="card-text"><h4 class="card-title">{{ entry.Lemma_ch }}</h4></p>          
-                            {% endif %}
+            
+                        {% if entry.Autore_documento_fonte %}                
+                            <p class="card-text"><b>Autore del documento fonte IT:</b> {{ entry.Autore_documento_fonte }}</p>                             
+                        {% endif %}            
 
-                        {% endif %}
+            
+                        {% if entry.Host_documento_fonte %}                
+                            <p class="card-text"><b>Host del documento fonte IT:</b> {{ entry.Host_documento_fonte }}</p>                             
+                        {% endif %}            
 
+            
+                        {% if entry.Url_documento_fonte %}                
+                            <p class="card-text"><b>URL del documento fonte IT:</b> <a href="{{ entry.Url_documento_fonte }}" target="_blank">{{ entry.Url_documento_fonte }}</a></p>                           
+                        {% endif %}           
 
-                        {% if entry.Acronimo_it %}                
-                            <p class="card-text"><b>AcronimoIT:</b> {{ entry.Acronimo_it }}</p>                             
-                        {% endif %}
-
-                        {% if entry.Acronimo_ch %}                
-                            <p class="card-text"><b>Acronimo CH:</b> {{ entry.Acronimo_ch }}</p>                             
-                        {% endif %}
-            
-                        {% if entry.Definizione_it %}                
-                            <p class="card-text"><b>Definizione IT:</b> {{ entry.Definizione_it }}</p>                             
-                        {% endif %}
-            
-                        {% if entry.Definizione_ch %}                
-                            <p class="card-text"><b>Definizione CH:</b> {{ entry.Definizione_ch }}</p>                             
-                        {% endif %}
-            
-                        {% if entry.Ambito_riferimento_it %}                
-                            <p class="card-text"><b>Ambito di riferimento del concetto IT:</b> {{ entry.Ambito_riferimento_it }}</p>                             
-                        {% endif %}
-            
-                        {% if entry.Ambito_riferimento_ch %}                
-                            <p class="card-text"><b>Ambito di riferimento del concetto CH:</b> {{ entry.Ambito_riferimento_ch }}</p>                             
-                        {% endif %}
-            
-                        {% if entry.Autore_definizione_it %}                
-                            <p class="card-text"><b>Autore della definizione IT:</b> {{ entry.Autore_definizione_it }}</p>                             
-                        {% endif %}
-            
-                        {% if entry.Autore_definizione_ch %}                
-                            <p class="card-text"><b>Autore della definizione CH:</b> {{ entry.Autore_definizione_ch }}</p>                             
-                        {% endif %}
-            
-                        {% if entry.Posizione_definizione_it %}                
-                            <p class="card-text"><b>Posizione della definizione nel documento fonte IT:</b> {{ entry.Posizione_definizione_it }}</p>                             
-                        {% endif %}
-            
-                        {% if entry.Posizione_definizione_ch %}                
-                            <p class="card-text"><b>Posizione della definizione nel documento fonte CH:</b> {{ entry.Posizione_definizione_ch }}</p>                             
-                        {% endif %}
-                        
-                        {% if entry.Url_definizione_it %}                
-                            <p class="card-text"><b>URL della definizione IT:</b> <a href="{{ entry.Url_definizione_it }}" target="_blank">{{ entry.Url_definizione_it }}</a></p>                          
-                        {% endif %}
-            
-                        {% if entry.Url_definizione_ch %}                
-                            <p class="card-text"><b>URL della definizione CH:</b> <a href="{{ entry.Url_definizione_ch }}" target="_blank">{{ entry.Url_definizione_ch }}</a></p>                             
-                        {% endif %}
-            
-                        {% if entry.Titolo_documento_fonte_it %}                
-                            <p class="card-text"><b>Titolo del documento fonte IT:</b> {{ entry.Titolo_documento_fonte_it }}</p>                             
-                        {% endif %}
-            
-                        {% if entry.Titolo_documento_fonte_ch %}                
-                            <p class="card-text"><b>Titolo del documento fonte CH:</b> {{ entry.Titolo_documento_fonte_ch }}</p>                             
-                        {% endif %}
-            
-                        {% if entry.Autore_documento_fonte_it %}                
-                            <p class="card-text"><b>Autore del documento fonte IT:</b> {{ entry.Autore_documento_fonte_it }}</p>                             
-                        {% endif %}
-            
-                        {% if entry.Autore_documento_fonte_ch %}                
-                            <p class="card-text"><b>Autore del documento fonte CH:</b> {{ entry.Autore_documento_fonte_ch }}</p>                             
-                        {% endif %}
-            
-                        {% if entry.Host_documento_fonte_it %}                
-                            <p class="card-text"><b>Host del documento fonte IT:</b> {{ entry.Host_documento_fonte_it }}</p>                             
-                        {% endif %}
-            
-                        {% if entry.Host_documento_fonte_ch %}                
-                            <p class="card-text"><b>Host del documento fonte CH:</b> {{ entry.Host_documento_fonte_ch }}</p>                             
-                        {% endif %}
-            
-                        {% if entry.Url_documento_fonte_it %}                
-                            <p class="card-text"><b>URL del documento fonte IT:</b> <a href="{{ entry.Url_documento_fonte_it }}" target="_blank">{{ entry.Url_documento_fonte_it }}</a></p>                           
-                        {% endif %}
-            
-                        {% if entry.Url_documento_fonte_ch %}                
-                            <p class="card-text"><b>URL del documento fonte CH:</b> <a href="{{ entry.Url_documento_fonte_ch }}" target="_blank">{{ entry.Url_documento_fonte_ch }}</a></p>                              
-                        {% endif %}
             
 
                         {% if entry.Data_inserimento_entry %}                
@@ -164,23 +119,19 @@
                         
                         
                         <p>
-                        {% if entry.Url_definizione_it %}  
-                            <a href="{{entry.Url_definizione_it}}" Target= "_blank" class="btn btn-success">Definizione IT</a> &nbsp                     
+                        {% if entry.Url_definizione %}  
+                            <a href="{{ entry.Url_definizione }}" Target= "_blank" class="btn btn-success">Definizione IT</a> &nbsp                     
                         {% endif %}
             
-                        {% if entry.Url_definizione_ch %}                
-                            <a href="{{entry.Url_definizione_ch}}" Target= "_blank" class="btn btn-danger">Definizione CH</a>
-                        {% endif %}                
+               
                         </p>
                         
                         <p>               
-                        {% if entry.Url_documento_fonte_it %}  
-                            <a href="{{entry.Url_documento_fonte_it}}" Target= "_blank" class="btn btn-success">Documento fonte IT</a> &nbsp                   
+                        {% if entry.Url_documento_fonte %}  
+                            <a href="{{ entry.Url_documento_fonte }}" Target= "_blank" class="btn btn-success">Documento fonte IT</a> &nbsp                   
                         {% endif %}    
             
-                        {% if entry.Url_documento_fonte_ch %}                
-                        <a href="{{entry.Url_documento_fonte_ch}}" Target= "_blank" class="btn btn-danger">Documento fonte CH</a>
-                        {% endif %}                                   
+                                
                         </p>
 
                         

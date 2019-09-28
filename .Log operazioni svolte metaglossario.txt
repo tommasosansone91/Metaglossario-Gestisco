@@ -210,3 +210,7 @@ copio e incollo il contenuto della cartella static nella directory principale de
 
 Solo il contenuto del database non viene copiato
 
+
+
+column app_metaglossario_glossary_entry.Lemma does not exist LINE 1: SELECT
+mi dava errore sul glossario.hrml perche non avevo fatto makemigrations migrate dopo aver cambiato nomi alle componenti del modello
