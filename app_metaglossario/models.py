@@ -48,6 +48,7 @@ class glossary_entry(models.Model):
     
     Url_documento_fonte = models.URLField(max_length=400, blank=True, null=True)
 
+    
 
     #### data e ID ####
 
@@ -57,6 +58,8 @@ class glossary_entry(models.Model):
 
     # il default nel modello fa comparire il valore selazionato quando creo il contenuto dall'admin 
     # e quando aggiungo l'attributo: viene automaticamente aggiunto a tutti gli elementi del modello
+
+    Commento_entry = models.CharField(max_length=256, blank=True, null=True)
 
     Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now().date() )
     # Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now().date)
@@ -78,7 +81,7 @@ class glossary_entry(models.Model):
         # faccio comparire per primi gli hide-> nuovi inseriti
 
     def clean(self):
-        if not (self.Lemma or self.Acronimo or self.Definizione or  self.Ambito_riferimento or self.Autore_definizione or self.Posizione_definizione or self.Url_definizione or self.Titolo_documento_fonte or self.Autore_documento_fonte or self.Host_documento_fonte or self.Url_documento_fonte):
+        if not (self.Lemma or self.Acronimo or self.Definizione or  self.Ambito_riferimento or self.Autore_definizione or self.Posizione_definizione or self.Url_definizione or self.Titolo_documento_fonte or self.Autore_documento_fonte or self.Host_documento_fonte or self.Url_documento_fonte or self.Commento_entry):
             raise ValidationError("Non è stata inserita alcuna terminologia. Compilare almeno un campo del form.")
         # non mi restituisce questa scritta ma quella messa di default nelle views
 

@@ -61,8 +61,8 @@
 
 
             <div class="form-group"">
-                    <label for="glossary_entry_input_7">URI della definizione</label>
-                    <small id="inputHelp" class="form-text text-muted">URL che rimanda al punto in cui è posizionata la definizione nel documento fonte. <a href="https://it.wikipedia.org/wiki/Uniform_Resource_Identifier#Esempi_di_URI" target="_blank">Esempio</a></small>
+                    <label for="glossary_entry_input_7">URL della definizione</label>
+                    <small id="inputHelp" class="form-text text-muted">URL che rimanda al punto in cui è posizionata la definizione nel documento fonte. <a href="https://en.wikipedia.org/wiki/Fragment_identifier#Examples" target="_blank">Esempio</a><br>Compilare solo se il documento fonte è caricato sul web e solo se la definizione è individuata da un <a href="https://en.wikipedia.org/wiki/Fragment_identifier" target="_blank" >fragment identifier</a></small>
                     <input name="Url_definizione" type="url" class="form-control" placeholder="">              
             </div>
   
@@ -93,6 +93,11 @@
             </div>
           
 
+            <div class="form-group"">
+                  <label for="glossary_entry_input_12">Altro/commento</label>
+                  <small id="inputHelp" class="form-text text-muted">Inserire eventuali ulteriori informazioni sulla terminologia che si vuole inserire.</small>                  
+                  <input name="Commento_entry" type="text" class="form-control" placeholder="">              
+            </div>
 
         <!-- faccio una funzione save che sovrascrive la normale funzione save per il salvataggio 
             del modello, in views.py, in modo tale che la data viene generata dalla funzione di vista e 
@@ -101,7 +106,7 @@
         <!-- Eventualmente in futuro posso nascondere il campo data alla vista del lettore -->
 
         <div class="form-group">
-              <label for="glossary_entry_input_12">Data di inserimento della terminologia</label>
+              <label for="glossary_entry_input_13">Data di inserimento della terminologia</label>
               <small id="inputHelp" class="form-text text-muted">Compilare solo se è nota la data di pubblicazione del documento fonte, altrimenti inserire la data di oggi.</small>
               <input name="Data_inserimento_entry" type="date" class="form-control" id="date_to_turn_into_toda">              
         </div>
@@ -128,7 +133,7 @@
           <br><br><br>
 
           
-          <div class="form-button" style="padding-left: 36%;"></div>
+          <div class="form-button" style="display:inline-block;padding-left: 36%;"></div>
               <button type="submit" style="width: 300px;height: 60px;" class="btn btn-primary">Inserisci terminologia</button>
           </div>
         

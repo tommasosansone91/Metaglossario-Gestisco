@@ -36,7 +36,8 @@ def glossario(request):
 
 def aggiungi_terminologia(request):
 
-    if request.method=='POST': #se si esegue il POST (click del pulsante submit)
+    #se si esegue il POST (click del pulsante submit)
+    if request.method=='POST': 
         form = glossary_entry_form(request.POST or None) 
         
         # request.POST è il contenuto inserito dagli utenti perchè request è il paramentro in ingresso della funzione
@@ -47,12 +48,14 @@ def aggiungi_terminologia(request):
             messages.success(request, ("Terminologia inserita con successo!\nAttendere la convalida da parte dell\'amministratore.\n Per favore non inserire di nuovo la stessa terminologia"))
             return redirect('aggiungi_terminologia')
             # con redirect non posso usare .html, ma per forza names
+
         else:
             insert_attempt_output="errato"
-            messages.error(request, ('ERRORE: La terminologia non è stata inserita nel glossario.\nVerificare se sia stata inserita la data.'))
+            messages.error(request, ('ERRORE: La terminologia non è stata inserita nel glossario.\nCompilare almeno un campo e la data di inserimento.'))
             return render(request, 'aggiungi_terminologia.html', {'insert_attempt_output':insert_attempt_output})
-
-    else:   # se si va sulla pagina e basta
+    
+    # se si va sulla pagina e basta
+    else:   
         return render(request, 'aggiungi_terminologia.html', {}) 
 
 

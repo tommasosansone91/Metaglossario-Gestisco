@@ -120,7 +120,7 @@
                         
                         <p>
                         {% if entry.Url_definizione %}  
-                            <a href="{{ entry.Url_definizione }}" Target= "_blank" class="btn btn-success">Definizione IT</a> &nbsp                     
+                            <a href="{{ entry.Url_definizione }}" Target= "_blank" class="btn btn-success">Definizione:</a> &nbsp                     
                         {% endif %}
             
                
@@ -128,13 +128,19 @@
                         
                         <p>               
                         {% if entry.Url_documento_fonte %}  
-                            <a href="{{ entry.Url_documento_fonte }}" Target= "_blank" class="btn btn-success">Documento fonte IT</a> &nbsp                   
+                            <a href="{{ entry.Url_documento_fonte }}" Target= "_blank" class="btn btn-success">Documento fonte:</a> &nbsp                   
                         {% endif %}    
             
                                 
                         </p>
 
-                        
+                        <p>               
+                            {% if entry.Commento_entry %}  
+                                <a href="{{ entry.Commento_entry }}" Target= "_blank" class="btn btn-success">Commento/altro:</a> &nbsp                   
+                            {% endif %}    
+                
+                                    
+                            </p>                        
                     
                     </div>        
                 </div> 
