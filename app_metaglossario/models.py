@@ -59,7 +59,7 @@ class glossary_entry(models.Model):
     # il default nel modello fa comparire il valore selazionato quando creo il contenuto dall'admin 
     # e quando aggiungo l'attributo: viene automaticamente aggiunto a tutti gli elementi del modello
 
-    Commento_entry = models.CharField(max_length=256, blank=True, null=True)
+    Commento_entry = models.TextField(blank=True, null=True)
 
     Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now().date() )
     # Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now().date)

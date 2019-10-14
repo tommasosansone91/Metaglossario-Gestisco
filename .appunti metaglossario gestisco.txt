@@ -119,3 +119,7 @@ nelle pagine dove copiare le cose inserisco
 {% block content %} (dove voglio che inizi)
 
 {% endblock %} (dove voglio che finisca)
+
+***
+
+quando chiamo la shell di python da anaconda finisco nella stessa directory in cui sono con anaconda.

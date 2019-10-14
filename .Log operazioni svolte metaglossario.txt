@@ -214,3 +214,167 @@ Solo il contenuto del database non viene copiato
 
 column app_metaglossario_glossary_entry.Lemma does not exist LINE 1: SELECT
 mi dava errore sul glossario.hrml perche non avevo fatto makemigrations migrate dopo aver cambiato nomi alle componenti del modello
+
+a quanto pare l'equivalente di
+
+with open(path) as f:
+        reader = csv.reader(f)      
+
+        è
+
+with open(path) as f:
+        reader = pd.read_excel(f)
+        
+
++++ ecco cosa c'era nel file Inizializzare
+
+import pandas as pd
+
+
+# Copia-incollati da
+# https://stackoverflow.com/questions/26082128/improperlyconfigured-you-must-either-define-the-environment-variable-django-set/28297987#28297987
+from django.conf import settings
+settings.configure()
+
+import django
+django.setup() 
+
+from app_metaglossario.models import glossary_entry
+ 
+
+
+path=r"D:\Files Tommaso\Politecnico\Lavoro polimi\Algoritmi metaglossario Python\traformazioni di prova per il Metaglossario\dati_prova.xlsx"
+ 
+with open(path) as f:
+        reader = pd.read_excel(f)
+        next(reader, None)  # skip the headers
+
+        for row in reader:
+                _, created = glossary_entry.objects.get_or_create(
+                Lemma=row[0],
+                Acronimo=row[1],
+                Definizione=row[2],
+                Ambito_riferimento=row[3],
+                Autore_definizione=row[4],
+                Posizione_definizione=row[5],
+                Url_definizione=row[6],
+                Titolo_documento_fonte=row[7],
+                Autore_documento_fonte=row[8],
+                Host_documento_fonte=row[9],
+                Url_documento_fonte=row[10],
+                Commento_entry=row[11],
+                Data_inserimento_entry=row[12],
+                Id_statico_entry=row[13],
+                )
+            # creates a tuple of the new object or
+            # current object and a boolean of if it was created
+
++++++
+
+la seconda versione ho fatto
+
+
+
+# myapp/management/commands/import_csv.py
+from django.core.management.base import BaseCommand, CommandError
+import csv
+
+
+# il path mi arriva da fuori come input da command line
+
+csv_file=r"D:\Files Tommaso\Politecnico\Lavoro polimi\Algoritmi metaglossario Python\traformazioni di prova per il Metaglossario\dati_prova.csv"
+
+class Command(BaseCommand):
+
+    def add_arguments(self, parser):
+        parser.add_argument('csv_file', nargs='+', type=str)
+
+    def handle(self, *args, **options):
+        for csv_file in options['csv_file']:
+            dataReader = csv.reader(open(csv_file), delimiter=',', quotechar='"')
+            for row in dataReader:
+                glo=glossary_entry()
+                glo.Lemma=row[0],
+                Acronimo=row[1],
+                Definizione=row[2],
+                Ambito_riferimento=row[3],
+                Autore_definizione=row[4],
+                Posizione_definizione=row[5],
+                Url_definizione=row[6],
+                Titolo_documento_fonte=row[7],
+                Autore_documento_fonte=row[8],
+                Host_documento_fonte=row[9],
+                Url_documento_fonte=row[10],
+                Commento_entry=row[11],
+                Data_inserimento_entry=row[12],
+                Id_statico_entry=row[13],
+                
+                # etc...
+                self.stdout.write(
+                    'Created glossary entry'
+                #     'Created glossary entry {} {}'.format(emp.Lemma, emp.Id_statico_entry)
+                )
+
+# You would then call this with:
+# ./manage.py import_csv --csvfile "/home/<name>/webapps/<name2>/employees.csv"
+
+
+#       python ./manage.py load_glossary csv_file "D:\Files Tommaso\Politecnico\Lavoro polimi\Algoritmi metaglossario Python\traformazioni di prova per il Metaglossario\dati_prova.csv"
+
+
+++++++++
+
+
+conda:
+
+pip install django import-export
+
+settings.py:
+
+    INSTALLED_APPS = [
+        'import_export',
+
+admin.py:
+
+from django.contrib import admin
+from .models import glossary_entry 
+
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
+
+
+class glossary_entry_resource(resources.ModelResource):
+    class Meta:
+        model=glossary_entry
+
+class glossary_entry_Admin(ImportExportModelAdmin, admin.ModelAdmin):
+    #resource_class = glossary_entry_resource
+    pass
+
+
+# Register your models here.
+admin.site.register(glossary_entry, glossary_entry_Admin)
+
+****
+
+l'importazione da CSV è fallimentare, per importare dati usa i files xlsx
+
+***
+
+                        <p>
+                        {% if entry.Url_definizione and entry.Url_definizione != "MISSING"  %}  
+                            <a href="{{ entry.Url_definizione }}" Target= "_blank" class="btn btn-primary">Definizione</a> &nbsp                     
+                        {% endif %}
+                        </p>
+                        
+                        
+                        <p>               
+                        {% if entry.Url_documento_fonte and entry.Url_documento_fonte != "MISSING" %}  
+                            <a href="{{ entry.Url_documento_fonte }}" Target= "_blank" class="btn btn-primary">Documento fonte</a> &nbsp                   
+                        {% endif %}                                  
+                        </p>
+
+Ne faccio a meno perchè è problematico. meglio eliminare i missing prima di inserire i fogli. 
+Il database di django è molto meglio per gestire i dati mancanti piuttosto che dargli un nome ap priori e fare mille speculazioni su cosa fare
+
+oscurati per praticità i pulsanti url

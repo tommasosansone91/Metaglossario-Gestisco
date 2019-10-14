@@ -106,41 +106,41 @@
                         {% if entry.Url_documento_fonte %}                
                             <p class="card-text"><b>URL del documento fonte:</b> <a href="{{ entry.Url_documento_fonte }}" target="_blank">{{ entry.Url_documento_fonte }}</a></p>                           
                         {% endif %}           
-
-            
+                        
 
                         {% if entry.Data_inserimento_entry %}                
                             <p class="card-text"><b>Data di inserimento delle informazioni:</b> {{ entry.Data_inserimento_entry }}</p>                             
                         {% endif %}
+            
+                        
+                        <!-- Il commento lo rendo visibile solo all'admin -->
+                        <!-- {% if entry.Commento_entry %}                
+                            <p class="card-text"><b>Commento/Altro:</b> {{ entry.Commento_entry }}</p>                             
+                        {% endif %} -->
+
             
                         {% if entry.Id_statico_entry %}                
                             <p class="card-text"><b>ID delle informazioni:</b> {{ entry.Id_statico_entry }}</p>                             
                         {% endif %}
                         
                         
-                        <p>
+                        <!-- PULSANTI URL -->
+                        <!-- per ora preferisco oscurarli -->
+
+                        <!-- <p>
                         {% if entry.Url_definizione %}  
-                            <a href="{{ entry.Url_definizione }}" Target= "_blank" class="btn btn-success">Definizione:</a> &nbsp                     
+                            <a href="{{ entry.Url_definizione }}" Target= "_blank" class="btn btn-primary">Definizione</a> &nbsp                     
                         {% endif %}
-            
-               
                         </p>
+                        
                         
                         <p>               
                         {% if entry.Url_documento_fonte %}  
-                            <a href="{{ entry.Url_documento_fonte }}" Target= "_blank" class="btn btn-success">Documento fonte:</a> &nbsp                   
-                        {% endif %}    
-            
-                                
-                        </p>
+                            <a href="{{ entry.Url_documento_fonte }}" Target= "_blank" class="btn btn-primary">Documento fonte</a> &nbsp                   
+                        {% endif %}                                  
+                        </p> -->
 
-                        <p>               
-                            {% if entry.Commento_entry %}  
-                                <a href="{{ entry.Commento_entry }}" Target= "_blank" class="btn btn-success">Commento/altro:</a> &nbsp                   
-                            {% endif %}    
-                
-                                    
-                            </p>                        
+                     
                     
                     </div>        
                 </div> 
