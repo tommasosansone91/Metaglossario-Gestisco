@@ -378,3 +378,41 @@ Ne faccio a meno perchè è problematico. meglio eliminare i missing prima di in
 Il database di django è molto meglio per gestire i dati mancanti piuttosto che dargli un nome ap priori e fare mille speculazioni su cosa fare
 
 oscurati per praticità i pulsanti url
+
+
+l'errore a questa linea
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+è colpa di un url tag chiuso male in seguito
+
+href="{% url 'home' %}"
+va a prendere l'url mappato e riferito al template home, appellativo di home.html
+
+href={% static "css/searchbar_style.css" %}
+va a prendere il file al percorso inicato, nella cartella static, 
+appellativo che ho dato alla cartella static(il nome dato a stati è specificato in settings.py)
+
+ho cambiato il form della terminologia in modo da nascondere la data
+
+        <div class="form-group">
+              <!-- <label for="glossary_entry_input_13">Data di inserimento della terminologia</label>
+              <small id="inputHelp" class="form-text text-muted">Compilare solo se è nota la data di pubblicazione del documento fonte, altrimenti inserire la data di oggi.</small>-->
+               <input name="Data_inserimento_entry" type="hidden" class="form-control" id="date_to_turn_into_toda">              
+        </div>
+
+ma rimane il javascript
+
+<script type="text/javascript" src={% static "js/get_today_date.js" %}></script>
+<script> get_today_date() </script> 
+
+fare le ombre in css
+  .form-group input:hover{
+    
+    /* border-color: red; */
+    box-shadow: 0 0 10px #ced4da;
+    
+
+    
+  }
+
+  

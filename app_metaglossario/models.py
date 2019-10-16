@@ -75,10 +75,11 @@ class glossary_entry(models.Model):
 
 
     class Meta:
-        ordering = ['-Admin_approval_switch', 'Lemma', 'Id_statico_entry']
+        ordering = ['Admin_approval_switch', 'Lemma', 'Data_inserimento_entry', 'Id_statico_entry']
         # il meno davanti all'attributo vuol dire che ordina al contrario
         # '-Admin_approval_switch', 
         # faccio comparire per primi gli hide-> nuovi inseriti
+        # in realtà per come ho definito hide e show, se metto senza il meno davanti, mi mostra per prima hide (h viene prima di s)
 
     def clean(self):
         if not (self.Lemma or self.Acronimo or self.Definizione or  self.Ambito_riferimento or self.Autore_definizione or self.Posizione_definizione or self.Url_definizione or self.Titolo_documento_fonte or self.Autore_documento_fonte or self.Host_documento_fonte or self.Url_documento_fonte or self.Commento_entry):
@@ -87,7 +88,7 @@ class glossary_entry(models.Model):
 
     def __str__(self):    
         # print("%s is %d years old." % (name, age))    
-        return  "%s - %s - [%s]"  %  (self.Lemma, self.Id_statico_entry, self.Admin_approval_switch)  
+        return  "%s - %s ----- [%s] - [%s]"  %  (self.Lemma, self.Id_statico_entry, self.Data_inserimento_entry, self.Admin_approval_switch)  
         #quello che fa apparire nella sezione admin, attributo che riassume tutti gli altri, quindi una primary key presumibilmente, pouò anche esesere la combinazione degli altri
 
 

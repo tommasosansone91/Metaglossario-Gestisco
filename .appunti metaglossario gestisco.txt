@@ -123,3 +123,7 @@ nelle pagine dove copiare le cose inserisco
 ***
 
 quando chiamo la shell di python da anaconda finisco nella stessa directory in cui sono con anaconda.
+
+Implementare un form che prende in ingresso files excel caricati dagli utenti
+
+https://docs.djangoproject.com/en/2.2/topics/http/file-uploads/

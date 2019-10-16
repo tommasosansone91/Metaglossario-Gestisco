@@ -1,15 +1,25 @@
 from django.shortcuts import render, redirect
+
 from .models import glossary_entry
 from .forms import glossary_entry_form
-from django.contrib import messages # questo mi consente di lanciare i messaggi da una pagina all'altra
+
+from .forms import glossary_sheet_form
+
+# questo mi consente di lanciare i messaggi da una pagina all'altra
+from django.contrib import messages 
 
 # per la ricerca
 from django.db.models import Q
+
+# per i messaggi a capo 
+from django.utils.safestring import mark_safe
 
 
 # Create your views here.
 def home(request):
     return render(request, 'home.html', {})
+
+
 
 def glossario(request):
 
@@ -32,7 +42,6 @@ def glossario(request):
         return render(request, template, {'all_entries':all_entries})
 
 
-   
 
 def aggiungi_terminologia(request):
 
@@ -59,6 +68,29 @@ def aggiungi_terminologia(request):
         return render(request, 'aggiungi_terminologia.html', {}) 
 
 
+def carica_glossario(request):
+
+    #se si esegue il POST (click del pulsante submit)
+    if request.method=='POST': 
+        form = glossary_sheet_form(request.POST or None) 
+        
+        # request.POST è il contenuto inserito dagli utenti perchè request è il paramentro in ingresso della funzione
+
+        if form.is_valid(): # funzione che controlla la coerenza dei campi (mail, url, numerico, testo, ecc.)
+            form.save()
+            insert_attempt_output="corretto"
+            messages.success(request, ("Glossario caricato con successo!\nAttendere la convalida da parte dell\'amministratore.\n Per favore non caricare di nuovo lo stesso glossario"))
+            return redirect('carica_glossario')
+            # con redirect non posso usare .html, ma per forza names
+
+        else:
+            insert_attempt_output="errato"
+            messages.error(request, ('ERRORE: Il glossario non è stato caricato.\nVerificare che nel glossario non siano stati inseriti caratteri speciali'))
+            return render(request, 'carica_glossario.html', {'insert_attempt_output':insert_attempt_output})
+    
+    # se si va sulla pagina e basta
+    else:   
+        return render(request, 'carica_glossario.html', {}) 
 
 
 # def vista_ricerca_semplice(request):

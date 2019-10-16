@@ -15,4 +15,21 @@ voglio fare una cosa che mi metta da una parte i campi per le fonti italiane, da
   
   */
 
+  .form-group input:hover{
+    
+    /* border-color: red; */
+    box-shadow: 0 0 3px  #007bff80;
+    border-style: solid;
+    border-color: #007bff28;
+        
+  }
 
+  
+  textarea:hover{
+    
+    /* border-color: red; */
+    box-shadow: 0 0 3px  #007bff80;
+    border-style: solid;
+    border-color: #007bff28;
+        
+  }

@@ -32,14 +32,14 @@
             </div>  
             
 
-            <div class="form-group"height: 20%">
+            <div class="form-group" >
                   <label for="glossary_entry_input_3">Definizione</label>
                   <small id="inputHelp" class="form-text text-muted">Non inserire testo proveniente da due o più fonti diverse.</small>
                   <textarea style="height:150px" name="Definizione" type="text" class="form-control" placeholder=""></textarea>               
             </div>
 
 
-            <div class="form-group"">
+            <div class="form-group">
                   <label for="glossary_entry_input_4">Ambito di riferimento della definizione</label>
                   <small id="inputHelp" class="form-text text-muted">Branca scientifica o ramo tecnico nella quale rientra il concetto che si vuole inserire. (es. Idraulica, idrologia, sismologia, ecc.)</small>
                   <input name="Ambito_riferimento" type="text" class="form-control" placeholder="">              
@@ -106,9 +106,9 @@
         <!-- Eventualmente in futuro posso nascondere il campo data alla vista del lettore -->
 
         <div class="form-group">
-              <label for="glossary_entry_input_13">Data di inserimento della terminologia</label>
-              <small id="inputHelp" class="form-text text-muted">Compilare solo se è nota la data di pubblicazione del documento fonte, altrimenti inserire la data di oggi.</small>
-              <input name="Data_inserimento_entry" type="date" class="form-control" id="date_to_turn_into_toda">              
+              <!-- <label for="glossary_entry_input_13">Data di inserimento della terminologia</label>
+              <small id="inputHelp" class="form-text text-muted">Compilare solo se è nota la data di pubblicazione del documento fonte, altrimenti inserire la data di oggi.</small>-->
+               <input name="Data_inserimento_entry" type="hidden" class="form-control" id="date_to_turn_into_toda">              
         </div>
 
         <!-- id="date_to_turn_into_today" -->
@@ -155,7 +155,7 @@
 <!-- <script type="text/javascript" src={% static "js/prova.js" %}></script>
 <script> funprova() </script>  -->
 
-<link rel="stylesheet" type="text/css" href={% static "css/prova.css" %}>
+<link rel="stylesheet" type="text/css" href={% static "css/form_aggiungi_terminologia.css" %}>
 
 
 
