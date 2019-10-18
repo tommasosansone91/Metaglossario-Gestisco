@@ -143,3 +143,7 @@ django_heroku.settings(locals())
 
 #aggiunto per far funzionare il modulo di importazione csv in admin
 IMPORT_EXPORT_USE_TRANSACTIONS = True
+
+# aggiunto per indicare la directory dei files salvati dallìupload degli utenti
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploaded_files')
+MEDIA_URL = '/uploaded_files/'

@@ -6,7 +6,7 @@
     <br>
     <p id="firstpar">
         Questo form serve ad inserire nuova terminologia nel <a href={% url "glossario" %}>glossario</a> del progetto GESTI.S.CO Interreg IT-CH.<br>
-        Tutti i campi sono facoltativi, <u>tranne la data di inserimento della terminologia</u>.<br> <!--qua devo fare l'autogenerazione di id statico e data di inserimento-->
+        Tutti i campi sono facoltativi.<br> <!--qua devo fare l'autogenerazione di id statico e data di inserimento-->
         La terminologia inserita dagli utenti sarà soggetta a revisione da parte dell'amministratore del sito prima di essere mostrata nel glossario.<br>
     </p>
 
@@ -108,15 +108,9 @@
         <div class="form-group">
               <!-- <label for="glossary_entry_input_13">Data di inserimento della terminologia</label>
               <small id="inputHelp" class="form-text text-muted">Compilare solo se è nota la data di pubblicazione del documento fonte, altrimenti inserire la data di oggi.</small>-->
-               <input name="Data_inserimento_entry" type="hidden" class="form-control" id="date_to_turn_into_toda">              
+               <input name="Data_inserimento_entry" type="hidden" class="form-control" id="mettici_data_di_oggi" >              
         </div>
 
-        <!-- id="date_to_turn_into_today" -->
-
-        <!-- <input name="Data_inserimento_entry" type="hidden" value="09/09/1991" class="form-control" id="date_to_turn_into_today" placeholder="">               -->
-
-        <!-- value=09/09/1991 -->
-        <!-- il formato della data per value="" deve essere gg/mm/2009 trattini non accettati! -->
 
         <div class="form-group">
             <!-- <label type="hidden" for="glossary_entry_input_13">Id statico delle informazioni</label> -->
@@ -148,13 +142,15 @@
 <!-- {% load static %} --> <!-- questa riga c'è già in base.html -->
 
 
+<!-- Javascript -->
+<script type="text/javascript" src={% static "js/data_oggi.js" %}> </script> 
+<script> attualizza_data_di_ID("mettici_data_di_oggi") </script> 
 
-<script type="text/javascript" src={% static "js/get_today_date.js" %}></script>
-<script> get_today_date() </script> 
 
 <!-- <script type="text/javascript" src={% static "js/prova.js" %}></script>
 <script> funprova() </script>  -->
 
+<!-- CSS -->
 <link rel="stylesheet" type="text/css" href={% static "css/form_aggiungi_terminologia.css" %}>
 
 

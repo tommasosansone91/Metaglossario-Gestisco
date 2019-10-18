@@ -416,3 +416,56 @@ fare le ombre in css
   }
 
   
+  *******
+
+
+  https://django.readthedocs.io/en/2.2.x/topics/http/file-uploads.html
+
+  registrato il nuovo modello nell'admin
+
+  MEDIA_ROOT e MEDIA_URL sono variabili i cui nomi non possono essere cambiati a piacimento e vanno utilizzati per indicare url e directory dei file salvati
+
+
+
+  *****
+
+  TemplateSyntaxError at /carica_glossario
+Invalid block tag on line 89: 'static', expected 'endblock'. Did you forget to register or load this tag?
+
+*******
+
+vuol dire che stai mettendo javascipt o css prima del  tag {% load static %}
+
+****
+
+SE MODIFICO L'ID NEL TEMPLATE NON FUNZIONA,
+SE MODIFICO L'ID NELLA FUNZIONE FUNZIONA, PERCHè?
+
+l'ho corretto cambiando tutto:
+file js, funzione e id nell'input del template
+
+            <div class="form-group">
+                <!-- <label for="glossary_entry_input_13">Data di inserimento della terminologia</label>
+                <small id="inputHelp" class="form-text text-muted">Compilare solo se è nota la data di pubblicazione del documento fonte, altrimenti inserire la data di oggi.</small>-->
+                 <input name="Data_inserimento_glossary" type="hidden" class="form-control" id="mettici_data_di_oggi">              
+            </div>
+
+
+<!-- Javascript -->
+<script type="text/javascript" src={% static "js/data_oggi.js" %}> </script> 
+<script> attualizza_data_di_ID("mettici_data_di_oggi") </script> 
+
+<!-- static/js/data_oggi.js -->
+function attualizza_data_di_ID(id_data) {
+    var now = new Date();
+    var day = ("0" + now.getDate()).slice(-2);
+    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+    var today = now.getFullYear()+"-"+(month)+"-"+(day);
+    document.getElementById(id_data).value = today;
+    }
+
+
+    ****
+
+    home e aggiungi terminologia hanno lo stesso layout
+    glossario e aggiungi glossario hanno lo stesso

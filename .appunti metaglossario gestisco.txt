@@ -127,3 +127,43 @@ quando chiamo la shell di python da anaconda finisco nella stessa directory in c
 Implementare un form che prende in ingresso files excel caricati dagli utenti
 
 https://docs.djangoproject.com/en/2.2/topics/http/file-uploads/
+
+*****
+
+per maneggiare il file importato uso una api di Django, la class FileSystemStorage, da usare in views.py
+
+scrittura solo temporanea
+
+----------
+
+def carica_glossario(request):
+
+    #se si esegue il POST (click del pulsante submit)
+    if request.method=='POST': 
+        uploaded_file=request.FILES['uploaded_glossary']
+        print(uploaded_file.name)
+        print(uploaded_file.size)
+        fs=FileSystemStorage()
+        fs.save(uploaded_file.name, uploaded_file)
+        
+        # request.POST è il contenuto inserito dagli utenti perchè request è il paramentro in ingresso della funzione
+
+        if form.is_valid(): # funzione che controlla la coerenza dei campi (mail, url, numerico, testo, ecc.)
+            form.save()
+            insert_attempt_output="corretto"
+            messages.success(request, ("Glossario caricato con successo!\nAttendere la convalida da parte dell\'amministratore.\n Per favore non caricare di nuovo lo stesso glossario"))
+            return redirect('carica_glossario')
+            # con redirect non posso usare .html, ma per forza names
+
+        else:
+            insert_attempt_output="errato"
+            messages.error(request, ('ERRORE: Il glossario non è stato caricato.\nVerificare che nel glossario non siano stati inseriti caratteri speciali'))
+            return render(request, 'carica_glossario.html', {'insert_attempt_output':insert_attempt_output})
+    
+    # se si va sulla pagina e basta
+    else:   
+        return render(request, 'carica_glossario.html', {}) 
+
+    -----------
+
+    nei form html, in input, il class determina i widget che vengono fuori

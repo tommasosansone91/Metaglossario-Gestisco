@@ -1,9 +1,12 @@
 from django.contrib import admin
 from .models import glossary_entry 
+from .models import glossary_file
 
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
+
+# queste due funzioni sono collegate al widget import export utilizzabile solo dall'admin
 
 class glossary_entry_resource(resources.ModelResource):
     class Meta:
@@ -20,7 +23,15 @@ class glossary_entry_Admin(ImportExportModelAdmin, admin.ModelAdmin):
 
 
 # Register your models here.
+# per ogni modello, registralo con una nuova linea del tipo
+# admin.site.register(modello)
+
 admin.site.register(glossary_entry, glossary_entry_Admin)
+
+# solo il modello accoppiato ad import-export prende in ingresso un secondo argomento quando registrato,
+# il secondo argomento è la funzione admin in cui in realtà viene messo pass
+
+admin.site.register(glossary_file)
 
 
 

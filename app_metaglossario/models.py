@@ -93,3 +93,29 @@ class glossary_entry(models.Model):
 
 
 
+
+
+class glossary_file(models.Model):
+
+    Glossary_file = models.FileField(upload_to='uploaded_glossaries/', blank=False, null=False)
+
+    Data_inserimento_glossary = models.DateField(blank=False, null=False, default=timezone.now().date() )
+    # Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now().date)
+
+
+    class Meta:
+        ordering = ['Data_inserimento_glossary', 'Glossary_file']
+        # il meno davanti all'attributo vuol dire che ordina al contrario
+        # '-Admin_approval_switch', 
+        # faccio comparire per primi gli hide-> nuovi inseriti
+        # in realtà per come ho definito hide e show, se metto senza il meno davanti, mi mostra per prima hide (h viene prima di s)
+
+    def clean(self):
+        if not (self.Glossary_file or self.Data_inserimento_glossary):
+            raise ValidationError("Non è stato selezionato alcun glossario per il caricamento.")
+        # non mi restituisce questa scritta ma quella messa di default nelle views
+
+    def __str__(self):    
+        # print("%s is %d years old." % (name, age))    
+        return  "%s ----- [%s]"  %  (self.Glossary_file, self.Data_inserimento_glossary)  
+        #quello che fa apparire nella sezione admin, attributo che riassume tutti gli altri, quindi una primary key presumibilmente, pouò anche esesere la combinazione degli altri
