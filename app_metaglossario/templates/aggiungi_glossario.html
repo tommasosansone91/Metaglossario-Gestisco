@@ -11,7 +11,9 @@
         Il widget consente di inserire più record di terminologia alla volta.
         
     </p>
+    <br>
 
+    <div class="container">
     <p id="firstpar">
         Per inserire più record alla volta:
         <ol>
@@ -21,39 +23,40 @@
             <li>Caricare il template compilato.</li>
         </ol>
     </p>
-
-    <p id="firstpar"></p>
-        Tutti i campi sono facoltativi.<br> <!--qua devo fare l'autogenerazione di id statico e data di inserimento-->
-        La terminologia inserita dagli utenti sarà soggetta a revisione da parte dell'amministratore del sito prima di essere mostrata nel glossario.<br>
-    </p>
+    </div>
+    
 
 
     <br>
 
-    <!-- scarica template glossario -->
-    
-
+    <!-- scarica template glossario -->    
     <p>        
     <form method="get" action="static/files_for_download/template_glossario.xlsx">
-    <div class="container"></div>
+    
         <button type="submit" class="btn btn-success">Scarica template</button>
-    </div>
+    
     </form>
     </p>
 
-    <div class="container">   
+    <!-- <div class="container">   
     <small id="inputHelp" class="form-text text-muted">NOTA: Non rinominare le colonne del template.</small>     
-    </div>  
-                 
-            
-
-    <br>
-
+    </div>   -->           
     
+    <div class="container">     
+    <p id="firstpar" >
+    
+        <b>Non rinominare le colonne del template.</b><br>
+        Tutti i campi sono facoltativi.<br> <!--qua devo fare l'autogenerazione di id statico e data di inserimento-->
+        La terminologia inserita dagli utenti sarà soggetta a revisione da parte dell'amministratore del sito prima di essere mostrata nel glossario.<br>
+    
+    </p>
+    </div>
+
+    <br>   
 
     <!-- carica glossario -->
     <p>
-    <form class="container" method="POST" enctype="multipart/form-data" >
+    <form method="POST" enctype="multipart/form-data" >
         {% csrf_token %}
 
         <div class="file-upload-wrapper" id="input-file-now">
@@ -72,8 +75,9 @@
             </div>
             <!-- la data funziona - ho controllato -->
   
-
-            <button type="submit" class="btn btn-primary">Carica glossario</button>
+            <div class="container">
+                <button type="submit" class="btn btn-primary">Carica glossario</button>
+            </div>
         </div>
 
     </form>
