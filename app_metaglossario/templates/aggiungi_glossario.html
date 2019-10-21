@@ -56,13 +56,13 @@
 
     <!-- carica glossario -->
     <p>
-    <form method="POST" enctype="multipart/form-data" >
+    <form method="POST" action="" enctype="multipart/form-data" >
         {% csrf_token %}
 
         <div class="file-upload-wrapper" id="input-file-now">
 
-            <small id="inputHelp" class="form-text text-muted">Seleziona il template compilato con la terminologia da caricare.</small>                  
-            <input type="file"  name="uploaded_glossary" id="input-file-now" data-max-file-size="5M" class="file-upload">
+            <small id="inputHelp" class="form-text text-muted">Seleziona il template compilato con la terminologia da caricare. <br>Non sono accettati i file maggiori di 5M.</small>                  
+            <input type="file"  name="Glossary_file" id="input-file-now" data-max-file-size="5M" class="file-upload">
             
             <br><br> 
 

@@ -469,3 +469,94 @@ function attualizza_data_di_ID(id_data) {
 
     home e aggiungi terminologia hanno lo stesso layout
     glossario e aggiungi glossario hanno lo stesso
+
+    caricament glossario risolto:
+
+    template:
+
+        <form method="POST" action="" enctype="multipart/form-data" >
+        {% csrf_token %}
+
+        <div class="file-upload-wrapper" id="input-file-now">
+
+            <small id="inputHelp" class="form-text text-muted">Seleziona il template compilato con la terminologia da caricare. <br>Non sono accettati i file maggiori di 5M.</small>                  
+            <input type="file"  name="Glossary_file" id="input-file-now" data-max-file-size="5M" class="file-upload">
+            
+            <br><br> 
+
+            <!-- entry della data è nascosto -->
+            <!-- in futuro posso rendere da forms.py il fatto che html non devono essere presi certi campi, quindi al posto di nasconderli tolgo proprio l'input. però devo far sì che nel modello si generino da soli se non specificati dall'utente -->
+            <div class="form-group">
+                <!-- <label for="glossary_entry_input_13">Data di inserimento della terminologia</label>
+                <small id="inputHelp" class="form-text text-muted">Compilare solo se è nota la data di pubblicazione del documento fonte, altrimenti inserire la data di oggi.</small>-->
+                 <input name="Data_inserimento_glossary" type="hidden" class="form-control" id="mettici_data_di_oggi">              
+            </div>
+            <!-- la data funziona - ho controllato -->
+  
+            <div class="container">
+                <button type="submit" class="btn btn-primary">Carica glossario</button>
+            </div>
+        </div>
+
+    </form>
+
+forms.py:
+
+    class glossary_file_form(forms.ModelForm):
+
+    class Meta:
+        model = glossary_file
+        fields = ["Glossary_file", "Data_inserimento_glossary"]
+
+models.py:
+
+class glossary_file(models.Model):
+
+    Glossary_file = models.FileField(upload_to='uploaded_glossaries/', blank=False, null=False)
+
+    Data_inserimento_glossary = models.DateField(blank=False, null=False, default=timezone.now().date() )
+    # Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now().date)
+
+
+    class Meta:
+        ordering = ['Data_inserimento_glossary', 'Glossary_file']
+        # il meno davanti all'attributo vuol dire che ordina al contrario
+        # '-Admin_approval_switch', 
+        # faccio comparire per primi gli hide-> nuovi inseriti
+        # in realtà per come ho definito hide e show, se metto senza il meno davanti, mi mostra per prima hide (h viene prima di s)
+
+    def clean(self):
+        if not (self.Glossary_file or self.Data_inserimento_glossary):
+            raise ValidationError("Non è stato selezionato alcun glossario per il caricamento.")
+        # non mi restituisce questa scritta ma quella messa di default nelle views
+
+    def __str__(self):    
+        # print("%s is %d years old." % (name, age))    
+        return  "%s ----- [%s]"  %  (self.Glossary_file, self.Data_inserimento_glossary)  
+        #quello che fa apparire nella sezione admin, attributo che riassume tutti gli altri, quindi una primary key presumibilmente, pouò anche esesere la combinazione degli altri
+
+views.py:
+
+def aggiungi_glossario(request):
+
+    #se si esegue il POST (click del pulsante submit)
+    if request.method=='POST': 
+
+        form = glossary_file_form(request.POST or None, request.FILES or None)
+        # form = glossary_file_form(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            insert_attempt_output="corretto"
+            # insert_attempt_output formatta il colore del messaggio, vedi in base.html
+            messages.success(request, ("Glossario inserito con successo!\nAttendere la convalida da parte dell\'amministratore.\n Per favore non inserire di nuovo la stessa terminologia"))
+            return redirect('aggiungi_glossario')
+
+        else:
+            insert_attempt_output="errato"
+            messages.error(request, ('ERRORE: Non è stato caricato alcun glossario.'))
+            return render(request, 'aggiungi_glossario.html', {'insert_attempt_output':insert_attempt_output})
+    
+    # se si va sulla pagina e basta
+    else:   
+        return render(request, 'aggiungi_glossario.html', {}) 

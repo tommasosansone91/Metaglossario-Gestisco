@@ -4,7 +4,7 @@ from .models import glossary_file
 
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
-
+# funzionano ma vs studio li legge male
 
 # queste due funzioni sono collegate al widget import export utilizzabile solo dall'admin
 

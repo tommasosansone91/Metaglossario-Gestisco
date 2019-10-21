@@ -167,3 +167,5 @@ def carica_glossario(request):
     -----------
 
     nei form html, in input, il class determina i widget che vengono fuori
+
+    https://www.youtube.com/watch?v=Rr1-UTFCuH4

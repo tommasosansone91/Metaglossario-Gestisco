@@ -83,6 +83,9 @@ def aggiungi_glossario(request):
     if request.method=='POST': 
 
         form = glossary_file_form(request.POST, request.FILES)
+        # form = glossary_file_form(request.POST, request.FILES)
+        # funziona anche con
+        # form = glossary_file_form(request.POST or None, request.FILES or None)
 
         if form.is_valid():
             form.save()
