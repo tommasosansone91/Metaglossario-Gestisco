@@ -470,7 +470,7 @@ function attualizza_data_di_ID(id_data) {
     home e aggiungi terminologia hanno lo stesso layout
     glossario e aggiungi glossario hanno lo stesso
 
-    caricament glossario risolto:
+    caricament glossario risolto: c era un mismatch tra nome file salvato temlate e nome form+modello
 
     template:
 
@@ -560,3 +560,5 @@ def aggiungi_glossario(request):
     # se si va sulla pagina e basta
     else:   
         return render(request, 'aggiungi_glossario.html', {}) 
+
+cambiato percosto internet di aggiungi glossario in aggiungi terminologia massa

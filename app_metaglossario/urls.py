@@ -9,7 +9,7 @@ urlpatterns=[
     path('', views.home, name='home'),
     path('aggiungi_terminologia', views.aggiungi_terminologia, name="aggiungi_terminologia"),
     path('glossario', views.glossario, name="glossario"),
-    path('aggiungi_glossario', views.aggiungi_glossario, name="aggiungi_glossario"),
+    path('aggiungi_terminologia_massa', views.aggiungi_glossario, name="aggiungi_glossario"),
 ]
 
 # serve a permettere il salvataggio dei media
