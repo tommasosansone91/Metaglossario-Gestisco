@@ -145,7 +145,7 @@
                     </div>        
                 </div> 
                 
-                <br>
+                <br> <!-- spazio tra le card -->
 
             {% endif %} <!--questo if è per pubblicare il contenuto solo se lo switch della review è passata-->
         
@@ -153,7 +153,71 @@
 
     {% endif %}
 
-</div></div>  
+
+    <br><br> <!-- spazio dopo i risultati impaginati -->       
+
+
+        <nav aria-label="...">
+            <ul class="pagination">
+
+                {% if all_entries.has_previous %}
+
+                <li class="page-item">
+                    <a class="page-link" href="?page=1">&laquo; first</a> 
+                </li>
+                    
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ all_entries.previous_page_number }}">{{ all_entries.previous_page_number }}</a>
+                </li>
+
+                {% else %}
+
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" class="page-item disabled">&laquo; first</a>  
+                </li> 
+                
+                <!-- <li class="page-item disabled"></li>
+                    <a class="page-link" href="#" class="page-item disabled">previous</a>
+                </li> -->
+
+                {% endif %}
+
+
+
+                <li class="page-item active">
+                <a class="page-link" href="#">{{ all_entries.number }}<span class="sr-only">(current)</span></a>
+                </li>
+
+
+
+                {% if all_entries.has_next %}
+                    
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ all_entries.next_page_number }}">{{ all_entries.next_page_number }}</a>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ all_entries.num_pages }}">Last &raquo;</a> 
+                </li>
+
+                {% else %}
+                               
+                <!-- <li class="page-item disabled"></li>
+                    <a class="page-link" href="#" class="page-item disabled">next</a>
+                </li> -->
+
+                <li class="page-item disabled">
+                   <a class="page-link" href="#" class="page-item disabled">Last &raquo;</a>  
+                </li> 
+                
+                {% endif %}
+
+            </ul>
+        </nav>
+
+
+
+    <br><br>
 
 <!-- CSS -->
 {% load static %}  <!-- Qui il tag è obbligatorio nonostante sia stato inserito dentro base.html -->
