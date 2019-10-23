@@ -1,42 +1,34 @@
-# per ora non funziona
+# all'inizio questo lo posso fare come amministratore
 
-# myapp/management/commands/load_glossary.py
-from django.core.management.base import BaseCommand, CommandError
-import csv
+from .models import glossary_entry
+from .models import glossary_file
 
-class Command(BaseCommand):
+import pandas as pd
 
-    def add_arguments(self, parser):
-        parser.add_argument('csv_file', nargs='+', type=str)
-
-    def handle(self, *args, **options):
-        for csv_file in options['csv_file']:
-            dataReader = csv.reader(open(csv_file), delimiter=',', quotechar='"')
-            for row in dataReader:
-                
-                Lemma=row[0],
-                Acronimo=row[1],
-                Definizione=row[2],
-                Ambito_riferimento=row[3],
-                Autore_definizione=row[4],
-                Posizione_definizione=row[5],
-                Url_definizione=row[6],
-                Titolo_documento_fonte=row[7],
-                Autore_documento_fonte=row[8],
-                Host_documento_fonte=row[9],
-                Url_documento_fonte=row[10],
-                Commento_entry=row[11],
-                Data_inserimento_entry=row[12],
-                Id_statico_entry=row[13],
-                
-                # etc...
-                self.stdout.write(
-                    'Created glossary entry'
-                #     'Created glossary entry {} {}'.format(emp.Lemma, emp.Id_statico_entry)
-                )
-
-# You would then call this with:
-# ./manage.py import_csv --csvfile "/home/<name>/webapps/<name2>/employees.csv"
+df = pd.read_excel (r'Path where the Excel file is stored\File name.xlsx') #for an earlier version of Excel, you may need to use the file extension of 'xls'
+print (df)
 
 
-#       python ./manage.py load_glossary csv_file "D:\Files Tommaso\Politecnico\Lavoro polimi\Algoritmi metaglossario Python\traformazioni di prova per il Metaglossario\dati_prova.csv"
+
+def import_withtimes(request):
+    print "Copia degli elementi dal modello dei file caricati (Glossary_file) al modello della terminologia (Glossary_entry)"
+    po_cache = list()
+    # The list() constructor returns a mutable sequence list of elements. If no parameters are passed, it creates an empty list. If iterable is passed as parameter, it creates a list of elements in the iterable.
+    for item in glossary_file.objects.all():
+
+        if item.po_number in po_cache:
+            continue
+
+        withtimes = Model2.objects.filter(planning_order=item.po_number)
+        for wi in withtimes:
+            po_cache.append(wi.planning_order)
+            item.wms = wi.wms_order
+            item.status = wi.shipment_status
+            item.aging = wi.status_date
+            item.carrier = wi.service_level
+            item.add_date = wi.order_add_date
+            item.asn_validation = wi.asn_sent_time
+            item.docs_add_date = wi.docs_received_time
+            item.save()
+
+

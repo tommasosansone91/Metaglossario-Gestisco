@@ -3,7 +3,7 @@
 {% block content %}
 
     <h1>Glossario</h1>
-
+    
     <br>
 
     <!-- Barra di navigazione  -->
@@ -197,7 +197,7 @@
                 </li>
 
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ all_entries.num_pages }}">Last &raquo;</a> 
+                    <a class="page-link" href="?page={{ all_entries.paginator.num_pages }}">Last &raquo;</a> 
                 </li>
 
                 {% else %}

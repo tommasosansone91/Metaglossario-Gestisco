@@ -610,7 +610,7 @@ se al paginator ne aggiungo altri in costruzione mi da errore empty page perchè
 
 il mio paginatore:
 
- <nav aria-label="...">
+<nav aria-label="...">
             <ul class="pagination">
 
                 {% if all_entries.has_previous %}
@@ -650,7 +650,7 @@ il mio paginatore:
                 </li>
 
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ all_entries.num_pages }}">Last &raquo;</a> 
+                    <a class="page-link" href="?page={{ all_entries.paginator.num_pages }}">Last &raquo;</a> 
                 </li>
 
                 {% else %}
@@ -667,3 +667,55 @@ il mio paginatore:
 
             </ul>
         </nav>
+
+questo l'avevo implementato ma non funziona:
+
+# per ora non funziona
+
+# myapp/management/commands/load_glossary.py
+from django.core.management.base import BaseCommand, CommandError
+import csv
+
+class Command(BaseCommand):
+
+    def add_arguments(self, parser):
+        parser.add_argument('csv_file', nargs='+', type=str)
+
+    def handle(self, *args, **options):
+        for csv_file in options['csv_file']:
+            dataReader = csv.reader(open(csv_file), delimiter=',', quotechar='"')
+            for row in dataReader:
+                
+                Lemma=row[0],
+                Acronimo=row[1],
+                Definizione=row[2],
+                Ambito_riferimento=row[3],
+                Autore_definizione=row[4],
+                Posizione_definizione=row[5],
+                Url_definizione=row[6],
+                Titolo_documento_fonte=row[7],
+                Autore_documento_fonte=row[8],
+                Host_documento_fonte=row[9],
+                Url_documento_fonte=row[10],
+                Commento_entry=row[11],
+                Data_inserimento_entry=row[12],
+                Id_statico_entry=row[13],
+                
+                # etc...
+                self.stdout.write(
+                    'Created glossary entry'
+                #     'Created glossary entry {} {}'.format(emp.Lemma, emp.Id_statico_entry)
+                )
+
+# You would then call this with:
+# ./manage.py import_csv --csvfile "/home/<name>/webapps/<name2>/employees.csv"
+
+
+#       python ./manage.py load_glossary csv_file "D:\Files Tommaso\Politecnico\Lavoro polimi\Algoritmi metaglossario Python\traformazioni di prova per il Metaglossario\dati_prova.csv"
+
+************************************
+
+django admin import export,
+problemi di importazione potrebbero essere legati alla lunghezza massima dei campi nel modello
+servono circa 25 secondi per importare 70 record. con import export da admin
+
