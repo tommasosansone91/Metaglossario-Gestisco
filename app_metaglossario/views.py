@@ -19,7 +19,7 @@ from django.core.paginator import Paginator
 from django.core.paginator import EmptyPage, PageNotAnInteger
 
 # usare i filtri
-from . import filters
+
 
 # per i messaggi a capo 
 # from django.utils.safestring import mark_safe
