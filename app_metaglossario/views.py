@@ -16,6 +16,10 @@ from django.db.models import Q
 
 # per la paginazione
 from django.core.paginator import Paginator
+from django.core.paginator import EmptyPage, PageNotAnInteger
+
+# usare i filtri
+from . import filters
 
 # per i messaggi a capo 
 # from django.utils.safestring import mark_safe
@@ -54,7 +58,7 @@ def glossario(request):
         # context = {'all_entries':selected_entries}
         #return render(request, template, context)
         # {'nome della variabile con cui sarà richiamato nel template':contenuto}
-        return render(request, template, {'all_entries':selected_entries})
+        return render(request, template, {'all_entries':selected_entries, 'query':query})
 
     # se non è stata fatta nessuna query
     else:
@@ -64,7 +68,7 @@ def glossario(request):
         page = request.GET.get('page')
         all_entries = paginator.get_page(page)
 
-        return render(request, template, {'all_entries':all_entries})
+        return render(request, template, {'all_entries':all_entries, 'query':query})
 
 
 # QUESTA è LA SINGOLA ENTRY
