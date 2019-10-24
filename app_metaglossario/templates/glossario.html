@@ -13,7 +13,7 @@
 
     <div class="topnav">
         
-        <a id="pulsante_ricerca_avanzata" href="#Ricerca_avanzata" onclick="alert('Funzione temporaneamente non disponibile')">Ricerca avanzata</a>
+        <a id="pulsante_ricerca_avanzata" href="#Ricerca_avanzata" onclick="alert('Funzione non ancora disponibile.')">Ricerca avanzata</a>
         
         <div id="blocco_ricerca_semplice" class="search-container">
 
@@ -156,6 +156,7 @@
 
     <br><br> <!-- spazio dopo i risultati impaginati -->       
 
+    
 
         <nav aria-label="...">
             <ul class="pagination">
@@ -275,7 +276,44 @@
 
 
 
+        <!-- navigatore di paginazione manuale -->
+        
+        {% if query %}
 
+            <form method="GET" >
+                    <nav aria-label="...">
+                        <ul class="pagination">
+                        
+                        <li class="page-item disabled"><a class="page-link" >Vai alla pagina: </a></li>
+                        <li class="hidden"><input type="hidden" name="q" value="{{request.GET.q}}"></li>
+                        <li class="page-item"><input style="width: 60px; color:grey" class="page-link" name="page"></li>                    
+                        <li class="page-item">&nbsp&nbsp&nbsp<button type="submit" class="btn btn-primary" href="?q={{query}}&page={{page}}">Vai</button></li>
+                        </ul>
+                        
+                    </nav>
+                </form>
+
+        {% else %}
+
+        <!-- se la query è vuota questo funziona -->
+
+            <form method="GET" action="{% url 'glossario' %}">
+                    <nav aria-label="...">
+                        <ul class="pagination">
+                        
+                        <li class="page-item disabled"><a class="page-link" >Vai alla pagina: </a></li>
+                        <li class="page-item" ><input style="width: 60px; color:grey" class="page-link" name="page" value=""></li>
+                        <li class="page-item">&nbsp&nbsp&nbsp<button type="submit" class="btn btn-primary">Vai</button></li>
+                        </ul>
+                        
+                    </nav>
+                </form>
+
+            
+        {% endif %}
+
+
+    
 
     <br><br>
 
