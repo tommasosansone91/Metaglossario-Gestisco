@@ -24,13 +24,15 @@
 
   .pagination input {
     background-color: #f8f8f8;   
-
+    color: black;
   }
 
   .pagination input:hover {
-    background-color: white;
+    background-color: white; 
     /* mettere borders 2 px qui dentro faceva saltare la linea successiva */
-    border-color: #007bffc4;
+    /* border-color: #007bffc4; */
+    color: black;
+    
 
   }
 
@@ -53,6 +55,7 @@
 
   } */
 
+/* PULSANTI DISABILITATI DI NAVIGAZIONE PAGINA */
 #tasto_navigazione_pagina_disabilitato{
   color:white;
   border-color: rgb(165, 165, 165);

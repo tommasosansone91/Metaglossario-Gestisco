@@ -18,8 +18,8 @@
         <div id="blocco_ricerca_semplice" class="search-container">
 
           <form method="GET" action="{% url 'glossario' %}">
-
-            <input id="testo_slot_ricerca_semplice" type="text" placeholder="Ricerca terminologia..." name="q" value="{{request.GET.q}}">  <!-- è il nome che ho dato anche nella views.py -->
+            
+            <input id="testo_slot_ricerca_semplice"  type="text" placeholder="Ricerca terminologia..." name="q" value="{{request.GET.q}}">  <!-- è il nome che ho dato anche nella views.py -->
             <!-- name dentro input text vuol dire il sintagma che viene dato all'url di tutte le query, seguito da un = per indicarne il bersaglio'  -->
             
             
@@ -274,7 +274,7 @@
                         
                         <li class="page-item disabled" ><a id="vai_alla_pagina_disabilitato" class="page-link" >Vai alla pagina: </a></li>
                         <li class="hidden"><input type="hidden" name="q" value="{{request.GET.q}}"></li>
-                        <li class="page-item"><input id="page_slot" style="width: 60px; color:grey" class="page-link" name="page"></li>                    
+                        <li class="page-item"><input id="page_slot" style="width: 60px" class="page-link" name="page"></li>                    
                         <li class="page-item">&nbsp&nbsp&nbsp<button type="submit" class="btn btn-primary" href="?q={{query}}&page={{page}}">Vai</button></li>
                         </ul>
                         

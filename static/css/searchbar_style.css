@@ -103,7 +103,18 @@ body {
 }
 
 #testo_slot_ricerca_semplice {
+  border:0px;
   float: left;
+  background-color:#f8f8f8;
+  /* quest'ultima linea per qualche motivo non funziona, quindi ho messo lo style direttamente nello slot del template */
+}
+
+#testo_slot_ricerca_semplice:hover {
+  float: left;
+  background-color:white;
+  border:1px;
+  border-color: #007bffc4;
   
+  /* quest'ultima linea per qualche motivo non funziona, quindi ho messo lo style direttamente nello slot del template */
 }
 
