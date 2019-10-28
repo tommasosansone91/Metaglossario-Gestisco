@@ -9,7 +9,7 @@ from .forms import glossary_file_form
 # from .forms import glossary_sheet_form
 
 # questo mi consente di lanciare i messaggi da una pagina all'altra
-from django.contrib import messages 
+from django.contrib import messages
 
 # per la ricerca
 from django.db.models import Q
@@ -21,7 +21,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger
 # usare i filtri
 
 
-# per i messaggi a capo 
+# per i messaggi a capo
 # from django.utils.safestring import mark_safe
 
 # per caricare i files dagli utenti
@@ -42,19 +42,20 @@ def glossario(request):
     template = "glossario.html" #il template è sempre lo stesso
 
     all_entries = glossary_entry.objects.all() #funziona lo stesso anche se dice Class 'glossary_entry' has no 'objects' memberpylint(no-member)
-    
+
     # se la query è stata fatta
     if query:
-        
+
         query = request.GET.get('q') #q è variabile risultante dalla query del database
-        selected_entries = glossary_entry.objects.filter(Q(Acronimo__icontains=query)|Q(Ambito_riferimento__icontains=query)|Q(Autore_definizione__icontains=query)|Q(Autore_documento_fonte__icontains=query)|Q(Data_inserimento_entry__icontains=query)|Q(Definizione__icontains=query)|Q(Host_documento_fonte__icontains=query)|Q(Id_statico_entry__icontains=query)|Q(Lemma__icontains=query)|Q(Posizione_definizione__icontains=query)|Q(Titolo_documento_fonte__icontains=query)|Q(Url_definizione__icontains=query)|Q(Url_documento_fonte__icontains=query))
+
+        glossary_entry.objects.filter(Q(Acronimo__icontains=query)|Q(Ambito_riferimento__icontains=query)|Q(Autore_definizione__icontains=query)|Q(Autore_documento_fonte__icontains=query)|Q(Data_inserimento_entry__icontains=query)|Q(Definizione__icontains=query)|Q(Host_documento_fonte__icontains=query)|Q(Id_statico_entry__icontains=query)|Q(Lemma__icontains=query)|Q(Posizione_definizione__icontains=query)|Q(Titolo_documento_fonte__icontains=query)|Q(Url_definizione__icontains=query)|Q(Url_documento_fonte__icontains=query))
         # Q(Acronimo__icontains=query dice quali sono i campi in cui cercare l'input specificato dall'utente
-        
-        # Pagination        
+
+        # Pagination
         paginator = Paginator(selected_entries, 10) # Show 25 contacts per page
         page = request.GET.get('page')
         selected_entries = paginator.get_page(page)
-        
+
         # context = {'all_entries':selected_entries}
         #return render(request, template, context)
         # {'nome della variabile con cui sarà richiamato nel template':contenuto}
@@ -76,8 +77,8 @@ def aggiungi_terminologia(request):
 
     #se si esegue il POST (click del pulsante submit)
     if request.method=='POST':
-        form = glossary_entry_form(request.POST or None) 
-        
+        form = glossary_entry_form(request.POST or None)
+
         # request.POST è il contenuto inserito dagli utenti perchè request è il paramentro in ingresso della funzione
 
         if form.is_valid(): # funzione che controlla la coerenza dei campi (mail, url, numerico, testo, ecc.)
@@ -92,10 +93,10 @@ def aggiungi_terminologia(request):
             insert_attempt_output="errato"
             messages.error(request, ('ERRORE: La terminologia non è stata inserita nel glossario.\nCompilare almeno un campo e la data di inserimento.'))
             return render(request, 'aggiungi_terminologia.html', {'insert_attempt_output':insert_attempt_output})
-    
+
     # se si va sulla pagina e basta
-    else:   
-        return render(request, 'aggiungi_terminologia.html', {}) 
+    else:
+        return render(request, 'aggiungi_terminologia.html', {})
 
 
 
@@ -103,7 +104,7 @@ def aggiungi_terminologia(request):
 def aggiungi_glossario(request):
 
     #se si esegue il POST (click del pulsante submit)
-    if request.method=='POST': 
+    if request.method=='POST':
 
         form = glossary_file_form(request.POST, request.FILES)
         # form = glossary_file_form(request.POST, request.FILES)
@@ -121,10 +122,10 @@ def aggiungi_glossario(request):
             insert_attempt_output="errato"
             messages.error(request, ('ERRORE: Non è stato caricato alcun glossario.'))
             return render(request, 'aggiungi_glossario.html', {'insert_attempt_output':insert_attempt_output})
-    
+
     # se si va sulla pagina e basta
-    else:   
-        return render(request, 'aggiungi_glossario.html', {}) 
+    else:
+        return render(request, 'aggiungi_glossario.html', {})
 
 
 
@@ -140,6 +141,3 @@ def aggiungi_glossario(request):
 
 #     #return render(request, template, context)
 #     return render(request, 'glossario.html', {'selected_entries':selected_entries})
-
-
-
