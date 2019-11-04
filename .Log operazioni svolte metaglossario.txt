@@ -1009,3 +1009,8 @@ Il dizionario mi permette di passare le variabili dalla views.py al template
   color: black;
   border-color: #ddd;
 }
+
+*****
+
+in settings.py
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240 # higher than the count of fields

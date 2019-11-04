@@ -28,7 +28,7 @@ class glossary_entry(models.Model):
 
     Lemma = models.CharField(max_length=256, blank=True, null=True)
     
-    Acronimo = models.CharField(max_length=15, blank=True, null=True)
+    Acronimo = models.CharField(max_length=25, blank=True, null=True)
 
     Definizione = models.TextField(blank=True, null=True) # sostituire con textfield?
     
