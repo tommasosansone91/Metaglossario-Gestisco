@@ -147,3 +147,5 @@ IMPORT_EXPORT_USE_TRANSACTIONS = True
 # aggiunto per indicare la directory dei files salvati dallìupload degli utenti
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploaded_files')
 MEDIA_URL = '/uploaded_files/'
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 13000 # higher than the count of fields
