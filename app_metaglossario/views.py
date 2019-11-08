@@ -31,7 +31,10 @@ from django.http import JsonResponse
 from django.core.files.storage import FileSystemStorage
 
 # per gli script di management dei files
-from .scripts import printout, printout_input, pour_entire_simple_model, erase_union_model, pour_entire_file_model, pour_latest_file, pour_latest_entry
+from .scripts import printout, printout_input
+from .scripts import pour_entire_simple_model, pour_entire_file_model
+from .scripts import pour_latest_file, pour_latest_entry
+from .scripts import erase_acquired_terminology, erase_glossary_entry
 
 # Create your views here.
 def home(request):
@@ -42,9 +45,6 @@ def home(request):
 def glossario(request):
 
     
-    # erase_union_model()
-    # pour_entire_simple_model()
-    # pour_entire_file_model()
 
     query = request.GET.get('q') #q è variabile risultante dalla query del database
     # non sostuituirla col valore vuoto
@@ -85,6 +85,12 @@ def glossario(request):
 # QUESTA è LA SINGOLA ENTRY
 def aggiungi_terminologia(request):
 
+    # erase_glossary_entry()
+    # erase_acquired_terminology()
+    # pour_entire_simple_model()
+    # pour_entire_file_model()
+    pour_latest_file()
+
     #se si esegue il POST (click del pulsante submit)
     if request.method=='POST':
         form = glossary_entry_form(request.POST or None)
@@ -97,7 +103,7 @@ def aggiungi_terminologia(request):
             # insert_attempt_output formatta il colore del messaggio, vedi in base.html
             messages.success(request, ("Terminologia inserita con successo!\nAttendere la convalida da parte dell\'amministratore.\n Per favore non inserire di nuovo la stessa terminologia"))
             
-            # per ora non lo usa
+            # per ora non lo uso
             # pour_latest_entry()
 
             return redirect('aggiungi_terminologia')
@@ -131,8 +137,9 @@ def aggiungi_glossario(request):
             # insert_attempt_output formatta il colore del messaggio, vedi in base.html
             messages.success(request, ("Glossario inserito con successo!\nAttendere la convalida da parte dell\'amministratore.\n Per favore non inserire di nuovo la stessa terminologia"))
             
-            
-            pour_latest_file()
+            #  per ora non lo uso
+            # pour_latest_file()
+
             return redirect('aggiungi_glossario')
 
         else:

@@ -12,7 +12,7 @@ def printout_input(input):
 
 def pour_entire_simple_model():
 
-    print("Inizia il riversamento di dati dal modello glossary_entry al modello acquired_terminology!")
+    print("Inizia il riversamento di tutti i dati dal modello glossary_entry al modello acquired_terminology!")
 
     import pandas as pd
     from .models import glossary_entry, acquired_terminology
@@ -76,7 +76,7 @@ def pour_entire_simple_model():
 
 def pour_entire_file_model():
 
-    print("Inizia il riversamento della terminologia di tutti i file salvati nel modello glossary_file al modello acquired_terminology...")
+    print("Inizia il riversamento della terminologia di tutti i file salvati nel modello glossary_file verso il modello acquired_terminology...")
 
     import pandas as pd
     
@@ -116,7 +116,7 @@ def pour_entire_file_model():
         col_id_statico_entry = excel_sheet.Id_statico_entry
         col_admin_approval_switch = excel_sheet.Admin_approval_switch
 
-        print("Inizia il riversamento di dati dal foglio al modello acquired_terminology!")
+        print("Inizia il riversamento di dati dal foglio %s al modello acquired_terminology..." % file_element.Glossary_file)
 
         for i in range(len(col_lemma)):
 
@@ -168,23 +168,14 @@ def pour_entire_file_model():
             entry.save()
 
 
-        print("Riversamento dei dati in %s terminato con successo!" % file_element.Glossary_file)
+        print("Riversamento dei dati di %s terminato con successo!" % file_element.Glossary_file)
         print("*****")
     
         
     print("La terminologia di tutti i file salvati nel modello glossary_file è stata riversata nel modello acquired_terminology!")
 
 
-# elimina tutti i dati dentro acquired terminoliogy
-def erase_union_model():
 
-    from .models import acquired_terminology
-
-    print("Inizia l'eliminazione di tutti i dati dentro acquired_terminology!")
-
-    acquired_terminology.objects.all().delete()
-
-    print("Eliminati tutti i dati dentro acquired_terminology!")
 
 
 def pour_latest_entry():
@@ -249,9 +240,9 @@ def pour_latest_file():
     import pandas as pd    
     from .models import glossary_file, acquired_terminology
 
-    latest_file_element = glossary_file.objects.latest('Data_inserimento_entry')
+    latest_file_element = glossary_file.objects.latest('Data_inserimento_glossary')
 
-    print("Inizia la lettura del foglio %s per estrarne la terminologia riga per riga..." % latest_file_element.Glossary_file)
+    print("Inizia la lettura del foglio %s per estrarne la terminologia riga per riga..." % latest_file_element)
   
     excel_sheet = pd.read_excel(latest_file_element.Glossary_file)
 
@@ -277,7 +268,7 @@ def pour_latest_file():
     col_id_statico_entry = excel_sheet.Id_statico_entry
     col_admin_approval_switch = excel_sheet.Admin_approval_switch
 
-    print("Inizia il riversamento di dati dal foglio al modello acquired_terminology!")
+    print("Inizia il riversamento di dati dal foglio %s verso il modello acquired_terminology..." % latest_file_element)
 
     for i in range(len(col_lemma)):
 
@@ -329,5 +320,21 @@ def pour_latest_file():
         entry.save()
 
 
-    print("Riversamento dei dati in %s terminato con successo!" % latest_file_element.Glossary_file)
+    print("Riversamento dei dati in %s terminato con successo!" % latest_file_element)
     print("*****")
+
+
+    # elimina tutti i dati dentro acquired terminoliogy
+def erase_acquired_terminology():
+
+    from .models import acquired_terminology
+    acquired_terminology.objects.all().delete()
+    print("Eliminati tutti i dati dentro acquired_terminology!")
+
+
+# elimina tutti i dati dentro acquired terminoliogy
+def erase_glossary_entry():
+
+    from .models import glossary_entry
+    glossary_entry.objects.all().delete()
+    print("Eliminati tutti i dati dentro glossary_entry!")
