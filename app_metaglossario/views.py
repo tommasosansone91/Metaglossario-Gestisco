@@ -89,7 +89,7 @@ def aggiungi_terminologia(request):
     # erase_acquired_terminology()
     # pour_entire_simple_model()
     # pour_entire_file_model()
-    pour_latest_file()
+    # pour_latest_file()
 
     #se si esegue il POST (click del pulsante submit)
     if request.method=='POST':
