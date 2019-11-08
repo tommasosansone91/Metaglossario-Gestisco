@@ -217,3 +217,15 @@ def carica_glossario(request):
     
 
     {{ query_initial_url }}
+
+
+    ********
+
+      for element in all_entries[:10]:
+        print(element.Lemma)
+
+
+print(len(col_lemma))
+
+        # print(col_lemma[23]) 
+        # break

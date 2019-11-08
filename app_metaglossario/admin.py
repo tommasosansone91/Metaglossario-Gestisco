@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import glossary_entry 
 from .models import glossary_file
+from .models import acquired_terminology
 
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
@@ -33,6 +34,8 @@ admin.site.register(glossary_entry, glossary_entry_Admin)
 # il secondo argomento è la funzione admin in cui in realtà viene messo pass
 
 admin.site.register(glossary_file)
+
+admin.site.register(acquired_terminology)
 
 
 

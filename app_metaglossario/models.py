@@ -121,7 +121,7 @@ class glossary_file(models.Model):
         #quello che fa apparire nella sezione admin, attributo che riassume tutti gli altri, quindi una primary key presumibilmente, pouò anche esesere la combinazione degli altri
 
 
-
+# qui devo riversare la terminologia contenuta in glossary_entry e glossary_file
 class acquired_terminology(models.Model):
 
     # If blank=True then the field will not be required, whereas if it's False the field cannot be blank.
@@ -136,17 +136,17 @@ class acquired_terminology(models.Model):
     
     Ambito_riferimento = models.CharField(max_length=256, blank=True, null=True)
 
-    Autore_definizione = models.CharField(max_length=256, blank=True, null=True)
+    Autore_definizione = models.TextField(blank=True, null=True)
     
-    Posizione_definizione = models.CharField(max_length=256, blank=True, null=True)
+    Posizione_definizione = models.TextField(blank=True, null=True)
     
     Url_definizione = models.URLField(max_length=400, blank=True, null=True)
     
-    Titolo_documento_fonte = models.CharField(max_length=256, blank=True, null=True)
+    Titolo_documento_fonte = models.TextField(blank=True, null=True)
     
-    Autore_documento_fonte = models.CharField(max_length=256, blank=True, null=True)
+    Autore_documento_fonte = models.TextField(blank=True, null=True)
     
-    Host_documento_fonte = models.CharField(max_length=256, blank=True, null=True)
+    Host_documento_fonte = models.TextField(blank=True, null=True)
     
     Url_documento_fonte = models.URLField(max_length=400, blank=True, null=True)
 
