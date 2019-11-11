@@ -1311,3 +1311,9 @@ def aggiungi_terminologia(request):
     # se si va sulla pagina e basta
     else:
         return render(request, 'aggiungi_terminologia.html', {})
+
+
+Ho sistemato il problema del server dati in eccesso heroku facendo:
+
+elimina dati da dashboard di heroku (non distruggere il database)
+quindi makemigrations, migrate
