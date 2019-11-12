@@ -37,6 +37,8 @@ admin.site.register(glossary_file)
 
 admin.site.register(acquired_terminology)
 
+admin.site.register(prepared_terminology)
+
 
 
 
