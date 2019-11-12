@@ -1322,4 +1322,24 @@ git commit -m "qualcosa"
 git push heroku master
 heroku run python manage.py createsuperuser
 
-quando ho più file con lo stesso nome nel database, uno viene rinominato e django fallisce
+quando ho più file con lo stesso nome nel database, uno viene rinominato e django fallisce.
+per ora risolvo eliminando i files duplicati di nome in locale.
+
+https://realpython.com/absolute-vs-relative-python-imports/
+
+
+def pour_entire__my_file_model():
+
+    import pandas as pd
+    from .models import my_file_model, output_model
+    all_files = my_file_model.objects.all()
+
+    for file_element in all_files: 
+
+        excel_sheet = pd.read_excel(file_element.My_file_model)
+        var_col_A = excel_sheet.Column_A
+        var_col_B = excel_sheet.Column_B
+        var_col_C = excel_sheet.Column_C
+
+        for i in range(len(var_col_A)):            
+            output_model.objects.create(field_A=var_col_A[i], field_B=var_col_B[i], field_C=var_col_C[i])

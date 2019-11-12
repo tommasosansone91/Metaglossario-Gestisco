@@ -164,3 +164,48 @@ class acquired_terminology(models.Model):
     def __str__(self):    
             
         return  "%s - %s ----- [%s] - [%s]"  %  (self.Lemma, self.Id_statico_entry, self.Data_inserimento_entry, self.Admin_approval_switch)  
+
+
+
+class prepared_terminology(models.Model):
+
+    # If blank=True then the field will not be required, whereas if it's False the field cannot be blank.
+    #This includes the admin and your own custom forms.
+    # The combo of the two is so frequent because typically if you're going to allow a field to be blank in your form, you're going to also need your database to allow NULL values for that field. The exception is CharFields and TextFields, which in Django are never saved as NULL. Blank values are stored in the DB as an empty string ('').
+
+    Lemma = models.CharField(max_length=256, blank=True, null=True)
+    
+    Acronimo = models.CharField(max_length=25, blank=True, null=True)
+
+    Definizione = models.TextField(blank=True, null=True) # sostituire con textfield?
+    
+    Ambito_riferimento = models.CharField(max_length=256, blank=True, null=True)
+
+    Autore_definizione = models.TextField(blank=True, null=True)
+    
+    Posizione_definizione = models.TextField(blank=True, null=True)
+    
+    Url_definizione = models.URLField(max_length=400, blank=True, null=True)
+    
+    Titolo_documento_fonte = models.TextField(blank=True, null=True)
+    
+    Autore_documento_fonte = models.TextField(blank=True, null=True)
+    
+    Host_documento_fonte = models.TextField(blank=True, null=True)
+    
+    Url_documento_fonte = models.URLField(max_length=400, blank=True, null=True)
+
+    Commento_entry = models.TextField(blank=True, null=True)
+
+    Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now().date() )
+
+    Id_statico_entry = models.CharField(max_length=256, blank=False, null=False, default="ITCH00000")
+
+    Admin_approval_switch = models.CharField(max_length=30,blank=False, null=False, default=Admin_approval_switch_choices[1], choices=Admin_approval_switch_choices)
+
+    class Meta:
+        ordering = ['Admin_approval_switch', 'Lemma', 'Data_inserimento_entry', 'Id_statico_entry']
+
+    def __str__(self):    
+            
+        return  "%s - %s ----- [%s] - [%s]"  %  (self.Lemma, self.Id_statico_entry, self.Data_inserimento_entry, self.Admin_approval_switch)  

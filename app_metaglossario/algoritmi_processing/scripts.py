@@ -15,7 +15,7 @@ def pour_entire_simple_model():
     print("Inizia il riversamento di tutti i dati dal modello glossary_entry al modello acquired_terminology!")
 
     import pandas as pd
-    from .models import glossary_entry, acquired_terminology
+    from app_metaglossario.models import glossary_entry, acquired_terminology
 
     all_entries = glossary_entry.objects.all()
 
@@ -63,9 +63,9 @@ def pour_entire_simple_model():
             entry.Commento_entry=element.Commento_entry
 
             
-        entry.Data_inserimento_entry=element.Data_inserimento_entry
-        entry.Id_statico_entry=element.Id_statico_entry               
-        entry.Admin_approval_switch=element.Admin_approval_switch
+        entry.Data_inserimento_entry = element.Data_inserimento_entry
+        entry.Id_statico_entry = element.Id_statico_entry               
+        entry.Admin_approval_switch = element.Admin_approval_switch
 
         entry.save()
 
@@ -80,7 +80,7 @@ def pour_entire_file_model():
 
     import pandas as pd
     
-    from .models import glossary_file, acquired_terminology
+    from app_metaglossario.models import glossary_file, acquired_terminology
 
     # tutti gli oggetti nel modello glossario sono salvati qui
     all_files = glossary_file.objects.all()
@@ -183,7 +183,7 @@ def pour_latest_entry():
     print("Il record inserito viene riversato nel modello acquired_terminology!")
 
     import pandas as pd
-    from .models import glossary_entry, acquired_terminology
+    from app_metaglossario.models import glossary_entry, acquired_terminology
 
     element = glossary_entry.objects.latest('Data_inserimento_entry')
 
@@ -238,7 +238,7 @@ def pour_latest_entry():
 def pour_latest_file():    
 
     import pandas as pd    
-    from .models import glossary_file, acquired_terminology
+    from app_metaglossario.models import glossary_file, acquired_terminology
 
     latest_file_element = glossary_file.objects.latest('Data_inserimento_glossary')
 
@@ -327,7 +327,7 @@ def pour_latest_file():
     # elimina tutti i dati dentro acquired terminoliogy
 def erase_acquired_terminology():
 
-    from .models import acquired_terminology
+    from app_metaglossario.models import acquired_terminology
     acquired_terminology.objects.all().delete()
     print("Eliminati tutti i dati dentro acquired_terminology!")
 
@@ -335,6 +335,6 @@ def erase_acquired_terminology():
 # elimina tutti i dati dentro acquired terminoliogy
 def erase_glossary_entry():
 
-    from .models import glossary_entry
+    from app_metaglossario.models import glossary_entry
     glossary_entry.objects.all().delete()
     print("Eliminati tutti i dati dentro glossary_entry!")

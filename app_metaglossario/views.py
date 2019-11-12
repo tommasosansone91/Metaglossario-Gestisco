@@ -31,20 +31,20 @@ from django.http import JsonResponse
 from django.core.files.storage import FileSystemStorage
 
 # per gli script di management dei files
-from .scripts import printout, printout_input
-from .scripts import pour_entire_simple_model, pour_entire_file_model
-from .scripts import pour_latest_file, pour_latest_entry
-from .scripts import erase_acquired_terminology, erase_glossary_entry
+from .algoritmi_processing.scripts import printout, printout_input
+from .algoritmi_processing.scripts import pour_entire_simple_model, pour_entire_file_model
+from .algoritmi_processing.scripts import pour_latest_file, pour_latest_entry
+from .algoritmi_processing.scripts import erase_acquired_terminology, erase_glossary_entry
+
+# per lo script PGI
+from .algoritmi_processing.PGI import algoritmo_PGI
 
 # Create your views here.
 def home(request):
     return render(request, 'home.html', {})
 
 
-
-def glossario(request):
-
-    
+def glossario(request):   
 
     query = request.GET.get('q') #q è variabile risultante dalla query del database
     # non sostuituirla col valore vuoto
@@ -170,6 +170,8 @@ def run_script(request):
     # pour_entire_simple_model()
     # pour_entire_file_model()
     # pour_latest_file()
+    printout()
+    algoritmo_PGI()
 
     return render(request, 'run_script.html', {})
 
