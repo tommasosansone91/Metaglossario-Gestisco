@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import glossary_entry 
 from .models import glossary_file
 from .models import acquired_terminology
+from .models import prepared_terminology
 
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
