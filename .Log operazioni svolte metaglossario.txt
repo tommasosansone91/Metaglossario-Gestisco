@@ -1317,3 +1317,9 @@ Ho sistemato il problema del server dati in eccesso heroku facendo:
 
 elimina dati da dashboard di heroku (non distruggere il database)
 quindi makemigrations, migrate
+git add .
+git commit -m "qualcosa"
+git push heroku master
+heroku run python manage.py createsuperuser
+
+quando ho più file con lo stesso nome nel database, uno viene rinominato e django fallisce

@@ -12,6 +12,7 @@ urlpatterns=[
     path('aggiungi_terminologia_massa', views.aggiungi_glossario, name="aggiungi_glossario"),
     path('api/glossario', views.api_glossario, name="api_glossario"),
     path('api', views.pagina_api, name="api"),
+    path('run_script', views.run_script, name="run_script")
 ]
 
 # path('nome della stringa dell'url', views.nome_funzione_views_associata, name="nome_del_template")

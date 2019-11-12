@@ -85,11 +85,7 @@ def glossario(request):
 # QUESTA è LA SINGOLA ENTRY
 def aggiungi_terminologia(request):
 
-    # erase_glossary_entry()
-    # erase_acquired_terminology()
-    # pour_entire_simple_model()
-    # pour_entire_file_model()
-    # pour_latest_file()
+    
 
     #se si esegue il POST (click del pulsante submit)
     if request.method=='POST':
@@ -166,6 +162,16 @@ def api_glossario(request):
 def pagina_api(request):
     return render(request, 'api.html', {})
 
+
+def run_script(request):
+
+    # erase_glossary_entry()
+    # erase_acquired_terminology()
+    # pour_entire_simple_model()
+    # pour_entire_file_model()
+    # pour_latest_file()
+
+    return render(request, 'run_script.html', {})
 
 
 # def vista_ricerca_semplice(request):
