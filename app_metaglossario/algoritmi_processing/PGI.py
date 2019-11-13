@@ -253,9 +253,9 @@ def algoritmo_PGI():
 
         prepared_entry.save()
 
-        Print("Eliminazione degli spazi all'inizio e alla fine di ogni cella terminata con successo!")
+        print("Eliminazione degli spazi all'inizio e alla fine di ogni cella terminata con successo!")
 
-        Print("Standardizzazione del formato dei dati terminata con successo!")
+        print("Standardizzazione del formato dei dati terminata con successo!")
 
-        Print("I dati sono ora in un formato standard e possono essere processati per la realizzazione della struttura relazionale!")
+        print("I dati sono ora in un formato standard e possono essere processati per la realizzazione della struttura relazionale!")
 
