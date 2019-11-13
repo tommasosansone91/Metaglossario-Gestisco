@@ -3,9 +3,10 @@ def algoritmo_PGI():
     import pandas as pd
     from app_metaglossario.models import acquired_terminology, prepared_terminology
 
+    print("Inizia la standardizzazione del formato dei dati per prepararli all'inserimento nel database...")
     
     # database di prima elaborazione
-        # oppure uso degli spazi virtuali, ossia le variabili, per ogni scrittura
+    # ppure uso degli spazi virtuali, ossia le variabili, per ogni scrittura
 
     #  svuoto il database destinazione 
 
@@ -14,7 +15,7 @@ def algoritmo_PGI():
     # lista del vecchio modello
     acquired_rows = acquired_terminology.objects.all()
 
-    print("Il modello prepared_terminology è stato svuotato")
+    print("Il modello prepared_terminology è stato svuotato!")
 
     print("Inizia lo riempimento del modello prepared_terminology...")
 
@@ -27,8 +28,8 @@ def algoritmo_PGI():
         if not pd.isnull(element.Lemma):
             prepared_entry.Lemma = element.Lemma
 
-        if not pd.isnull(element.Acronimo):
-            prepared_entry.Acronimo = element.Acronimo
+        if not pd.isnull(element.Id_statico_entry):
+            prepared_entry.Id_statico_entry = element.Id_statico_entry
 
         if not pd.isnull(element.Definizione):    
             prepared_entry.Definizione = element.Definizione
@@ -83,8 +84,8 @@ def algoritmo_PGI():
         if not pd.isnull(prepared_entry.Lemma):
             prepared_entry.Lemma.title() # non è veramente necessario
 
-        if not pd.isnull(prepared_entry.Acronimo):
-            prepared_entry.Acronimo.upper()
+        if not pd.isnull(prepared_entry.Id_statico_entry):
+            prepared_entry.Id_statico_entry.upper()
             
         if not pd.isnull(prepared_entry.Ambito_riferimento):    
             prepared_entry.Ambito_riferimento.title() # non è veramente necessario
@@ -109,14 +110,152 @@ def algoritmo_PGI():
         prepared_entry.save()
         
 
-    print(prepared_rows)
+    
 
-    print("Modifica del formato del testo (uppercase/title) del modello prepared_terminology terminato con successo!")
+       
 
-    # cambio di maiuscole e minuscole
-
-    # elimina spazi da davanti e dietro
+    print("Modifica del formato del testo (uppercase/title) terminato con successo!")
 
     # sostituzione di doppi spazi e  acapo con degli spazi
 
+    print("Inizia l'eliminazione dei doppi spazi dal testo...")
+    
+    rip_doppi_spazi = 3 # ripeto il ciclo 3 volte 
+
+    prepared_rows = prepared_terminology.objects.all()
+
+    for i in range(rip_doppi_spazi):    # ripeto il ciclo n volte 
+
+        for prepared_entry in prepared_rows:        
+            
+            if not pd.isnull(prepared_entry.Lemma):
+                prepared_entry.Lemma = prepared_entry.Lemma.replace("  ", " ")
+
+            if not pd.isnull(prepared_entry.Id_statico_entry):
+                prepared_entry.Id_statico_entry = prepared_entry.Id_statico_entry.replace("  ", " ")
+
+            if not pd.isnull(prepared_entry.Definizione):    
+                prepared_entry.Definizione = prepared_entry.Definizione.replace("  ", " ")
+
+            if not pd.isnull(prepared_entry.Ambito_riferimento):    
+                prepared_entry.Ambito_riferimento = prepared_entry.Ambito_riferimento.replace("  ", " ")
+
+            if not pd.isnull(prepared_entry.Autore_definizione):    
+                prepared_entry.Autore_definizione = prepared_entry.Autore_definizione.replace("  ", " ")
+
+            if not pd.isnull(prepared_entry.Posizione_definizione):    
+                prepared_entry.Posizione_definizione = prepared_entry.Posizione_definizione.replace("  ", " ")
+
+            if not pd.isnull(prepared_entry.Titolo_documento_fonte):    
+                prepared_entry.Titolo_documento_fonte = prepared_entry.Titolo_documento_fonte.replace("  ", " ")
+
+            if not pd.isnull(prepared_entry.Autore_documento_fonte):    
+                prepared_entry.Autore_documento_fonte = prepared_entry.Autore_documento_fonte.replace("  ", " ")
+
+            if not pd.isnull(prepared_entry.Host_documento_fonte):    
+                prepared_entry.Host_documento_fonte = prepared_entry.Host_documento_fonte.replace("  ", " ")
+            
+            if not pd.isnull(prepared_entry.Commento_entry):    
+                prepared_entry.Commento_entry = prepared_entry.Commento_entry.replace("  ", " ")                      
+        
+
+            prepared_entry.save()
+
+            # elimina spazi da davanti e dietro
+
+
+    print("Eliminazione dei doppi spazi terminata con successo!")
+    print("Inizia l'eliminazione degli spazi all'inizio e alla fine di ogni cella...")
+
+    prepared_rows = prepared_terminology.objects.all()
+
+    for prepared_entry in prepared_rows:        
+        
+        if not pd.isnull(prepared_entry.Lemma):
+            if prepared_entry.Lemma[0] == " ":
+                prepared_entry.Lemma = prepared_entry.Lemma[1:]
+            if prepared_entry.Lemma[-1] == " ":
+                prepared_entry.Lemma = prepared_entry.Lemma[0:-1]
+
+        if not pd.isnull(prepared_entry.Id_statico_entry):
+            if prepared_entry.Id_statico_entry[0] == " ":
+                prepared_entry.Id_statico_entry = prepared_entry.Id_statico_entry[1:]
+            if prepared_entry.Id_statico_entry[-1] == " ":
+                prepared_entry.Id_statico_entry = prepared_entry.Id_statico_entry[0:-1]
+
+
+        if not pd.isnull(prepared_entry.Definizione):    
+            if prepared_entry.Definizione[0] == " ":
+                prepared_entry.Definizione = prepared_entry.Definizione[1:]
+            if prepared_entry.Definizione[-1] == " ":
+                prepared_entry.Definizione = prepared_entry.Definizione[0:-1]
+
+        if not pd.isnull(prepared_entry.Ambito_riferimento):    
+            if prepared_entry.Ambito_riferimento[0] == " ":
+                prepared_entry.Ambito_riferimento = prepared_entry.Ambito_riferimento[1:]
+            if prepared_entry.Ambito_riferimento[-1] == " ":
+                prepared_entry.Ambito_riferimento = prepared_entry.Ambito_riferimento[0:-1]
+
+        if not pd.isnull(prepared_entry.Autore_definizione):    
+            if prepared_entry.Autore_definizione[0] == " ":
+                prepared_entry.Autore_definizione = prepared_entry.Autore_definizione[1:]
+            if prepared_entry.Autore_definizione[-1] == " ":
+                prepared_entry.Autore_definizione = prepared_entry.Autore_definizione[0:-1]
+
+        if not pd.isnull(prepared_entry.Posizione_definizione):    
+            if prepared_entry.Posizione_definizione[0] == " ":
+                prepared_entry.Posizione_definizione = prepared_entry.Posizione_definizione[1:]
+            if prepared_entry.Posizione_definizione[-1] == " ":
+                prepared_entry.Posizione_definizione = prepared_entry.Posizione_definizione[0:-1]
+
+        if not pd.isnull(prepared_entry.Url_definizione):    
+            if prepared_entry.Url_definizione[0] == " ":
+                prepared_entry.Url_definizione = prepared_entry.Url_definizione[1:]
+            if prepared_entry.Url_definizione[-1] == " ":
+                prepared_entry.Url_definizione = prepared_entry.Url_definizione[0:-1]
+
+        if not pd.isnull(prepared_entry.Titolo_documento_fonte):    
+            if prepared_entry.Titolo_documento_fonte[0] == " ":
+                prepared_entry.Titolo_documento_fonte = prepared_entry.Titolo_documento_fonte[1:]
+            if prepared_entry.Titolo_documento_fonte[-1] == " ":
+                prepared_entry.Titolo_documento_fonte = prepared_entry.Titolo_documento_fonte[0:-1]
+
+        if not pd.isnull(prepared_entry.Autore_documento_fonte):    
+            if prepared_entry.Autore_documento_fonte[0] == " ":
+                prepared_entry.Autore_documento_fonte = prepared_entry.Autore_documento_fonte[1:]
+            if prepared_entry.Autore_documento_fonte[-1] == " ":
+                prepared_entry.Autore_documento_fonte = prepared_entry.Autore_documento_fonte[0:-1]
+
+        if not pd.isnull(prepared_entry.Host_documento_fonte):    
+            if prepared_entry.Host_documento_fonte[0] == " ":
+                prepared_entry.Host_documento_fonte = prepared_entry.Host_documento_fonte[1:]
+            if prepared_entry.Host_documento_fonte[-1] == " ":
+                prepared_entry.Host_documento_fonte = prepared_entry.Host_documento_fonte[0:-1]
+
+        if not pd.isnull(prepared_entry.Url_documento_fonte):    
+            if prepared_entry.Url_documento_fonte[0] == " ":
+                prepared_entry.Url_documento_fonte = prepared_entry.Url_documento_fonte[1:]
+            if prepared_entry.Url_documento_fonte[-1] == " ":
+                prepared_entry.Url_documento_fonte = prepared_entry.Url_documento_fonte[0:-1]
+
+        if not pd.isnull(prepared_entry.Commento_entry):    
+            if prepared_entry.Commento_entry[0] == " ":
+                prepared_entry.Commento_entry = prepared_entry.Commento_entry[1:]
+            if prepared_entry.Commento_entry[-1] == " ":
+                prepared_entry.Commento_entry = prepared_entry.Commento_entry[0:-1]
+        
+        if not pd.isnull(prepared_entry.Id_statico_entry):
+            if prepared_entry.Id_statico_entry[0] == " ":
+                prepared_entry.Id_statico_entry = prepared_entry.Id_statico_entry[1:]
+            if prepared_entry.Id_statico_entry[-1] == " ":
+                prepared_entry.Id_statico_entry = prepared_entry.Id_statico_entry[0:-1]       
+
+
+        prepared_entry.save()
+
+        Print("Eliminazione degli spazi all'inizio e alla fine di ogni cella terminata con successo!")
+
+        Print("Standardizzazione del formato dei dati terminata con successo!")
+
+        Print("I dati sono ora in un formato standard e possono essere processati per la realizzazione della struttura relazionale!")
 
