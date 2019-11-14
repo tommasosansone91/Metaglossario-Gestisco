@@ -7,6 +7,7 @@ from .models import glossary_file
 from .forms import glossary_file_form
 
 from .models import acquired_terminology
+from .models import prepared_terminology
 
 # from .forms import glossary_sheet_form
 
@@ -51,14 +52,14 @@ def glossario(request):
 
     template = "glossario.html" #il template è sempre lo stesso
 
-    all_entries = acquired_terminology.objects.all() #funziona lo stesso anche se dice Class 'glossary_entry' has no 'objects' memberpylint(no-member)
+    all_entries = prepared_terminology.objects.all() #funziona lo stesso anche se dice Class 'glossary_entry' has no 'objects' memberpylint(no-member)
 
     # se la query è stata fatta
     if query:
 
         query = request.GET.get('q') #q è variabile risultante dalla query del database
 
-        selected_entries = acquired_terminology.objects.filter(Q(Acronimo__icontains=query)|Q(Ambito_riferimento__icontains=query)|Q(Autore_definizione__icontains=query)|Q(Autore_documento_fonte__icontains=query)|Q(Data_inserimento_entry__icontains=query)|Q(Definizione__icontains=query)|Q(Host_documento_fonte__icontains=query)|Q(Id_statico_entry__icontains=query)|Q(Lemma__icontains=query)|Q(Posizione_definizione__icontains=query)|Q(Titolo_documento_fonte__icontains=query)|Q(Url_definizione__icontains=query)|Q(Url_documento_fonte__icontains=query))
+        selected_entries = prepared_terminology.objects.filter(Q(Acronimo__icontains=query)|Q(Ambito_riferimento__icontains=query)|Q(Autore_definizione__icontains=query)|Q(Autore_documento_fonte__icontains=query)|Q(Data_inserimento_entry__icontains=query)|Q(Definizione__icontains=query)|Q(Host_documento_fonte__icontains=query)|Q(Id_statico_entry__icontains=query)|Q(Lemma__icontains=query)|Q(Posizione_definizione__icontains=query)|Q(Titolo_documento_fonte__icontains=query)|Q(Url_definizione__icontains=query)|Q(Url_documento_fonte__icontains=query))
         # Q(Acronimo__icontains=query dice quali sono i campi in cui cercare l'input specificato dall'utente
 
         # Pagination
@@ -84,8 +85,6 @@ def glossario(request):
 
 # QUESTA è LA SINGOLA ENTRY
 def aggiungi_terminologia(request):
-
-    
 
     #se si esegue il POST (click del pulsante submit)
     if request.method=='POST':
@@ -151,7 +150,7 @@ def aggiungi_glossario(request):
 # per esportare il contenuto glossario tramite API
 def api_glossario(request):
 
-    all_entries = glossary_entry.objects.all() #[:30] #tutti fino al 30simo
+    all_entries = prepared_terminology.objects.all() #[:30] #tutti fino al 30simo
 
     data = {"entries":list(all_entries.values("Lemma", "Acronimo", "Definizione", "Ambito_riferimento", "Autore_definizione", "Posizione_definizione", "Url_definizione", "Titolo_documento_fonte", "Autore_documento_fonte", "Host_documento_fonte", "Url_documento_fonte", "Commento_entry", "Data_inserimento_entry", "Id_statico_entry"))}
 
