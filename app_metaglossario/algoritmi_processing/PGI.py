@@ -1,10 +1,14 @@
 def algoritmo_PGI():
 
+    # algoritmo per standardizzare i dati prima di incatenarli nella struttura relazionale
+
     import pandas as pd
     from app_metaglossario.models import acquired_terminology, prepared_terminology
 
     print("Inizia la standardizzazione del formato dei dati per prepararli all'inserimento nel database...")
     
+    # samtlisci il algoritmo perchè vanno bene i Nan
+
     # database di prima elaborazione
     # ppure uso degli spazi virtuali, ossia le variabili, per ogni scrittura
 

@@ -229,3 +229,19 @@ print(len(col_lemma))
 
         # print(col_lemma[23]) 
         # break
+
+
+    # iterating over rows using iterrows() function  
+for i, j in df.iterrows(): 
+    print(i, j) 
+    print() 
+
+
+    df.sort_values(['Total Due']) returns a sorted DF, but it doesn't update DF in place.
+
+So do it explicitly:
+
+df = df.sort_values(['Total Due'])
+or
+
+df.sort_values(['Total Due'], inplace=True)

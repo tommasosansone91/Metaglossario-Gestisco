@@ -37,8 +37,28 @@ from .algoritmi_processing.scripts import pour_entire_simple_model, pour_entire_
 from .algoritmi_processing.scripts import pour_latest_file, pour_latest_entry
 from .algoritmi_processing.scripts import erase_acquired_terminology, erase_glossary_entry
 
-# per lo script PGI
 from .algoritmi_processing.PGI import algoritmo_PGI
+from .algoritmi_processing.SR import algoritmo_SR
+
+
+def run_script(request):
+
+    # erase_glossary_entry()
+    # erase_acquired_terminology()
+    # pour_entire_simple_model()
+    # pour_entire_file_model()
+    # pour_latest_file()
+    printout()
+    # algoritmo_PGI()
+    algoritmo_SR()
+
+    print("*** Script eseguito fino alla fine! ***")
+
+    return render(request, 'run_script.html', {})
+
+
+
+
 
 # Create your views here.
 def home(request):
@@ -162,17 +182,7 @@ def pagina_api(request):
     return render(request, 'api.html', {})
 
 
-def run_script(request):
 
-    # erase_glossary_entry()
-    # erase_acquired_terminology()
-    # pour_entire_simple_model()
-    # pour_entire_file_model()
-    # pour_latest_file()
-    printout()
-    algoritmo_PGI()
-
-    return render(request, 'run_script.html', {})
 
 
 # def vista_ricerca_semplice(request):

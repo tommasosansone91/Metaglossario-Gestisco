@@ -1343,3 +1343,545 @@ def pour_entire__my_file_model():
 
         for i in range(len(var_col_A)):            
             output_model.objects.create(field_A=var_col_A[i], field_B=var_col_B[i], field_C=var_col_C[i])
+
+
+***
+
+algoritmo PGI backup
+
+
+def algoritmo_PGI():
+
+    # algoritmo per standardizzare i dati prima di incatenarli nella struttura relazionale
+
+    import pandas as pd
+    from app_metaglossario.models import acquired_terminology, prepared_terminology
+
+    print("Inizia la standardizzazione del formato dei dati per prepararli all'inserimento nel database...")
+    
+    # database di prima elaborazione
+    # ppure uso degli spazi virtuali, ossia le variabili, per ogni scrittura
+
+    #  svuoto il database destinazione 
+
+    prepared_terminology.objects.all().delete()
+
+    # lista del vecchio modello
+    acquired_rows = acquired_terminology.objects.all()
+
+    print("Il modello prepared_terminology è stato svuotato!")
+
+    print("Inizia lo riempimento del modello prepared_terminology...")
+
+    # compilo il nuovo modello coi dati 
+
+    for element in acquired_rows:
+
+        prepared_entry = prepared_terminology.objects.create()
+        
+        if not pd.isnull(element.Lemma):
+            prepared_entry.Lemma = element.Lemma
+
+        if not pd.isnull(element.Id_statico_entry):
+            prepared_entry.Id_statico_entry = element.Id_statico_entry
+
+        if not pd.isnull(element.Definizione):    
+            prepared_entry.Definizione = element.Definizione
+
+        if not pd.isnull(element.Ambito_riferimento):    
+            prepared_entry.Ambito_riferimento = element.Ambito_riferimento
+
+        if not pd.isnull(element.Autore_definizione):    
+            prepared_entry.Autore_definizione = element.Autore_definizione
+
+        if not pd.isnull(element.Posizione_definizione):    
+            prepared_entry.Posizione_definizione = element.Posizione_definizione
+
+        if not pd.isnull(element.Url_definizione):    
+            prepared_entry.Url_definizione = element.Url_definizione
+
+        if not pd.isnull(element.Titolo_documento_fonte):    
+            prepared_entry.Titolo_documento_fonte = element.Titolo_documento_fonte
+
+        if not pd.isnull(element.Autore_documento_fonte):    
+            prepared_entry.Autore_documento_fonte = element.Autore_documento_fonte
+
+        if not pd.isnull(element.Host_documento_fonte):    
+            prepared_entry.Host_documento_fonte = element.Host_documento_fonte
+
+        if not pd.isnull(element.Url_documento_fonte):    
+            prepared_entry.Url_documento_fonte = element.Url_documento_fonte
+
+        if not pd.isnull(element.Commento_entry):    
+            prepared_entry.Commento_entry = element.Commento_entry
+
+            
+        prepared_entry.Data_inserimento_entry = element.Data_inserimento_entry
+        prepared_entry.Id_statico_entry = element.Id_statico_entry               
+        prepared_entry.Admin_approval_switch = element.Admin_approval_switch
+
+        prepared_entry.save()
+
+
+    print("Riempimento del modello prepared_terminology terminato con successo!")
+
+    print("Inizia l'elaborazione della terminologia contenuta nel modello prepared_terminology...")
+
+
+    # upper, lower, title
+    print("Inizia la modifica del formato del testo (uppercase/title)...")
+
+    prepared_rows = prepared_terminology.objects.all()
+
+    for prepared_entry in prepared_rows:
+
+        if not pd.isnull(prepared_entry.Lemma):
+            prepared_entry.Lemma.title() # non è veramente necessario
+
+        if not pd.isnull(prepared_entry.Id_statico_entry):
+            prepared_entry.Id_statico_entry.upper()
+            
+        if not pd.isnull(prepared_entry.Ambito_riferimento):    
+            prepared_entry.Ambito_riferimento.title() # non è veramente necessario
+
+        if not pd.isnull(prepared_entry.Autore_definizione):    
+            prepared_entry.Autore_definizione.title() # non è veramente necessario
+
+        if not pd.isnull(prepared_entry.Posizione_definizione):    
+            prepared_entry.Posizione_definizione.title() # non è veramente necessario
+
+        if not pd.isnull(prepared_entry.Titolo_documento_fonte):    
+            prepared_entry.Titolo_documento_fonte.title() # non è veramente necessario
+
+        if not pd.isnull(prepared_entry.Autore_documento_fonte):    
+            prepared_entry.Autore_documento_fonte.title() # non è veramente necessario
+
+        if not pd.isnull(prepared_entry.Host_documento_fonte):    
+            prepared_entry.Host_documento_fonte.title() # non è veramente necessario
+
+        prepared_entry.Id_statico_entry.upper() 
+
+        prepared_entry.save()
+        
+
+    
+
+       
+
+    print("Modifica del formato del testo (uppercase/title) terminato con successo!")
+
+    # sostituzione di doppi spazi e  acapo con degli spazi
+
+    print("Inizia l'eliminazione dei doppi spazi dal testo...")
+    
+    rip_doppi_spazi = 3 # ripeto il ciclo 3 volte 
+
+    prepared_rows = prepared_terminology.objects.all()
+
+    for i in range(rip_doppi_spazi):    # ripeto il ciclo n volte 
+
+        for prepared_entry in prepared_rows:        
+            
+            if not pd.isnull(prepared_entry.Lemma):
+                prepared_entry.Lemma = prepared_entry.Lemma.replace("  ", " ")
+
+            if not pd.isnull(prepared_entry.Id_statico_entry):
+                prepared_entry.Id_statico_entry = prepared_entry.Id_statico_entry.replace("  ", " ")
+
+            if not pd.isnull(prepared_entry.Definizione):    
+                prepared_entry.Definizione = prepared_entry.Definizione.replace("  ", " ")
+
+            if not pd.isnull(prepared_entry.Ambito_riferimento):    
+                prepared_entry.Ambito_riferimento = prepared_entry.Ambito_riferimento.replace("  ", " ")
+
+            if not pd.isnull(prepared_entry.Autore_definizione):    
+                prepared_entry.Autore_definizione = prepared_entry.Autore_definizione.replace("  ", " ")
+
+            if not pd.isnull(prepared_entry.Posizione_definizione):    
+                prepared_entry.Posizione_definizione = prepared_entry.Posizione_definizione.replace("  ", " ")
+
+            if not pd.isnull(prepared_entry.Titolo_documento_fonte):    
+                prepared_entry.Titolo_documento_fonte = prepared_entry.Titolo_documento_fonte.replace("  ", " ")
+
+            if not pd.isnull(prepared_entry.Autore_documento_fonte):    
+                prepared_entry.Autore_documento_fonte = prepared_entry.Autore_documento_fonte.replace("  ", " ")
+
+            if not pd.isnull(prepared_entry.Host_documento_fonte):    
+                prepared_entry.Host_documento_fonte = prepared_entry.Host_documento_fonte.replace("  ", " ")
+            
+            if not pd.isnull(prepared_entry.Commento_entry):    
+                prepared_entry.Commento_entry = prepared_entry.Commento_entry.replace("  ", " ")                      
+        
+
+            prepared_entry.save()
+
+            # elimina spazi da davanti e dietro
+
+
+    print("Eliminazione dei doppi spazi terminata con successo!")
+    print("Inizia l'eliminazione degli spazi all'inizio e alla fine di ogni cella...")
+
+    prepared_rows = prepared_terminology.objects.all()
+
+    for prepared_entry in prepared_rows:        
+        
+        if not pd.isnull(prepared_entry.Lemma):
+            if prepared_entry.Lemma[0] == " ":
+                prepared_entry.Lemma = prepared_entry.Lemma[1:]
+            if prepared_entry.Lemma[-1] == " ":
+                prepared_entry.Lemma = prepared_entry.Lemma[0:-1]
+
+        if not pd.isnull(prepared_entry.Id_statico_entry):
+            if prepared_entry.Id_statico_entry[0] == " ":
+                prepared_entry.Id_statico_entry = prepared_entry.Id_statico_entry[1:]
+            if prepared_entry.Id_statico_entry[-1] == " ":
+                prepared_entry.Id_statico_entry = prepared_entry.Id_statico_entry[0:-1]
+
+
+        if not pd.isnull(prepared_entry.Definizione):    
+            if prepared_entry.Definizione[0] == " ":
+                prepared_entry.Definizione = prepared_entry.Definizione[1:]
+            if prepared_entry.Definizione[-1] == " ":
+                prepared_entry.Definizione = prepared_entry.Definizione[0:-1]
+
+        if not pd.isnull(prepared_entry.Ambito_riferimento):    
+            if prepared_entry.Ambito_riferimento[0] == " ":
+                prepared_entry.Ambito_riferimento = prepared_entry.Ambito_riferimento[1:]
+            if prepared_entry.Ambito_riferimento[-1] == " ":
+                prepared_entry.Ambito_riferimento = prepared_entry.Ambito_riferimento[0:-1]
+
+        if not pd.isnull(prepared_entry.Autore_definizione):    
+            if prepared_entry.Autore_definizione[0] == " ":
+                prepared_entry.Autore_definizione = prepared_entry.Autore_definizione[1:]
+            if prepared_entry.Autore_definizione[-1] == " ":
+                prepared_entry.Autore_definizione = prepared_entry.Autore_definizione[0:-1]
+
+        if not pd.isnull(prepared_entry.Posizione_definizione):    
+            if prepared_entry.Posizione_definizione[0] == " ":
+                prepared_entry.Posizione_definizione = prepared_entry.Posizione_definizione[1:]
+            if prepared_entry.Posizione_definizione[-1] == " ":
+                prepared_entry.Posizione_definizione = prepared_entry.Posizione_definizione[0:-1]
+
+        if not pd.isnull(prepared_entry.Url_definizione):    
+            if prepared_entry.Url_definizione[0] == " ":
+                prepared_entry.Url_definizione = prepared_entry.Url_definizione[1:]
+            if prepared_entry.Url_definizione[-1] == " ":
+                prepared_entry.Url_definizione = prepared_entry.Url_definizione[0:-1]
+
+        if not pd.isnull(prepared_entry.Titolo_documento_fonte):    
+            if prepared_entry.Titolo_documento_fonte[0] == " ":
+                prepared_entry.Titolo_documento_fonte = prepared_entry.Titolo_documento_fonte[1:]
+            if prepared_entry.Titolo_documento_fonte[-1] == " ":
+                prepared_entry.Titolo_documento_fonte = prepared_entry.Titolo_documento_fonte[0:-1]
+
+        if not pd.isnull(prepared_entry.Autore_documento_fonte):    
+            if prepared_entry.Autore_documento_fonte[0] == " ":
+                prepared_entry.Autore_documento_fonte = prepared_entry.Autore_documento_fonte[1:]
+            if prepared_entry.Autore_documento_fonte[-1] == " ":
+                prepared_entry.Autore_documento_fonte = prepared_entry.Autore_documento_fonte[0:-1]
+
+        if not pd.isnull(prepared_entry.Host_documento_fonte):    
+            if prepared_entry.Host_documento_fonte[0] == " ":
+                prepared_entry.Host_documento_fonte = prepared_entry.Host_documento_fonte[1:]
+            if prepared_entry.Host_documento_fonte[-1] == " ":
+                prepared_entry.Host_documento_fonte = prepared_entry.Host_documento_fonte[0:-1]
+
+        if not pd.isnull(prepared_entry.Url_documento_fonte):    
+            if prepared_entry.Url_documento_fonte[0] == " ":
+                prepared_entry.Url_documento_fonte = prepared_entry.Url_documento_fonte[1:]
+            if prepared_entry.Url_documento_fonte[-1] == " ":
+                prepared_entry.Url_documento_fonte = prepared_entry.Url_documento_fonte[0:-1]
+
+        if not pd.isnull(prepared_entry.Commento_entry):    
+            if prepared_entry.Commento_entry[0] == " ":
+                prepared_entry.Commento_entry = prepared_entry.Commento_entry[1:]
+            if prepared_entry.Commento_entry[-1] == " ":
+                prepared_entry.Commento_entry = prepared_entry.Commento_entry[0:-1]
+        
+        if not pd.isnull(prepared_entry.Id_statico_entry):
+            if prepared_entry.Id_statico_entry[0] == " ":
+                prepared_entry.Id_statico_entry = prepared_entry.Id_statico_entry[1:]
+            if prepared_entry.Id_statico_entry[-1] == " ":
+                prepared_entry.Id_statico_entry = prepared_entry.Id_statico_entry[0:-1]       
+
+
+        prepared_entry.save()
+
+        print("Eliminazione degli spazi all'inizio e alla fine di ogni cella terminata con successo!")
+
+        print("Standardizzazione del formato dei dati terminata con successo!")
+
+        print("I dati sono ora in un formato standard e possono essere processati per la realizzazione della struttura relazionale!")
+
+
+********************
+
+
+    class GI(object):
+        def __init__(self, Lemma, Acronimo, Definizione, Ambito_riferimento, Autore_definizione, Posizione_definizione, Url_definizione, Titolo_documento_fonte, Autore_documento_fonte, Host_documento_fonte, Url_documento_fonte, Commento_entry, Data_inserimento_entry, Id_statico_entry, Admin_approval_switch):
+            self.Lemma = Lemma
+            self.Acronimo = Acronimo
+            self.Definizione = Definizione
+            self.Ambito_riferimento = Ambito_riferimento
+            self.Autore_definizione = Autore_definizione
+            self.Posizione_definizione = Posizione_definizione
+            self.Url_definizione = Url_definizione
+            self.Titolo_documento_fonte = Titolo_documento_fonte
+            self.Autore_documento_fonte = Autore_documento_fonte
+            self.Host_documento_fonte = Host_documento_fonte
+            self.Url_documento_fonte = Url_documento_fonte
+            self.Commento_entry = Commento_entry
+            self.Data_inserimento_entry = Data_inserimento_entry
+            self.Id_statico_entry = Id_statico_entry
+            self.Admin_approval_switch = Admin_approval_switch
+
+        def to_dict(self):
+            return {
+                'Lemma': self.Lemma,
+                'Acronimo': self.Acronimo,
+                'Definizione': self.Definizione,
+                'Ambito_riferimento': self.Ambito_riferimento,
+                'Autore_definizione': self.Autore_definizione,
+                'Posizione_definizione': self.Posizione_definizione,
+                'Url_definizione': self.Url_definizione,
+                'Titolo_documento_fonte': self.Titolo_documento_fonte,
+                'Autore_documento_fonte': self.Autore_documento_fonte,
+                'Host_documento_fonte': self.Host_documento_fonte,
+                'Url_documento_fonte': self.Url_documento_fonte,
+                'Commento_entry': self.Commento_entry,
+                'Data_inserimento_entry': self.Data_inserimento_entry,
+                'Id_statico_entry': self.Id_statico_entry,
+                'Admin_approval_switch': self.Admin_approval_switch,
+            }
+    
+        pd.DataFrame.from_records([s.to_dict() for s in signals])
+
+
+************
+
+
+#inizializzo un array 2D (matrice) di vuoti
+    GI = [["" for x in range(nC)] for y in range(L_GI)] 
+
+    # print(GI)
+
+    i=0
+    j=0
+
+    for element in prepared_entries:
+        i=i+1      
+            
+        if not pd.isnull(element.Lemma):
+            j=j+1
+            GI[i, j] = element.Lemma
+
+        if not pd.isnull(element.Id_statico_entry):
+            j=j+1
+            GI[i, j] = element.Id_statico_entry
+
+        if not pd.isnull(element.Definizione):    
+            j=j+1
+            GI[i, j] = element.Definizione
+
+        if not pd.isnull(element.Ambito_riferimento):    
+            j=j+1
+            GI[i, j] = element.Ambito_riferimento
+
+        if not pd.isnull(element.Autore_definizione):    
+            j=j+1
+            GI[i, j] = element.Autore_definizione
+
+        if not pd.isnull(element.Posizione_definizione):  
+            j=j+1  
+            GI[i, j] = element.Posizione_definizione
+
+        if not pd.isnull(element.Url_definizione):   
+            j=j+1 
+            GI[i, j] = element.Url_definizione
+
+        if not pd.isnull(element.Titolo_documento_fonte):  
+            j=j+1  
+            GI[i, j] = element.Titolo_documento_fonte
+
+        if not pd.isnull(element.Autore_documento_fonte):    
+            j=j+1
+            GI[i, j] = element.Autore_documento_fonte
+
+        if not pd.isnull(element.Host_documento_fonte):    
+            j=j+1
+            GI[i, j] = element.Host_documento_fonte
+
+        if not pd.isnull(element.Url_documento_fonte):    
+            j=j+1
+            GI[i, j] = element.Url_documento_fonte
+
+        if not pd.isnull(element.Commento_entry):   
+            j=j+1 
+            GI[i, j] = element.Commento_entry
+
+        j=j+1
+        GI[i, j] = element.Data_inserimento_entry
+
+        j=j+1
+        GI[i, j] = element.Id_statico_entry      
+
+        j=j+1         
+        GI[i, j] = element.Admin_approval_switch
+        
+
+        j=0 # fine del ciclo for in j virtuale
+        
+    i=0
+
+    print(GI)
+
+
+    *********
+
+
+    # rimepire il dataframe
+    i=0
+    j=0
+
+    for element in prepared_entries:
+        i=i+1      
+            
+        print(element.Lemma)
+
+        if not pd.isnull(element.Lemma):
+            j=j+1
+            GI.iat[i,j] = element.Lemma
+
+        if not pd.isnull(element.Acronimo):
+            j=j+1
+            GI.iat[i,j] = element.Acronimo
+
+        if not pd.isnull(element.Definizione):    
+            j=j+1
+            GI.iat[i,j] = element.Definizione
+
+        if not pd.isnull(element.Ambito_riferimento):    
+            j=j+1
+            GI.iat[i,j] = element.Ambito_riferimento
+
+        if not pd.isnull(element.Autore_definizione):    
+            j=j+1
+            GI.iat[i,j] = element.Autore_definizione
+
+        if not pd.isnull(element.Posizione_definizione):  
+            j=j+1  
+            GI.iat[i,j] = element.Posizione_definizione
+
+        if not pd.isnull(element.Url_definizione):   
+            j=j+1 
+            GI.iat[i,j] = element.Url_definizione
+
+        if not pd.isnull(element.Titolo_documento_fonte):  
+            j=j+1  
+            GI.iat[i,j] = element.Titolo_documento_fonte
+
+        if not pd.isnull(element.Autore_documento_fonte):    
+            j=j+1
+            GI.iat[i,j] = element.Autore_documento_fonte
+
+        if not pd.isnull(element.Host_documento_fonte):    
+            j=j+1
+            GI.iat[i,j] = element.Host_documento_fonte
+
+        if not pd.isnull(element.Url_documento_fonte):    
+            j=j+1
+            GI.iat[i,j] = element.Url_documento_fonte
+
+        if not pd.isnull(element.Commento_entry):   
+            j=j+1 
+            GI.iat[i,j] = element.Commento_entry
+
+        j=j+1
+        GI.iat[i,j] = element.Data_inserimento_entry
+
+        j=j+1
+        GI.iat[i,j] = element.Id_statico_entry      
+
+        j=j+1         
+        GI.iat[i,j] = element.Admin_approval_switch
+        
+        print(i)
+
+        if i == 999:
+            print(GI)
+
+
+        j=0 # fine del ciclo for in j virtuale
+        
+    i=0
+
+    print(GI)
+
+    **********
+    nei cicli non usare l'uguale ma usa invece append
+
+
+    ********
+
+
+    print("Viene preparata la tabella di ID e terminologia Elab1")
+    
+
+    Elab1 = Elab1.sort_values(['Lemma', 'Id_statico_entry'])
+    Elab1.ID_db_Lemma = IDs_prestampa.ID_db_Lemma
+   
+
+    Elab1 = Elab1.sort_values(['Acronimo', 'Id_statico_entry'])
+    Elab1.ID_db_Acronimo = IDs_prestampa.ID_db_Acronimo
+    
+
+    Elab1 = Elab1.sort_values(['Definizione', 'Id_statico_entry'])
+    Elab1.ID_db_Definizione = IDs_prestampa.ID_db_Definizione
+    print(Elab1)
+
+    Elab1 = Elab1.sort_values(['Ambito_riferimento', 'Id_statico_entry'])
+    Elab1.ID_db_Ambito_riferimento = IDs_prestampa.ID_db_Ambito_riferimento
+
+    Elab1 = Elab1.sort_values(['Autore_definizione', 'Id_statico_entry'])
+    Elab1.ID_db_Autore_definizione = IDs_prestampa.ID_db_Autore_definizione
+
+    Elab1 = Elab1.sort_values(['Posizione_definizione', 'Id_statico_entry'])
+    Elab1.ID_db_Posizione_definizione = IDs_prestampa.ID_db_Posizione_definizione
+
+    Elab1 = Elab1.sort_values(['Url_definizione', 'Id_statico_entry'])
+    Elab1.ID_db_Url_definizione = IDs_prestampa.ID_db_Url_definizione
+
+    Elab1 = Elab1.sort_values(['Titolo_documento_fonte', 'Id_statico_entry'])
+    Elab1.ID_db_Titolo_documento_fonte = IDs_prestampa.ID_db_Titolo_documento_fonte
+
+    Elab1 = Elab1.sort_values(['Autore_documento_fonte', 'Id_statico_entry'])
+    Elab1.ID_db_Autore_documento_fonte = IDs_prestampa.ID_db_Autore_documento_fonte
+
+    Elab1 = Elab1.sort_values(['Host_documento_fonte', 'Id_statico_entry'])
+    Elab1.ID_db_Host_documento_fonte = IDs_prestampa.ID_db_Host_documento_fonte
+
+    Elab1 = Elab1.sort_values(['Url_documento_fonte', 'Id_statico_entry'])
+    Elab1.ID_db_Url_documento_fonte = IDs_prestampa.ID_db_Url_documento_fonte
+
+    Elab1 = Elab1.sort_values(['Commento_entry', 'Id_statico_entry'])
+    Elab1.ID_db_Commento_entry = IDs_prestampa.ID_db_Commento_entry
+
+    Elab1 = Elab1.sort_values(['Data_inserimento_entry', 'Id_statico_entry'])
+    Elab1.ID_db_Data_inserimento_entry = IDs_prestampa.ID_db_Data_inserimento_entry
+
+    Elab1 = Elab1.sort_values(['Id_statico_entry'])
+    Elab1.ID_db_Id_statico_entry = IDs_prestampa.ID_db_Id_statico_entry
+
+    Elab1 = Elab1.sort_values(['Admin_approval_switch', 'Id_statico_entry'])
+    Elab1.ID_db_Admin_approval_switch = IDs_prestampa.ID_db_Admin_approval_switch
+
+
+    Elab1 = Elab1.sort_values(['Lemma', 'Id_statico_entry'])
+
+
+    print("Gli ID di Elab 1 vengono assegnati in ordine ascendente con l'ordine alfabetico di ogni colonna")
+
+    print(Elab1)
+
+
+    
