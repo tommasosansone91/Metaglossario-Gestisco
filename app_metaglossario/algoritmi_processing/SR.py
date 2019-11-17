@@ -73,7 +73,6 @@ def algoritmo_SR():
     label_IDs_prestampa = []
 
     for i in range(nC):
-
         label_IDs_prestampa.append("ID_db_" + nomi_campi_prepared_terminology[i])
     
     ID_dimension = 1000000
@@ -81,8 +80,7 @@ def algoritmo_SR():
     IDs_prestampa_content = []
 
     # mentre per python il primo indice è 0, nella mia riga io ci metto 1
-    for i in range(L_GI):
-        
+    for i in range(L_GI):        
         IDs_prestampa_content.append([ (ID_dimension * (j+1) ) + (i+1) for j in range(nC) ])
             
 
@@ -173,7 +171,6 @@ def algoritmo_SR():
     label_ripetizioni = []
 
     for i in range(nC):
-
         label_ripetizioni.append("Ripetizioni_di_" + nomi_campi_prepared_terminology[i])
 
     ripetizioni_content = []
@@ -184,4 +181,283 @@ def algoritmo_SR():
     ripetizioni = pd.DataFrame(ripetizioni_content, columns=label_ripetizioni)
     
 
+    # inizia la riscrittura degli id per mettere uguali queli che corrispondono ad oggetti uguali
 
+    #ordino il glossario alfabeticamente per X
+
+    # pone uguali id di elementi guuali
+
+    #  If ActiveCell.Offset(j, nC).Value = ActiveCell.Offset(j - 1, nC).Value Then
+                    
+    #                 ActiveCell.Offset(j, 0).Value = ActiveCell.Offset(j - 1, 0)
+                    
+    #                 Ripetizioni(i) = Ripetizioni(i) + 1
+                    
+    #                 Else
+                    
+    #                 ActiveCell.Offset(j, 0).Value = ActiveCell.Offset(j - 1, 0) + 1
+                    
+    #                 End If
+
+    # salto il fatto che id statico non ha ripetizioni perchè c'è l'interruttore di show/hide
+
+    label_Elab1 = nomi_campi_prepared_terminology + label_IDs_prestampa
+
+    print("Inizia lo scansionamento della terminologia e dei metadati per individuare elementi uguali...")
+    
+    # non posso fare il megaciclo      
+
+    # nuovo campo da processare
+
+    print("Ricerca dei lemmi uguali...")
+
+    Elab1 = Elab1.sort_values(['Lemma', 'Id_statico_entry'])
+    Elab1 = Elab1.reset_index(drop=True)
+
+    # uno in meno perchè devo fare confronto tra i e i+1
+    for i in range(L_GI-1):
+
+        # se gli oggetti consecutivi sono uguali
+        if Elab1.at[i+1, "Lemma"] == Elab1.at[i, "Lemma"] :
+
+            # poni l'id successivo uguale a quello attuale
+            Elab1.at[i+1, "ID_db_Lemma"] = Elab1.at[i, "ID_db_Lemma"]
+
+    
+    
+
+    #nuovo campo da processare
+
+    print("Ricerca degli acronimi uguali...")
+    
+    Elab1 = Elab1.sort_values(['Acronimo', 'Id_statico_entry'])
+    Elab1 = Elab1.reset_index(drop=True)
+
+    # uno in meno perchè devo fare confronto tra i e i+1
+    for i in range(L_GI-1):
+
+        # se gli oggetti consecutivi sono uguali
+        if Elab1.at[i+1, "Acronimo"] == Elab1.at[i, "Acronimo"] :
+
+            # poni l'id successivo uguale a quello attuale
+            Elab1.at[i+1, "ID_db_Acronimo"] = Elab1.at[i, "ID_db_Acronimo"]
+
+    #nuovo campo da processare
+    
+    print("Ricerca delle definizioni uguali...")
+
+    Elab1 = Elab1.sort_values(['Definizione', 'Id_statico_entry'])
+    Elab1 = Elab1.reset_index(drop=True)
+
+    # uno in meno perchè devo fare confronto tra i e i+1
+    for i in range(L_GI-1):
+
+        # se gli oggetti consecutivi sono uguali
+        if Elab1.at[i+1, "Definizione"] == Elab1.at[i, "Definizione"] :
+
+            # poni l'id successivo uguale a quello attuale
+            Elab1.at[i+1, "ID_db_Definizione"] = Elab1.at[i, "ID_db_Definizione"]
+
+
+    #nuovo campo da processare
+
+    print("Ricerca degli ambiti di riferimento uguali...")
+    
+    Elab1 = Elab1.sort_values(['Ambito_riferimento', 'Id_statico_entry'])
+    Elab1 = Elab1.reset_index(drop=True)
+
+    # uno in meno perchè devo fare confronto tra i e i+1
+    for i in range(L_GI-1):
+
+        # se gli oggetti consecutivi sono uguali
+        if Elab1.at[i+1, "Ambito_riferimento"] == Elab1.at[i, "Ambito_riferimento"] :
+
+            # poni l'id successivo uguale a quello attuale
+            Elab1.at[i+1, "ID_db_Ambito_riferimento"] = Elab1.at[i, "ID_db_Ambito_riferimento"]
+
+
+    #nuovo campo da processare
+
+    print("Ricerca degli ambiti di Autore_definizione uguali...")
+        
+    Elab1 = Elab1.sort_values(['Autore_definizione', 'Id_statico_entry'])
+    Elab1 = Elab1.reset_index(drop=True)
+
+    # uno in meno perchè devo fare confronto tra i e i+1
+    for i in range(L_GI-1):
+
+        # se gli oggetti consecutivi sono uguali
+        if Elab1.at[i+1, "Autore_definizione"] == Elab1.at[i, "Autore_definizione"] :
+
+            # poni l'id successivo uguale a quello attuale
+            Elab1.at[i+1, "ID_db_Autore_definizione"] = Elab1.at[i, "ID_db_Autore_definizione"]
+
+
+    #nuovo campo da processare
+
+    print("Ricerca delle posizioni delle definizioni uguali...")
+        
+    Elab1 = Elab1.sort_values(['Posizione_definizione', 'Id_statico_entry'])
+    Elab1 = Elab1.reset_index(drop=True)
+
+    # uno in meno perchè devo fare confronto tra i e i+1
+    for i in range(L_GI-1):
+
+        # se gli oggetti consecutivi sono uguali
+        if Elab1.at[i+1, "Posizione_definizione"] == Elab1.at[i, "Posizione_definizione"] :
+
+            # poni l'id successivo uguale a quello attuale
+            Elab1.at[i+1, "ID_db_Posizione_definizione"] = Elab1.at[i, "ID_db_Posizione_definizione"]
+
+
+    #nuovo campo da processare
+
+    print("Ricerca delgli url delle definizioni uguali...")
+        
+    Elab1 = Elab1.sort_values(['Url_definizione', 'Id_statico_entry'])
+    Elab1 = Elab1.reset_index(drop=True)
+
+    # uno in meno perchè devo fare confronto tra i e i+1
+    for i in range(L_GI-1):
+
+        # se gli oggetti consecutivi sono uguali
+        if Elab1.at[i+1, "Url_definizione"] == Elab1.at[i, "Url_definizione"] :
+
+            # poni l'id successivo uguale a quello attuale
+            Elab1.at[i+1, "ID_db_Url_definizione"] = Elab1.at[i, "ID_db_Url_definizione"]
+
+
+    #nuovo campo da processare
+
+    print("Ricerca dei Titolo_documento_fonte uguali...")
+        
+    Elab1 = Elab1.sort_values(['Titolo_documento_fonte', 'Id_statico_entry'])
+    Elab1 = Elab1.reset_index(drop=True)
+
+    # uno in meno perchè devo fare confronto tra i e i+1
+    for i in range(L_GI-1):
+
+        # se gli oggetti consecutivi sono uguali
+        if Elab1.at[i+1, "Titolo_documento_fonte"] == Elab1.at[i, "Titolo_documento_fonte"] :
+
+            # poni l'id successivo uguale a quello attuale
+            Elab1.at[i+1, "ID_db_Titolo_documento_fonte"] = Elab1.at[i, "ID_db_Titolo_documento_fonte"]
+
+
+#nuovo campo da processare
+
+    print("Ricerca dei Autore_documento_fonte uguali...")
+    
+    Elab1 = Elab1.sort_values(['Autore_documento_fonte', 'Id_statico_entry'])
+    Elab1 = Elab1.reset_index(drop=True)
+
+    # uno in meno perchè devo fare confronto tra i e i+1
+    for i in range(L_GI-1):
+
+        # se gli oggetti consecutivi sono uguali
+        if Elab1.at[i+1, "Autore_documento_fonte"] == Elab1.at[i, "Autore_documento_fonte"] :
+
+            # poni l'id successivo uguale a quello attuale
+            Elab1.at[i+1, "ID_db_Autore_documento_fonte"] = Elab1.at[i, "ID_db_Autore_documento_fonte"]
+
+
+#nuovo campo da processare
+
+    print("Ricerca dei Host_documento_fonte uguali...")
+    
+    Elab1 = Elab1.sort_values(['Host_documento_fonte', 'Id_statico_entry'])
+    Elab1 = Elab1.reset_index(drop=True)
+
+    # uno in meno perchè devo fare confronto tra i e i+1
+    for i in range(L_GI-1):
+
+        # se gli oggetti consecutivi sono uguali
+        if Elab1.at[i+1, "Host_documento_fonte"] == Elab1.at[i, "Host_documento_fonte"] :
+
+            # poni l'id successivo uguale a quello attuale
+            Elab1.at[i+1, "ID_db_Host_documento_fonte"] = Elab1.at[i, "ID_db_Host_documento_fonte"]
+
+
+#nuovo campo da processare
+
+    print("Ricerca dei Url_documento_fonte uguali...")
+    
+    Elab1 = Elab1.sort_values(['Url_documento_fonte', 'Id_statico_entry'])
+    Elab1 = Elab1.reset_index(drop=True)
+
+    # uno in meno perchè devo fare confronto tra i e i+1
+    for i in range(L_GI-1):
+
+        # se gli oggetti consecutivi sono uguali
+        if Elab1.at[i+1, "Url_documento_fonte"] == Elab1.at[i, "Url_documento_fonte"] :
+
+            # poni l'id successivo uguale a quello attuale
+            Elab1.at[i+1, "ID_db_Url_documento_fonte"] = Elab1.at[i, "ID_db_Url_documento_fonte"]
+
+
+#nuovo campo da processare
+
+    print("Ricerca dei Commento_entry uguali...")
+    
+    Elab1 = Elab1.sort_values(['Commento_entry', 'Id_statico_entry'])
+    Elab1 = Elab1.reset_index(drop=True)
+
+    # uno in meno perchè devo fare confronto tra i e i+1
+    for i in range(L_GI-1):
+
+        # se gli oggetti consecutivi sono uguali
+        if Elab1.at[i+1, "Commento_entry"] == Elab1.at[i, "Commento_entry"] :
+
+            # poni l'id successivo uguale a quello attuale
+            Elab1.at[i+1, "ID_db_Commento_entry"] = Elab1.at[i, "ID_db_Commento_entry"]
+
+
+#nuovo campo da processare
+
+    print("Ricerca delle date_entry uguali...")
+    
+    Elab1 = Elab1.sort_values(['Data_inserimento_entry', 'Id_statico_entry'])
+    Elab1 = Elab1.reset_index(drop=True)
+
+    # uno in meno perchè devo fare confronto tra i e i+1
+    for i in range(L_GI-1):
+
+        # se gli oggetti consecutivi sono uguali
+        if Elab1.at[i+1, "Data_inserimento_entry"] == Elab1.at[i, "Data_inserimento_entry"] :
+
+            # poni l'id successivo uguale a quello attuale
+            Elab1.at[i+1, "ID_db_Data_inserimento_entry"] = Elab1.at[i, "ID_db_Data_inserimento_entry"]
+
+
+#nuovo campo da processare
+    
+    # Id_statico_entry slta perchè sicuramente è univoco
+
+    # nel foglio excel di ingresso devo fare un meccanismo per assegnare gli id ma li fa l'utore
+
+
+#nuovo campo da processare
+
+    print("Ricerca degli Admin_approval_switch uguali...")
+    
+    Elab1 = Elab1.sort_values(['Admin_approval_switch', 'Id_statico_entry'])
+    Elab1 = Elab1.reset_index(drop=True)
+
+    # uno in meno perchè devo fare confronto tra i e i+1
+    for i in range(L_GI-1):
+
+        # se gli oggetti consecutivi sono uguali
+        if Elab1.at[i+1, "Admin_approval_switch"] == Elab1.at[i, "Admin_approval_switch"] :
+
+            # poni l'id successivo uguale a quello attuale
+            Elab1.at[i+1, "ID_db_Admin_approval_switch"] = Elab1.at[i, "ID_db_Admin_approval_switch"]
+
+
+
+
+
+    print(Elab1)
+
+    print("Elab1 è interessato dalle seguenti ripetizioni:")
+
+    print(ripetizioni)
