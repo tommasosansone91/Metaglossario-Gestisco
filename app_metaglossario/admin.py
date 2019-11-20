@@ -3,6 +3,7 @@ from .models import glossary_entry
 from .models import glossary_file
 from .models import acquired_terminology
 from .models import prepared_terminology
+from .models import displaying_terminology
 
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
@@ -22,9 +23,6 @@ class glossary_entry_Admin(ImportExportModelAdmin, admin.ModelAdmin):
     pass
 
 
-
-
-
 # Register your models here.
 # per ogni modello, registralo con una nuova linea del tipo
 # admin.site.register(modello)
@@ -39,6 +37,8 @@ admin.site.register(glossary_file)
 admin.site.register(acquired_terminology)
 
 admin.site.register(prepared_terminology)
+
+admin.site.register(displaying_terminology)
 
 
 

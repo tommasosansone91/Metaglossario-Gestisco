@@ -305,8 +305,11 @@
 
     <br><br>
 
+
+{% load static %}   <!-- Qui il tag è obbligatorio nonostante sia stato inserito dentro base.html -->
+
+
 <!-- CSS -->
-{% load static %}  <!-- Qui il tag è obbligatorio nonostante sia stato inserito dentro base.html -->
 <link rel="stylesheet" type="text/css" href={% static "css/searchbar_style.css" %}>
 <link rel="stylesheet" type="text/css" href={% static "css/navigation_box_style.css" %}>
 

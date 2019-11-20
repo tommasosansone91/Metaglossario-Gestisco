@@ -32,7 +32,7 @@ from django.http import JsonResponse
 from django.core.files.storage import FileSystemStorage
 
 # per gli script di management dei files
-from .algoritmi_processing.scripts import printout, printout_input
+from .algoritmi_processing.scripts import printout, printout_input, finish_sound
 from .algoritmi_processing.scripts import pour_entire_simple_model, pour_entire_file_model
 from .algoritmi_processing.scripts import pour_latest_file, pour_latest_entry
 from .algoritmi_processing.scripts import erase_acquired_terminology, erase_glossary_entry
@@ -43,16 +43,28 @@ from .algoritmi_processing.SR import algoritmo_SR
 
 def run_script(request):
 
+    import time
+
+    start_time = printout()
     # erase_glossary_entry()
     # erase_acquired_terminology()
     # pour_entire_simple_model()
     # pour_entire_file_model()
     # pour_latest_file()
-    printout()
+    
     # algoritmo_PGI()
     algoritmo_SR()
 
+    elapsed_time = round(time.time() - start_time)
+
     print("*** Script eseguito fino alla fine! ***")
+    print("*** Tempo impiegato: %s s ***" % elapsed_time )
+
+    finish_sound()
+
+    
+
+
 
     return render(request, 'run_script.html', {})
 

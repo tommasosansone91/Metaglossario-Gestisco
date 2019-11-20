@@ -2,6 +2,8 @@ def algoritmo_PGI():
 
     # algoritmo per standardizzare i dati prima di incatenarli nella struttura relazionale
 
+    # questo algoritmo va ottimizzato mettendo i cicli delle etichette delle colonne al posto di richiamare ogni elemento del database con la propria etichetta
+
     import pandas as pd
     from app_metaglossario.models import acquired_terminology, prepared_terminology
 
@@ -257,9 +259,9 @@ def algoritmo_PGI():
 
         prepared_entry.save()
 
-        print("Eliminazione degli spazi all'inizio e alla fine di ogni cella terminata con successo!")
+    print("Eliminazione degli spazi all'inizio e alla fine di ogni cella terminata con successo!")
 
-        print("Standardizzazione del formato dei dati terminata con successo!")
+    print("Standardizzazione del formato dei dati terminata con successo!")
 
-        print("I dati sono ora in un formato standard e possono essere processati per la realizzazione della struttura relazionale!")
+    print("I dati sono ora in un formato standard e possono essere processati per la realizzazione della struttura relazionale!")
 

@@ -1,16 +1,42 @@
 
 def printout():
-    print("script richiamato con successo")
+
+    import time
+
+    print("script richiamato con successo!")
+    start_time = time.time()
+    return start_time
 
 
 def printout_input(input):
 
-    script_name = "Script di conferma"
+    import time
 
+    start_time = time.time()
+    script_name = "Script di conferma"
     print("%s richiamato con successo con il seguente input: %s" % (script_name, input))
+    
+    return start_time
+
+
+def finish_sound():
+
+    import sys
+    import time
+    import winsound
+    
+    duration = 500  # milliseconds
+    freq = 220  # Hz
+    winsound.Beep(freq, duration)
+    winsound.Beep(freq, duration)
+    winsound.Beep(freq, duration)
+
+    
 
 
 def pour_entire_simple_model():
+
+    # questo algoritmo va ottimizzato mettendo i cicli delle etichette delle colonne al posto di richiamare ogni elemento del database con la propria etichetta
 
     print("Inizia il riversamento di tutti i dati dal modello glossary_entry al modello acquired_terminology!")
 
@@ -75,6 +101,8 @@ def pour_entire_simple_model():
 
 
 def pour_entire_file_model():
+
+    # questo algoritmo va ottimizzato mettendo i cicli delle etichette delle colonne al posto di richiamare ogni elemento del database con la propria etichetta
 
     print("Inizia il riversamento della terminologia di tutti i file salvati nel modello glossary_file verso il modello acquired_terminology...")
 
@@ -237,6 +265,8 @@ def pour_latest_entry():
 
 def pour_latest_file():    
 
+    # questo algoritmo va ottimizzato mettendo i cicli delle etichette delle colonne al posto di richiamare ogni elemento del database con la propria etichetta
+
     import pandas as pd    
     from app_metaglossario.models import glossary_file, acquired_terminology
 
@@ -324,6 +354,8 @@ def pour_latest_file():
     print("*****")
 
 
+    # per eliminare i glossari lo faccio manualmente (glossary_file)
+
     # elimina tutti i dati dentro acquired terminoliogy
 def erase_acquired_terminology():
 
@@ -338,3 +370,6 @@ def erase_glossary_entry():
     from app_metaglossario.models import glossary_entry
     glossary_entry.objects.all().delete()
     print("Eliminati tutti i dati dentro glossary_entry!")
+
+
+# per il modello prepared la funzione di eliminazione è già insita nell'algoritmo PGI
