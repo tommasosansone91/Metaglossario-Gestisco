@@ -207,6 +207,7 @@ def algoritmo_SR():
     #  viene generato un ID del tipo x000000[contatore del ciclo j /ossia prestampaIDs(j,i)] e salvato come sostituto
     #  un ciclo k scorre tutta la colonna DALLA CELLA CORRENTE VERSO IL BASSO (onde evitare di sovrascrivere i precedenti) e sostituisce altre celle uguali al bersaglio con il sostuituto
 
+    print("Viene eseguita la riclassificazione degli ID dei singoli oggetti per realizzare le tabelle relazionali del database...")
 
     # col_scan 1 To L_GI, 1 To nC
     # avvenuta_sost  1 To L_GI, 1 To nC
@@ -231,34 +232,136 @@ def algoritmo_SR():
     # in VBA, solo negli offset accade che righe e colonne hanno il sistema ribaltato rispetto a x=0 e coordinate scambiate
     # nelle matrici si ragiona normalmente in (righe, colonne)
 
-    for i in range(nC):
-    # ciclo delle colonne
-    # per l'ID statico non devo farlo ... ma non è più in ultima poizione
+    # for i in range(nC):
+    # # ciclo delle colonne
+    # # per l'ID statico non devo farlo ... ma non è più in ultima poizione
 
-        for j in range(L_GI):
-        #ciclo delle righe
+    #     for j in range(L_GI):
+    #     #ciclo delle righe
 
-            Bersaglio = col_scan.iloc[j, i]
-            Sostituto = IDs_prestampa.iloc[j, i] # questi sono gli id 1000001 , 10000002, ecc
+    #         Bersaglio = col_scan.iloc[j, i]
+    #         Sostituto = IDs_prestampa.iloc[j, i] # questi sono gli id 1000001 , 10000002, ecc
 
             
 
-            for k in range(j, L_GI): #[j, j+1,...,L_GI-1, L_GI]
-            # ciclo del check per una riga di tutti i duoi doppioni nella colonna
-            # 'deve andare fino a L_GI-1 : deve controllare la colonna fino in fondo, ma senza modificare gli elementi prima della colonna j
-            # 'ciclo di sola sostituzione: non mettere else
+    #         for k in range(j, L_GI): #[j, j+1,...,L_GI-1, L_GI]
+    #         # ciclo del check per una riga di tutti i duoi doppioni nella colonna
+    #         # 'deve andare fino a L_GI-1 : deve controllare la colonna fino in fondo, ma senza modificare gli elementi prima della colonna j
+    #         # 'ciclo di sola sostituzione: non mettere else
 
                 
 
-                if col_scan.iloc[k, i] == Bersaglio and avvenuta_sost.iloc[k, i] == 0:
+    #             if col_scan.iloc[k, i] == Bersaglio and avvenuta_sost.iloc[k, i] == 0:
                             
-                    col_scan.iloc[k, i] = Sostituto                             
-                    avvenuta_sost.iloc[k, i] = 1
+    #                 col_scan.iloc[k, i] = Sostituto                             
+    #                 avvenuta_sost.iloc[k, i] = 1
 
+
+    # # incollo col_scan sulla parte ID di Elab 1
+    
+    # Elab1[ label_IDs_prestampa ] = col_scan [label_IDs_prestampa]
+
+    # print(Elab1[ label_IDs_prestampa ])
+
+    # 'ora devo compattare gli ID per non lasciare buchi
+    for j in range(nC):
+
+        Elab1 = Elab1.sort_values([nomi_campi_prepared_terminology[j], "Id_statico_entry"])
+        Elab1 = Elab1.reset_index(drop=True)
+        
+
+    Elab1 = Elab1.sort_values(["Id_statico_entry"])
+    Elab1 = Elab1.reset_index(drop=True)
+
+    print(Elab1)
+
+    print("Vengono generate le tabelle per il database...")
+
+    print("Viene generata la tabella delle entità Things con tutti gli oggetti del database e i loro Id relazionali...")
+
+    # creazione della tabella things: id e oggetti
+    # concat: axis: 0 per la concatenazione in colonna, 1 per la concatenazione in riga
+
+    # concatena in colonna gli id di tutti gli oggetti
+    # incolla uno sotto l'altra le colonne degli id
+    Things_ID = pd.concat([Elab1[j] for j in nomi_campi_prepared_terminology], axis=0) 
+
+    # concatena in colonna gli oggetti
+     # incolla uno sotto l'altra le colonne degli oggetti
+    Things_oggetti = pd.concat([Elab1[j] for j in label_IDs_prestampa], axis=0)
+
+    # crea la tabella things
+    # concatena in riga id e oggetti    
+    Things_content = pd.concat([Things_ID, Things_oggetti], axis=1) # non è dataframe
+    Things = pd.DataFrame(Things_content, columns=['ID_db_Thing','Thing']) # è dataframe
+    # resetto gli indici altrimenti mi tiene gli indici di Elab1
+    Things = Things.reset_index(drop=True)
+
+    print(Things)
+
+    print("Vengono generate le tabelle relazionali...")
+
+
+    # ["Lemma", "Acronimo", "Definizione", "Ambito_riferimento", "Autore_definizione", "Posizione_definizione", "
+    # Url_definizione", "Titolo_documento_fonte", "Autore_documento_fonte", "Host_documento_fonte", 
+    # "Url_documento_fonte", "Commento_entry", "Data_inserimento_entry", "Id_statico_entry", "Admin_approval_switch"]
+    
+    # ID_db_
+
+    is_Acronimo_of = pd.concat([ Elab1["ID_db_Acronimo"], Elab1["ID_db_Lemma"], Elab1["Acronimo"], Elab1["Lemma"] ], axis=1)
+
+    is_Lemma_of = pd.concat( [Elab1["ID_db_Lemma"], Elab1["ID_db_Definizione"], Elab1["Lemma"], Elab1["Definizione"] ], axis=1)
+
+    is_Ambito_riferimento_of = pd.concat([ Elab1["ID_db_Ambito_riferimento"], Elab1["ID_db_Definizione"], Elab1["Ambito_riferimento"], Elab1["Definizione"] ], axis=1)
+
+    is_Autore_definizione_of = pd.concat([ Elab1["ID_db_Autore_definizione"], Elab1["ID_db_Definizione"], Elab1["Autore_definizione"], Elab1["Definizione"] ], axis=1)
+
+    is_Posizione_definizione_of = pd.concat([ Elab1["ID_db_Posizione_definizione"], Elab1["ID_db_Definizione"], Elab1["Posizione_definizione"], Elab1["Definizione"] ], axis=1)
+
+    is_Url_definizione_of = pd.concat([ Elab1["ID_db_Url_definizione"], Elab1["ID_db_Definizione"], Elab1["Url_definizione"], Elab1["Definizione"] ], axis=1)
+
+    # is_Titolo_documento_fonte_of = pd.concat([ Elab1["ID_db_Ambito_riferimento"], Elab1["ID_db_Definizione"], Elab1["Ambito_riferimento"], Elab1["Definizione"] ], axis=1)
+
+    is_Autore_documento_fonte_of = pd.concat([ Elab1["ID_db_Autore_documento_fonte"], Elab1["ID_db_Titolo_documento_fonte"], Elab1["Autore_documento_fonte"], Elab1["Titolo_documento_fonte"] ], axis=1)
+
+    is_Host_documento_fonte_of = pd.concat([ Elab1["ID_db_Host_documento_fonte"], Elab1["ID_db_Titolo_documento_fonte"], Elab1["Host_documento_fonte"], Elab1["Titolo_documento_fonte"] ], axis=1)
+
+    is_Url_documento_fonte_of = pd.concat([ Elab1["ID_db_Url_documento_fonte"], Elab1["ID_db_Titolo_documento_fonte"], Elab1["Url_documento_fonte"], Elab1["Titolo_documento_fonte"] ], axis=1)
+
+    is_Commento_entry_of = pd.concat([ Elab1["ID_db_Commento_entry"], Elab1["ID_db_Id_statico_entry"], Elab1["Commento_entry"], Elab1["Id_statico_entry"] ], axis=1)
+    
+    is_Data_inserimento_entry_of = pd.concat([ Elab1["ID_db_Data_inserimento_entry"], Elab1["ID_db_Id_statico_entry"], Elab1["Data_inserimento_entry"], Elab1["Id_statico_entry"] ], axis=1)
+    
+
+    # is_Id_statico_entry_of è lunga nC*L_GI perchè collega gli id_statici a nC entità del database
+
+    Id_statico_entry_impilati_per_nC = pd.concat([Elab1["Id_statico_entry"] for j in range(nC)], axis=0)   
+    # resetto gli indici altrimenti mi tiene gli indici di Elab1
+    Id_statico_entry_impilati_per_nC = Id_statico_entry_impilati_per_nC.reset_index(drop=True)
+    Id_statico_entry_impilati_per_nC = pd.DataFrame(Id_statico_entry_impilati_per_nC) # è dataframe
+
+    ID_db_Id_statico_entry_impilati_per_nC = pd.concat([Elab1["ID_db_Id_statico_entry"] for j in range(nC)], axis=0)  
+    # resetto gli indici altrimenti mi tiene gli indici di Elab1
+    ID_db_Id_statico_entry_impilati_per_nC = ID_db_Id_statico_entry_impilati_per_nC.reset_index(drop=True)
+    ID_db_Id_statico_entry_impilati_per_nC = pd.DataFrame(ID_db_Id_statico_entry_impilati_per_nC) # è dataframe
+  
+
+   
+    is_Id_statico_entry_of = pd.concat( [ ID_db_Id_statico_entry_impilati_per_nC, Id_statico_entry_impilati_per_nC, Things ], axis=1)
+
+    is_Admin_approval_switch_of = pd.concat([ Elab1["ID_db_Admin_approval_switch"], Elab1["ID_db_Id_statico_entry"], Elab1["Admin_approval_switch"], Elab1["Id_statico_entry"] ], axis=0)
+    
+    
+    ###########
+
+    # ELIMINA LE RIGHE RIPETUTE dalle tabelle relazionali
 
     # ####################
 
     displaying_terminology.objects.all().delete()
     print("Eliminati tutti i dati dentro displaying_terminology!")
+
+
+    # il 3-ciclo è momentaneamente dsattivato
 
 

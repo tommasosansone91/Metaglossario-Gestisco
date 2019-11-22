@@ -245,3 +245,20 @@ df = df.sort_values(['Total Due'])
 or
 
 df.sort_values(['Total Due'], inplace=True)
+
+
+ is_Acronimo_of = pd.concat([ Elab1["ID_db_Acronimo"], Elab1["ID_db_Lemma"], Elab1["Acronimo"], Elab1["Lemma"] ], axis=1)
+
+
+    # concatena in colonna gli id di tutti gli oggetti
+    # incolla uno sotto l'altra le colonne degli id
+        
+
+    Things_ID = pd.concat([Elab1[j] for j in nomi_campi_prepared_terminology], axis=0) 
+
+
+ricordati di fare x = pd.DataFrame(x)
+altrimenti non funzioneranno le etichette label quando richiamato l'oggetto
+
+    **********
+    nei cicli non usare l'uguale ma usa invece append

@@ -1817,8 +1817,7 @@ def algoritmo_PGI():
 
     print(GI)
 
-    **********
-    nei cicli non usare l'uguale ma usa invece append
+
 
 
     ********
