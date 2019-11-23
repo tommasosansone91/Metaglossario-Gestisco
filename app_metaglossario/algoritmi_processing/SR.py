@@ -263,6 +263,8 @@ def algoritmo_SR():
 
     print(Elab1[ label_IDs_prestampa ])
 
+    del IDs_prestampa
+
     # 'ora devo compattare gli ID per non lasciare buchi
     for j in range(nC):
 
@@ -292,8 +294,11 @@ def algoritmo_SR():
 
     # crea la tabella things
     # concatena in riga id e oggetti    
-    Things_content = pd.concat([Things_ID, Things_oggetti], axis=1) # non è dataframe
-    Things = pd.DataFrame(Things_content, columns=['ID_db_Thing','Thing']) # è dataframe
+    Things = pd.concat([Things_ID, Things_oggetti], axis=1) # è dataframe
+
+    # assegno il nome alle colonne
+    Things.columns=['ID_db_Thing','Thing']
+    
     # resetto gli indici altrimenti mi tiene gli indici di Elab1
     Things = Things.reset_index(drop=True)
 
@@ -354,7 +359,9 @@ def algoritmo_SR():
 
     is_Admin_approval_switch_of = pd.concat([ Elab1["ID_db_Admin_approval_switch"], Elab1["ID_db_Id_statico_entry"], Elab1["Admin_approval_switch"], Elab1["Id_statico_entry"] ], axis=1)
     
-    
+    del Elab1
+
+
     ###########
 
     # ELIMINA LE RIGHE RIPETUTE dalle tabelle relazionali
