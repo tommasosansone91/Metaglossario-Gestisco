@@ -232,36 +232,36 @@ def algoritmo_SR():
     # in VBA, solo negli offset accade che righe e colonne hanno il sistema ribaltato rispetto a x=0 e coordinate scambiate
     # nelle matrici si ragiona normalmente in (righe, colonne)
 
-    # for i in range(nC):
-    # # ciclo delle colonne
-    # # per l'ID statico non devo farlo ... ma non è più in ultima poizione
+    for i in range(nC):
+    # ciclo delle colonne
+    # per l'ID statico non devo farlo ... ma non è più in ultima poizione
 
-    #     for j in range(L_GI):
-    #     #ciclo delle righe
+        for j in range(L_GI):
+        #ciclo delle righe
 
-    #         Bersaglio = col_scan.iloc[j, i]
-    #         Sostituto = IDs_prestampa.iloc[j, i] # questi sono gli id 1000001 , 10000002, ecc
+            Bersaglio = col_scan.iloc[j, i]
+            Sostituto = IDs_prestampa.iloc[j, i] # questi sono gli id 1000001 , 10000002, ecc
 
             
 
-    #         for k in range(j, L_GI): #[j, j+1,...,L_GI-1, L_GI]
-    #         # ciclo del check per una riga di tutti i duoi doppioni nella colonna
-    #         # 'deve andare fino a L_GI-1 : deve controllare la colonna fino in fondo, ma senza modificare gli elementi prima della colonna j
-    #         # 'ciclo di sola sostituzione: non mettere else
+            for k in range(j, L_GI): #[j, j+1,...,L_GI-1, L_GI]
+            # ciclo del check per una riga di tutti i duoi doppioni nella colonna
+            # 'deve andare fino a L_GI-1 : deve controllare la colonna fino in fondo, ma senza modificare gli elementi prima della colonna j
+            # 'ciclo di sola sostituzione: non mettere else
 
                 
 
-    #             if col_scan.iloc[k, i] == Bersaglio and avvenuta_sost.iloc[k, i] == 0:
+                if col_scan.iloc[k, i] == Bersaglio and avvenuta_sost.iloc[k, i] == 0:
                             
-    #                 col_scan.iloc[k, i] = Sostituto                             
-    #                 avvenuta_sost.iloc[k, i] = 1
+                    col_scan.iloc[k, i] = Sostituto                             
+                    avvenuta_sost.iloc[k, i] = 1
 
 
-    # # incollo col_scan sulla parte ID di Elab 1
+    # incollo col_scan sulla parte ID di Elab 1
     
-    # Elab1[ label_IDs_prestampa ] = col_scan [label_IDs_prestampa]
+    Elab1[ label_IDs_prestampa ] = col_scan [label_IDs_prestampa]
 
-    # print(Elab1[ label_IDs_prestampa ])
+    print(Elab1[ label_IDs_prestampa ])
 
     # 'ora devo compattare gli ID per non lasciare buchi
     for j in range(nC):
@@ -349,12 +349,73 @@ def algoritmo_SR():
    
     is_Id_statico_entry_of = pd.concat( [ ID_db_Id_statico_entry_impilati_per_nC, Id_statico_entry_impilati_per_nC, Things ], axis=1)
 
-    is_Admin_approval_switch_of = pd.concat([ Elab1["ID_db_Admin_approval_switch"], Elab1["ID_db_Id_statico_entry"], Elab1["Admin_approval_switch"], Elab1["Id_statico_entry"] ], axis=0)
+
+
+
+    is_Admin_approval_switch_of = pd.concat([ Elab1["ID_db_Admin_approval_switch"], Elab1["ID_db_Id_statico_entry"], Elab1["Admin_approval_switch"], Elab1["Id_statico_entry"] ], axis=1)
     
     
     ###########
 
     # ELIMINA LE RIGHE RIPETUTE dalle tabelle relazionali
+
+    print("La tabella delle entità e le tabelle relazionali vengono ripulite degli elementi ridondanti")
+
+    Tabelle_relazionali = [is_Acronimo_of, is_Lemma_of, is_Ambito_riferimento_of, is_Autore_definizione_of, is_Posizione_definizione_of, is_Url_definizione_of, is_Autore_documento_fonte_of, is_Host_documento_fonte_of, is_Url_documento_fonte_of, is_Commento_entry_of, is_Data_inserimento_entry_of, is_Id_statico_entry_of, is_Admin_approval_switch_of]
+
+
+    label_righe_eliminate = []
+
+    for i in range(nC):
+        label_righe_eliminate.append("Righe_eliminate_di_" + nomi_campi_prepared_terminology[i])
+
+    # creo i dati per il df righe_eliminate
+    righe_eliminate_content = []
+    
+    righe_eliminate_content.append([ 0 for j in range(nC) ])
+
+    # creo il df righe_eliminate
+    righe_eliminate = pd.DataFrame(righe_eliminate_content, columns=label_righe_eliminate)
+
+    j=0
+
+    for tabella in Tabelle_relazionali:
+
+        colonne_tabella = list(tabella.columns.values)        
+
+        tabella = tabella.sort_values( [ colonne_tabella[0], colonne_tabella[1] ] )
+        tabella = tabella.reset_index(drop=True)
+    
+        last_ID_unique_A = tabella.iloc[0, 0] 
+        last_ID_unique_B = tabella.iloc[0, 1] 
+
+
+        for i in range(1,L_GI): # da 1 a L_GI
+
+            if tabella.iloc[i, 0] == last_ID_unique_A and tabella.iloc[i, 1] == last_ID_unique_B:
+
+                tabella.iloc[i, :] = "ELIMINARE"
+                righe_eliminate.iloc[0, j] = righe_eliminate.iloc[0, j] + 1
+
+            else:
+                last_ID_unique_A = tabella.iloc[i, 0] 
+                last_ID_unique_B = tabella.iloc[i, 1] 
+
+        
+
+        
+        indexNames = tabella[ tabella[colonne_tabella[0]] == "ELIMINARE" ].index
+ 
+        # Delete these row indexes from dataFrame
+        tabella.drop(indexNames , inplace=True)
+        tabella = tabella.reset_index(drop=True)
+
+        print(tabella)
+
+        j=j+1
+
+    print(np.transpose(righe_eliminate))
+
 
     # ####################
 

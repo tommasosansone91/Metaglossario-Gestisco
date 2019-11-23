@@ -2228,3 +2228,6 @@ perchè le etichette per il ciclaggio non erano uguali
 
 
 
+'Series' object has no attribute 'columns'
+nella serie manca la colonna che stai cercando
+stavo copiando admina pproval nell asse sbagliato (0 anxiche 1)

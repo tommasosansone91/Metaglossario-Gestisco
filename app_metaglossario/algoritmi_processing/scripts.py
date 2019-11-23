@@ -25,7 +25,7 @@ def finish_sound():
     import time
     import winsound
     
-    duration = 500  # milliseconds
+    duration = 250  # milliseconds
     freq = 220  # Hz
     winsound.Beep(freq, duration)
     winsound.Beep(freq, duration)
