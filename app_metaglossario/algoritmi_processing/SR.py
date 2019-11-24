@@ -89,7 +89,7 @@ def algoritmo_SR():
 
     IDs_prestampa = pd.DataFrame(IDs_prestampa_content, columns=label_IDs_prestampa)   
 
-
+    del IDs_prestampa_content
 
     # devo ordinare dalla A alla Z la tabella della terminolgia
     # poi devo reincollare il vettore di ogni colonna già ordinata dalla A alla Z
@@ -101,7 +101,7 @@ def algoritmo_SR():
 
     print("Gli ID di Elab 1 vengono assegnati in ordine numerico ascendente con l'ordine alfabetico (A->Z) di ogni colonna.")
 
-    
+    del GI
 
 
     # vedi i print
@@ -214,7 +214,7 @@ def algoritmo_SR():
 
     #  va bene anche df_zeros = df * 0
 
-    avvenuta_sost = pd.DataFrame(0, index=np.arange(len(GI)), columns=label_IDs_prestampa)
+    avvenuta_sost = pd.DataFrame(0, index=np.arange(L_GI), columns=label_IDs_prestampa)
 
 
     # ordino il glossario alfabeticamente per IDS, una sola volta
@@ -264,6 +264,8 @@ def algoritmo_SR():
     print(Elab1[ label_IDs_prestampa ])
 
     del IDs_prestampa
+    del avvenuta_sost
+    del col_scan
 
     # 'ora devo compattare gli ID per non lasciare buchi
     for j in range(nC):
@@ -286,11 +288,13 @@ def algoritmo_SR():
 
     # concatena in colonna gli id di tutti gli oggetti
     # incolla uno sotto l'altra le colonne degli id
-    Things_ID = pd.concat([Elab1[j] for j in nomi_campi_prepared_terminology], axis=0) 
+    Things_ID = pd.concat([Elab1[j] for j in label_IDs_prestampa], axis=0) 
+
+    L_T = len(Things_ID.index)
 
     # concatena in colonna gli oggetti
      # incolla uno sotto l'altra le colonne degli oggetti
-    Things_oggetti = pd.concat([Elab1[j] for j in label_IDs_prestampa], axis=0)
+    Things_oggetti = pd.concat([Elab1[j] for j in nomi_campi_prepared_terminology], axis=0)
 
     # crea la tabella things
     # concatena in riga id e oggetti    
@@ -298,11 +302,14 @@ def algoritmo_SR():
 
     # assegno il nome alle colonne
     Things.columns=['ID_db_Thing','Thing']
-    
+
     # resetto gli indici altrimenti mi tiene gli indici di Elab1
     Things = Things.reset_index(drop=True)
 
     print(Things)
+
+    del Things_ID
+    del Things_oggetti
 
     print("Vengono generate le tabelle relazionali...")
 
@@ -352,7 +359,7 @@ def algoritmo_SR():
   
 
    
-    is_Id_statico_entry_of = pd.concat( [ ID_db_Id_statico_entry_impilati_per_nC, Id_statico_entry_impilati_per_nC, Things ], axis=1)
+    is_Id_statico_entry_of = pd.concat( [ ID_db_Id_statico_entry_impilati_per_nC, Things["ID_db_Thing"], Id_statico_entry_impilati_per_nC, Things["Thing"] ], axis=1)
 
 
 
@@ -360,7 +367,8 @@ def algoritmo_SR():
     is_Admin_approval_switch_of = pd.concat([ Elab1["ID_db_Admin_approval_switch"], Elab1["ID_db_Id_statico_entry"], Elab1["Admin_approval_switch"], Elab1["Id_statico_entry"] ], axis=1)
     
     del Elab1
-
+    del Id_statico_entry_impilati_per_nC
+    del ID_db_Id_statico_entry_impilati_per_nC
 
     ###########
 
@@ -368,7 +376,76 @@ def algoritmo_SR():
 
     print("La tabella delle entità e le tabelle relazionali vengono ripulite degli elementi ridondanti")
 
+    righe_eliminate_Things = pd.DataFrame([0], columns=["Righe_eliminate_di_Things"])
+
+
+    colonne_Things = list(Things.columns.values)        
+
+    Things = Things.sort_values( [ colonne_Things[0], colonne_Things[1] ] )
+    Things = Things.reset_index(drop=True)
+
+    last_ID_unique_A = Things.iloc[0, 0] 
+    last_ID_unique_B = Things.iloc[0, 1] 
+
+
+    for i in range(1, L_T): # da 1 a L_T
+
+        if Things.iloc[i, 0] == last_ID_unique_A and Things.iloc[i, 1] == last_ID_unique_B:
+
+            Things.iloc[i, :] = "ELIMINARE"
+            righe_eliminate_Things.iloc[0, 0] = righe_eliminate_Things.iloc[0, 0] + 1 # solo una colonna (j = 1 costante)
+
+
+        # handle Nan
+
+        # questo è impossibile perchè tutti gli ID_db non sono NaN di sicuro
+
+        # elif np.isnan(Things.iloc[i, 0]) and np.isnan(last_ID_unique_A) and Things.iloc[i, 1] == last_ID_unique_B:
+
+        #     Things.iloc[i, :] = "ELIMINARE"
+        #     righe_eliminate.iloc[0, j] = righe_eliminate.iloc[0, j] + 1
+
+        elif Things.iloc[i, 0] == last_ID_unique_A and np.isnan(Things.iloc[i, 1]) and np.isnan(last_ID_unique_B):
+
+            Things.iloc[i, :] = "ELIMINARE"
+            righe_eliminate_Things.iloc[0, j] = righe_eliminate_Things.iloc[0, j] + 1
+
+
+        # questo è impossibile perchè tutti gli ID_db non sono NaN di sicuro
+
+        # elif np.isnan(Things.iloc[i, 0]) and np.isnan(last_ID_unique_A) and np.isnan(Things.iloc[i, 1]) and np.isnan(last_ID_unique_B):
+
+        #     Things.iloc[i, :] = "ELIMINARE"
+        #     righe_eliminate.iloc[0, j] = righe_eliminate.iloc[0, j] + 1
+
+
+
+        else:
+            last_ID_unique_A = Things.iloc[i, 0] 
+            last_ID_unique_B = Things.iloc[i, 1] 
+
+    
+
+    
+    indexNames = Things[ Things[colonne_Things[0]] == "ELIMINARE" ].index
+
+    # Delete these row indexes from dataFrame
+    Things.drop(indexNames, inplace=True)
+    Things = Things.reset_index(drop=True)
+
+    print("Things")
+    print(Things)
+
+    print("***********************************")
+
+
+
+
+
     Tabelle_relazionali = [is_Acronimo_of, is_Lemma_of, is_Ambito_riferimento_of, is_Autore_definizione_of, is_Posizione_definizione_of, is_Url_definizione_of, is_Autore_documento_fonte_of, is_Host_documento_fonte_of, is_Url_documento_fonte_of, is_Commento_entry_of, is_Data_inserimento_entry_of, is_Id_statico_entry_of, is_Admin_approval_switch_of]
+
+    nomi_Tabelle_relazionali = ["is_Acronimo_of", "is_Lemma_of", "is_Ambito_riferimento_of", "is_Autore_definizione_of", "is_Posizione_definizione_of", "is_Url_definizione_of", "is_Autore_documento_fonte_of", "is_Host_documento_fonte_of", "is_Url_documento_fonte_of", "is_Commento_entry_of", "is_Data_inserimento_entry_of", "is_Id_statico_entry_of", "is_Admin_approval_switch_of"]
+
 
 
     label_righe_eliminate = []
@@ -384,11 +461,13 @@ def algoritmo_SR():
     # creo il df righe_eliminate
     righe_eliminate = pd.DataFrame(righe_eliminate_content, columns=label_righe_eliminate)
 
-    j=0
+    j=0 # serve solo per tracciare il n di righe eliminate
 
     for tabella in Tabelle_relazionali:
 
-        colonne_tabella = list(tabella.columns.values)        
+        colonne_tabella = list(tabella.columns.values)
+
+        L_tabella = len(tabella.index)       
 
         tabella = tabella.sort_values( [ colonne_tabella[0], colonne_tabella[1] ] )
         tabella = tabella.reset_index(drop=True)
@@ -397,12 +476,33 @@ def algoritmo_SR():
         last_ID_unique_B = tabella.iloc[0, 1] 
 
 
-        for i in range(1,L_GI): # da 1 a L_GI
+        for i in range(1, L_tabella): # da 1 a L_tabella
 
             if tabella.iloc[i, 0] == last_ID_unique_A and tabella.iloc[i, 1] == last_ID_unique_B:
 
                 tabella.iloc[i, :] = "ELIMINARE"
                 righe_eliminate.iloc[0, j] = righe_eliminate.iloc[0, j] + 1
+
+
+            # handle Nan
+            # questo è impossibile perchè tutti gli ID_db non sono NaN di sicuro
+
+            # elif np.isnan(tabella.iloc[i, 0]) and np.isnan(last_ID_unique_A) and tabella.iloc[i, 1] == last_ID_unique_B:
+
+            #     tabella.iloc[i, :] = "ELIMINARE"
+            #     righe_eliminate.iloc[0, j] = righe_eliminate.iloc[0, j] + 1
+
+            # elif tabella.iloc[i, 0] == last_ID_unique_A and np.isnan(tabella.iloc[i, 1]) and np.isnan(last_ID_unique_B):
+
+            #     tabella.iloc[i, :] = "ELIMINARE"
+            #     righe_eliminate.iloc[0, j] = righe_eliminate.iloc[0, j] + 1
+
+            # elif np.isnan(tabella.iloc[i, 0]) and np.isnan(last_ID_unique_A) and np.isnan(tabella.iloc[i, 1]) and np.isnan(last_ID_unique_B):
+
+            #     tabella.iloc[i, :] = "ELIMINARE"
+            #     righe_eliminate.iloc[0, j] = righe_eliminate.iloc[0, j] + 1
+
+
 
             else:
                 last_ID_unique_A = tabella.iloc[i, 0] 
@@ -414,13 +514,17 @@ def algoritmo_SR():
         indexNames = tabella[ tabella[colonne_tabella[0]] == "ELIMINARE" ].index
  
         # Delete these row indexes from dataFrame
-        tabella.drop(indexNames , inplace=True)
+        tabella.drop(indexNames, inplace=True)
         tabella = tabella.reset_index(drop=True)
 
+        print(nomi_Tabelle_relazionali[j])
         print(tabella)
+
+        print("***********************************")
 
         j=j+1
 
+    print(np.transpose(righe_eliminate_Things))
     print(np.transpose(righe_eliminate))
 
 
@@ -431,5 +535,10 @@ def algoritmo_SR():
 
 
     # il 3-ciclo è momentaneamente dsattivato
+
+    # gli oggetti univoci li trova, ma
+    # in alcune tabelle non li elimina
+
+    
 
 
