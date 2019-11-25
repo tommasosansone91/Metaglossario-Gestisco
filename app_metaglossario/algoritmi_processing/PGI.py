@@ -1,5 +1,7 @@
 def algoritmo_PGI():
 
+    print("Viene richiamato l'algoritmo PGI!")
+
     # algoritmo per standardizzare i dati prima di incatenarli nella struttura relazionale
 
     # questo algoritmo va ottimizzato mettendo i cicli delle etichette delle colonne al posto di richiamare ogni elemento del database con la propria etichetta

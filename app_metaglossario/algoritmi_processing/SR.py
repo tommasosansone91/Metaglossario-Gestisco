@@ -1,24 +1,21 @@
+from app_metaglossario.metaglossary_models import *
+from app_metaglossario.models import prepared_terminology
+from app_metaglossario.models import displaying_terminology
+
 def algoritmo_SR():
 
-    # algoritmo per standardizzare i dati prima di incatenarli nella struttura relazionale
+    print("Viene richiamato l'algoritmo SR!")
+
+    # algoritmo per generare la struttura relazionale
 
     # nota: ci sono dati con lo stesso ID perchè sono i lemmi inglesi eliminati
 
     import numpy as np
     import pandas as pd
-    from app_metaglossario.models import prepared_terminology
-    from app_metaglossario.models import displaying_terminology
-    # from app_metaglossario.metaglossary_models import 
-
-    # devo modificare
-
-    ###############################
-    ###  CONTROLLI e PARAMETRI
-    ###############################
-
-
-    #setta la dimensione dell'ID
     
+
+
+    #setta la dimensione dell'ID    
     ID_dimension = 1000000
 
     print("Inizia la creazione della struttura relazionale dei dati contenuti in prepared_terminology...")
@@ -290,7 +287,7 @@ def algoritmo_SR():
     # incolla uno sotto l'altra le colonne degli id
     Things_ID = pd.concat([Elab1[j] for j in label_IDs_prestampa], axis=0) 
 
-    L_T = len(Things_ID.index)
+    L_Things = len(Things_ID.index)
 
     # concatena in colonna gli oggetti
      # incolla uno sotto l'altra le colonne degli oggetti
@@ -388,7 +385,7 @@ def algoritmo_SR():
     last_ID_unique_B = Things.iloc[0, 1] 
 
 
-    for i in range(1, L_T): # da 1 a L_T
+    for i in range(1, L_Things): # da 1 a L_T
 
         if Things.iloc[i, 0] == last_ID_unique_A and Things.iloc[i, 1] == last_ID_unique_B:
 
@@ -432,6 +429,7 @@ def algoritmo_SR():
     # Delete these row indexes from dataFrame
     Things.drop(indexNames, inplace=True)
     Things = Things.reset_index(drop=True)
+    L_Things=len(Things) # devo aggiornare la lunghezza di Things
 
     print("Things")
     print(Things)
@@ -510,11 +508,11 @@ def algoritmo_SR():
 
         
 
-        
-        indexNames = tabella[ tabella[colonne_tabella[0]] == "ELIMINARE" ].index
- 
+        # cancellare le righe contrassegnate
+        indexNames = tabella[ tabella[colonne_tabella[0]] == "ELIMINARE" ].index 
         # Delete these row indexes from dataFrame
         tabella.drop(indexNames, inplace=True)
+
         tabella = tabella.reset_index(drop=True)
 
         print(nomi_Tabelle_relazionali[j])
@@ -530,8 +528,60 @@ def algoritmo_SR():
 
     # ####################
 
+    # copia le tabelle di entità e relazionali nel modello per disporre i dati
+    print("Le tabelle relazionali elaborate vengono riversate nei modelli del metaglossario...")
+
+
+    # https://stackoverflow.com/questions/34425607/how-to-write-a-pandas-dataframe-to-django-model
+
+    modelli_relazionali_metaglossario = [ model_is_Acronimo_of, model_is_Lemma_of, model_is_Ambito_riferimento_of, model_is_Autore_definizione_of, model_is_Posizione_definizione_of, model_is_Url_definizione_of, model_is_Autore_documento_fonte_of, model_is_Url_documento_fonte_of, model_is_Commento_entry_of, model_is_Data_inserimento_entry_of, model_is_Id_statico_entry_of, model_is_Admin_approval_switch_of ]
+    nomi_modelli_relazionali_metaglossario = [ "model_is_Acronimo_of", "model_is_Lemma_of", "model_is_Ambito_riferimento_of", "model_is_Autore_definizione_of", "model_is_Posizione_definizione_of", "model_is_Url_definizione_of", "model_is_Autore_documento_fonte_of", "model_is_Url_documento_fonte_of", "model_is_Commento_entry_of", "model_is_Data_inserimento_entry_of", "model_is_Id_statico_entry_of", "model_is_Admin_approval_switch_of" ]
+
+    n_tabelle = len(Tabelle_relazionali)
+
+    model_Things.objects.all().delete()
+    print("Eliminati tutti i dati dentro model_Things!")
+
+    # per things
+    for i in range(L_Things):             
+            # non ci sono NaN            
+            model_Things.objects.create(ID=Things.iloc[i, 0], Oggetto=Things.iloc[i, 1])
+
+
+    print("È stato generato il modello model_Things!")
+
+
+    # per le tabelle relazionali
+
+    for k in range(n_tabelle):
+
+        tabella = Tabelle_relazionali[k]
+        modello = modelli_relazionali_metaglossario[k]
+
+        colonne_tabella = list(tabella.columns.values) 
+
+        L_tabella = len(tabella.index)       
+
+        # dovrebbero essere già ordinate, ma non importa
+        tabella = tabella.sort_values( [ colonne_tabella[0], colonne_tabella[1] ] )
+        tabella = tabella.reset_index(drop=True)
+
+        modello.objects.all().delete()
+        print("Eliminati tutti i dati dentro %s!" % nomi_modelli_relazionali_metaglossario[k])
+
+        for i in range(L_tabella):             
+            # non ci sono NaN            
+            modello.objects.create(ID_soggetto=tabella.iloc[i, 0], ID_oggetto=tabella.iloc[i, 1])
+
+        print("È stato generato il modello %s!" % nomi_modelli_relazionali_metaglossario[k])
+
+
+    ###############
+
     displaying_terminology.objects.all().delete()
     print("Eliminati tutti i dati dentro displaying_terminology!")
+
+
 
 
     # il 3-ciclo è momentaneamente dsattivato

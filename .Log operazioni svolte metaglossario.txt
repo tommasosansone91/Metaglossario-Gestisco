@@ -3144,3 +3144,41 @@ def algoritmo_SR():
 
 
 ************************************
+
+  j=0 # serve solo per tracciare il n di righe eliminate
+
+    tabelle_database = [Things]
+    tabelle_database = tabelle_database.append(Tabelle_relazionali)
+
+    nomi_tabelle_database = ["Things"]
+    nomi_tabelle_database = nomi_tabelle_database.append(nomi_Tabelle_relazionali)
+
+    modelli_metaglossario = [ model_Things, model_is_Acronimo_of, model_is_Lemma_of, model_is_Ambito_riferimento_of, model_is_Autore_definizione_of, model_is_Posizione_definizione_of, model_is_Url_definizione_of, model_is_Autore_documento_fonte_of, model_is_Url_documento_fonte_of, model_is_Commento_entry_of, model_is_Data_inserimento_entry_of, model_is_Id_statico_entry_of, model_is_Admin_approval_switch_of ]
+    nomi_modelli_metaglossario = [ "model_Things", "model_is_Acronimo_of", "model_is_Lemma_of", "model_is_Ambito_riferimento_of", "model_is_Autore_definizione_of", "model_is_Posizione_definizione_of", "model_is_Url_definizione_of", "model_is_Autore_documento_fonte_of", "model_is_Url_documento_fonte_of", "model_is_Commento_entry_of", "model_is_Data_inserimento_entry_of", "model_is_Id_statico_entry_of", "model_is_Admin_approval_switch_of" ]
+
+    n_tabelle = len(tabelle_database)
+
+    for k in range(n_tabelle):
+
+        tabella = tabelle_database[k]
+        modello = modelli_metaglossario[k]
+
+        nomi_campi_modelli = [field.name for field in prepared_terminology._meta.get_fields()[1:]]
+
+        colonne_tabella = list(tabella.columns.values) 
+
+        L_tabella = len(tabella.index)       
+
+        # dovrebbero essere già ordinate, ma non importa
+        tabella = tabella.sort_values( [ colonne_tabella[0], colonne_tabella[1] ] )
+        tabella = tabella.reset_index(drop=True)
+
+        for i in range(L_tabella): 
+            
+            # non ci sono NaN
+            
+            modello.objects.create(field_A=var_col_A[i], field_B=var_col_B[i], field_C=var_col_C[i])
+
+
+
+**************************
