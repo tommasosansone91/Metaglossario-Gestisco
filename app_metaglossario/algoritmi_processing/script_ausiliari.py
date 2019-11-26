@@ -1,6 +1,6 @@
 import sys
 import time
-import winsound
+
 
 
 def printout():
@@ -21,6 +21,7 @@ def printout_input(input):
 
 def finish_sound():
     
+    # import winsound
     # duration = 150  # milliseconds
     # freq = 440  # Hz
     # winsound.Beep(freq, duration)
