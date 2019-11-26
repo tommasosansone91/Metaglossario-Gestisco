@@ -1,6 +1,6 @@
 from app_metaglossario.metaglossary_models import *
 from app_metaglossario.models import prepared_terminology
-from app_metaglossario.models import displaying_terminology
+# from app_metaglossario.models import displaying_terminology
 
 def algoritmo_WD():
 

@@ -1,3 +1,5 @@
+from app_metaglossario.metaglossary_models import *
+
 
 def pour_entire_simple_model():
 
@@ -335,6 +337,19 @@ def erase_glossary_entry():
     from app_metaglossario.models import glossary_entry
     glossary_entry.objects.all().delete()
     print("Eliminati tutti i dati dentro glossary_entry!")
+
+
+def erase_database_tables():
+
+    modelli_metaglossario = [ model_Things, model_is_Acronimo_of, model_is_Lemma_of, model_is_Ambito_riferimento_of, model_is_Autore_definizione_of, model_is_Posizione_definizione_of, model_is_Url_definizione_of, model_is_Autore_documento_fonte_of, model_is_Url_documento_fonte_of, model_is_Commento_entry_of, model_is_Data_inserimento_entry_of, model_is_Id_statico_entry_of, model_is_Admin_approval_switch_of ]
+   
+    for modello in modelli_metaglossario:
+
+        modello.objects.all().delete()
+        print("Eliminati tutti i dati dentro %s!" % modello)  
+
+    print("*********************************************") 
+    print("Eliminati tutti i dati dentro i modelli di entità e relazioni del metaglossario!") 
 
 
 # per il modello prepared la funzione di eliminazione è già insita nell'algoritmo PGI

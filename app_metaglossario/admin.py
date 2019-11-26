@@ -3,7 +3,7 @@ from .models import glossary_entry
 from .models import glossary_file
 from .models import acquired_terminology
 from .models import prepared_terminology
-from .models import displaying_terminology
+# from .models import displaying_terminology
 
 # importa tutti i modelli del metaglossario
 from app_metaglossario.metaglossary_models import *
@@ -40,7 +40,7 @@ admin.site.register(glossary_entry, glossary_entry_Admin)
 admin.site.register(glossary_file)
 admin.site.register(acquired_terminology)
 admin.site.register(prepared_terminology)
-admin.site.register(displaying_terminology)
+# admin.site.register(displaying_terminology)
 
 # qui registro i modelli del metaglossario
 
@@ -51,6 +51,7 @@ admin.site.register(model_is_Ambito_riferimento_of)
 admin.site.register(model_is_Autore_definizione_of)
 admin.site.register(model_is_Posizione_definizione_of)
 admin.site.register(model_is_Url_definizione_of)
+admin.site.register(model_is_Titolo_documento_fonte_of)
 admin.site.register(model_is_Autore_documento_fonte_of)
 admin.site.register(model_is_Url_documento_fonte_of)
 admin.site.register(model_is_Commento_entry_of)

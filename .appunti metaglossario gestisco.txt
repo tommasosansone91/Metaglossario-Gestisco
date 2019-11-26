@@ -262,3 +262,9 @@ altrimenti non funzioneranno le etichette label quando richiamato l'oggetto
 
     **********
     nei cicli non usare l'uguale ma usa invece append
+
+
+    dare il plurale all'admin section modelli
+
+    class Meta:
+        verbose_name_plural = "Categories"

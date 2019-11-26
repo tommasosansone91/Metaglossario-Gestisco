@@ -1,6 +1,6 @@
 from app_metaglossario.metaglossary_models import *
 from app_metaglossario.models import prepared_terminology
-from app_metaglossario.models import displaying_terminology
+# from app_metaglossario.models import displaying_terminology
 
 def algoritmo_SR():
 
@@ -168,7 +168,7 @@ def algoritmo_SR():
     Elab1 = Elab1.sort_values(["Lemma", "Id_statico_entry"])
     Elab1 = Elab1.reset_index(drop=True)
  
-
+    print("Gli elementi uguali dentro Elab1 hanno ricevuto lo stesso Id_db!")
     print(Elab1)
 
     # creo un dataframe per gli ogetti univoci (L_GI-ripetizioni)
@@ -274,6 +274,8 @@ def algoritmo_SR():
     Elab1 = Elab1.sort_values(["Id_statico_entry"])
     Elab1 = Elab1.reset_index(drop=True)
 
+    print("Viene eseguita la riclassificazione degli ID dei singoli oggetti per realizzare le tabelle relazionali del database...")
+
     print(Elab1)
 
     print("Vengono generate le tabelle per il database...")
@@ -329,7 +331,7 @@ def algoritmo_SR():
 
     is_Url_definizione_of = pd.concat([ Elab1["ID_db_Url_definizione"], Elab1["ID_db_Definizione"], Elab1["Url_definizione"], Elab1["Definizione"] ], axis=1)
 
-    # is_Titolo_documento_fonte_of = pd.concat([ Elab1["ID_db_Ambito_riferimento"], Elab1["ID_db_Definizione"], Elab1["Ambito_riferimento"], Elab1["Definizione"] ], axis=1)
+    is_Titolo_documento_fonte_of = pd.concat([ Elab1["ID_db_Titolo_documento_fonte"], Elab1["ID_db_Definizione"], Elab1["Titolo_documento_fonte"], Elab1["Definizione"] ], axis=1)
 
     is_Autore_documento_fonte_of = pd.concat([ Elab1["ID_db_Autore_documento_fonte"], Elab1["ID_db_Titolo_documento_fonte"], Elab1["Autore_documento_fonte"], Elab1["Titolo_documento_fonte"] ], axis=1)
 
@@ -440,9 +442,9 @@ def algoritmo_SR():
 
 
 
-    Tabelle_relazionali = [is_Acronimo_of, is_Lemma_of, is_Ambito_riferimento_of, is_Autore_definizione_of, is_Posizione_definizione_of, is_Url_definizione_of, is_Autore_documento_fonte_of, is_Host_documento_fonte_of, is_Url_documento_fonte_of, is_Commento_entry_of, is_Data_inserimento_entry_of, is_Id_statico_entry_of, is_Admin_approval_switch_of]
+    Tabelle_relazionali = [is_Acronimo_of, is_Lemma_of, is_Ambito_riferimento_of, is_Autore_definizione_of, is_Posizione_definizione_of, is_Url_definizione_of, is_Titolo_documento_fonte_of, is_Autore_documento_fonte_of, is_Host_documento_fonte_of, is_Url_documento_fonte_of, is_Commento_entry_of, is_Data_inserimento_entry_of, is_Id_statico_entry_of, is_Admin_approval_switch_of]
 
-    nomi_Tabelle_relazionali = ["is_Acronimo_of", "is_Lemma_of", "is_Ambito_riferimento_of", "is_Autore_definizione_of", "is_Posizione_definizione_of", "is_Url_definizione_of", "is_Autore_documento_fonte_of", "is_Host_documento_fonte_of", "is_Url_documento_fonte_of", "is_Commento_entry_of", "is_Data_inserimento_entry_of", "is_Id_statico_entry_of", "is_Admin_approval_switch_of"]
+    nomi_Tabelle_relazionali = ["is_Acronimo_of", "is_Lemma_of", "is_Ambito_riferimento_of", "is_Autore_definizione_of", "is_Posizione_definizione_of", "is_Url_definizione_of", "is_Titolo_documento_fonte_of", "is_Autore_documento_fonte_of", "is_Host_documento_fonte_of", "is_Url_documento_fonte_of", "is_Commento_entry_of", "is_Data_inserimento_entry_of", "is_Id_statico_entry_of", "is_Admin_approval_switch_of"]
 
 
 
@@ -534,13 +536,17 @@ def algoritmo_SR():
 
     # https://stackoverflow.com/questions/34425607/how-to-write-a-pandas-dataframe-to-django-model
 
-    modelli_relazionali_metaglossario = [ model_is_Acronimo_of, model_is_Lemma_of, model_is_Ambito_riferimento_of, model_is_Autore_definizione_of, model_is_Posizione_definizione_of, model_is_Url_definizione_of, model_is_Autore_documento_fonte_of, model_is_Url_documento_fonte_of, model_is_Commento_entry_of, model_is_Data_inserimento_entry_of, model_is_Id_statico_entry_of, model_is_Admin_approval_switch_of ]
-    nomi_modelli_relazionali_metaglossario = [ "model_is_Acronimo_of", "model_is_Lemma_of", "model_is_Ambito_riferimento_of", "model_is_Autore_definizione_of", "model_is_Posizione_definizione_of", "model_is_Url_definizione_of", "model_is_Autore_documento_fonte_of", "model_is_Url_documento_fonte_of", "model_is_Commento_entry_of", "model_is_Data_inserimento_entry_of", "model_is_Id_statico_entry_of", "model_is_Admin_approval_switch_of" ]
+    modelli_relazionali_metaglossario = [ model_is_Acronimo_of, model_is_Lemma_of, model_is_Ambito_riferimento_of, model_is_Autore_definizione_of, model_is_Posizione_definizione_of, model_is_Url_definizione_of, model_is_Titolo_documento_fonte_of, model_is_Autore_documento_fonte_of, model_is_Url_documento_fonte_of, model_is_Commento_entry_of, model_is_Data_inserimento_entry_of, model_is_Id_statico_entry_of, model_is_Admin_approval_switch_of ]
+    nomi_modelli_relazionali_metaglossario = [ "model_is_Acronimo_of", "model_is_Lemma_of", "model_is_Ambito_riferimento_of", "model_is_Autore_definizione_of", "model_is_Posizione_definizione_of", "model_is_Url_definizione_of", "model_is_Titolo_documento_fonte_of", "model_is_Autore_documento_fonte_of", "model_is_Url_documento_fonte_of", "model_is_Commento_entry_of", "model_is_Data_inserimento_entry_of", "model_is_Id_statico_entry_of", "model_is_Admin_approval_switch_of" ]
 
-    n_tabelle = len(Tabelle_relazionali)
+    n_tabelle = len(modelli_relazionali_metaglossario)
+
+
+    # genera la tabella Things
 
     model_Things.objects.all().delete()
     print("Eliminati tutti i dati dentro model_Things!")
+    print("Viene generato il modello model_Things....")
 
     # per things
     for i in range(L_Things):             
@@ -549,6 +555,19 @@ def algoritmo_SR():
 
 
     print("È stato generato il modello model_Things!")
+
+    # genera la tabella model_Things_2 - il comtenuto è lo stesso di model_Things
+
+    # model_Things_2.objects.all().delete()
+    # print("Eliminati tutti i dati dentro model_Things_2!")
+
+    # # per things
+    # for i in range(L_Things):             
+    #         # non ci sono NaN            
+    #         model_Things_2.objects.create(ID=Things.iloc[i, 0], Oggetto=Things.iloc[i, 1])
+
+
+    # print("È stato generato il modello model_Things!")
 
 
     # per le tabelle relazionali
@@ -568,6 +587,7 @@ def algoritmo_SR():
 
         modello.objects.all().delete()
         print("Eliminati tutti i dati dentro %s!" % nomi_modelli_relazionali_metaglossario[k])
+        print("Viene generato il modello %s..." % nomi_modelli_relazionali_metaglossario[k])
 
         for i in range(L_tabella):             
             # non ci sono NaN            
@@ -578,16 +598,10 @@ def algoritmo_SR():
 
     ###############
 
-    displaying_terminology.objects.all().delete()
-    print("Eliminati tutti i dati dentro displaying_terminology!")
+    # displaying_terminology.objects.all().delete()
+    # print("Eliminati tutti i dati dentro displaying_terminology!")
 
-
-
-
-    # il 3-ciclo è momentaneamente dsattivato
-
-    # gli oggetti univoci li trova, ma
-    # in alcune tabelle non li elimina
+    # la tabella things è giusta
 
     
 
