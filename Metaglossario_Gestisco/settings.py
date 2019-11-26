@@ -35,7 +35,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'winsound',
     'import_export',
     'django_filters',
     'app_metaglossario',
