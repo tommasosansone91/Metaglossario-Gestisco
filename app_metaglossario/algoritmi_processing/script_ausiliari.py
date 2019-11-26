@@ -29,18 +29,18 @@ def finish_sound():
     # winsound.Beep(freq, duration)
 
     from playsound import playsound
-    import os    
+    # import os    
 
-    from django.contrib.staticfiles import finders
+    # from django.contrib.staticfiles import finders
 
-    result = finders.find('static/sounds/1607.mp3')
-    searched_locations = finders.searched_locations
+    # result = finders.find('static/sounds/1607.mp3')
+    # searched_locations = finders.searched_locations
 
-    # print(searched_locations[0])
-    # print(os.path.join(searched_locations[0]+r'\sounds\1607.mp3'))
+    # # print(searched_locations[0])
+    # # print(os.path.join(searched_locations[0]+r'\sounds\1607.mp3'))
 
-    sound_dir = os.path.join(searched_locations[0]+r'\sounds\1607.mp3')
+    # sound_dir = os.path.join(searched_locations[0]+r'\sounds\1607.mp3')
 
-    playsound(sound_dir)
+    # playsound(sound_dir)
 
-    print("(Suono di fine script eseguito!)")
+    # print("(Suono di fine script eseguito!)")
