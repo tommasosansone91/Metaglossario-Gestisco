@@ -1,4 +1,4 @@
-from app_metaglossario.metaglossary_models import *
+from app_metaglossario.entity_relationship_models import *
 from app_metaglossario.models import prepared_terminology
 # from app_metaglossario.models import displaying_terminology
 

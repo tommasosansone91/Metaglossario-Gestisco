@@ -6,7 +6,7 @@ from .models import prepared_terminology
 from .models import displaying_terminology
 
 # importa tutti i modelli del metaglossario
-from app_metaglossario.metaglossary_models import *
+from app_metaglossario.entity_relationship_models import *
 
 # importa tutti i modelli di punto di vista nodale
 from app_metaglossario.node_models import *
