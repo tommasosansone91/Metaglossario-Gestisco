@@ -2,6 +2,11 @@ from app_metaglossario.metaglossary_models import *
 from app_metaglossario.models import prepared_terminology
 # from app_metaglossario.models import displaying_terminology
 
+# per far funzionare il salvataggio delle cartelle
+import os    
+from django.contrib.staticfiles import finders
+
+
 def algoritmo_SR():
 
     print("Viene richiamato l'algoritmo SR!")
@@ -110,8 +115,7 @@ def algoritmo_SR():
         
 
 
-    Elab1 = Elab1.sort_values(['Lemma', 'Id_statico_entry'])
-    Elab1 = Elab1.reset_index(drop=True)
+     
 
     
     print(Elab1)
@@ -143,6 +147,8 @@ def algoritmo_SR():
     # salto il fatto che id statico non ha ripetizioni perchè c'è l'interruttore di show/hide
 
     label_Elab1 = nomi_campi_prepared_terminology + label_IDs_prestampa
+
+    print("***********************************")
 
     print("Inizia lo scansionamento della terminologia e dei metadati per individuare elementi uguali...")
     
@@ -203,6 +209,8 @@ def algoritmo_SR():
     #  l'ID corrente(j) viene salvato come bersaglio da sostituire
     #  viene generato un ID del tipo x000000[contatore del ciclo j /ossia prestampaIDs(j,i)] e salvato come sostituto
     #  un ciclo k scorre tutta la colonna DALLA CELLA CORRENTE VERSO IL BASSO (onde evitare di sovrascrivere i precedenti) e sostituisce altre celle uguali al bersaglio con il sostuituto
+
+    print("***********************************")
 
     print("Viene eseguita la riclassificazione degli ID dei singoli oggetti per realizzare le tabelle relazionali del database...")
 
@@ -274,9 +282,12 @@ def algoritmo_SR():
     Elab1 = Elab1.sort_values(["Id_statico_entry"])
     Elab1 = Elab1.reset_index(drop=True)
 
-    print("Viene eseguita la riclassificazione degli ID dei singoli oggetti per realizzare le tabelle relazionali del database...")
+    print("La riclassificazione degli ID dei singoli oggetti è terminata!")
 
+ 
     print(Elab1)
+
+    print("***********************************")
 
     print("Vengono generate le tabelle per il database...")
 
@@ -365,6 +376,29 @@ def algoritmo_SR():
 
     is_Admin_approval_switch_of = pd.concat([ Elab1["ID_db_Admin_approval_switch"], Elab1["ID_db_Id_statico_entry"], Elab1["Admin_approval_switch"], Elab1["Id_statico_entry"] ], axis=1)
     
+    
+    # volgio salvarmi elab1 in una tabella così mi salvo i dati 
+    # cosi non ho bisogno di far ricorrere ogni volta l'algoritmo relazionele se voglio
+    # lanciare quello che mi crea il modello dei nodi per la visualizzazione
+
+    # import os    
+    # from django.contrib.staticfiles import finders
+
+    # queste 2 righe le ho inserite all'inizio
+
+    saving_file_name = 'Elab1.xlsx'
+
+    saving_folder_name = 'saved_dataframes'
+
+    finders.find(saving_folder_name)
+    searched_locations = finders.searched_locations
+    df_dir = os.path.join(searched_locations[0]+r'\\'+saving_folder_name+r'\\'+saving_file_name)
+    Elab1.to_excel(df_dir)
+
+    print("Il dataframe Elab1 è stato salvato in una tabella excel nella directory %s !" % df_dir)
+
+
+
     del Elab1
     del Id_statico_entry_impilati_per_nC
     del ID_db_Id_statico_entry_impilati_per_nC
@@ -373,7 +407,7 @@ def algoritmo_SR():
 
     # ELIMINA LE RIGHE RIPETUTE dalle tabelle relazionali
 
-    print("La tabella delle entità e le tabelle relazionali vengono ripulite degli elementi ridondanti")
+    print("La tabella delle entità e le tabelle relazionali vengono ripulite degli elementi ridondanti...")
 
     righe_eliminate_Things = pd.DataFrame([0], columns=["Righe_eliminate_di_Things"])
 
@@ -436,7 +470,7 @@ def algoritmo_SR():
     print("Things")
     print(Things)
 
-    print("***********************************")
+    
 
 
 
@@ -520,88 +554,128 @@ def algoritmo_SR():
         print(nomi_Tabelle_relazionali[j])
         print(tabella)
 
-        print("***********************************")
+        print("--------------------")
 
         j=j+1
+
+
+    print("La tabella delle entità e le tabelle relazionali sono state ripulite degli elementi ridondanti")
+
+    
 
     print(np.transpose(righe_eliminate_Things))
     print(np.transpose(righe_eliminate))
 
+    print("***********************************")
 
     # ####################
 
-    # copia le tabelle di entità e relazionali nel modello per disporre i dati
-    print("Le tabelle relazionali elaborate vengono riversate nei modelli del metaglossario...")
+    # salvo in excel le tabelle relazionali perchè le voglio copiare in access per fare delle prove
 
 
-    # https://stackoverflow.com/questions/34425607/how-to-write-a-pandas-dataframe-to-django-model
+    saving_folder_name = 'saved_dataframes'+ r'\\' +'tabelle_entita_e_relazionali'
+    
+    print("Le tabelle relazionali vengono salvate come fogli excel nella directory %s ..." % saving_folder_name)
 
-    modelli_relazionali_metaglossario = [ model_is_Acronimo_of, model_is_Lemma_of, model_is_Ambito_riferimento_of, model_is_Autore_definizione_of, model_is_Posizione_definizione_of, model_is_Url_definizione_of, model_is_Titolo_documento_fonte_of, model_is_Autore_documento_fonte_of, model_is_Url_documento_fonte_of, model_is_Commento_entry_of, model_is_Data_inserimento_entry_of, model_is_Id_statico_entry_of, model_is_Admin_approval_switch_of ]
-    nomi_modelli_relazionali_metaglossario = [ "model_is_Acronimo_of", "model_is_Lemma_of", "model_is_Ambito_riferimento_of", "model_is_Autore_definizione_of", "model_is_Posizione_definizione_of", "model_is_Url_definizione_of", "model_is_Titolo_documento_fonte_of", "model_is_Autore_documento_fonte_of", "model_is_Url_documento_fonte_of", "model_is_Commento_entry_of", "model_is_Data_inserimento_entry_of", "model_is_Id_statico_entry_of", "model_is_Admin_approval_switch_of" ]
+    saving_file_name = 'Things.xlsx'
 
-    n_tabelle = len(modelli_relazionali_metaglossario)
+    finders.find(saving_folder_name)
+    searched_locations = finders.searched_locations
+    df_dir = os.path.join(searched_locations[0] + r'\\' + saving_folder_name + r'\\' + saving_file_name)
+    Things.to_excel(df_dir)
+
+    print("La tabella delle entità Things è stata salvata in una tabella excel!")
+
+    
+    n_tabelle = len(Tabelle_relazionali)
+
+    for k in range(n_tabelle):
+
+        tabella = Tabelle_relazionali[k]
+        # nome_tabella = nomi_Tabelle_relazionali[k]
+
+        saving_file_name = nomi_Tabelle_relazionali[k] + r'.xlsx'
+
+        # questa riga l'ho già messa sopra, quindi non devo ripeterla per tutto il ciclo
+        # saving_folder_name = 'saved_dataframes'+ r'\\' +'tabelle_entita_e_relazionali'
+
+        finders.find(saving_folder_name)
+        searched_locations = finders.searched_locations
+        df_dir = os.path.join(searched_locations[0] + r'\\' + saving_folder_name + r'\\' + saving_file_name)
+        tabella.to_excel(df_dir)
+
+        print("La tabella relazionale %s è stata salvata in una tabella excel!" % nomi_Tabelle_relazionali[k] )
+
+    
+
+    # ##################### ##################### ####################
+
+    # # copia le tabelle di entità e relazionali nel modello per disporre i dati
+    # print("Le tabelle relazionali elaborate vengono riversate nei modelli del metaglossario...")
 
 
-    # genera la tabella Things
+    # # https://stackoverflow.com/questions/34425607/how-to-write-a-pandas-dataframe-to-django-model
 
-    model_Things.objects.all().delete()
-    print("Eliminati tutti i dati dentro model_Things!")
-    print("Viene generato il modello model_Things....")
+    # modelli_relazionali_metaglossario = [ model_is_Acronimo_of, model_is_Lemma_of, model_is_Ambito_riferimento_of, model_is_Autore_definizione_of, model_is_Posizione_definizione_of, model_is_Url_definizione_of, model_is_Titolo_documento_fonte_of, model_is_Autore_documento_fonte_of, model_is_Url_documento_fonte_of, model_is_Commento_entry_of, model_is_Data_inserimento_entry_of, model_is_Id_statico_entry_of, model_is_Admin_approval_switch_of ]
+    # nomi_modelli_relazionali_metaglossario = [ "model_is_Acronimo_of", "model_is_Lemma_of", "model_is_Ambito_riferimento_of", "model_is_Autore_definizione_of", "model_is_Posizione_definizione_of", "model_is_Url_definizione_of", "model_is_Titolo_documento_fonte_of", "model_is_Autore_documento_fonte_of", "model_is_Url_documento_fonte_of", "model_is_Commento_entry_of", "model_is_Data_inserimento_entry_of", "model_is_Id_statico_entry_of", "model_is_Admin_approval_switch_of" ]
 
-    # per things
-    for i in range(L_Things):             
-            # non ci sono NaN            
-            model_Things.objects.create(ID=Things.iloc[i, 0], Oggetto=Things.iloc[i, 1])
+    # # già definito prima
+    # # n_tabelle = len(modelli_relazionali_metaglossario)
 
 
-    print("È stato generato il modello model_Things!")
+    # # genera la tabella Things
 
-    # genera la tabella model_Things_2 - il comtenuto è lo stesso di model_Things
-
-    # model_Things_2.objects.all().delete()
-    # print("Eliminati tutti i dati dentro model_Things_2!")
+    # model_Things.objects.all().delete()
+    # print("Eliminati tutti i dati dentro model_Things!")
+    # print("Viene generato il modello model_Things....")
 
     # # per things
     # for i in range(L_Things):             
     #         # non ci sono NaN            
-    #         model_Things_2.objects.create(ID=Things.iloc[i, 0], Oggetto=Things.iloc[i, 1])
+    #         model_Things.objects.create(ID=Things.iloc[i, 0], Oggetto=Things.iloc[i, 1])
 
 
     # print("È stato generato il modello model_Things!")
 
 
-    # per le tabelle relazionali
+    # # per le tabelle relazionali
 
-    for k in range(n_tabelle):
+    # for k in range(n_tabelle):
 
-        tabella = Tabelle_relazionali[k]
-        modello = modelli_relazionali_metaglossario[k]
+    #     tabella = Tabelle_relazionali[k]
+    #     modello = modelli_relazionali_metaglossario[k]
 
-        colonne_tabella = list(tabella.columns.values) 
+    #     colonne_tabella = list(tabella.columns.values) 
 
-        L_tabella = len(tabella.index)       
+    #     L_tabella = len(tabella.index)       
 
-        # dovrebbero essere già ordinate, ma non importa
-        tabella = tabella.sort_values( [ colonne_tabella[0], colonne_tabella[1] ] )
-        tabella = tabella.reset_index(drop=True)
+    #     # dovrebbero essere già ordinate, ma non importa
+    #     tabella = tabella.sort_values( [ colonne_tabella[0], colonne_tabella[1] ] )
+    #     tabella = tabella.reset_index(drop=True)
 
-        modello.objects.all().delete()
-        print("Eliminati tutti i dati dentro %s!" % nomi_modelli_relazionali_metaglossario[k])
-        print("Viene generato il modello %s..." % nomi_modelli_relazionali_metaglossario[k])
+    #     modello.objects.all().delete()
+    #     print("Eliminati tutti i dati dentro %s!" % nomi_modelli_relazionali_metaglossario[k])
+    #     print("Viene generato il modello %s..." % nomi_modelli_relazionali_metaglossario[k])
 
-        for i in range(L_tabella):             
-            # non ci sono NaN            
-            modello.objects.create(ID_soggetto=tabella.iloc[i, 0], ID_oggetto=tabella.iloc[i, 1])
+    #     for i in range(L_tabella):             
+    #         # non ci sono NaN            
+    #         modello.objects.create(ID_soggetto=tabella.iloc[i, 0], ID_oggetto=tabella.iloc[i, 1])
 
-        print("È stato generato il modello %s!" % nomi_modelli_relazionali_metaglossario[k])
+    #     print("È stato generato il modello %s!" % nomi_modelli_relazionali_metaglossario[k])
+
+
+
+    #############
+
 
 
     ###############
 
-    # displaying_terminology.objects.all().delete()
-    # print("Eliminati tutti i dati dentro displaying_terminology!")
 
-    # la tabella things è giusta
+
+
+
+
 
     
 

@@ -16,9 +16,15 @@
 <p>Attenzione a runnare lo script da locale (http://127.0.0.1:8000/)</p>
 
 
+ 
+
 {% load static %}   <!-- Qui il tag è obbligatorio nonostante sia stato inserito dentro base.html -->
 
 <!-- Javascript -->
 <script type="text/javascript" src={% static "js/update_script_status.js" %}></script>
+
+<!-- <audio controls>
+    source src="{% static 'sounds/1607.mp3' %}" type="audio/mpeg">
+</audio> -->
 
 {% endblock %}

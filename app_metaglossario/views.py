@@ -54,7 +54,8 @@ def run_script(request):
     # pour_latest_file()
     
     # algoritmo_PGI()
-    # algoritmo_SR()
+    algoritmo_SR()
+    # algoritmo_WD()
 
     # erase_database_tables()
 
@@ -209,3 +210,12 @@ def pagina_api(request):
 
 #     #return render(request, template, context)
 #     return render(request, 'glossario.html', {'selected_entries':selected_entries})
+
+
+
+
+
+
+
+
+

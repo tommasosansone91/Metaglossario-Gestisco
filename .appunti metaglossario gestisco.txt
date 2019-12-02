@@ -268,3 +268,138 @@ altrimenti non funzioneranno le etichette label quando richiamato l'oggetto
 
     class Meta:
         verbose_name_plural = "Categories"
+
+
+        fai modello come elab 1
+
+        poi pubblica normalemente ma mettendo come url di ogni oggetto la query del proprio id db
+
+        segui l'algoritmo WD
+
+
+class Things(models.Model):
+    ID_Thing = models.CharField(max_length=50)
+    Thing = models.TextField()
+
+class Relations(models.Model):
+    Lemma_s = models.ManyToManyField(Things)
+    Acronimo_s = models.ManyToManyField(Things)
+
+
+potrei incentrarlo sulla definizione... ma poi altre cose non toccano la definizione
+
++++++++
+
+class Person(models.Model):
+    name = models.CharField(max_length=50)
+    description = models.TextField()
+
+class Club(models.Model):
+    name = models.CharField(max_length=50)
+    members = models.ManyToManyField(Person)
+Here we define a relationship where a club has many Persons and members and a Person can be a member of several different Clubs.
+
+
+Though we define only two models, django actually creates three tables in the database for us. 
+These are myapp_person, myapp_club and myapp_club_members. 
+Django automatically creates a unique index on myapp_club_members(club_id,person_id) columns
+
+class Thing(models.Model):
+    Thing = models.CharField(max_length=50)
+
+class Lemma(models.Model):
+    acronym = models.ManyToManyField(Thing)
+
+una thing diventa acronym o quello che c e nel nome della variavile cos' come
+la persona diventava un embro blu, rosso eo viola del club
+
+ora di nuovo es1
+
+
+
+
+
+tom = Person.objects.create(name="Tom", description="A nice guy")
+bill = Person.objects.create(name="Bill", description="Good dancer")
+
+nightclub = Club.objects.create(name="The Saturday Night Club")
+nightclub.members.add(tom, bill)
+
+
+acronimo_curr = Thing.objects.create(name="IPCC")
+
+lemma_curr = Lemma.objects.create(name="intergovernamental panel on cc")
+lemma_curr.acronym.add(acronimo_curr)
+
+
+acronimo_curr = Thing.objects.create(name="IPCC")
+
+lemma_curr = Lemma.objects.create(name="intergovernamental panel on cc")
+lemma_curr.acronym.add(acronimo_curr)
+
+thing_curr = cosa selezionata dalla tabella, es. acronimo
+
+lemma_curr = Lemma.objects.create(name=lemma corrispondente alla cosa selezionata sulla tabella)
+lemma_curr.acronym.add(acronimo_curr)
+
+
+thing_curr = cosa selezionata dalla tabella, es. acronimo --> Thing.objects. ??? seleziona
+
+lemma_curr.acronym.add(acronimo_curr)
+
+for thing_curr in lemma_curr.acronym.all():
+    print(thing_curr.thing)  
+
+
+    *************
+
+
+metti la struttura delle tabelle col related names come avevo fatto nella domanda di stack overflow
+
+poi scorri la tabella Things
+
+nel template prendo thing come principale, mi salvo l id
+
+
+se nella tabella relaz [j] ]c'è quel id come soggetto, stampa label[j] e oggetto corrisp (viene tradotto automaticamente col suo nome)
+
+
+things entries = things objec all
+
+for i in things
+
+print <h1> things.thing </h1>
+
+for j in tabelle relazionali
+
+if things.id == tabella relaz.id soggetto [j]
+
+print label[j] -> tabella relaz.id oggetto [j]
+
+
+***********7
+
+
+    import os    
+    from django.contrib.staticfiles import finders
+
+    saving_folder_name = 'saved_dataframes'
+
+    saving_file_name = 'output_table.xlsx'
+
+    result = finders.find(saving_folder_name)
+    searched_locations = finders.searched_locations
+
+    # print(searched_locations[0])
+    # print(os.path.join(searched_locations[0]+r'\sounds\1607.mp3'))
+
+    df_dir = os.path.join(searched_locations[0]+r'\\'+saving_folder_name+r'\\'+saving_file_name)
+
+    df1 = pd.DataFrame([['a', 'b'], ['c', 'd']])
+    df1.to_excel(df_dir)
+
+
+    
+
+
+

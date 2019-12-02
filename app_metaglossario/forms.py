@@ -15,3 +15,7 @@ class glossary_file_form(forms.ModelForm):
     class Meta:
         model = glossary_file
         fields = ["Glossary_file", "Data_inserimento_glossary"]
+
+
+
+

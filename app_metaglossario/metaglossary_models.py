@@ -2,6 +2,7 @@ from django.db import models
 
 # Tabella delle entità
 
+
 class model_Things(models.Model): 
 
     ID = models.CharField(max_length=10, primary_key=True)
@@ -13,8 +14,8 @@ class model_Things(models.Model):
     def __str__(self):                
         return  "[ %s ] : %s"  %  (self.ID, self.Oggetto)
 
-# Tabelle relazionali
 
+# Tabelle relazionali
 class model_is_Acronimo_of(models.Model): 
 
     ID_soggetto = models.CharField(max_length=10)

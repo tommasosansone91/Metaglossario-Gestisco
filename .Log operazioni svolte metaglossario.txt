@@ -3182,3 +3182,75 @@ def algoritmo_SR():
 
 
 **************************
+
+
+class model_Titolo_documento_fonte(models.Model): 
+
+    ID = models.CharField(max_length=10, primary_key=True)
+
+    Titolo_documento_fonte = models.TextField(blank=True, null=True)
+
+    Url_documento_fonte = models.ManyToManyField('model_Url_documento_fonte', blank=True, null=True)
+    Autore_documento_fonte = models.ManyToManyField('model_Autore_documento_fonte', blank=True, null=True)
+    Host_documento_fonte = models.ManyToManyField('model_Host_documento_fonte', blank=True, null=True)
+    Definizione = models.ManyToManyField('model_Things', blank=True, null=True)
+
+    class Meta:
+        ordering = ['Titolo_documento_fonte', 'ID']
+
+    def __str__(self):                
+        return  "%s [ %s ]"  %  (self.Titolo_documento_fonte, self.ID)
+
+
+class model_Url_documento_fonte(models.Model): 
+
+    ID = models.CharField(max_length=10, primary_key=True)
+
+    Url_documento_fonte = models.TextField(blank=True, null=True)
+
+    Titolo_documento_fonte = models.ManyToManyField('model_Titolo_documento_fonte', blank=True, null=True)
+    
+
+    class Meta:
+        ordering = ['Url_documento_fonte', 'ID']
+
+    def __str__(self):                
+        return  "%s [ %s ]"  %  (self.Url_documento_fonte, self.ID)
+
+
+
+class model_Autore_documento_fonte(models.Model): 
+
+    ID = models.CharField(max_length=10, primary_key=True)
+
+    Autore_documento_fonte = models.TextField(blank=True, null=True)
+
+    Titolo_documento_fonte = models.ManyToManyField('model_Titolo_documento_fonte', blank=True, null=True)
+    
+
+    class Meta:
+        ordering = ['Autore_documento_fonte', 'ID']
+
+    def __str__(self):                
+        return  "%s [ %s ]"  %  (self.Autore_documento_fonte, self.ID)
+
+
+
+class model_Host_documento_fonte(models.Model): 
+
+    ID = models.CharField(max_length=10, primary_key=True)
+
+    Host_documento_fonte = models.TextField(blank=True, null=True)
+
+    Titolo_documento_fonte = models.ManyToManyField('model_Titolo_documento_fonte', blank=True, null=True)
+    
+
+    class Meta:
+        ordering = ['Host_documento_fonte', 'ID']
+
+    def __str__(self):                
+        return  "%s [ %s ]"  %  (self.Host_documento_fonte, self.ID)
+
+
+
+        ********************
