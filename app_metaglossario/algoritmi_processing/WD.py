@@ -42,8 +42,11 @@ def algoritmo_WD():
 
 
     
-    # model_node.objects.all().delete()
-    # print("Eliminati tutti i dati dentro model_node!")
+    model_node.objects.all().delete()
+    print("Eliminati tutti i dati dentro model_node!")
+
+
+
 
   
 

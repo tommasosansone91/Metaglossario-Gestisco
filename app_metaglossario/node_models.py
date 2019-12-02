@@ -26,9 +26,9 @@ from django.utils import timezone
 
 class model_node(models.Model): 
 
-    ID = models.CharField(max_length=10, primary_key=True)
+    centered_ID = models.CharField(max_length=10, primary_key=True)
 
-    Thing = models.TextField(blank=True, null=True)
+    centered_Thing = models.TextField(blank=True, null=True)
 
     # devo predisporre un autocompile, con una funzione def se riesco
     Entita = models.CharField(max_length=256, blank=True, null=True)

@@ -54,8 +54,8 @@ def run_script(request):
     # pour_latest_file()
     
     # algoritmo_PGI()
-    algoritmo_SR()
-    # algoritmo_WD()
+    # algoritmo_SR()
+    algoritmo_WD()
 
     # erase_database_tables()
 
