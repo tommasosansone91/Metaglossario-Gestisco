@@ -356,6 +356,7 @@ def algoritmo_SR():
     
 
     # is_Id_statico_entry_of è lunga nC*L_GI perchè collega gli id_statici a nC entità del database
+    ###
 
     Id_statico_entry_impilati_per_nC = pd.concat([Elab1["Id_statico_entry"] for j in range(nC)], axis=0)   
     # resetto gli indici altrimenti mi tiene gli indici di Elab1
@@ -367,23 +368,24 @@ def algoritmo_SR():
     ID_db_Id_statico_entry_impilati_per_nC = ID_db_Id_statico_entry_impilati_per_nC.reset_index(drop=True)
     ID_db_Id_statico_entry_impilati_per_nC = pd.DataFrame(ID_db_Id_statico_entry_impilati_per_nC) # è dataframe
   
-
-   
     is_Id_statico_entry_of = pd.concat( [ ID_db_Id_statico_entry_impilati_per_nC, Things["ID_db_Thing"], Id_statico_entry_impilati_per_nC, Things["Thing"] ], axis=1)
 
-
-
+    ####
 
     is_Admin_approval_switch_of = pd.concat([ Elab1["ID_db_Admin_approval_switch"], Elab1["ID_db_Id_statico_entry"], Elab1["Admin_approval_switch"], Elab1["Id_statico_entry"] ], axis=1)
     
     
-    # volgio salvarmi elab1 in una tabella così mi salvo i dati 
+
+
+
+    # volgio salvarmi i dataframe in delle tabelle così mi salvo i dati 
     # cosi non ho bisogno di far ricorrere ogni volta l'algoritmo relazionele se voglio
     # lanciare quello che mi crea il modello dei nodi per la visualizzazione
 
+
+
     # import os    
     # from django.contrib.staticfiles import finders
-
     # queste 2 righe le ho inserite all'inizio
 
     saving_file_name = 'Elab1.xlsx'
@@ -565,6 +567,10 @@ def algoritmo_SR():
 
     print(np.transpose(righe_eliminate_Things))
     print(np.transpose(righe_eliminate))
+
+    print("***********************************")
+
+
 
     print("***********************************")
 

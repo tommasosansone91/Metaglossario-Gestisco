@@ -3345,3 +3345,18 @@ def algoritmo_WD():
 
 
 ****************************
+
+is_Acronimo_of = pd.read_excel(folder_ER_dir+r'\\is_Acronimo_of.xlsx', head=True, index_col=0)
+    is_Lemma_of = pd.read_excel(folder_ER_dir+r'\\is_Lemma_of.xlsx', head=True, index_col=0)
+    is_Ambito_riferimento_of = pd.read_excel(folder_ER_dir+r'\\is_Ambito_riferimento_of.xlsx', head=True, index_col=0)
+    is_Autore_definizione_of = pd.read_excel(folder_ER_dir+r'\\is_Autore_definizione_of.xlsx', head=True, index_col=0)
+    is_Posizione_definizione_of = pd.read_excel(folder_ER_dir+r'\\is_Posizione_definizione_of.xlsx', head=True, index_col=0)
+    is_Url_definizione_of = pd.read_excel(folder_ER_dir+r'\\is_Url_definizione_of.xlsx', head=True, index_col=0)
+    is_Titolo_documento_fonte_of = pd.read_excel(folder_ER_dir+r'\\is_Titolo_documento_fonte_of.xlsx', head=True, index_col=0)
+    is_Autore_documento_fonte_of = pd.read_excel(folder_ER_dir+r'\\is_Autore_documento_fonte_of.xlsx', head=True, index_col=0)
+    is_Host_documento_fonte_of = pd.read_excel(folder_ER_dir+r'\\is_Host_documento_fonte_of.xlsx', head=True, index_col=0)
+    is_Url_documento_fonte_of = pd.read_excel(folder_ER_dir+r'\\is_Url_documento_fonte_of.xlsx', head=True, index_col=0)
+    is_Commento_entry_of = pd.read_excel(folder_ER_dir+r'\\is_Commento_entry_of.xlsx', head=True, index_col=0)
+    is_Data_inserimento_entry_of = pd.read_excel(folder_ER_dir+r'\\is_Data_inserimento_entry_of.xlsx', head=True, index_col=0)
+    is_Id_statico_entry_of = pd.read_excel(folder_ER_dir+r'\\is_Id_statico_entry_of.xlsx', head=True, index_col=0)
+    is_Admin_approval_switch_of = pd.read_excel(folder_ER_dir+r'\\is_Admin_approval_switch_of.xlsx', head=True, index_col=0)

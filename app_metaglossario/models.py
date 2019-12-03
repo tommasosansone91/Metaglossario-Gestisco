@@ -61,8 +61,8 @@ class glossary_entry(models.Model):
 
     Commento_entry = models.TextField(blank=True, null=True)
 
-    Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now().date() )
-    # Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now().date)
+    Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now )
+    # Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now)
 
     Id_statico_entry = models.CharField(max_length=256, blank=False, null=False, default="ITCH00000")
 
@@ -99,7 +99,7 @@ class glossary_file(models.Model):
 
     Glossary_file = models.FileField(upload_to='uploaded_glossaries/', blank=False, null=False)
 
-    Data_inserimento_glossary = models.DateField(blank=False, null=False, default=timezone.now().date() )
+    Data_inserimento_glossary = models.DateField(blank=False, null=False, default=timezone.now )
     # Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now().date)
 
 
@@ -152,7 +152,7 @@ class acquired_terminology(models.Model):
 
     Commento_entry = models.TextField(blank=True, null=True)
 
-    Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now().date() )
+    Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now )
 
     Id_statico_entry = models.CharField(max_length=256, blank=False, null=False, default="ITCH00000")
 
@@ -197,7 +197,7 @@ class prepared_terminology(models.Model):
 
     Commento_entry = models.TextField(blank=True, null=True)
 
-    Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now().date() )
+    Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now )
 
     Id_statico_entry = models.CharField(max_length=256, blank=False, null=False, default="ITCH00000")
 
@@ -244,7 +244,7 @@ class displaying_terminology(models.Model):
 
     Commento_entry = models.TextField(blank=True, null=True)
 
-    Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now().date() )
+    Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now )
 
     Id_statico_entry = models.CharField(max_length=256, blank=False, null=False, default="ITCH00000")
 
