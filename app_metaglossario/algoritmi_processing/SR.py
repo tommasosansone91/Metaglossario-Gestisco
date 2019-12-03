@@ -54,7 +54,7 @@ def algoritmo_SR():
     # creo il dataframe
     GI = pd.DataFrame(columns=nomi_campi_prepared_terminology)
 
-    # print(GI)
+    
 
 
     for element in prepared_entries:
@@ -471,7 +471,7 @@ def algoritmo_SR():
     print(Things)
 
     
-
+    print("--------------------")
 
 
 
