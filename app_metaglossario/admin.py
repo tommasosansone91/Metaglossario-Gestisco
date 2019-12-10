@@ -60,6 +60,7 @@ admin.site.register(model_is_Posizione_definizione_of, Controllo_import_export)
 admin.site.register(model_is_Url_definizione_of, Controllo_import_export)
 admin.site.register(model_is_Titolo_documento_fonte_of, Controllo_import_export)
 admin.site.register(model_is_Autore_documento_fonte_of, Controllo_import_export)
+admin.site.register(model_is_Host_documento_fonte_of, Controllo_import_export)
 admin.site.register(model_is_Url_documento_fonte_of, Controllo_import_export)
 admin.site.register(model_is_Commento_entry_of, Controllo_import_export)
 admin.site.register(model_is_Data_inserimento_entry_of, Controllo_import_export)
@@ -107,7 +108,11 @@ class model_is_Autore_documento_fonte_of_resource(resources.ModelResource):
     class Meta:
         model = model_is_Autore_documento_fonte_of
 
-class model_is_Url_documento_fonte_of_resource(resources.ModelResource):
+class model_is_Host_documento_fonte_of_resource(resources.ModelResource):
+    class Meta:
+        model = model_is_Autore_documento_fonte_of
+
+class model_is_Host_documento_fonte_of_resource(resources.ModelResource):
     class Meta:
         model = model_is_Url_documento_fonte_of
 
