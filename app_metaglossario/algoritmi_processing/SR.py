@@ -411,6 +411,7 @@ def algoritmo_SR():
 
     print("La tabella delle entità e le tabelle relazionali vengono ripulite degli elementi ridondanti...")
 
+    # dataframe 1x1
     righe_eliminate_Things = pd.DataFrame([0], columns=["Righe_eliminate_di_Things"])
 
 
@@ -553,8 +554,10 @@ def algoritmo_SR():
 
         tabella = tabella.reset_index(drop=True)
 
+        Tabelle_relazionali[j] = tabella
+
         print(nomi_Tabelle_relazionali[j])
-        print(tabella)
+        print(Tabelle_relazionali[j])
 
         print("--------------------")
 
@@ -570,7 +573,7 @@ def algoritmo_SR():
 
     print("***********************************")
 
-
+    
 
     print("***********************************")
 
