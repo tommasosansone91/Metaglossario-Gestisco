@@ -206,12 +206,14 @@ def query_wizard(request):
 
     QWform = QueryFormName()
 
+
+
     if request.method == 'POST': #se qualcuno clicca su "submit", cioè esegue una post
         QWform = QueryFormName(request.POST)
 
         if QWform.is_valid(): #validation check
             
-            print("Query SQL acquisita:"+QWform.cleaned_data['SQL_query'])
+            print("Query SQL acquisita:"+ QWform.cleaned_data['SQL_query'])
             #esempio SELECT * FROM things2 WHERE ID_Things <1000021
 
             # agisci qui
@@ -229,6 +231,9 @@ def query_wizard(request):
             # # connect to the database
             # mydb = mysql.connector.connect(user='root', password='metaglossariov2',
             #                               host='localhost', database='schema_meta_prova')
+
+
+            
 
             my_cursor = mydb.cursor()
             my_cursor.execute(QWform.cleaned_data['SQL_query'])

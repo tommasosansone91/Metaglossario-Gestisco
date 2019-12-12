@@ -5,14 +5,14 @@ from django.db import models
 
 class model_Things(models.Model): 
 
-    ID = models.CharField(max_length=10, primary_key=True)
-    Oggetto = models.TextField(blank=True, null=True)
+    ID_Thing = models.CharField(max_length=10, primary_key=True)
+    Thing = models.TextField(blank=True, null=True)
 
     class Meta:
-        ordering = ['ID', 'Oggetto']
+        ordering = ['ID_Thing', 'Thing']
 
     def __str__(self):                
-        return  "[ %s ] : %s"  %  (self.ID, self.Oggetto)
+        return  "[ %s ] : %s"  %  (self.ID_Thing, self.Thing)
 
 
 # Tabelle relazionali

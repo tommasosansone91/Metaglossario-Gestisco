@@ -641,7 +641,7 @@ def algoritmo_SR():
     # per things
     for i in range(L_Things):             
             # non ci sono NaN            
-            model_Things.objects.create(ID=Things.iloc[i, 0], Oggetto=Things.iloc[i, 1])
+            model_Things.objects.create(ID_Thing=Things.iloc[i, 0], Thing=Things.iloc[i, 1])
 
 
     print("È stato generato il modello model_Things!")
