@@ -51,86 +51,86 @@ admin.site.register(displaying_terminology, Controllo_import_export)
 # admin.site.register(model_node)
 
 #qui registro i modelli del metaglossario : tabelle relazionali ed entirà
-admin.site.register(model_Things, Controllo_import_export)
-admin.site.register(model_is_Acronimo_of, Controllo_import_export)
-admin.site.register(model_is_Lemma_of, Controllo_import_export)
-admin.site.register(model_is_Ambito_riferimento_of, Controllo_import_export)
-admin.site.register(model_is_Autore_definizione_of, Controllo_import_export)
-admin.site.register(model_is_Posizione_definizione_of, Controllo_import_export)
-admin.site.register(model_is_Url_definizione_of, Controllo_import_export)
-admin.site.register(model_is_Titolo_documento_fonte_of, Controllo_import_export)
-admin.site.register(model_is_Autore_documento_fonte_of, Controllo_import_export)
-admin.site.register(model_is_Host_documento_fonte_of, Controllo_import_export)
-admin.site.register(model_is_Url_documento_fonte_of, Controllo_import_export)
-admin.site.register(model_is_Commento_entry_of, Controllo_import_export)
-admin.site.register(model_is_Data_inserimento_entry_of, Controllo_import_export)
-admin.site.register(model_is_Id_statico_entry_of, Controllo_import_export)
-admin.site.register(model_is_Admin_approval_switch_of, Controllo_import_export)
+admin.site.register(model_things, Controllo_import_export)
+admin.site.register(model_is_acronimo_of, Controllo_import_export)
+admin.site.register(model_is_lemma_of, Controllo_import_export)
+admin.site.register(model_is_ambito_riferimento_of, Controllo_import_export)
+admin.site.register(model_is_autore_definizione_of, Controllo_import_export)
+admin.site.register(model_is_posizione_definizione_of, Controllo_import_export)
+admin.site.register(model_is_url_definizione_of, Controllo_import_export)
+admin.site.register(model_is_titolo_documento_fonte_of, Controllo_import_export)
+admin.site.register(model_is_autore_documento_fonte_of, Controllo_import_export)
+admin.site.register(model_is_host_documento_fonte_of, Controllo_import_export)
+admin.site.register(model_is_url_documento_fonte_of, Controllo_import_export)
+admin.site.register(model_is_commento_entry_of, Controllo_import_export)
+admin.site.register(model_is_data_inserimento_entry_of, Controllo_import_export)
+admin.site.register(model_is_id_statico_entry_of, Controllo_import_export)
+admin.site.register(model_is_admin_approval_switch_of, Controllo_import_export)
 
 # per permettere l'esportazione delle tabelle relazionali e dela tabella delle entità
 
         # fields = ('id', 'name', 'price',) # per includere i campi
         # exclude = ('id','Data_inserimento_entry','Id_statico_entry','Admin_approval_switch' ) # per escludere i campi
         
-class model_Things_resource(resources.ModelResource):
+class model_things_resource(resources.ModelResource):
     class Meta:
-        model = model_Things
+        model = model_things
 
-class model_is_Acronimo_of_resource(resources.ModelResource):
+class model_is_acronimo_of_resource(resources.ModelResource):
     class Meta:
-        model = model_is_Acronimo_of
+        model = model_is_acronimo_of
 
-class model_is_Lemma_of_resource(resources.ModelResource):
+class model_is_lemma_of_resource(resources.ModelResource):
     class Meta:
-        model = model_is_Lemma_of
+        model = model_is_lemma_of
 
-class model_is_Ambito_riferimento_of_resource(resources.ModelResource):
+class model_is_ambito_riferimento_of_resource(resources.ModelResource):
     class Meta:
-        model = model_is_Ambito_riferimento_of
+        model = model_is_ambito_riferimento_of
 
-class model_is_Autore_definizione_of_resource(resources.ModelResource):
+class model_is_autore_definizione_of_resource(resources.ModelResource):
     class Meta:
-        model = model_is_Autore_definizione_of
+        model = model_is_autore_definizione_of
 
-class model_is_Posizione_definizione_of_resource(resources.ModelResource):
+class model_is_posizione_definizione_of_resource(resources.ModelResource):
     class Meta:
-        model = model_is_Posizione_definizione_of
+        model = model_is_posizione_definizione_of
 
-class model_is_Url_definizione_of_resource(resources.ModelResource):
+class model_is_url_definizione_of_resource(resources.ModelResource):
     class Meta:
-        model = model_is_Url_definizione_of
+        model = model_is_url_definizione_of
 
-class model_is_Titolo_documento_fonte_of_resource(resources.ModelResource):
+class model_is_titolo_documento_fonte_of_resource(resources.ModelResource):
     class Meta:
-        model = model_is_Titolo_documento_fonte_of
+        model = model_is_titolo_documento_fonte_of
 
-class model_is_Autore_documento_fonte_of_resource(resources.ModelResource):
+class model_is_autore_documento_fonte_of_resource(resources.ModelResource):
     class Meta:
-        model = model_is_Autore_documento_fonte_of
+        model = model_is_autore_documento_fonte_of
 
-class model_is_Host_documento_fonte_of_resource(resources.ModelResource):
+class model_is_host_documento_fonte_of_resource(resources.ModelResource):
     class Meta:
-        model = model_is_Autore_documento_fonte_of
+        model = model_is_autore_documento_fonte_of
 
-class model_is_Host_documento_fonte_of_resource(resources.ModelResource):
+class model_is_host_documento_fonte_of_resource(resources.ModelResource):
     class Meta:
-        model = model_is_Url_documento_fonte_of
+        model = model_is_url_documento_fonte_of
 
-class model_is_Commento_entry_of_resource(resources.ModelResource):
+class model_is_commento_entry_of_resource(resources.ModelResource):
     class Meta:
-        model = model_is_Commento_entry_of
+        model = model_is_commento_entry_of
 
-class model_is_Data_inserimento_entry_of_resource(resources.ModelResource):
+class model_is_data_inserimento_entry_of_resource(resources.ModelResource):
     class Meta:
-        model = model_is_Data_inserimento_entry_of
+        model = model_is_data_inserimento_entry_of
 
-class model_is_Id_statico_entry_of_resource(resources.ModelResource):
+class model_is_id_statico_entry_of_resource(resources.ModelResource):
     class Meta:
-        model = model_is_Id_statico_entry_of
+        model = model_is_id_statico_entry_of
 
-class model_is_Admin_approval_switch_of_resource(resources.ModelResource):
+class model_is_admin_approval_switch_of_resource(resources.ModelResource):
     class Meta:
-        model = model_is_Admin_approval_switch_of
+        model = model_is_admin_approval_switch_of
 
 
 

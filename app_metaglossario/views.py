@@ -245,14 +245,14 @@ def query_wizard(request):
             #Parla alla console
             print("Query eseguita sul database con successo, risultati inviati al browser!")
 
-            print("************************************")
-            print("Risutati della query:")
+            # print("************************************")
+            # print("Risutati della query:")
 
             # so che mi ritorna una lista di tuple: allora mi preparo a stampare con un doppio ciclo for a mo' di matrice
-            for record in query_result_list:
-                for entity in record:
-                    print(entity)
-                print("---")
+            # for record in query_result_list:
+            #     for entity in record:
+            #         print(entity)
+            #     print("---")
 
             print("************************************")
 

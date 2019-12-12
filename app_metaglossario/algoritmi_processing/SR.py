@@ -619,32 +619,34 @@ def algoritmo_SR():
 
     ##################### ##################### ####################
 
+
     # copia le tabelle di entità e relazionali nel modello per disporre i dati
     print("Le tabelle relazionali elaborate vengono riversate nei modelli del metaglossario...")
 
+    # inizio a lavorare sui modelli
+    # li metto tutti in minuscolo per non guastare postgresql
 
     # https://stackoverflow.com/questions/34425607/how-to-write-a-pandas-dataframe-to-django-model
 
-    modelli_relazionali_metaglossario = [ model_is_Acronimo_of, model_is_Lemma_of, model_is_Ambito_riferimento_of, model_is_Autore_definizione_of, model_is_Posizione_definizione_of, model_is_Url_definizione_of, model_is_Titolo_documento_fonte_of, model_is_Autore_documento_fonte_of, model_is_Host_documento_fonte_of, model_is_Url_documento_fonte_of, model_is_Commento_entry_of, model_is_Data_inserimento_entry_of, model_is_Id_statico_entry_of, model_is_Admin_approval_switch_of ]
-    nomi_modelli_relazionali_metaglossario = [ "model_is_Acronimo_of", "model_is_Lemma_of", "model_is_Ambito_riferimento_of", "model_is_Autore_definizione_of", "model_is_Posizione_definizione_of", "model_is_Url_definizione_of", "model_is_Titolo_documento_fonte_of", "model_is_Autore_documento_fonte_of", "model_is_Host_documento_fonte_of", "model_is_Url_documento_fonte_of", "model_is_Commento_entry_of", "model_is_Data_inserimento_entry_of", "model_is_Id_statico_entry_of", "model_is_Admin_approval_switch_of" ]
+    modelli_relazionali_metaglossario = [ model_is_acronimo_of, model_is_lemma_of, model_is_ambito_riferimento_of, model_is_autore_definizione_of, model_is_posizione_definizione_of, model_is_url_definizione_of, model_is_titolo_documento_fonte_of, model_is_autore_documento_fonte_of, model_is_host_documento_fonte_of, model_is_url_documento_fonte_of, model_is_commento_entry_of, model_is_data_inserimento_entry_of, model_is_id_statico_entry_of, model_is_admin_approval_switch_of ]
+    nomi_modelli_relazionali_metaglossario = [ "model_is_acronimo_of", "model_is_lemma_of", "model_is_ambito_riferimento_of", "model_is_autore_definizione_of", "model_is_posizione_definizione_of", "model_is_url_definizione_of", "model_is_titolo_documento_fonte_of", "model_is_autore_documento_fonte_of", "model_is_host_documento_fonte_of", "model_is_Url_documento_fonte_of", "model_is_commento_entry_of", "model_is_data_inserimento_entry_of", "model_is_id_statico_entry_of", "model_is_admin_approval_switch_of" ]
 
     # già definito prima
     # n_tabelle = len(modelli_relazionali_metaglossario)
 
+    # genera il modello things
 
-    # genera la tabella Things
-
-    model_Things.objects.all().delete()
-    print("Eliminati tutti i dati dentro model_Things!")
-    print("Viene generato il modello model_Things....")
+    model_things.objects.all().delete()
+    print("Eliminati tutti i dati dentro model_things!")
+    print("Viene generato il modello model_things....")
 
     # per things
     for i in range(L_Things):             
             # non ci sono NaN            
-            model_Things.objects.create(ID_Thing=Things.iloc[i, 0], Thing=Things.iloc[i, 1])
+            model_things.objects.create(id_thing=Things.iloc[i, 0], thing=Things.iloc[i, 1])
 
 
-    print("È stato generato il modello model_Things!")
+    print("È stato generato il modello model_things!")
 
 
     # per le tabelle relazionali
@@ -668,7 +670,7 @@ def algoritmo_SR():
 
         for i in range(L_tabella):             
             # non ci sono NaN            
-            modello.objects.create(ID_soggetto=tabella.iloc[i, 0], ID_oggetto=tabella.iloc[i, 1])
+            modello.objects.create(id_soggetto=tabella.iloc[i, 0], id_oggetto=tabella.iloc[i, 1])
 
         print("È stato generato il modello %s!" % nomi_modelli_relazionali_metaglossario[k])
 

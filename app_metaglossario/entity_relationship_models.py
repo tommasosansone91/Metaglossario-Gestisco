@@ -3,195 +3,195 @@ from django.db import models
 # Tabella delle entità
 
 
-class model_Things(models.Model): 
+class model_things(models.Model): 
 
-    ID_Thing = models.CharField(max_length=10, primary_key=True)
-    Thing = models.TextField(blank=True, null=True)
+    id_thing = models.CharField(max_length=10, primary_key=True)
+    thing = models.TextField(blank=True, null=True)
 
     class Meta:
-        ordering = ['ID_Thing', 'Thing']
+        ordering = ['id_thing', 'thing']
 
     def __str__(self):                
-        return  "[ %s ] : %s"  %  (self.ID_Thing, self.Thing)
+        return  "[ %s ] : %s"  %  (self.id_thing, self.thing)
 
 
 # Tabelle relazionali
-class model_is_Acronimo_of(models.Model): 
+class model_is_acronimo_of(models.Model): 
 
-    ID_soggetto = models.CharField(max_length=10)
-    ID_oggetto = models.CharField(max_length=10)
-
-    class Meta:
-        ordering = ['ID_soggetto', 'ID_oggetto']
-
-    def __str__(self):                
-        return  "[ %s ] <---> [ %s ]"  %  (self.ID_soggetto, self.ID_oggetto)
-
-
-class model_is_Lemma_of(models.Model): 
-
-    ID_soggetto = models.CharField(max_length=10)
-    ID_oggetto = models.CharField(max_length=10)
+    id_soggetto = models.CharField(max_length=10)
+    id_oggetto = models.CharField(max_length=10)
 
     class Meta:
-        ordering = ['ID_soggetto', 'ID_oggetto']
+        ordering = ['id_soggetto', 'id_oggetto']
 
     def __str__(self):                
-        return  "[ %s ] <---> [ %s ]"  %  (self.ID_soggetto, self.ID_oggetto)
+        return  "[ %s ] <---> [ %s ]"  %  (self.id_soggetto, self.id_oggetto)
 
 
+class model_is_lemma_of(models.Model): 
 
-class model_is_Ambito_riferimento_of(models.Model): 
-
-    ID_soggetto = models.CharField(max_length=10)
-    ID_oggetto = models.CharField(max_length=10)
+    id_soggetto = models.CharField(max_length=10)
+    id_oggetto = models.CharField(max_length=10)
 
     class Meta:
-        ordering = ['ID_soggetto', 'ID_oggetto']
+        ordering = ['id_soggetto', 'id_oggetto']
 
     def __str__(self):                
-        return  "[ %s ] <---> [ %s ]"  %  (self.ID_soggetto, self.ID_oggetto)
+        return  "[ %s ] <---> [ %s ]"  %  (self.id_soggetto, self.id_oggetto)
 
 
 
-class model_is_Autore_definizione_of(models.Model): 
+class model_is_ambito_riferimento_of(models.Model): 
 
-    ID_soggetto = models.CharField(max_length=10)
-    ID_oggetto = models.CharField(max_length=10)
+    id_soggetto = models.CharField(max_length=10)
+    id_oggetto = models.CharField(max_length=10)
 
     class Meta:
-        ordering = ['ID_soggetto', 'ID_oggetto']
+        ordering = ['id_soggetto', 'id_oggetto']
 
     def __str__(self):                
-        return  "[ %s ] <---> [ %s ]"  %  (self.ID_soggetto, self.ID_oggetto)
+        return  "[ %s ] <---> [ %s ]"  %  (self.id_soggetto, self.id_oggetto)
 
 
 
-class model_is_Posizione_definizione_of(models.Model): 
+class model_is_autore_definizione_of(models.Model): 
 
-    ID_soggetto = models.CharField(max_length=10)
-    ID_oggetto = models.CharField(max_length=10)
+    id_soggetto = models.CharField(max_length=10)
+    id_oggetto = models.CharField(max_length=10)
 
     class Meta:
-        ordering = ['ID_soggetto', 'ID_oggetto']
+        ordering = ['id_soggetto', 'id_oggetto']
 
     def __str__(self):                
-        return  "[ %s ] <---> [ %s ]"  %  (self.ID_soggetto, self.ID_oggetto)
+        return  "[ %s ] <---> [ %s ]"  %  (self.id_soggetto, self.id_oggetto)
 
 
 
-class model_is_Url_definizione_of(models.Model): 
+class model_is_posizione_definizione_of(models.Model): 
 
-    ID_soggetto = models.CharField(max_length=10)
-    ID_oggetto = models.CharField(max_length=10)
+    id_soggetto = models.CharField(max_length=10)
+    id_oggetto = models.CharField(max_length=10)
 
     class Meta:
-        ordering = ['ID_soggetto', 'ID_oggetto']
+        ordering = ['id_soggetto', 'id_oggetto']
 
     def __str__(self):                
-        return  "[ %s ] <---> [ %s ]"  %  (self.ID_soggetto, self.ID_oggetto)
+        return  "[ %s ] <---> [ %s ]"  %  (self.id_soggetto, self.id_oggetto)
 
 
-class model_is_Titolo_documento_fonte_of(models.Model): 
+
+class model_is_url_definizione_of(models.Model): 
+
+    id_soggetto = models.CharField(max_length=10)
+    id_oggetto = models.CharField(max_length=10)
+
+    class Meta:
+        ordering = ['id_soggetto', 'id_oggetto']
+
+    def __str__(self):                
+        return  "[ %s ] <---> [ %s ]"  %  (self.id_soggetto, self.id_oggetto)
+
+
+class model_is_titolo_documento_fonte_of(models.Model): 
     
-    ID_soggetto = models.CharField(max_length=10)
-    ID_oggetto = models.CharField(max_length=10)
+    id_soggetto = models.CharField(max_length=10)
+    id_oggetto = models.CharField(max_length=10)
 
     class Meta:
-        ordering = ['ID_soggetto', 'ID_oggetto']
+        ordering = ['id_soggetto', 'id_oggetto']
 
     def __str__(self):                
-        return  "[ %s ] <---> [ %s ]"  %  (self.ID_soggetto, self.ID_oggetto)
+        return  "[ %s ] <---> [ %s ]"  %  (self.id_soggetto, self.id_oggetto)
 
 
-class model_is_Autore_documento_fonte_of(models.Model): 
+class model_is_autore_documento_fonte_of(models.Model): 
 
-    ID_soggetto = models.CharField(max_length=10)
-    ID_oggetto = models.CharField(max_length=10)
+    id_soggetto = models.CharField(max_length=10)
+    id_oggetto = models.CharField(max_length=10)
 
     class Meta:
-        ordering = ['ID_soggetto', 'ID_oggetto']
+        ordering = ['id_soggetto', 'id_oggetto']
 
     def __str__(self):                
-        return  "[ %s ] <---> [ %s ]"  %  (self.ID_soggetto, self.ID_oggetto)
+        return  "[ %s ] <---> [ %s ]"  %  (self.id_soggetto, self.id_oggetto)
 
 
 
-class model_is_Host_documento_fonte_of(models.Model): 
+class model_is_host_documento_fonte_of(models.Model): 
 
-    ID_soggetto = models.CharField(max_length=10)
-    ID_oggetto = models.CharField(max_length=10)
+    id_soggetto = models.CharField(max_length=10)
+    id_oggetto = models.CharField(max_length=10)
 
     class Meta:
-        ordering = ['ID_soggetto', 'ID_oggetto']
+        ordering = ['id_soggetto', 'id_oggetto']
 
     def __str__(self):                
-        return  "[ %s ] <---> [ %s ]"  %  (self.ID_soggetto, self.ID_oggetto)
+        return  "[ %s ] <---> [ %s ]"  %  (self.id_soggetto, self.id_oggetto)
 
 
 
-class model_is_Url_documento_fonte_of(models.Model): 
+class model_is_url_documento_fonte_of(models.Model): 
 
-    ID_soggetto = models.CharField(max_length=10)
-    ID_oggetto = models.CharField(max_length=10)
+    id_soggetto = models.CharField(max_length=10)
+    id_oggetto = models.CharField(max_length=10)
 
     class Meta:
-        ordering = ['ID_soggetto', 'ID_oggetto']
+        ordering = ['id_soggetto', 'id_oggetto']
 
     def __str__(self):                
-        return  "[ %s ] <---> [ %s ]"  %  (self.ID_soggetto, self.ID_oggetto)
+        return  "[ %s ] <---> [ %s ]"  %  (self.id_soggetto, self.id_oggetto)
 
 
 
-class model_is_Commento_entry_of(models.Model): 
+class model_is_commento_entry_of(models.Model): 
 
-    ID_soggetto = models.CharField(max_length=10)
-    ID_oggetto = models.CharField(max_length=10)
+    id_soggetto = models.CharField(max_length=10)
+    id_oggetto = models.CharField(max_length=10)
 
     class Meta:
-        ordering = ['ID_soggetto', 'ID_oggetto']
+        ordering = ['id_soggetto', 'id_oggetto']
 
     def __str__(self):                
-        return  "[ %s ] <---> [ %s ]"  %  (self.ID_soggetto, self.ID_oggetto)
+        return  "[ %s ] <---> [ %s ]"  %  (self.id_soggetto, self.id_oggetto)
 
 
 
-class model_is_Data_inserimento_entry_of(models.Model): 
+class model_is_data_inserimento_entry_of(models.Model): 
 
-    ID_soggetto = models.CharField(max_length=10)
-    ID_oggetto = models.CharField(max_length=10)
+    id_soggetto = models.CharField(max_length=10)
+    id_oggetto = models.CharField(max_length=10)
 
     class Meta:
-        ordering = ['ID_soggetto', 'ID_oggetto']
+        ordering = ['id_soggetto', 'id_oggetto']
 
     def __str__(self):                
-        return  "[ %s ] <---> [ %s ]"  %  (self.ID_soggetto, self.ID_oggetto)
+        return  "[ %s ] <---> [ %s ]"  %  (self.id_soggetto, self.id_oggetto)
 
 
 
-class model_is_Id_statico_entry_of(models.Model): 
+class model_is_id_statico_entry_of(models.Model): 
 
-    ID_soggetto = models.CharField(max_length=10)
-    ID_oggetto = models.CharField(max_length=10)
+    id_soggetto = models.CharField(max_length=10)
+    id_oggetto = models.CharField(max_length=10)
 
     class Meta:
-        ordering = ['ID_soggetto', 'ID_oggetto']
+        ordering = ['id_soggetto', 'id_oggetto']
 
     def __str__(self):                
-        return  "[ %s ] <---> [ %s ]"  %  (self.ID_soggetto, self.ID_oggetto)
+        return  "[ %s ] <---> [ %s ]"  %  (self.id_soggetto, self.id_oggetto)
 
 
 
-class model_is_Admin_approval_switch_of(models.Model): 
+class model_is_admin_approval_switch_of(models.Model): 
 
-    ID_soggetto = models.CharField(max_length=10)
-    ID_oggetto = models.CharField(max_length=10)
+    id_soggetto = models.CharField(max_length=10)
+    id_oggetto = models.CharField(max_length=10)
 
     class Meta:
-        ordering = ['ID_soggetto', 'ID_oggetto']
+        ordering = ['id_soggetto', 'id_oggetto']
 
     def __str__(self):                
-        return  "[ %s ] <---> [ %s ]"  %  (self.ID_soggetto, self.ID_oggetto)
+        return  "[ %s ] <---> [ %s ]"  %  (self.id_soggetto, self.id_oggetto)
 
 
 
