@@ -398,6 +398,9 @@ print label[j] -> tabella relaz.id oggetto [j]
     df1 = pd.DataFrame([['a', 'b'], ['c', 'd']])
     df1.to_excel(df_dir)
 
+**************
+
+https://www.youtube.com/watch?v=D2lwk1Ukgz0&list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p&index=14
 
     
 

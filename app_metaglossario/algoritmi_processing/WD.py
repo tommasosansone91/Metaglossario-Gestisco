@@ -112,6 +112,7 @@ def algoritmo_WD():
     # salvo i nomi delle colonne
     label_Elab1 = list(Elab1.columns)
 
+    # importo le tabelle che contengono solo l'id statico delle singole entità
     ISIO_Lemma = pd.concat( [ Elab1["ID_db_Id_statico_entry"], Elab1["ID_db_Definizione"], Elab1["Id_statico_entry"], Elab1["Definizione"] ], axis=1) # è dataframe
     ISIO_Acronimo = pd.concat( [ Elab1["ID_db_Id_statico_entry"], Elab1["ID_db_Acronimo"], Elab1["Id_statico_entry"], Elab1["Acronimo"] ], axis=1) 
     ISIO_Definizione = pd.concat( [ Elab1["ID_db_Id_statico_entry"], Elab1["ID_db_Definizione"], Elab1["Id_statico_entry"], Elab1["Definizione"] ], axis=1) 
@@ -148,9 +149,11 @@ def algoritmo_WD():
 
     print("*****************************************")
 
+    # per proseguire devo usare sql per interrogare le tabelle di django
+
 
   
-    # per proseguire devo imparare a riempire un modello molti a molti con SQL
+    
 
 
 

@@ -43,6 +43,10 @@ from .algoritmi_processing.SR import algoritmo_SR
 from .algoritmi_processing.WD import algoritmo_WD
 
 
+# per il query wizard
+from .forms import QueryFormName
+
+
 
 def run_script(request):   
 
@@ -195,6 +199,67 @@ def pagina_api(request):
     return render(request, 'api.html', {})
 
 
+def query_wizard(request):
+    
+    # from app_metaglossario import forms
+    # from forms import QueryFormName
+
+    QWform = QueryFormName()
+
+    if request.method == 'POST': #se qualcuno clicca su "submit", cioè esegue una post
+        QWform = QueryFormName(request.POST)
+
+        if QWform.is_valid(): #validation check
+            
+            print("Query SQL acquisita:"+QWform.cleaned_data['SQL_query'])
+            #esempio SELECT * FROM things2 WHERE ID_Things <1000021
+
+            # agisci qui
+
+            import psycopg2 as pg2
+
+            mydb = pg2.connect(user='zogpunyhfdizcj', password='e4e8bbb8ef02572179d0ccdc1a146d4f2eba03e587525349bb4436a80b87f4ec',
+                                          host='ec2-46-51-190-87.eu-west-1.compute.amazonaws.com', database='dfibp7p1uu70v7')
+
+            #'postgres://zogpunyhfdizcj:e4e8bbb8ef02572179d0ccdc1a146d4f2eba03e587525349bb4436a80b87f4ec@ec2-46-51-190-87.eu-west-1.compute.amazonaws.com:5432/dfibp7p1uu70v7')
+            #postgres://user:password@host:porta/database_name
+
+            # import mysql.connector
+
+            # # connect to the database
+            # mydb = mysql.connector.connect(user='root', password='metaglossariov2',
+            #                               host='localhost', database='schema_meta_prova')
+
+            my_cursor = mydb.cursor()
+            my_cursor.execute(QWform.cleaned_data['SQL_query'])
+
+            query_result_list = my_cursor.fetchall()
+
+            len_result_list = len(query_result_list)
+           
+            #Parla alla console
+            print("Query eseguita sul database con successo, risultati inviati al browser!")
+
+            print("************************************")
+            print("Risutati della query:")
+
+            # so che mi ritorna una lista di tuple: allora mi preparo a stampare con un doppio ciclo for a mo' di matrice
+            for record in query_result_list:
+                for entity in record:
+                    print(entity)
+                print("---")
+
+            print("************************************")
+
+            #devo creare una matrice
+            context_diz={'QWform':QWform, 'queryresult_key' :query_result_list, 'len_result_list_key':len_result_list}
+            # non ho una views che ne crea il dizionario della chiave e della lista
+            # faccio una vista che mi ritorna entrambe le cose con un dzionario a due elementi
+
+    else:
+        context_diz={'QWform':QWform}
+
+    return render(request,'query_wizard.html',context_diz)
 
 
 

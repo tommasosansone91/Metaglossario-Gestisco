@@ -1,0 +1,72 @@
+{% extends 'base.html'%} <!-- vuol dire inserisci qui la navigation toolbar contenuta in base -->
+
+{% block content %}
+
+<h1>Query Wizard</h1>
+<!-- (Al momento è un query box, devo trasformarlo in un wizard) -->
+<p>Please type your SQL query in the box below:</p>
+
+
+<div class="container">
+  <form method="POST">
+      {% csrf_token %}
+      
+      {{QWform.as_p}}
+      <!-- Qui avevo scritto queryform e non funzionava, invece con QWform funziona -->
+
+    <input type="submit" class="btn btn-primary" value="Run query">
+  </form>
+
+</div>
+
+<br>
+<!--  show tabella  -->
+
+<h2>Query result:</h2>
+
+
+{% if queryresult_key %}
+
+    <table>
+
+    {% for row in queryresult_key %}
+        <tr>
+        {% for cell in row %}
+
+            <td class="class_Tabella_Risultati">{{ cell }}</td>
+
+        {% endfor %}
+        </tr>
+    {% endfor %}
+
+    </table>
+
+
+
+{% else %}
+
+
+    {% if len_result_list_key == 0 %} <!-- se non c'è niente nella lista dei risultati -->
+
+    <p class=class_expect_query>No match found</p>
+
+    {% else %}
+
+    <p class=class_expect_query>Waiting for you to run the query</p>
+
+    {% endif %}
+
+
+
+
+{% endif %}
+
+
+<br><br><br>
+    
+{% load static %}
+<!-- CSS -->
+<link rel="stylesheet" href="{% static "css/qw_style.css" %}"/>
+    
+
+{% endblock %}
