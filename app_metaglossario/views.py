@@ -268,6 +268,14 @@ def query_wizard(request):
 
 
 
+def indice_glossario(request):   
+
+    template = "indice_glossario.html" #il template è sempre lo stesso
+    all_entries = prepared_terminology.objects.all() #funziona lo stesso anche se dice Class 'glossary_entry' has no 'objects' memberpylint(no-member)
+
+    return render(request, template, {'all_entries':all_entries})
+
+
 # def vista_ricerca_semplice(request):
 
 #     template = "glossario.html"

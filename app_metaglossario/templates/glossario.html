@@ -15,6 +15,10 @@
         
         <a id="pulsante_ricerca_avanzata" href="#Ricerca_avanzata" onclick="alert('Funzione non ancora disponibile.')">Ricerca avanzata</a>
         
+        <!-- vai all'indice -->
+        <a id="goto_index_button" href="{% url 'indice_glossario' %}"><i class="fa fa-list-ul" aria-hidden="true"></i></a>
+            
+
         <div id="blocco_ricerca_semplice" class="search-container">
 
           <form method="GET" action="{% url 'glossario' %}">
@@ -32,6 +36,7 @@
             <button id="cancel_search_button" type="submit" onclick="Delete_simple_search()"><i class="fa fa-trash"></i></button>
             
             
+            <!-- onclick="window.location.href=???{% url 'indice_glossario' %}???" -->
 
           </form>
 
