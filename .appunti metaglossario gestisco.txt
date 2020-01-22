@@ -732,3 +732,23 @@ https://www.youtube.com/watch?v=D2lwk1Ukgz0&list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6
 
 
 
+https://www.digitalocean.com/community/tutorials/how-to-serve-django-applications-with-uwsgi-and-nginx-on-ubuntu-14-04
+
+dentro git bash
+
+cd C:
+
+cd Users
+
+cd Tommaso
+
+
+oppure
+cd Users/Tommaso
+
+
+SELECT things_2.thing AS Acronimo, things_3.thing AS Definizione, things.thing AS Ambito, things_4.thing AS autore_def, things_6.thing AS url_def, things_7.thing AS titolo_doc, things_8.thing AS autore_doc, things_9.thing AS URL_doc, things_10.thing AS Host_doc, things_1.thing AS Lemma FROM (things AS things_1 INNER JOIN ((things AS things_9 INNER JOIN is_Url_documento_fonte_of ON things_9.[ID_Thing] = is_Url_documento_fonte_of.[ID_soggetto]) INNER JOIN ((things AS things_10 INNER JOIN is_Host_documento_fonte_of ON things_10.[ID_Thing] = is_Host_documento_fonte_of.[ID_soggetto]) INNER JOIN ((things AS things_8 INNER JOIN is_autore_documento_of ON things_8.[ID_Thing] = is_autore_documento_of.[ID_soggetto]) INNER JOIN ((things INNER JOIN is_Ambito_riferimento_of ON things.[ID_Thing] = is_Ambito_riferimento_of.[ID_soggetto]) INNER JOIN ((((things AS things_4 INNER JOIN ((is_lemma_of INNER JOIN things AS things_3 ON is_lemma_of.[ID_oggetto] = things_3.[ID_Thing]) INNER JOIN is_autore_definizione_of ON things_3.[ID_Thing] = is_autore_definizione_of.[ID_oggetto]) ON things_4.[ID_Thing] = is_autore_definizione_of.[ID_soggetto]) INNER JOIN (things AS things_6 INNER JOIN is_url_definizione_of ON things_6.[ID_Thing] = is_url_definizione_of.[ID_soggetto]) ON things_3.[ID_Thing] = is_url_definizione_of.[ID_oggetto]) INNER JOIN (things AS things_5 INNER JOIN is_posizione_definizione_of ON things_5.[ID_Thing] = is_posizione_definizione_of.[ID_soggetto]) ON things_3.[ID_Thing] = is_posizione_definizione_of.[ID_oggetto]) INNER JOIN (is_Titolo_documento_fonte_of INNER JOIN things AS things_7 ON is_Titolo_documento_fonte_of.[ID_soggetto] = things_7.[ID_Thing]) ON things_3.[ID_Thing] = is_Titolo_documento_fonte_of.[ID_oggetto]) ON is_Ambito_riferimento_of.[ID_oggetto] = things_3.[ID_Thing]) ON is_autore_documento_of.[ID_oggetto] = things_7.[ID_Thing]) ON is_Host_documento_fonte_of.[ID_oggetto] = things_7.[ID_Thing]) ON is_Url_documento_fonte_of.[ID_oggetto] = things_7.[ID_Thing]) ON things_1.[ID_Thing] = is_lemma_of.[ID_soggetto]) INNER JOIN (things AS things_2 INNER JOIN is_Acronimo_of ON things_2.[ID_Thing] = is_Acronimo_of.[ID_soggetto]) ON things_1.[ID_Thing] = is_Acronimo_of.[ID_oggetto] ORDER BY things_1.thing;
+
+
+https://www.digitalocean.com/community/tutorials/how-to-build-a-django-and-gunicorn-application-with-docker
+
