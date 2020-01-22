@@ -210,7 +210,7 @@ def indice_glossario(request):
 
 
 
-def query_wizard(request):
+def metaglossario(request):
     
     # salva in variabile python ciò che il template mi indica come like_term, finisce anche nell'url
     # qui è vuoto
@@ -220,7 +220,22 @@ def query_wizard(request):
     Query_initial_string = "SELECT Lemmi.Thing, Acronimi.Thing, Definizioni.Thing FROM (app_metaglossario_model_is_Lemma_of INNER JOIN ((app_metaglossario_model_Things AS Acronimi INNER JOIN app_metaglossario_model_is_Acronimo_of ON Acronimi.ID_Thing = app_metaglossario_model_is_Acronimo_of.ID_soggetto) INNER JOIN app_metaglossario_model_Things AS Lemmi ON app_metaglossario_model_is_Acronimo_of.ID_oggetto = Lemmi.ID_Thing) ON app_metaglossario_model_is_Lemma_of.ID_soggetto = Lemmi.ID_Thing) INNER JOIN app_metaglossario_model_Things AS Definizioni ON app_metaglossario_model_is_Lemma_of.ID_oggetto = Definizioni.ID_Thing ORDER BY Lemmi.Thing"
    # metto questa perchè è per dire che di default la stringa di query è quella senza like
 
-    template = "query_wizard.html" #il template è sempre lo stesso
+    #da access a django sql puro
+
+    #per evitare confilitti nel like cambia " con '"
+
+    #cambia * con %
+
+    # i nomi delle tabelle e delle relazioni protrebbero cambiare
+
+    # ricerca in tutti i campi acq, metodo OR
+    # Query_initial_string = "SELECT Lemmi.Thing, Acronimi.Thing, Definizioni.Thing FROM (app_metaglossario_model_is_Lemma_of INNER JOIN ((app_metaglossario_model_Things AS Acronimi INNER JOIN app_metaglossario_model_is_Acronimo_of ON Acronimi.ID_Thing = app_metaglossario_model_is_Acronimo_of.ID_soggetto) INNER JOIN app_metaglossario_model_Things AS Lemmi ON app_metaglossario_model_is_Acronimo_of.ID_oggetto = Lemmi.ID_Thing) ON app_metaglossario_model_is_Lemma_of.ID_soggetto = Lemmi.ID_Thing) INNER JOIN app_metaglossario_model_Things AS Definizioni ON app_metaglossario_model_is_Lemma_of.ID_oggetto = Definizioni.ID_Thing WHERE (((Lemmi.Thing) Like '%acq%') OR ((Acronimi.Thing) Like '%acq%') OR ((Definizioni.Thing) Like '%acq%')) ORDER BY Lemmi.Thing"
+
+    # backup original string
+    # Query_initial_string = "SELECT Lemmi.Thing, Acronimi.Thing, Definizioni.Thing FROM (app_metaglossario_model_is_Lemma_of INNER JOIN ((app_metaglossario_model_Things AS Acronimi INNER JOIN app_metaglossario_model_is_Acronimo_of ON Acronimi.ID_Thing = app_metaglossario_model_is_Acronimo_of.ID_soggetto) INNER JOIN app_metaglossario_model_Things AS Lemmi ON app_metaglossario_model_is_Acronimo_of.ID_oggetto = Lemmi.ID_Thing) ON app_metaglossario_model_is_Lemma_of.ID_soggetto = Lemmi.ID_Thing) INNER JOIN app_metaglossario_model_Things AS Definizioni ON app_metaglossario_model_is_Lemma_of.ID_oggetto = Definizioni.ID_Thing"
+
+    
+    template = "metaglossario.html" #il template è sempre lo stesso
 
     # no modello eprchè mi connetto diretto al db
 

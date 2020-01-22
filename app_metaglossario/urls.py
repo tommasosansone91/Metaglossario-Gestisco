@@ -13,7 +13,7 @@ urlpatterns=[
     path('api/glossario', views.api_glossario, name="api_glossario"),
     path('api', views.pagina_api, name="api"),
     path('run_script', views.run_script, name="run_script"),
-    path('query_wizard', views.query_wizard, name="query_wizard"),
+    path('metaglossario', views.metaglossario, name="metaglossario"),
     path('indice_glossario', views.indice_glossario, name="indice_glossario")
 ]
 

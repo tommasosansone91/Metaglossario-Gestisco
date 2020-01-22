@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h1>Query Wizard</h1>
+<h1>Metaglossario</h1>
 <!-- (Al momento è un query box, devo trasformarlo in un wizard) -->
 <br>
 
@@ -21,7 +21,7 @@
 
         <div id="blocco_ricerca_semplice" class="search-container">
 
-          <form method="GET" action="{% url 'query_wizard' %}">
+          <form method="GET" action="{% url 'metaglossario' %}">
             
             <input id="testo_slot_ricerca_semplice"  type="text" placeholder="Ricerca terminologia..." name="like_term" value="{{request.GET.like_term}}">  <!-- è il nome che ho dato anche nella views.py -->
             <!-- name dentro input text vuol dire il sintagma che viene dato all'url di tutte le query, seguito da un = per indicarne il bersaglio'  -->
@@ -48,8 +48,6 @@
 
     <br>
 <!--  show tabella  -->
-
-<h2>Query result:</h2>
 
 
 
