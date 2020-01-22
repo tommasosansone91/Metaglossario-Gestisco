@@ -3360,3 +3360,8 @@ is_Acronimo_of = pd.read_excel(folder_ER_dir+r'\\is_Acronimo_of.xlsx', head=True
     is_Data_inserimento_entry_of = pd.read_excel(folder_ER_dir+r'\\is_Data_inserimento_entry_of.xlsx', head=True, index_col=0)
     is_Id_statico_entry_of = pd.read_excel(folder_ER_dir+r'\\is_Id_statico_entry_of.xlsx', head=True, index_col=0)
     is_Admin_approval_switch_of = pd.read_excel(folder_ER_dir+r'\\is_Admin_approval_switch_of.xlsx', head=True, index_col=0)
+
+********
+
+voglio aggiungere al query wizard lo slot in cui l'utente inserisce una parola e 
+questa viene chainata dentro la query iniziale

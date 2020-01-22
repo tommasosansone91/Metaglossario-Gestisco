@@ -4,30 +4,69 @@
 
 <h1>Query Wizard</h1>
 <!-- (Al momento è un query box, devo trasformarlo in un wizard) -->
-<p>Please type your SQL query in the box below:</p>
-
-
-<div class="container">
-  <form method="POST">
-      {% csrf_token %}
-      
-      {{QWform.as_p}}
-      <!-- Qui avevo scritto queryform e non funzionava, invece con QWform funziona -->
-
-    <input type="submit" class="btn btn-primary" value="Run query">
-  </form>
-
-</div>
-
 <br>
+
+    <!-- Barra di navigazione  -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- questo fa apparire il pulsantino di ricerca -->
+    <!-- questo fa apparire il pulsantino di ricerca -->
+
+    <div class="topnav">
+        
+        <a id="pulsante_ricerca_avanzata" href="#Ricerca_avanzata" onclick="alert('Funzione non ancora disponibile.')">Ricerca avanzata</a>
+        
+        <!-- vai all'indice -->
+        {% comment %} <a id="goto_index_button" href="{% url 'indice_glossario' %}"><i class="fa fa-list-ul" aria-hidden="true"></i></a> {% endcomment %}
+            
+
+        <div id="blocco_ricerca_semplice" class="search-container">
+
+          <form method="GET" action="{% url 'query_wizard' %}">
+            
+            <input id="testo_slot_ricerca_semplice"  type="text" placeholder="Ricerca terminologia..." name="like_term" value="{{request.GET.like_term}}">  <!-- è il nome che ho dato anche nella views.py -->
+            <!-- name dentro input text vuol dire il sintagma che viene dato all'url di tutte le query, seguito da un = per indicarne il bersaglio'  -->
+            
+            
+
+            <!-- #cerca -->
+            <button id="search_button" type="submit"><i class="fa fa-search"></i></button>
+
+            
+            <!-- cancella query -->
+            <button id="cancel_search_button" type="submit" onclick="Delete_simple_search()"><i class="fa fa-trash"></i></button>
+            
+            
+            <!-- onclick="window.location.href=???{% url 'indice_glossario' %}???" -->
+
+          </form>
+
+          
+        </div>
+
+    </div>
+
+
+    <br>
 <!--  show tabella  -->
 
 <h2>Query result:</h2>
 
 
+
 {% if queryresult_key %}
 
+<br>
+
     <table>
+
+        <tr style="font-weight: bold; text-align: center;">
+            <td class="class_Tabella_Head">Lemma</td>
+            <td class="class_Tabella_Head">Acronimo</td>
+            <td class="class_Tabella_Head">Definizione</td>
+
+
+
+        </tr>
 
     {% for row in queryresult_key %}
         <tr>
@@ -48,11 +87,11 @@
 
     {% if len_result_list_key == 0 %} <!-- se non c'è niente nella lista dei risultati -->
 
-    <p class=class_expect_query>No match found</p>
+    <p class="class_expect_query">No match found</p>
 
     {% else %}
 
-    <p class=class_expect_query>Waiting for you to run the query</p>
+    <p class="class_expect_query">Waiting for you to run the query</p>
 
     {% endif %}
 
@@ -67,6 +106,11 @@
 {% load static %}
 <!-- CSS -->
 <link rel="stylesheet" href="{% static "css/qw_style.css" %}"/>
-    
+<link rel="stylesheet" type="text/css" href={% static "css/searchbar_style.css" %}>
+<link rel="stylesheet" type="text/css" href={% static "css/navigation_box_style.css" %}>
+
+<!-- Javascript -->
+<script type="text/javascript" src={% static "js/delete_simple_search.js" %}></script>
+<!-- script caricato ma non runnato -->    
 
 {% endblock %}

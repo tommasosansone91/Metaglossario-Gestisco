@@ -752,3 +752,166 @@ SELECT things_2.thing AS Acronimo, things_3.thing AS Definizione, things.thing A
 
 https://www.digitalocean.com/community/tutorials/how-to-build-a-django-and-gunicorn-application-with-docker
 
+
+******
+
+backup del query wizard
+
+
+{% extends 'base.html'%} <!-- vuol dire inserisci qui la navigation toolbar contenuta in base -->
+
+{% block content %}
+
+<h1>Query Wizard</h1>
+<!-- (Al momento è un query box, devo trasformarlo in un wizard) -->
+<p>Please type your SQL query in the box below:</p>
+
+
+<div class="container">
+  <form method="POST">
+      {% csrf_token %}
+      
+      {{QWform.as_p}}
+      <!-- Qui avevo scritto queryform e non funzionava, invece con QWform funziona -->
+
+    <input type="submit" class="btn btn-primary" value="Run query">
+  </form>
+
+</div>
+
+<br>
+<!--  show tabella  -->
+
+<h2>Query result:</h2>
+
+
+
+{% if queryresult_key %}
+
+<br>
+
+    <table>
+
+        <tr style="font-weight: bold; text-align: center;">
+            <td class="class_Tabella_Head">Lemma</td>
+            <td class="class_Tabella_Head">Acronimo</td>
+            <td class="class_Tabella_Head">Definizione</td>
+
+
+
+        </tr>
+
+    {% for row in queryresult_key %}
+        <tr>
+        {% for cell in row %}
+
+            <td class="class_Tabella_Risultati">{{ cell }}</td>
+
+        {% endfor %}
+        </tr>
+    {% endfor %}
+
+    </table>
+
+
+
+{% else %}
+
+
+    {% if len_result_list_key == 0 %} <!-- se non c'è niente nella lista dei risultati -->
+
+    <p class="class_expect_query">No match found</p>
+
+    {% else %}
+
+    <p class="class_expect_query">Waiting for you to run the query</p>
+
+    {% endif %}
+
+
+
+
+{% endif %}
+
+
+<br><br><br>
+    
+{% load static %}
+<!-- CSS -->
+<link rel="stylesheet" href="{% static "css/qw_style.css" %}"/>
+    
+
+{% endblock %}
+
+
+
+*************
+
+backup view query wizard
+
+query_wizard(request):
+    
+    # from app_metaglossario import forms
+    # from forms import QueryFormName
+
+    QWform = QueryFormName()
+
+
+    if request.method == 'POST': #se qualcuno clicca su "submit", cioè esegue una post
+        QWform = QueryFormName(request.POST)
+
+        if QWform.is_valid(): #validation check
+            
+            print("Query SQL acquisita:"+ QWform.cleaned_data['SQL_query'])
+            #esempio SELECT * FROM things2 WHERE ID_Things <1000021
+
+            # agisci qui
+
+            import psycopg2 as pg2
+
+            # questo poi come lo nascondo?
+            mydb = pg2.connect(user='zogpunyhfdizcj', password='e4e8bbb8ef02572179d0ccdc1a146d4f2eba03e587525349bb4436a80b87f4ec',
+                                          host='ec2-46-51-190-87.eu-west-1.compute.amazonaws.com', database='dfibp7p1uu70v7')
+
+            #'postgres://zogpunyhfdizcj:e4e8bbb8ef02572179d0ccdc1a146d4f2eba03e587525349bb4436a80b87f4ec@ec2-46-51-190-87.eu-west-1.compute.amazonaws.com:5432/dfibp7p1uu70v7')
+            #postgres://user:password@host:porta/database_name
+
+            # import mysql.connector
+
+            # # connect to the database
+            # mydb = mysql.connector.connect(user='root', password='metaglossariov2',
+            #                               host='localhost', database='schema_meta_prova')
+
+
+            
+
+            my_cursor = mydb.cursor()
+            my_cursor.execute(QWform.cleaned_data['SQL_query'])
+
+            query_result_list = my_cursor.fetchall()
+
+            len_result_list = len(query_result_list)
+           
+            #Parla alla console
+            print("Query eseguita sul database con successo, risultati inviati al browser!")
+
+            # print("************************************")
+            # print("Risutati della query:")
+
+            # so che mi ritorna una lista di tuple: allora mi preparo a stampare con un doppio ciclo for a mo' di matrice
+            # for record in query_result_list:
+            #     for entity in record:
+            #         print(entity)
+            #     print("---")
+
+            print("************************************")
+
+            #devo creare una matrice
+            context_diz={'QWform':QWform, 'queryresult_key' :query_result_list, 'len_result_list_key':len_result_list}
+            # non ho una views che ne crea il dizionario della chiave e della lista
+            # faccio una vista che mi ritorna entrambe le cose con un dzionario a due elementi
+
+    else:
+        context_diz={'QWform':QWform}
+
+    return render(request,'query_wizard.html',context_diz)

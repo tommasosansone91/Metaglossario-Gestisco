@@ -37,9 +37,12 @@ Query_initial_string = "SELECT Lemmi.Thing, Acronimi.Thing, Definizioni.Thing FR
 
 
 
-class QueryFormName(forms.Form):
-    SQL_query = forms.CharField(widget=forms.Textarea, initial=Query_initial_string, label="") #type your default query here
-    # la label="" come input è per evitare che nel form compaia automaticamente "sql query"
+# class QueryFormName(forms.Form):
+#     SQL_query = forms.CharField(initial=Query_initial_string, label="") #type your default query here
+#     # la label="" come input è per evitare che nel form compaia automaticamente "sql query"
+
+#     # SQL_query = forms.CharField(widget=forms.Textarea, initial=Query_initial_string, label="") #type your default query here
+    
 
 
 

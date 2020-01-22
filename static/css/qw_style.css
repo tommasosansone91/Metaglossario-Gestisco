@@ -5,6 +5,11 @@
   
 .class_Tabella_Risultati{
       background-color: #acff99;
-    border: 3px solid white;
+      border: 3px solid white;
   
   }
+
+.class_Tabella_Head{
+    background-color: white;
+    border: 3px solid white;
+}
