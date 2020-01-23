@@ -44,8 +44,8 @@ from .algoritmi_processing.WD import algoritmo_WD
 
 
 # per il query wizard
-# from .forms import QueryFormName
-
+import pandas as pd
+import numpy as np
 
 
 def run_script(request):   
@@ -217,7 +217,7 @@ def metaglossario(request):
     like_term_query = request.GET.get('like_term')
 
     # senza  il comando LIKE
-    Query_initial_string = "SELECT Lemmi.Thing, Acronimi.Thing, Definizioni.Thing FROM (app_metaglossario_model_is_Lemma_of INNER JOIN ((app_metaglossario_model_Things AS Acronimi INNER JOIN app_metaglossario_model_is_Acronimo_of ON Acronimi.ID_Thing = app_metaglossario_model_is_Acronimo_of.ID_soggetto) INNER JOIN app_metaglossario_model_Things AS Lemmi ON app_metaglossario_model_is_Acronimo_of.ID_oggetto = Lemmi.ID_Thing) ON app_metaglossario_model_is_Lemma_of.ID_soggetto = Lemmi.ID_Thing) INNER JOIN app_metaglossario_model_Things AS Definizioni ON app_metaglossario_model_is_Lemma_of.ID_oggetto = Definizioni.ID_Thing ORDER BY Lemmi.Thing"
+    Query_initial_string = "SELECT Lemmi.Thing, Acronimi.Thing, Definizioni.Thing, Lemmi.ID_Thing, Acronimi.ID_Thing, Definizioni.ID_Thing FROM (app_metaglossario_model_is_Lemma_of INNER JOIN ((app_metaglossario_model_Things AS Acronimi INNER JOIN app_metaglossario_model_is_Acronimo_of ON Acronimi.ID_Thing = app_metaglossario_model_is_Acronimo_of.ID_soggetto) INNER JOIN app_metaglossario_model_Things AS Lemmi ON app_metaglossario_model_is_Acronimo_of.ID_oggetto = Lemmi.ID_Thing) ON app_metaglossario_model_is_Lemma_of.ID_soggetto = Lemmi.ID_Thing) INNER JOIN app_metaglossario_model_Things AS Definizioni ON app_metaglossario_model_is_Lemma_of.ID_oggetto = Definizioni.ID_Thing ORDER BY Lemmi.Thing"
    # metto questa perchè è per dire che di default la stringa di query è quella senza like
 
     #da access a django sql puro
@@ -239,16 +239,26 @@ def metaglossario(request):
 
     # no modello eprchè mi connetto diretto al db
 
+
+
     # se la query è stata fatta
     if like_term_query:
-
+        
         like_term_query = request.GET.get('like_term')
+
+        if "'" in like_term_query:
+
+            like_term_query="Non inserire apostrofi! Query annullata."
+            
+
+            
+        
 
         # al posto di selected_entries
 
         # con il comando like con aggiunta dell'utente - solo termine like
         # l'element like_term è incatenato tra le % per usare il like con sql diretto
-        Query_string = "SELECT Lemmi.Thing, Acronimi.Thing, Definizioni.Thing FROM (app_metaglossario_model_is_Lemma_of INNER JOIN ((app_metaglossario_model_Things AS Acronimi INNER JOIN app_metaglossario_model_is_Acronimo_of ON Acronimi.ID_Thing = app_metaglossario_model_is_Acronimo_of.ID_soggetto) INNER JOIN app_metaglossario_model_Things AS Lemmi ON app_metaglossario_model_is_Acronimo_of.ID_oggetto = Lemmi.ID_Thing) ON app_metaglossario_model_is_Lemma_of.ID_soggetto = Lemmi.ID_Thing) INNER JOIN app_metaglossario_model_Things AS Definizioni ON app_metaglossario_model_is_Lemma_of.ID_oggetto = Definizioni.ID_Thing WHERE (((Lemmi.Thing) Like '%" + like_term_query + "%') OR ((Acronimi.Thing) Like '%" + like_term_query + "%') OR ((Definizioni.Thing) Like '%" + like_term_query + "%')) ORDER BY Lemmi.Thing"
+        Query_string = "SELECT Lemmi.Thing, Acronimi.Thing, Definizioni.Thing, Lemmi.ID_Thing, Acronimi.ID_Thing, Definizioni.ID_Thing FROM (app_metaglossario_model_is_Lemma_of INNER JOIN ((app_metaglossario_model_Things AS Acronimi INNER JOIN app_metaglossario_model_is_Acronimo_of ON Acronimi.ID_Thing = app_metaglossario_model_is_Acronimo_of.ID_soggetto) INNER JOIN app_metaglossario_model_Things AS Lemmi ON app_metaglossario_model_is_Acronimo_of.ID_oggetto = Lemmi.ID_Thing) ON app_metaglossario_model_is_Lemma_of.ID_soggetto = Lemmi.ID_Thing) INNER JOIN app_metaglossario_model_Things AS Definizioni ON app_metaglossario_model_is_Lemma_of.ID_oggetto = Definizioni.ID_Thing WHERE (((Lemmi.Thing) Like '%" + like_term_query + "%') OR ((Acronimi.Thing) Like '%" + like_term_query + "%') OR ((Definizioni.Thing) Like '%" + like_term_query + "%')) ORDER BY Lemmi.Thing"
 
 
     # se il termine like è stato lasciato vuoto
@@ -285,11 +295,34 @@ def metaglossario(request):
 
     len_result_list = len(query_result_list)
     
+    
+
     #Parla alla console
     print("Query eseguita sul database con successo, %s risultati inviati al browser!" % len_result_list)
 
+    print("************************************************************")
 
-    print("************************************")
+    # genera una tabella solo coi risultati da pubblicare
+
+    # trasforma la lista di tuple in dataframe
+    query_result_df = pd.DataFrame(query_result_list)
+
+    #devo creare due dataframe, uno con things e uno con gli id da usare nel query wizard
+
+    # seleziona dalla
+
+    print("Risultati della query:")
+    print(query_result_df)
+    
+
+
+    # trasforma il dataframe in una lista di liste
+    query_result_lol = np.array(query_result_df)
+    
+    # trasforma il dataframe in una lista di tuple
+    query_result_list = [tuple(sottolista) for sottolista in query_result_lol]
+    
+
 
     #in questo dizionario stanno le variabili che le viste consegnano al template
     context_dict={'queryresult_key':query_result_list, 'len_result_list_key':len_result_list, 'like_term_query':like_term_query}

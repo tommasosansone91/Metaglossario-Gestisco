@@ -62,20 +62,20 @@
             <td class="class_Tabella_Head">Acronimo</td>
             <td class="class_Tabella_Head">Definizione</td>
 
-
-
         </tr>
 
     {% for row in queryresult_key %}
+
         <tr>
+        
 
-        {% for cell in row %}
+            <td class="class_Tabella_Risultati">{{ row.0 }}</td>
+            <td class="class_Tabella_Risultati">{{ row.1 }}</td>
+            <td class="class_Tabella_Risultati">{{ row.2 }}</td>
 
-            <td class="class_Tabella_Risultati">{{ cell }}</td>
-
-        {% endfor %} 
-
+        
         </tr>
+
     {% endfor %}
 
     </table>
@@ -87,15 +87,15 @@
 
     {% if len_result_list_key == 0 %} <!-- se non c'è niente nella lista dei risultati -->
 
-    <p class="class_expect_query">No match found</p>
+    <p class="class_expect_query">Nessun risultato.</p>
+    <p class="class_expect_query">Eliminare eventuali apostrofi dai termini di ricerca.</p>
+
 
     {% else %}
 
-    <p class="class_expect_query">Waiting for you to run the query</p>
+    <p class="class_expect_query">ERRORE: query non inserita!</p>
 
     {% endif %}
-
-
 
 
 {% endif %}
