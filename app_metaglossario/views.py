@@ -267,6 +267,7 @@ def metaglossario(request):
         # la query rimane quella dichiarata di default
         Query_string = Query_initial_string
 
+    print("************************************************************")
 
     print("Query SQL acquisita: ")
     print(Query_string)
@@ -287,13 +288,12 @@ def metaglossario(request):
     my_cursor.execute(Query_string)
 
     query_result_list = my_cursor.fetchall()
-    
-    # Pagination
-    # paginator = Paginator(query_result_list, 10) # Show 25 contacts per page
-    # page = request.GET.get('page')
-    # query_result_list = paginator.get_page(page) 
 
     len_result_list = len(query_result_list)
+    
+    
+
+    
     
     
 
@@ -314,7 +314,7 @@ def metaglossario(request):
     print("Risultati della query:")
     print(query_result_df)
     
-
+    print("************************************************************")
 
     # trasforma il dataframe in una lista di liste
     query_result_lol = np.array(query_result_df)
@@ -322,6 +322,11 @@ def metaglossario(request):
     # trasforma il dataframe in una lista di tuple
     query_result_list = [tuple(sottolista) for sottolista in query_result_lol]
     
+
+    # Pagination - funziona in questo punto ma se lo metti prima no
+    paginator = Paginator(query_result_list, 25) # Show 25 contacts per page
+    page = request.GET.get('page')
+    query_result_list = paginator.get_page(page) 
 
 
     #in questo dizionario stanno le variabili che le viste consegnano al template
