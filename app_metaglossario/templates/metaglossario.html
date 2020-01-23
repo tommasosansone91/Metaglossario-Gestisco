@@ -36,7 +36,7 @@
             <button id="cancel_search_button" type="submit" onclick="Delete_simple_search()"><i class="fa fa-trash"></i></button>
             
             
-            <!-- onclick="window.location.href=???{% url 'indice_glossario' %}???" -->
+           
 
           </form>
 
@@ -61,6 +61,7 @@
             <td class="class_Tabella_Head">Lemma</td>
             <td class="class_Tabella_Head">Acronimo</td>
             <td class="class_Tabella_Head">Definizione</td>
+            {% comment %} <td class="class_Tabella_Head">Titolo documento fonte</td> {% endcomment %}
 
         </tr>
 
@@ -72,6 +73,7 @@
             <td class="class_Tabella_Risultati">{{ row.0 }}</td>
             <td class="class_Tabella_Risultati">{{ row.1 }}</td>
             <td class="class_Tabella_Risultati">{{ row.2 }}</td>
+            {% comment %} <td class="class_Tabella_Risultati">{{ row.3 }}</td> {% endcomment %}
 
         
         </tr>
@@ -111,7 +113,7 @@
         <nav aria-label="...">
             <ul class="pagination">
                 
-            <!-- Se la q ha ricevuto un input = la search bar ha inserito input -->    
+            <!-- Se la like term ha ricevuto un input = la search bar ha inserito input -->    
             {% if like_term_query %}
                                 
                 {% if queryresult_key.has_previous %}
