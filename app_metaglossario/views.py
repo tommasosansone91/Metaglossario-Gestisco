@@ -249,43 +249,6 @@ def metaglossario(request):
         # con il comando like con aggiunta dell'utente - solo termine like
         # l'element like_term è incatenato tra le % per usare il like con sql diretto
         Query_string = "SELECT Lemmi.Thing, Acronimi.Thing, Definizioni.Thing FROM (app_metaglossario_model_is_Lemma_of INNER JOIN ((app_metaglossario_model_Things AS Acronimi INNER JOIN app_metaglossario_model_is_Acronimo_of ON Acronimi.ID_Thing = app_metaglossario_model_is_Acronimo_of.ID_soggetto) INNER JOIN app_metaglossario_model_Things AS Lemmi ON app_metaglossario_model_is_Acronimo_of.ID_oggetto = Lemmi.ID_Thing) ON app_metaglossario_model_is_Lemma_of.ID_soggetto = Lemmi.ID_Thing) INNER JOIN app_metaglossario_model_Things AS Definizioni ON app_metaglossario_model_is_Lemma_of.ID_oggetto = Definizioni.ID_Thing WHERE (((Lemmi.Thing) Like '%" + like_term_query + "%') OR ((Acronimi.Thing) Like '%" + like_term_query + "%') OR ((Definizioni.Thing) Like '%" + like_term_query + "%')) ORDER BY Lemmi.Thing"
-                    
-        print("Query SQL acquisita: "+ Query_string)
-
-        import psycopg2 as pg2
-
-        # questo poi come lo nascondo?
-        mydb = pg2.connect(user='zogpunyhfdizcj', password='e4e8bbb8ef02572179d0ccdc1a146d4f2eba03e587525349bb4436a80b87f4ec',
-                                        host='ec2-46-51-190-87.eu-west-1.compute.amazonaws.com', database='dfibp7p1uu70v7')
-
-        #'postgres://zogpunyhfdizcj:e4e8bbb8ef02572179d0ccdc1a146d4f2eba03e587525349bb4436a80b87f4ec@ec2-46-51-190-87.eu-west-1.compute.amazonaws.com:5432/dfibp7p1uu70v7')
-        #postgres://user:password@host:porta/database_name
-
-        my_cursor = mydb.cursor()
-        my_cursor.execute(Query_string)
-
-        filtered_query_result_list = my_cursor.fetchall()
-        # la chiamo così perchè sono nel caso del comando like
-
-        # fine selected entries
-
-        # Pagination
-        # paginator = Paginator(filtered_query_result_list, 10) # Show 25 contacts per page
-        # page = request.GET.get('page')
-        # filtered_query_result_list = paginator.get_page(page) 
-
-        len_result_list = len(filtered_query_result_list)
-        
-        #Parla alla console
-        print("Query eseguita sul database con successo, %s risultati inviati al browser!" % len_result_list)
-
-
-        print("************************************")
-
-        #in questo dizionario stanno le variabili che le viste consegnano al template
-        context_dict={'queryresult_key':filtered_query_result_list, 'len_result_list_key':len_result_list, 'like_term_query':like_term_query}
-
-        return render(request, template, context_dict)
 
 
     # se il termine like è stato lasciato vuoto
@@ -293,45 +256,46 @@ def metaglossario(request):
 
         # la query rimane quella dichiarata di default
         Query_string = Query_initial_string
-           
-        print("Query SQL acquisita: "+ Query_string)
-        
-
-        import psycopg2 as pg2
-
-        # questo poi come lo nascondo?
-        mydb = pg2.connect(user='zogpunyhfdizcj', password='e4e8bbb8ef02572179d0ccdc1a146d4f2eba03e587525349bb4436a80b87f4ec',
-                                        host='ec2-46-51-190-87.eu-west-1.compute.amazonaws.com', database='dfibp7p1uu70v7')
-
-        #'postgres://zogpunyhfdizcj:e4e8bbb8ef02572179d0ccdc1a146d4f2eba03e587525349bb4436a80b87f4ec@ec2-46-51-190-87.eu-west-1.compute.amazonaws.com:5432/dfibp7p1uu70v7')
-        #postgres://user:password@host:porta/database_name
-
-        my_cursor = mydb.cursor()
-        my_cursor.execute(Query_string)
-
-        query_result_list = my_cursor.fetchall()
-        # non scrivo filtered perchè... è come se non avessi usato il filtro
-
-        # fine selected entries
-
-        # Pagination
-        # paginator = Paginator(query_result_list, 10) # Show 25 contacts per page
-        # page = request.GET.get('page')
-        # query_result_list = paginator.get_page(page)     
-
-        len_result_list = len(query_result_list)
-        
-        #Parla alla console
-        print("Query eseguita sul database con successo, %s risultati inviati al browser!" % len_result_list)
 
 
-        print("************************************")
-        
+    print("Query SQL acquisita: ")
+    print(Query_string)
+
+    #connessione al db
+
+    import psycopg2 as pg2
+
+    # questo poi come lo nascondo?
+    mydb = pg2.connect(user='zogpunyhfdizcj', password='e4e8bbb8ef02572179d0ccdc1a146d4f2eba03e587525349bb4436a80b87f4ec',
+                                    host='ec2-46-51-190-87.eu-west-1.compute.amazonaws.com', database='dfibp7p1uu70v7')
+
+    #'postgres://zogpunyhfdizcj:e4e8bbb8ef02572179d0ccdc1a146d4f2eba03e587525349bb4436a80b87f4ec@ec2-46-51-190-87.eu-west-1.compute.amazonaws.com:5432/dfibp7p1uu70v7')
+    #postgres://user:password@host:porta/database_name
+
+    # query sul db
+    my_cursor = mydb.cursor()
+    my_cursor.execute(Query_string)
+
+    query_result_list = my_cursor.fetchall()
+    
+    # Pagination
+    # paginator = Paginator(query_result_list, 10) # Show 25 contacts per page
+    # page = request.GET.get('page')
+    # query_result_list = paginator.get_page(page) 
+
+    len_result_list = len(query_result_list)
+    
+    #Parla alla console
+    print("Query eseguita sul database con successo, %s risultati inviati al browser!" % len_result_list)
 
 
-        context_dict={'queryresult_key':query_result_list, 'len_result_list_key':len_result_list, 'like_term_query':like_term_query}
-        
-        return render(request, template, context_dict)
+    print("************************************")
+
+    #in questo dizionario stanno le variabili che le viste consegnano al template
+    context_dict={'queryresult_key':query_result_list, 'len_result_list_key':len_result_list, 'like_term_query':like_term_query}
+
+    return render(request, template, context_dict)
+
 
 
 

@@ -68,11 +68,13 @@
 
     {% for row in queryresult_key %}
         <tr>
+
         {% for cell in row %}
 
             <td class="class_Tabella_Risultati">{{ cell }}</td>
 
-        {% endfor %}
+        {% endfor %} 
+
         </tr>
     {% endfor %}
 
