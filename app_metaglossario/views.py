@@ -217,7 +217,7 @@ def metaglossario(request):
     like_term_query = request.GET.get('like_term')
 
     # senza  il comando LIKE
-    Query_initial_string = "SELECT Lemmi.Thing, Acronimi.Thing, Definizioni.Thing, app_metaglossario_model_things.Thing AS Titolo_documento_fonte FROM (((app_metaglossario_model_is_Lemma_of INNER JOIN ((app_metaglossario_model_Things AS Acronimi INNER JOIN app_metaglossario_model_is_Acronimo_of ON Acronimi.ID_Thing = app_metaglossario_model_is_Acronimo_of.ID_soggetto) INNER JOIN app_metaglossario_model_Things AS Lemmi ON app_metaglossario_model_is_Acronimo_of.ID_oggetto = Lemmi.ID_Thing) ON app_metaglossario_model_is_Lemma_of.ID_soggetto = Lemmi.ID_Thing) INNER JOIN app_metaglossario_model_Things AS Definizioni ON app_metaglossario_model_is_Lemma_of.ID_oggetto = Definizioni.ID_Thing) INNER JOIN app_metaglossario_model_is_Titolo_documento_fonte_of ON Definizioni.ID_Thing = app_metaglossario_model_is_Titolo_documento_fonte_of.ID_oggetto) INNER JOIN app_metaglossario_model_Things ON app_metaglossario_model_is_Titolo_documento_fonte_of.ID_soggetto = app_metaglossario_model_Things.ID_Thing WHERE (((Lemmi.Thing) Like '%acq%')) OR (((Acronimi.Thing) Like '%acq%')) OR (((Definizioni.Thing) Like '%acq%')) ORDER BY Lemmi.Thing;"
+    Query_initial_string = "SELECT Lemmi.Thing, Acronimi.Thing, Definizioni.Thing, app_metaglossario_model_things.Thing AS Titolo_documento_fonte FROM (((app_metaglossario_model_is_Lemma_of INNER JOIN ((app_metaglossario_model_Things AS Acronimi INNER JOIN app_metaglossario_model_is_Acronimo_of ON Acronimi.ID_Thing = app_metaglossario_model_is_Acronimo_of.ID_soggetto) INNER JOIN app_metaglossario_model_Things AS Lemmi ON app_metaglossario_model_is_Acronimo_of.ID_oggetto = Lemmi.ID_Thing) ON app_metaglossario_model_is_Lemma_of.ID_soggetto = Lemmi.ID_Thing) INNER JOIN app_metaglossario_model_Things AS Definizioni ON app_metaglossario_model_is_Lemma_of.ID_oggetto = Definizioni.ID_Thing) INNER JOIN app_metaglossario_model_is_Titolo_documento_fonte_of ON Definizioni.ID_Thing = app_metaglossario_model_is_Titolo_documento_fonte_of.ID_oggetto) INNER JOIN app_metaglossario_model_Things ON app_metaglossario_model_is_Titolo_documento_fonte_of.ID_soggetto = app_metaglossario_model_Things.ID_Thing ORDER BY Lemmi.Thing;"
    # metto questa perchè è per dire che di default la stringa di query è quella senza like
 
     # Query_initial_string = "SELECT Lemmi.Thing, Acronimi.Thing, Definizioni.Thing, app_metaglossario_model_things.Thing AS Titolo_documento_fonte FROM (((app_metaglossario_model_is_Lemma_of INNER JOIN ((app_metaglossario_model_Things AS Acronimi INNER JOIN app_metaglossario_model_is_Acronimo_of ON Acronimi.ID_Thing = app_metaglossario_model_is_Acronimo_of.ID_soggetto) INNER JOIN app_metaglossario_model_Things AS Lemmi ON app_metaglossario_model_is_Acronimo_of.ID_oggetto = Lemmi.ID_Thing) ON app_metaglossario_model_is_Lemma_of.ID_soggetto = Lemmi.ID_Thing) INNER JOIN app_metaglossario_model_Things AS Definizioni ON app_metaglossario_model_is_Lemma_of.ID_oggetto = Definizioni.ID_Thing) INNER JOIN app_metaglossario_model_is_Titolo_documento_fonte_of ON Definizioni.ID_Thing = app_metaglossario_model_is_Titolo_documento_fonte_of.ID_oggetto) INNER JOIN app_metaglossario_model_Things ON app_metaglossario_model_is_Titolo_documento_fonte_of.ID_soggetto = app_metaglossario_model_Things.ID_Thing WHERE (((Lemmi.Thing) Like '%acq%')) OR (((Acronimi.Thing) Like '%acq%')) OR (((Definizioni.Thing) Like '%acq%')) ORDER BY Lemmi.Thing;"
@@ -296,11 +296,7 @@ def metaglossario(request):
 
     query_result_list = my_cursor.fetchall()
 
-    len_result_list = len(query_result_list)
-    
-    
-
-    
+    len_result_list = len(query_result_list) 
     
     
 

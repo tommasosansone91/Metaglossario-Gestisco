@@ -1,0 +1,18 @@
+modificare nella linea del select metti il nome della tabella rinominata es titolo_doc_fonte
+nel fro, appena appare il nome della tabella che porta le things, model_things ma senza attributi.thing o.id thing, 
+inserisci AS e mettici il nome della tabella che hai usato nella linea del select.
+nella query, ogni volta che appare di nuovo quel model_things, sostituiscila col nuovo nome della tabella.
+
+
+  
+da access a django sql puro
+
+sostituisci model_ con app_metaglossario_model_
+
+per evitare confilitti nel like cambia " con '"
+
+cambia * con %
+
+i nomi delle tabelle e delle relazioni protrebbero cambiare
+
+ricerca in tutti i campi acq, metodo
