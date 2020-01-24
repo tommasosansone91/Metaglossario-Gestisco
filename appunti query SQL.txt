@@ -1,3 +1,5 @@
+
+
 modificare nella linea del select metti il nome della tabella rinominata es titolo_doc_fonte
 nel fro, appena appare il nome della tabella che porta le things, model_things ma senza attributi.thing o.id thing, 
 inserisci AS e mettici il nome della tabella che hai usato nella linea del select.
@@ -18,7 +20,7 @@ i nomi delle tabelle e delle relazioni protrebbero cambiare
 ricerca in tutti i campi acq, metodo
 
 
-°°°°°°°°°°°°
+-----------------------------------------------------------------------
 
 versioni
 

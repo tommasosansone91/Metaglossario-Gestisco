@@ -58,23 +58,24 @@
     <table>
 
         <tr style="font-weight: bold; text-align: center;">
-            <td class="class_Tabella_Head">Lemma</td>
-            <td class="class_Tabella_Head">Acronimo</td>
-            <td class="class_Tabella_Head">Definizione</td>
-            <td class="class_Tabella_Head">Titolo documento fonte</td>
+
+            <td id="Lemma_cell" class="class_Tabella_Head">Lemma</td>
+            <td id="Acronimo_cell" class="class_Tabella_Head">Acronimo</td>
+            <td id="Definizione_cell" class="class_Tabella_Head">Definizione</td>
+            <td id="Titolo_documento_fonte_cell" class="class_Tabella_Head">Titolo documento fonte</td>
+            <td id="Url_documento_fonte_cell" class="class_Tabella_Head">URL documento fonte</td>
 
         </tr>
 
     {% for row in queryresult_key %}
 
-        <tr>
-        
+        <tr>        
 
-            <td class="class_Tabella_Risultati">{{ row.0 }}</td>
-            <td class="class_Tabella_Risultati">{{ row.1 }}</td>
-            <td class="class_Tabella_Risultati">{{ row.2 }}</td>
-            <td class="class_Tabella_Risultati">{{ row.3 }}</td>
-
+            <td id="Lemma_cell" class="class_Tabella_Risultati">{{ row.0 }}</td>
+            <td id="Acronimo_cell" class="class_Tabella_Risultati">{{ row.1 }}</td>
+            <td id="Definizione_cell" class="class_Tabella_Risultati">{{ row.2 }}</td>
+            <td id="Titolo_documento_fonte_cell" class="class_Tabella_Risultati">{{ row.3 }}</td>
+            <td id="Url_documento_fonte_cell" class="class_Tabella_Risultati">{{ row.4 }}</td>
         
         </tr>
 
@@ -256,7 +257,7 @@
     
 {% load static %}
 <!-- CSS -->
-<link rel="stylesheet" href="{% static "css/qw_style.css" %}"/>
+<link rel="stylesheet" href="{% static "css/metaglossario_style.css" %}"/>
 <link rel="stylesheet" type="text/css" href={% static "css/searchbar_style.css" %}>
 <link rel="stylesheet" type="text/css" href={% static "css/navigation_box_style.css" %}>
 
