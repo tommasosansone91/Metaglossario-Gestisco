@@ -1,19 +1,22 @@
 <!-- Qui costruisco la navigation toolbar e altri contenuti che voglio mettere in ogni pagina-->
-
-{% load static %}
-
 <!doctype html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- meta tag per indicizzazione -->    
+    <meta name="keywords" content="metaglossario, glossario, Gestisco, Interreg, protezione civile">
+    <meta name="description" content="Metaglossario del progetto Interreg Gestisco">
+
     <!-- favicon -->
-    <!-- <link rel="shortcut icon" href="{% static 'img/gestisco_logo_round_favicon2.png' %}" /> -->
+    {% load static %}
     <link rel="shortcut icon" href="{% static 'img/metaglossary_favicon_3.png' %}" />
    
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 
     <title>Metaglossario Gestisco</title>
   </head>
@@ -175,10 +178,34 @@
 
         
         {% endblock %}
+
+        
         
         <!-- INSERISCI QUI IL PIè DI PAGINA -->
 
+      <br><br><br>
+
+      <hr>  
+
+      <div class="bottom-bar">
+
+        <span>  <i><img id="logo_bottom_bar" src="{% static 'img/loghi_partner/lombardia-minilogo.png' %}" align="middle"></i></span>
+        <span>  <i><img id="logo_bottom_bar" src="{% static 'img/loghi_partner/ticino-minilogo.png' %}" align="middle"></i></span>
+        <span>  <i><img id="logo_bottom_bar" src="{% static 'img/loghi_partner/poli-minilogo.png' %}" align="middle"></i></span>
+        <span>  <i><img id="logo_bottom_bar" src="{% static 'img/loghi_partner/fpm-minilogo.png' %}" align="middle"></i></span>
+        <span>  <i><img id="logo_bottom_bar" src="{% static 'img/loghi_partner/supsi-minilogo.png' %}" align="middle"></i></span>
+        <span>  <i><img id="logo_bottom_bar" src="{% static 'img/loghi_partner/como-minilogo.png' %}" align="middle"></i></span>
+        <span>  <i><img id="logo_bottom_bar" src="{% static 'img/loghi_partner/varese-minilogo.png' %}" align="middle"></i></span>
+        <span>  <i><img id="logo_bottom_bar" src="{% static 'img/loghi_partner/arpap-minilogo.png' %}" align="middle"></i></span>
+        
+
       </div>
+
+      <hr>
+
+      </div>
+
+      <br>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -190,6 +217,7 @@
 
     <!-- css -->
     <link rel="stylesheet" type="text/css" href={% static "css/top_navbar_style.css" %}>
+    <link rel="stylesheet" type="text/css" href={% static "css/bottom_navbar_style.css" %}>
 
     
   
