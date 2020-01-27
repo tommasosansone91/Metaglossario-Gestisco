@@ -15,6 +15,16 @@ per evitare confilitti nel like cambia " con '"
 
 cambia * con %
 
+
+sostituisci
+
+Like "%acq%" o "*acq*"
+
+con
+
+'%" + like_term_query + "%'
+
+
 i nomi delle tabelle e delle relazioni protrebbero cambiare
 
 ricerca in tutti i campi acq, metodo

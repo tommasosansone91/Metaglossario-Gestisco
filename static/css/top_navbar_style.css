@@ -2,17 +2,27 @@
     background-color: #485058f3;
 }
 
-/*.navbar {
-    
+/*.navbar {    
      border: 0px; 
 }*/
 
-/* .nav-item-right {
-    
-    float: right;
-} */
+.nav-item {
 
-/* #metaglossary_baricon  {
-    float: right;
-    max-height: 20px;
-} */
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    
+}
+
+/* ------- dropdown menu -------  */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}

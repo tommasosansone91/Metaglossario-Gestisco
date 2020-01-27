@@ -59,10 +59,29 @@
                 <a class="nav-link" href="{% url 'api' %}">API</a>
               </li>
 
-              {% comment %} <!-- About -->
+              <!-- About -->
+
+              
+
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'about' %}">About</a>
-              </li> {% endcomment %}
+
+                <div class="dropdown">
+
+                  <a class="nav-link">About<i class="fa fa-caret-down"></i></a>
+
+                  <div class="dropdown-content">
+                    <a href="#">Che cos'è un metaglossario</a>
+                    <a href="#">Perchè un metaglossario</a>
+                    <a href="#">Scelte progettuali</a>
+                    <a href="#">Letteratura</a>
+                    <a href="#">Ringraziamenti</a>
+                  </div>  
+                  
+                </div>               
+
+              </li>
+
+              
 
               {% comment %} che cos'è un metaglossario
               letteratura
@@ -162,8 +181,8 @@
 
         <!-- INCOLLARE COSE QUI IN MEZZO NON SERVE PERCHè NON LE RAPPRESENTA -->
 
+        
         {% endblock %}
-
         
         <!-- INSERISCI QUI IL PIè DI PAGINA -->
 
@@ -179,6 +198,8 @@
 
     <!-- css -->
     <link rel="stylesheet" type="text/css" href={% static "css/top_navbar_style.css" %}>
+
+    
   
   </body>
 </html>
