@@ -8,21 +8,40 @@
 
 .nav-item {
 
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
     text-align: center;
     
 }
 
 /* ------- dropdown menu -------  */
 
-.dropdown {
-    position: relative;
-    display: inline-block;
-  }
+.nav-item dropdown {
 
-.dropdown-content a:hover {background-color: #ddd;}
+    background-color: #485058f3;
+}
 
-.dropdown:hover .dropdown-content {display: block;}
+/* tendina */
+.dropdown-menu {
 
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
+    background-color: #485058f3;
+    border-radius: 0px;
+    margin: 0px;
+}
+
+/* pulsante */
+.nav-link dropdown-toggle{
+
+    background-color: #343a40;
+}
+
+/* elemento della tendina */
+.dropdown-item{
+    color:  #9a9da0;
+    background-color: #343a40;
+}
+
+.dropdown-item:hover{
+    color:  #c8d3d5;
+    background-color: #485058f3;
+}

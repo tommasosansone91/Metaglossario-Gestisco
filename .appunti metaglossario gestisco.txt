@@ -1274,8 +1274,14 @@ def metaglossario(request):
 #     #return render(request, template, context)
 #     return render(request, 'glossario.html', {'selected_entries':selected_entries})
 
+*******************++
+
+se vedi che il browser non riporta le modifiche al css, ricordati di svuotare la cache
 
 
+chrome: f12 > network > disable cache
+
+una classe che inizia con un nome e dopo uno spazio ha un altro nome probabilmente ne eredita le caratteristiche
 
 
 

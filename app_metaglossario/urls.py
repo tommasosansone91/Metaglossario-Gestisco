@@ -14,7 +14,14 @@ urlpatterns=[
     path('api', views.pagina_api, name="api"),
     path('run_script', views.run_script, name="run_script"),
     path('metaglossario', views.metaglossario, name="metaglossario"),
-    path('indice_glossario', views.indice_glossario, name="indice_glossario")
+    path('indice_glossario', views.indice_glossario, name="indice_glossario"),
+
+    path('about/che_cos_e_un_metaglossario', views.che_cos_e_un_metaglossario, name="che_cos_e_un_metaglossario"),
+    path('about/istruzioni_per_l_uso', views.istruzioni_per_l_uso, name="istruzioni_per_l_uso"),
+    path('about/bibliografia', views.bibliografia, name="bibliografia"),
+    path('about/perche_un_metaglossario', views.perche_un_metaglossario, name="perche_un_metaglossario"),
+    path('about/ringraziamenti', views.ringraziamenti, name="ringraziamenti")
+    
 ]
 
 # path('nome della stringa dell'url', views.nome_funzione_views_associata, name="nome_del_template")

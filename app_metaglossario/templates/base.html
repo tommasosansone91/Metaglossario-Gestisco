@@ -63,32 +63,24 @@
 
               
 
-              <li class="nav-item">
+              <li class="nav-item dropdown">
 
-                <div class="dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">About</a>
+                
+                <div class="dropdown-menu">
 
-                  <a class="nav-link">About<i class="fa fa-caret-down"></i></a>
-
-                  <div class="dropdown-content">
-                    <a href="#">Che cos'è un metaglossario</a>
-                    <a href="#">Perchè un metaglossario</a>
-                    <a href="#">Scelte progettuali</a>
-                    <a href="#">Letteratura</a>
-                    <a href="#">Ringraziamenti</a>
-                  </div>  
+                  <a class="dropdown-item" href="{% url 'che_cos_e_un_metaglossario' %}">Che cos'è un metaglossario</a>
+                  <a class="dropdown-item" href="{% url 'perche_un_metaglossario' %}">Perchè un metaglossario</a>
+                  <a class="dropdown-item" href="{% url 'istruzioni_per_l_uso' %}">Logica di utilizzo e istruzioni per l'uso</a>
                   
-                </div>               
+                  {% comment %} <div class="dropdown-divider"></div> {% endcomment %}
 
+                  <a class="dropdown-item" href="{% url 'bibliografia' %}">Bibliografia</a>
+                  <a class="dropdown-item" href="{% url 'ringraziamenti' %}">Ringraziamenti</a>
+
+                </div>
               </li>
 
-              
-
-              {% comment %} che cos'è un metaglossario
-              letteratura
-              le unità linguistiche
-              la struttura relazionale 
-              il query wizard
-              {% endcomment %}
 
               <!-- Run script -->
               <!-- <li class="nav-item" style="background-color:rgb(15, 233, 106);color:rgb(54, 54, 54)">

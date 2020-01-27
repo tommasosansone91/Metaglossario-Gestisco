@@ -1,0 +1,33 @@
+{% extends 'base.html'%} <!-- vuol dire inserisci qui la navigation toolbar contenuta in base -->
+
+{% block content %}
+
+    <h1>Logica di utilizzo e istruzioni per l'uso</h1>
+    
+    <br>
+
+    <h3>L'obiettivo del metaglosario</h3>
+
+    <p>Obiettivo del metaglossario è di oggettivare, facilitare e velocizzare la comunicazione tra operatori di culture tecniche e amministrative diverse oltreché provenienti da ambiti geografici molto lontani tra loro, sia in tempo di pace che durante le concitate fasi dell’emergenza. Il metaglossario si appoggia su una estesa e capillare ricerca basata sull’<i>harvesting</i> dei glossari di diversi soggetti pubblici e privati disponibili sul web.</p>
+    <p>Uno dei pilastri del lavoro sta nel riconoscimento che non sussistano fonti autoritative nella definizione dei lemmi che, di per sé, prevalgono sulle altre. La definizione del lemma “Marmotta” è certamente “<i>Marmota marmota</i>, roditore della famiglia <i>Sciuridae</i>”. Ma, in ambito ferroviario è difficile sostenere che non valga, con altrettanta autorevolezza, la definizione di “particolare segnale ferroviario basso girevole che comanda il movimento dei treni in manovra”. La marmotta è appunto uno dei segnali di manovra, definiti "bassi" (in maniera autoritativa) dai regolamenti ferroviari ed esercita una funzione indispensabile nelle stazioni, negli scali merci, nei grandi depositi locomotive e in tanti casi di immissione di binari e raccordi nelle aree di stazione.</p>
+    <p>Il metaglossario non entra nel merito di quale, delle due definizioni, sia effettivamente quella principale. In questo senso si discosta dai glossari tradizionali. </p>
+    <p>Un glossario tradizionale sintetizza le diverse classi di significato riportando diverse definizioni del lemma riferite a ambiti generici (in medicina, in aeronautica, in meccanica). Il metaglossario intercetta i glossari disponibili, anche nell’ambito della medesima area semantica e riporta pedissequamente tutte le definizioni rinvenute per quel lemma riportandone la fonte.</p>
+    <p>L’utente ha così a disposizione, per ogni lemma, un compendio di definizioni certamente destrutturato e disomogeneo, ma che fornisce uno spaccato della cultura di Protezione Civile, consentendo una presa diretta sulla semantica organizzativa di interesse, considerando appieno il rapporto tra l'espressione e la realtà extralinguistica.</p>
+
+    <br>
+
+    
+    fai tutorial video per ogni paragrafo
+
+    <br><br>
+
+
+{% load static %}  <!-- Qui il tag è obbligatorio nonostante sia stato inserito dentro base.html -->
+
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href={% static "css/about_style.css" %}>
+
+<!-- Javascript -->
+{% comment %} <script type="text/javascript" src={% static "js/file.js" %}></script> {% endcomment %}
+
+{% endblock %}

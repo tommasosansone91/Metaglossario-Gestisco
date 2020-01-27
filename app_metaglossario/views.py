@@ -81,6 +81,24 @@ def run_script(request):
 def home(request):
     return render(request, 'home.html', {})
 
+# about pages
+
+def che_cos_e_un_metaglossario(request):
+    return render(request, 'about/che_cos_e_un_metaglossario.html', {})
+
+def istruzioni_per_l_uso(request):
+    return render(request, 'about/istruzioni_per_l_uso.html', {})
+
+def bibliografia(request):
+    return render(request, 'about/bibliografia.html', {})
+
+def perche_un_metaglossario(request):
+    return render(request, 'about/perche_un_metaglossario.html', {})
+
+def ringraziamenti(request):
+    return render(request, 'about/ringraziamenti.html', {})
+
+# ----------
 
 def glossario(request):   
 
