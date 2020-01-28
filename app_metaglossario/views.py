@@ -158,26 +158,34 @@ def api_glossario(request):
     response= JsonResponse(data)
     return response
     # qui manca il passaggio del template, ma forseva bene così
-
-def pagina_api(request):
-    return render(request, 'api.html', {})
+    # questo template non viene usato
 
 
-# about pages section
+def esporta_terminologia(request):
+    return render(request, 'esporta_terminologia.html', {})
+
+
+# info pages section
 def che_cos_e_un_metaglossario(request):
-    return render(request, 'about/che_cos_e_un_metaglossario.html', {})
+    return render(request, 'info/che_cos_e_un_metaglossario.html', {})
+
+def codice_sorgente(request):
+    return render(request, 'info/codice_sorgente.html', {})
+
+def come_sono_organizzati_i_dati(request):
+    return render(request, 'info/che_cos_e_un_metaglossario.html', {})
 
 def istruzioni_per_l_uso(request):
-    return render(request, 'about/istruzioni_per_l_uso.html', {})
+    return render(request, 'info/istruzioni_per_l_uso.html', {})
 
 def bibliografia(request):
-    return render(request, 'about/bibliografia.html', {})
+    return render(request, 'info/bibliografia.html', {})
 
 def perche_un_metaglossario(request):
-    return render(request, 'about/perche_un_metaglossario.html', {})
+    return render(request, 'info/perche_un_metaglossario.html', {})
 
 def ringraziamenti(request):
-    return render(request, 'about/ringraziamenti.html', {})
+    return render(request, 'info/ringraziamenti.html', {})
 
 # ----------
 

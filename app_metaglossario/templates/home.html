@@ -4,6 +4,7 @@
 
 {% load static %}
 
+    
     <div>
     
         <div style="display: inline-block; vertical-align: middle; float:left;">
@@ -19,8 +20,11 @@
         
 
     </div>
+    
 
     <br><br><br><br>
+
+
 
     <p>Questo sito web è predisposto ad ospitare il glossario del <a href="https://interreg-italiasvizzera.eu/progetti/gestisco/">Progetto GESTI.S.CO Interreg Italia-Svizzera</a>.</p>
     <p>Il progetto <b>GESTISCO - Gestione e coordinamento delle emergenze e delle catastrofi senza confini</b>  ha l’obiettivo di <b>rafforzare la governance transfrontaliera tra Italia e Svizzera nella gestione delle emergenze</b>.</p>
@@ -32,11 +36,17 @@
 
     
     <div style="text-align:center">
-    <img src="{% static 'img/Zoom_mappa_gestisco_2.jpg' %}" style="width:90%;" align="middle" alt="Area transfrontaliera interessata dal progetto Gestisco" >
+        <img src="{% static 'img/Zoom_mappa_gestisco_2.jpg' %}" style="width:90%;" align="middle" alt="Area transfrontaliera interessata dal progetto Gestisco" >
     </div>
-   
-    
-        
-        
+
+{% comment %} connettore facebook {% endcomment %}
+{% comment %} <div id="fb-root"></div> {% endcomment %}
+{% comment %} <script async defer crossorigin="anonymous" src="https://connect.facebook.net/it_IT/sdk.js#xfbml=1&version=v5.0"></script>       {% endcomment %}
+
+{% comment %} link facebook {% endcomment %}
+{% comment %} <div class="fb-page" data-href="https://www.facebook.com/GestiscoInterregITCH/" data-tabs="timeline" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/GestiscoInterregITCH/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/GestiscoInterregITCH/">Gestisco</a></blockquote></div> {% endcomment %}
+
+
+
 {% endblock %}
 

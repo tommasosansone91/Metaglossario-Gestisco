@@ -37,6 +37,29 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
 
+
+        <!-- Info -->   
+        <li class="nav-item dropdown">
+
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Info</a>
+          
+          <div class="dropdown-menu">
+
+            <a class="dropdown-item" href="{% url 'che_cos_e_un_metaglossario' %}">Che cos'è un metaglossario</a>
+            <a class="dropdown-item" href="{% url 'perche_un_metaglossario' %}">Perchè un metaglossario</a>
+            <a class="dropdown-item" href="{% url 'come_sono_organizzati_i_dati' %}">Come sono organizzati i dati</a>
+            <a class="dropdown-item" href="{% url 'istruzioni_per_l_uso' %}">Istruzioni per l'uso</a>
+            
+            {% comment %} <div class="dropdown-divider"></div> {% endcomment %}
+
+            <a class="dropdown-item" href="{% url 'codice_sorgente' %}">Codice sorgente</a>
+            <a class="dropdown-item" href="{% url 'bibliografia' %}">Bibliografia</a>
+            <a class="dropdown-item" href="{% url 'ringraziamenti' %}">Ringraziamenti</a>
+
+          </div>
+        </li>
+
+
                 <!-- glossario -->
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'glossario' %}">Glossario<span class="sr-only">(current)</span></a>                
@@ -57,32 +80,12 @@
                 <a class="nav-link" href="{% url 'aggiungi_glossario' %}">Aggiungi terminologia in massa</a>
               </li>
 
-              <!-- Api -->
+              <!-- esporta terminologia -->
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'api' %}">API</a>
+                <a class="nav-link" href="{% url 'esporta_terminologia' %}">Esporta terminologia</a>
               </li>
 
-              <!-- About -->
 
-              
-
-              <li class="nav-item dropdown">
-
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">About</a>
-                
-                <div class="dropdown-menu">
-
-                  <a class="dropdown-item" href="{% url 'che_cos_e_un_metaglossario' %}">Che cos'è un metaglossario</a>
-                  <a class="dropdown-item" href="{% url 'perche_un_metaglossario' %}">Perchè un metaglossario</a>
-                  <a class="dropdown-item" href="{% url 'istruzioni_per_l_uso' %}">Logica di utilizzo e istruzioni per l'uso</a>
-                  
-                  {% comment %} <div class="dropdown-divider"></div> {% endcomment %}
-
-                  <a class="dropdown-item" href="{% url 'bibliografia' %}">Bibliografia</a>
-                  <a class="dropdown-item" href="{% url 'ringraziamenti' %}">Ringraziamenti</a>
-
-                </div>
-              </li>
 
 
               <!-- Run script -->

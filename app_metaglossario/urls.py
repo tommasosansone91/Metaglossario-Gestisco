@@ -20,13 +20,15 @@ urlpatterns=[
     path('aggiungi_terminologia', views.aggiungi_terminologia, name="aggiungi_terminologia"),
     path('aggiungi_terminologia_massa', views.aggiungi_glossario, name="aggiungi_glossario"),
     path('api/glossario', views.api_glossario, name="api_glossario"),
-    path('api', views.pagina_api, name="api"),       
+    path('esporta_terminologia', views.esporta_terminologia, name="esporta_terminologia"),       
     
-    path('about/che_cos_e_un_metaglossario', views.che_cos_e_un_metaglossario, name="che_cos_e_un_metaglossario"),
-    path('about/istruzioni_per_l_uso', views.istruzioni_per_l_uso, name="istruzioni_per_l_uso"),
-    path('about/bibliografia', views.bibliografia, name="bibliografia"),
-    path('about/perche_un_metaglossario', views.perche_un_metaglossario, name="perche_un_metaglossario"),
-    path('about/ringraziamenti', views.ringraziamenti, name="ringraziamenti"),
+    path('info/che_cos_e_un_metaglossario', views.che_cos_e_un_metaglossario, name="che_cos_e_un_metaglossario"),
+    path('info/codice_sorgente', views.codice_sorgente, name="codice_sorgente"),
+    path('info/come_sono_organizzati_i_dati', views.come_sono_organizzati_i_dati, name="come_sono_organizzati_i_dati"),    
+    path('info/istruzioni_per_l_uso', views.istruzioni_per_l_uso, name="istruzioni_per_l_uso"),
+    path('info/bibliografia', views.bibliografia, name="bibliografia"),
+    path('info/perche_un_metaglossario', views.perche_un_metaglossario, name="perche_un_metaglossario"),
+    path('info/ringraziamenti', views.ringraziamenti, name="ringraziamenti"),
 
     path('run_script', views.run_script, name="run_script"), 
     

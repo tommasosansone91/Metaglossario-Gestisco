@@ -1,0 +1,49 @@
+{% extends 'base.html'%} <!-- vuol dire inserisci qui la navigation toolbar contenuta in base -->
+
+{% block content %}
+
+    <h1>Istruzioni per l'uso</h1>
+    
+    <br>
+
+    <h4>Glossario</h4>
+
+    <p>In questa pagina viene mostrata la terminologia in forma di semplice glossario.</p>
+    <p>Gli elementi sono raggruppati per 
+
+    <br>
+
+    <h4>Metaglossario</h4>
+
+    <br>
+
+    <h4>Aggiungi terminologia</h4>
+
+    <br>
+
+    <h4>Aggiungi terminologia in massa</h4>
+
+    <br>
+
+    <h4>API</h4>
+
+    <br>
+
+ 
+
+
+    
+    {% comment %} fai tutorial video per ogni paragrafo {% endcomment %}
+
+    
+
+
+{% load static %}  <!-- Qui il tag è obbligatorio nonostante sia stato inserito dentro base.html -->
+
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href={% static "css/about_style.css" %}>
+
+<!-- Javascript -->
+{% comment %} <script type="text/javascript" src={% static "js/file.js" %}></script> {% endcomment %}
+
+{% endblock %}
