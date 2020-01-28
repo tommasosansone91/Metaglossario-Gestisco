@@ -4,6 +4,7 @@ from . import views
 # viste separate per i template glossario e metaglossario
 from . import view_glossario
 from . import view_metaglossario
+from . import view_run_script
 
 # serve a permettere il salvataggio dei media
 from django.conf import settings
@@ -30,7 +31,7 @@ urlpatterns=[
     path('info/perche_un_metaglossario', views.perche_un_metaglossario, name="perche_un_metaglossario"),
     path('info/ringraziamenti', views.ringraziamenti, name="ringraziamenti"),
 
-    path('run_script', views.run_script, name="run_script"), 
+    path('run_script', view_run_script.run_script, name="run_script"), 
     
 ]
 

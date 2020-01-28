@@ -400,8 +400,24 @@ def algoritmo_SR():
     print("Il dataframe Elab1 è stato salvato in una tabella excel nella directory %s !" % df_dir)
 
 
+    # creo una copia di elab1 per il download agli utenti, ci metto solo elementi non sensibili
+
+    Terminologia_metaglossario = pd.concat([ Elab1["Lemma"], Elab1["Acronimo"], Elab1["Definizione"], Elab1["Ambito_riferimento"], Elab1["Autore_definizione"], Elab1["Posizione_definizione"], Elab1["Url_definizione"], Elab1["Titolo_documento_fonte"], Elab1["Autore_documento_fonte"], Elab1["Host_documento_fonte"], Elab1["Url_documento_fonte"], Elab1["Commento_entry"], Elab1["Data_inserimento_entry"], Elab1["Id_statico_entry"] ])
+
+    saving_file_name = 'Terminologia_metaglossario.xlsx'
+
+    saving_folder_name = 'saved_dataframes'
+
+    finders.find(saving_folder_name)
+    searched_locations = finders.searched_locations
+    df_dir = os.path.join(searched_locations[0]+r'\\'+saving_folder_name+r'\\'+saving_file_name)
+    Elab2.to_excel(df_dir)
+
+    print("Il dataframe Terminologia_metaglossario è stato salvato in una tabella excel nella directory %s !" % df_dir)
+												
 
     del Elab1
+    del Terminologia_metaglossario
     del Id_statico_entry_impilati_per_nC
     del ID_db_Id_statico_entry_impilati_per_nC
 
