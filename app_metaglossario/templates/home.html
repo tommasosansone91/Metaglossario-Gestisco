@@ -1,9 +1,27 @@
 {% extends 'base.html'%} <!-- vuol dire inserisci qui la navigation toolbar contenuta in base -->
 
 {% block content %}
-    <h1>Il progetto GESTI.S.CO</h1>
 
-    <br>
+{% load static %}
+
+    <div>
+    
+        <div style="display: inline-block; vertical-align: middle; float:left;">
+        <h1>Il progetto GESTI.S.CO</h1>    
+        </div>
+
+        
+        <div style="display: inline-block; vertical-align: middle; float: right;">
+            <img src="{% static 'img/loghi_partner/interreg-minilogo.png' %}" style="height:50px" alt="Logo Interreg" >
+            &nbsp&nbsp&nbsp&nbsp&nbsp
+            <img src="{% static 'img/loghi_partner/gestisco-minilogo-baffi.png' %}" style="height:50px" alt="Logo Gestisco" >       
+        </div>
+        
+
+    </div>
+
+    <br><br><br><br>
+
     <p>Questo sito web è predisposto ad ospitare il glossario del <a href="https://interreg-italiasvizzera.eu/progetti/gestisco/">Progetto GESTI.S.CO Interreg Italia-Svizzera</a>.</p>
     <p>Il progetto <b>GESTISCO - Gestione e coordinamento delle emergenze e delle catastrofi senza confini</b>  ha l’obiettivo di <b>rafforzare la governance transfrontaliera tra Italia e Svizzera nella gestione delle emergenze</b>.</p>
     <p>Le istituzioni partner hanno organizzazioni differenti, informazioni disomogenee e non sempre condivise, procedure operative indipendenti e strumenti non integrati; risulta, quindi, necessario intervenire con azioni di governance per strutturare una rete di conoscenza e instaurare rapporti duraturi, in modo tale da rendere effettivamente possibili la collaborazione, il supporto e il mutuo soccorso tra le istituzioni in caso di necessità, come previsto da accordi vigenti a livello nazionale e regionale.</p> 
@@ -12,7 +30,7 @@
     <p>I partner coinvolti sono: <b>SUPSI, Regione Lombardia, ARPA Piemonte, Fondazione Politecnico di Milano, Politecnico di Milano (Dipartimento di Ingegneria Civile e Ambientale DICA), Comune di Como, Cantone Ticino.</b> GESTISCO ha una durata di 36 mesi; è stato avviato a novembre 2018 e terminerà a novembre 2021. </p>
     <br>
 
-    {% load static %}
+    
     <div style="text-align:center">
     <img src="{% static 'img/Zoom_mappa_gestisco_2.jpg' %}" style="width:90%;" align="middle" alt="Area transfrontaliera interessata dal progetto Gestisco" >
     </div>

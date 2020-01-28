@@ -14,13 +14,6 @@ from .models import prepared_terminology
 # questo mi consente di lanciare i messaggi da una pagina all'altra
 from django.contrib import messages
 
-# per la ricerca
-from django.db.models import Q
-
-# per la paginazione
-from django.core.paginator import Paginator
-from django.core.paginator import EmptyPage, PageNotAnInteger
-
 # per creare api e consentire di esportarle
 from django.http import JsonResponse
 
@@ -81,61 +74,14 @@ def run_script(request):
 def home(request):
     return render(request, 'home.html', {})
 
-# about pages
 
-def che_cos_e_un_metaglossario(request):
-    return render(request, 'about/che_cos_e_un_metaglossario.html', {})
+def indice_glossario(request):   
 
-def istruzioni_per_l_uso(request):
-    return render(request, 'about/istruzioni_per_l_uso.html', {})
-
-def bibliografia(request):
-    return render(request, 'about/bibliografia.html', {})
-
-def perche_un_metaglossario(request):
-    return render(request, 'about/perche_un_metaglossario.html', {})
-
-def ringraziamenti(request):
-    return render(request, 'about/ringraziamenti.html', {})
-
-# ----------
-
-def glossario(request):   
-
-    query = request.GET.get('q') #q è variabile risultante dalla query del database
-    # non sostuituirla col valore vuoto
-
-    template = "glossario.html" #il template è sempre lo stesso
-
+    template = "indice_glossario.html" #il template è sempre lo stesso
     all_entries = prepared_terminology.objects.all() #funziona lo stesso anche se dice Class 'glossary_entry' has no 'objects' memberpylint(no-member)
 
-    # se la query è stata fatta
-    if query:
+    return render(request, template, {'all_entries':all_entries})
 
-        query = request.GET.get('q') #q è variabile risultante dalla query del database
-
-        selected_entries = prepared_terminology.objects.filter(Q(Acronimo__icontains=query)|Q(Ambito_riferimento__icontains=query)|Q(Autore_definizione__icontains=query)|Q(Autore_documento_fonte__icontains=query)|Q(Data_inserimento_entry__icontains=query)|Q(Definizione__icontains=query)|Q(Host_documento_fonte__icontains=query)|Q(Id_statico_entry__icontains=query)|Q(Lemma__icontains=query)|Q(Posizione_definizione__icontains=query)|Q(Titolo_documento_fonte__icontains=query)|Q(Url_definizione__icontains=query)|Q(Url_documento_fonte__icontains=query))
-        # Q(Acronimo__icontains=query dice quali sono i campi in cui cercare l'input specificato dall'utente
-
-        # Pagination
-        paginator = Paginator(selected_entries, 10) # Show 25 contacts per page
-        page = request.GET.get('page')
-        selected_entries = paginator.get_page(page)
-
-        # context = {'all_entries':selected_entries}
-        #return render(request, template, context)
-        # {'nome della variabile con cui sarà richiamato nel template':contenuto}
-        return render(request, template, {'all_entries':selected_entries, 'query':query})
-
-    # se non è stata fatta nessuna query
-    else:
-
-        # Pagination
-        paginator = Paginator(all_entries, 10) # Show 25 contacts per page
-        page = request.GET.get('page')
-        all_entries = paginator.get_page(page)
-
-        return render(request, template, {'all_entries':all_entries, 'query':query})
 
 
 # QUESTA è LA SINGOLA ENTRY
@@ -217,162 +163,22 @@ def pagina_api(request):
     return render(request, 'api.html', {})
 
 
-def indice_glossario(request):   
+# about pages section
+def che_cos_e_un_metaglossario(request):
+    return render(request, 'about/che_cos_e_un_metaglossario.html', {})
 
-    template = "indice_glossario.html" #il template è sempre lo stesso
-    all_entries = prepared_terminology.objects.all() #funziona lo stesso anche se dice Class 'glossary_entry' has no 'objects' memberpylint(no-member)
+def istruzioni_per_l_uso(request):
+    return render(request, 'about/istruzioni_per_l_uso.html', {})
 
-    return render(request, template, {'all_entries':all_entries})
+def bibliografia(request):
+    return render(request, 'about/bibliografia.html', {})
 
+def perche_un_metaglossario(request):
+    return render(request, 'about/perche_un_metaglossario.html', {})
 
+def ringraziamenti(request):
+    return render(request, 'about/ringraziamenti.html', {})
 
-
-
-def metaglossario(request):
-    
-    # salva in variabile python ciò che il template mi indica come like_term, finisce anche nell'url
-    # qui è vuoto
-    like_term_query = request.GET.get('like_term')
-
-    # senza  il comando LIKE
-    Query_initial_string = "SELECT Lemmi.Thing, Acronimi.Thing, Definizioni.Thing, Titolo_documento_fonte.Thing, Url_documento_fonte.Thing FROM app_metaglossario_model_Things AS Url_documento_fonte INNER JOIN (app_metaglossario_model_is_Url_documento_fonte_of INNER JOIN ((((app_metaglossario_model_is_Lemma_of INNER JOIN ((app_metaglossario_model_Things AS Acronimi INNER JOIN app_metaglossario_model_is_Acronimo_of ON Acronimi.ID_Thing = app_metaglossario_model_is_Acronimo_of.ID_soggetto) INNER JOIN app_metaglossario_model_Things AS Lemmi ON app_metaglossario_model_is_Acronimo_of.ID_oggetto = Lemmi.ID_Thing) ON app_metaglossario_model_is_Lemma_of.ID_soggetto = Lemmi.ID_Thing) INNER JOIN app_metaglossario_model_Things AS Definizioni ON app_metaglossario_model_is_Lemma_of.ID_oggetto = Definizioni.ID_Thing) INNER JOIN app_metaglossario_model_is_Titolo_documento_fonte_of ON Definizioni.ID_Thing = app_metaglossario_model_is_Titolo_documento_fonte_of.ID_oggetto) INNER JOIN app_metaglossario_model_Things AS Titolo_documento_fonte ON app_metaglossario_model_is_Titolo_documento_fonte_of.ID_soggetto = Titolo_documento_fonte.ID_Thing) ON app_metaglossario_model_is_Url_documento_fonte_of.ID_oggetto = Titolo_documento_fonte.ID_Thing) ON Url_documento_fonte.ID_Thing = app_metaglossario_model_is_Url_documento_fonte_of.ID_soggetto ORDER BY Lemmi.Thing;"     
-         # metto questa perchè è per dire che di default la stringa di query è quella senza like
-
-    #  Query_initial_string = "SELECT Lemmi.Thing, Acronimi.Thing, Definizioni.Thing, app_metaglossario_model_things.Thing AS Titolo_documento_fonte FROM (((app_metaglossario_model_is_Lemma_of INNER JOIN ((app_metaglossario_model_Things AS Acronimi INNER JOIN app_metaglossario_model_is_Acronimo_of ON Acronimi.ID_Thing = app_metaglossario_model_is_Acronimo_of.ID_soggetto) INNER JOIN app_metaglossario_model_Things AS Lemmi ON app_metaglossario_model_is_Acronimo_of.ID_oggetto = Lemmi.ID_Thing) ON app_metaglossario_model_is_Lemma_of.ID_soggetto = Lemmi.ID_Thing) INNER JOIN app_metaglossario_model_Things AS Definizioni ON app_metaglossario_model_is_Lemma_of.ID_oggetto = Definizioni.ID_Thing) INNER JOIN app_metaglossario_model_is_Titolo_documento_fonte_of ON Definizioni.ID_Thing = app_metaglossario_model_is_Titolo_documento_fonte_of.ID_oggetto) INNER JOIN app_metaglossario_model_Things ON app_metaglossario_model_is_Titolo_documento_fonte_of.ID_soggetto = app_metaglossario_model_Things.ID_Thing ORDER BY Lemmi.Thing;"
-   
-
-    #da access a django sql puro
-
-    #per evitare confilitti nel like cambia " con '"
-
-    #cambia * con %
-
-    # i nomi delle tabelle e delle relazioni protrebbero cambiare
-
-    # ricerca in tutti i campi acq, metodo OR
-    # Query_initial_string = "SELECT Lemmi.Thing, Acronimi.Thing, Definizioni.Thing FROM (app_metaglossario_model_is_Lemma_of INNER JOIN ((app_metaglossario_model_Things AS Acronimi INNER JOIN app_metaglossario_model_is_Acronimo_of ON Acronimi.ID_Thing = app_metaglossario_model_is_Acronimo_of.ID_soggetto) INNER JOIN app_metaglossario_model_Things AS Lemmi ON app_metaglossario_model_is_Acronimo_of.ID_oggetto = Lemmi.ID_Thing) ON app_metaglossario_model_is_Lemma_of.ID_soggetto = Lemmi.ID_Thing) INNER JOIN app_metaglossario_model_Things AS Definizioni ON app_metaglossario_model_is_Lemma_of.ID_oggetto = Definizioni.ID_Thing WHERE (((Lemmi.Thing) Like '%acq%') OR ((Acronimi.Thing) Like '%acq%') OR ((Definizioni.Thing) Like '%acq%')) ORDER BY Lemmi.Thing"
-
-    # backup original string
-    # Query_initial_string = "SELECT Lemmi.Thing, Acronimi.Thing, Definizioni.Thing FROM (app_metaglossario_model_is_Lemma_of INNER JOIN ((app_metaglossario_model_Things AS Acronimi INNER JOIN app_metaglossario_model_is_Acronimo_of ON Acronimi.ID_Thing = app_metaglossario_model_is_Acronimo_of.ID_soggetto) INNER JOIN app_metaglossario_model_Things AS Lemmi ON app_metaglossario_model_is_Acronimo_of.ID_oggetto = Lemmi.ID_Thing) ON app_metaglossario_model_is_Lemma_of.ID_soggetto = Lemmi.ID_Thing) INNER JOIN app_metaglossario_model_Things AS Definizioni ON app_metaglossario_model_is_Lemma_of.ID_oggetto = Definizioni.ID_Thing"
-
-    
-    template = "metaglossario.html" #il template è sempre lo stesso
-
-    # no modello eprchè mi connetto diretto al db
-
-
-
-    # se la query è stata fatta
-    if like_term_query:
-        
-        like_term_query = request.GET.get('like_term')
-
-        if "'" in like_term_query:
-
-            like_term_query="Non inserire apostrofi! Query annullata."
-            # non lo restituisce al template perchè c'è un javascript che 
-            # copia e incolla il like_term e lo incolla negli hidden form
-
-            
-        
-
-        # al posto di selected_entries
-
-        # con il comando like con aggiunta dell'utente - solo termine like
-        # l'element like_term è incatenato tra le % per usare il like con sql diretto
-        Query_string = "SELECT Lemmi.Thing, Acronimi.Thing, Definizioni.Thing, Titolo_documento_fonte.Thing, Url_documento_fonte.Thing FROM app_metaglossario_model_Things AS Url_documento_fonte INNER JOIN (app_metaglossario_model_is_Url_documento_fonte_of INNER JOIN ((((app_metaglossario_model_is_Lemma_of INNER JOIN ((app_metaglossario_model_Things AS Acronimi INNER JOIN app_metaglossario_model_is_Acronimo_of ON Acronimi.ID_Thing = app_metaglossario_model_is_Acronimo_of.ID_soggetto) INNER JOIN app_metaglossario_model_Things AS Lemmi ON app_metaglossario_model_is_Acronimo_of.ID_oggetto = Lemmi.ID_Thing) ON app_metaglossario_model_is_Lemma_of.ID_soggetto = Lemmi.ID_Thing) INNER JOIN app_metaglossario_model_Things AS Definizioni ON app_metaglossario_model_is_Lemma_of.ID_oggetto = Definizioni.ID_Thing) INNER JOIN app_metaglossario_model_is_Titolo_documento_fonte_of ON Definizioni.ID_Thing = app_metaglossario_model_is_Titolo_documento_fonte_of.ID_oggetto) INNER JOIN app_metaglossario_model_Things AS Titolo_documento_fonte ON app_metaglossario_model_is_Titolo_documento_fonte_of.ID_soggetto = Titolo_documento_fonte.ID_Thing) ON app_metaglossario_model_is_Url_documento_fonte_of.ID_oggetto = Titolo_documento_fonte.ID_Thing) ON Url_documento_fonte.ID_Thing = app_metaglossario_model_is_Url_documento_fonte_of.ID_soggetto WHERE (((Lemmi.Thing) Like '%" + like_term_query + "%')) OR (((Acronimi.Thing) Like '%" + like_term_query + "%')) OR (((Definizioni.Thing) Like '%" + like_term_query + "%')) OR (((Titolo_documento_fonte.Thing) Like '%" + like_term_query + "%')) OR (((Url_documento_fonte.Thing) Like '%" + like_term_query + "%')) ORDER BY Lemmi.Thing;"     
-        #  Query_string = "SELECT Lemmi.Thing, Acronimi.Thing, Definizioni.Thing, app_metaglossario_model_things.Thing AS Titolo_documento_fonte FROM (((app_metaglossario_model_is_Lemma_of INNER JOIN ((app_metaglossario_model_Things AS Acronimi INNER JOIN app_metaglossario_model_is_Acronimo_of ON Acronimi.ID_Thing = app_metaglossario_model_is_Acronimo_of.ID_soggetto) INNER JOIN app_metaglossario_model_Things AS Lemmi ON app_metaglossario_model_is_Acronimo_of.ID_oggetto = Lemmi.ID_Thing) ON app_metaglossario_model_is_Lemma_of.ID_soggetto = Lemmi.ID_Thing) INNER JOIN app_metaglossario_model_Things AS Definizioni ON app_metaglossario_model_is_Lemma_of.ID_oggetto = Definizioni.ID_Thing) INNER JOIN app_metaglossario_model_is_Titolo_documento_fonte_of ON Definizioni.ID_Thing = app_metaglossario_model_is_Titolo_documento_fonte_of.ID_oggetto) INNER JOIN app_metaglossario_model_Things ON app_metaglossario_model_is_Titolo_documento_fonte_of.ID_soggetto = app_metaglossario_model_Things.ID_Thing WHERE (((Lemmi.Thing) Like '%" + like_term_query + "%') OR ((Acronimi.Thing) Like '%" + like_term_query + "%') OR ((Definizioni.Thing) Like '%" + like_term_query + "%')) ORDER BY Lemmi.Thing;"
-   
-
-    # se il termine like è stato lasciato vuoto
-    else:
-
-        # la query rimane quella dichiarata di default
-        Query_string = Query_initial_string
-
-    print("************************************************************")
-
-    print("Query SQL acquisita: ")
-    print(Query_string)
-
-    #connessione al db
-
-    import psycopg2 as pg2
-
-    # questo poi come lo nascondo?
-    mydb = pg2.connect(user='zogpunyhfdizcj', password='e4e8bbb8ef02572179d0ccdc1a146d4f2eba03e587525349bb4436a80b87f4ec',
-                                    host='ec2-46-51-190-87.eu-west-1.compute.amazonaws.com', database='dfibp7p1uu70v7')
-
-    #'postgres://zogpunyhfdizcj:e4e8bbb8ef02572179d0ccdc1a146d4f2eba03e587525349bb4436a80b87f4ec@ec2-46-51-190-87.eu-west-1.compute.amazonaws.com:5432/dfibp7p1uu70v7')
-    #postgres://user:password@host:porta/database_name
-
-    # query sul db
-    my_cursor = mydb.cursor()
-    my_cursor.execute(Query_string)
-
-    query_result_list = my_cursor.fetchall()
-
-    len_result_list = len(query_result_list) 
-    
-    
-
-    #Parla alla console
-    print("Query eseguita sul database con successo, %s risultati inviati al browser!" % len_result_list)
-
-    print("************************************************************")
-
-    # genera una tabella solo coi risultati da pubblicare
-
-    # trasforma la lista di tuple in dataframe
-    query_result_df = pd.DataFrame(query_result_list)
-
-    #devo creare due dataframe, uno con things e uno con gli id da usare nel query wizard
-
-    # seleziona dalla
-
-    print("Risultati della query:")
-    print(query_result_df)
-    
-    print("************************************************************")
-
-    # trasforma il dataframe in una lista di liste
-    query_result_lol = np.array(query_result_df)
-    
-    # trasforma il dataframe in una lista di tuple
-    query_result_list = [tuple(sottolista) for sottolista in query_result_lol]
-    
-
-    # Pagination - funziona in questo punto ma se lo metti prima no
-    paginator = Paginator(query_result_list, 25) # Show 25 contacts per page
-    page = request.GET.get('page')
-    query_result_list = paginator.get_page(page) 
-
-
-    #in questo dizionario stanno le variabili che le viste consegnano al template
-    context_dict={'queryresult_key':query_result_list, 'len_result_list_key':len_result_list, 'like_term_query':like_term_query}
-
-    return render(request, template, context_dict)
-
-
-
-
-
-# def vista_ricerca_semplice(request):
-
-#     template = "glossario.html"
-
-#     query = request.GET.get('q') #q è variabile risultante dalla query del database
-
-#     selected_entries = glossary_entry.objects.filter(Q(Lemma_it__icontains=query))
-
-#     context = {'selected_entries':selected_entries}
-
-#     #return render(request, template, context)
-
-
-
-
-
-
+# ----------
 
 
