@@ -130,7 +130,7 @@ def codice_sorgente(request):
     return render(request, 'info/codice_sorgente.html', {})
 
 def come_sono_organizzati_i_dati(request):
-    return render(request, 'info/che_cos_e_un_metaglossario.html', {})
+    return render(request, 'info/come_sono_organizzati_i_dati.html', {})
 
 def istruzioni_per_l_uso(request):
     return render(request, 'info/istruzioni_per_l_uso.html', {})
