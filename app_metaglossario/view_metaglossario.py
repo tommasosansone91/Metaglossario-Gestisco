@@ -90,12 +90,23 @@ def metaglossario(request):
 
     # password 2 - .passwords.txt
 
+    import os ###
+    import django_heroku ###
+    from decouple import config ###
+
+    # per gestire user e password del database postgresql che cambiano ogni 24 ore sugli host
+    import dj_database_url ###
+
+    view_db_user = config("view_db_user")
+    view_db_password = config("view_db_password")
+    view_db_host = config("view_db_host")
+    view_db_database = config("view_db_database")
 
 
-    
-    mydb = pg2.connect(user='zogpunyhfdizcj', password='e4e8bbb8ef02572179d0ccdc1a146d4f2eba03e587525349bb4436a80b87f4ec',
-                                    host='ec2-46-51-190-87.eu-west-1.compute.amazonaws.com', database='dfibp7p1uu70v7')
+    mydb = pg2.connect(user=view_db_user, password=view_db_password,
+                                    host=view_db_host, database=view_db_database)
 
+                                    
     #postgres://user:password@host:porta/database_name
 
     # query sul db
