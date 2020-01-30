@@ -3,7 +3,7 @@ from .models import glossary_entry
 from .models import glossary_file
 from .models import acquired_terminology
 from .models import prepared_terminology
-from .models import displaying_terminology
+# from .models import displaying_terminology
 
 # importa tutti i modelli del metaglossario
 from app_metaglossario.entity_relationship_models import *
@@ -44,7 +44,7 @@ admin.site.register(glossary_entry, Controllo_import_export)
 admin.site.register(glossary_file)
 admin.site.register(acquired_terminology, Controllo_import_export)
 admin.site.register(prepared_terminology, Controllo_import_export)
-admin.site.register(displaying_terminology, Controllo_import_export)
+# admin.site.register(displaying_terminology, Controllo_import_export)
 
 
 # qui registro i modelli a nodi

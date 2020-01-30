@@ -82,6 +82,8 @@ def metaglossario(request):
 
     #connessione al db
 
+    
+
     import psycopg2 as pg2
 
     # questo poi come lo nascondo?

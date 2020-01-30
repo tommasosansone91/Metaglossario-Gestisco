@@ -10,7 +10,7 @@ from .algoritmi_processing.script_ausiliari import *
 # per gli script di elaborazione della terminologia
 from .algoritmi_processing.PGI import algoritmo_PGI
 from .algoritmi_processing.SR import algoritmo_SR
-from .algoritmi_processing.WD import algoritmo_WD
+# from .algoritmi_processing.WD import algoritmo_WD
 
 
 def run_script(request):   
