@@ -87,10 +87,15 @@ def metaglossario(request):
     import psycopg2 as pg2
 
     # questo poi come lo nascondo?
+
+    # password 2 - .passwords.txt
+
+
+
+    
     mydb = pg2.connect(user='zogpunyhfdizcj', password='e4e8bbb8ef02572179d0ccdc1a146d4f2eba03e587525349bb4436a80b87f4ec',
                                     host='ec2-46-51-190-87.eu-west-1.compute.amazonaws.com', database='dfibp7p1uu70v7')
 
-    #'postgres://zogpunyhfdizcj:e4e8bbb8ef02572179d0ccdc1a146d4f2eba03e587525349bb4436a80b87f4ec@ec2-46-51-190-87.eu-west-1.compute.amazonaws.com:5432/dfibp7p1uu70v7')
     #postgres://user:password@host:porta/database_name
 
     # query sul db
