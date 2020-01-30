@@ -97,16 +97,16 @@ def metaglossario(request):
     # per gestire user e password del database postgresql che cambiano ogni 24 ore sugli host
     import dj_database_url ###
 
-    view_db_user = config("view_db_user")
+    view_db_user = config("VIEW_DB_USER")
     view_db_password = config("view_db_password")
     view_db_host = config("view_db_host")
     view_db_database = config("view_db_database")
 
 
-    mydb = pg2.connect(user=view_db_user, password=view_db_password,
+    mydb = pg2.connect(user=VIEW_DB_USER, password=view_db_password,
                                     host=view_db_host, database=view_db_database)
 
-                                    
+
     #postgres://user:password@host:porta/database_name
 
     # query sul db
