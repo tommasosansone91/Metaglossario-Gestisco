@@ -411,7 +411,7 @@ def algoritmo_SR():
     finders.find(saving_folder_name)
     searched_locations = finders.searched_locations
     df_dir = os.path.join(searched_locations[0]+r'\\'+saving_folder_name+r'\\'+saving_file_name)
-    Elab2.to_excel(df_dir)
+    Terminologia_metaglossario.to_excel(df_dir)
 
     print("Il dataframe Terminologia_metaglossario è stato salvato in una tabella excel nella directory %s !" % df_dir)
 												
@@ -435,6 +435,8 @@ def algoritmo_SR():
 
     Things = Things.sort_values( [ colonne_Things[0], colonne_Things[1] ] )
     Things = Things.reset_index(drop=True)
+
+    print(Things)
 
     last_ID_unique_A = Things.iloc[0, 0] 
     last_ID_unique_B = Things.iloc[0, 1] 

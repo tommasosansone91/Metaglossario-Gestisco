@@ -16,14 +16,17 @@ from .algoritmi_processing.SR import algoritmo_SR
 def run_script(request):   
 
     start_time = printout()
+
+   
     # erase_glossary_entry()
     # erase_acquired_terminology()
+
     # pour_entire_simple_model()
     # pour_entire_file_model()
     # pour_latest_file()
     
     # algoritmo_PGI()
-    algoritmo_SR()
+    # algoritmo_SR()
     # algoritmo_WD()
 
     # erase_database_tables()
