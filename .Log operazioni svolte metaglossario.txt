@@ -3365,3 +3365,8 @@ is_Acronimo_of = pd.read_excel(folder_ER_dir+r'\\is_Acronimo_of.xlsx', head=True
 
 voglio aggiungere al query wizard lo slot in cui l'utente inserisce una parola e 
 questa viene chainata dentro la query iniziale
+
+
+le variabili ambientali per nascondere le password dai files che carico sul server vanno messe nel fle .env che permette di leggerle in locale,
+ma per farle funzionare su eroku devo compilare l'apposita sezione inserendo le variabili manualmente
+vedi https://stackoverflow.com/questions/49216958/heroku-declare-it-as-envvar-or-define-a-default-value
