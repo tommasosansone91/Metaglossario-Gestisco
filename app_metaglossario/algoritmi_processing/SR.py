@@ -402,7 +402,7 @@ def algoritmo_SR():
 
     # creo una copia di elab1 per il download agli utenti, ci metto solo elementi non sensibili
 
-    Terminologia_metaglossario = pd.concat([ Elab1["Lemma"], Elab1["Acronimo"], Elab1["Definizione"], Elab1["Ambito_riferimento"], Elab1["Autore_definizione"], Elab1["Posizione_definizione"], Elab1["Url_definizione"], Elab1["Titolo_documento_fonte"], Elab1["Autore_documento_fonte"], Elab1["Host_documento_fonte"], Elab1["Url_documento_fonte"], Elab1["Commento_entry"], Elab1["Data_inserimento_entry"], Elab1["Id_statico_entry"] ])
+    Terminologia_metaglossario = pd.concat([ Elab1["Lemma"], Elab1["Acronimo"], Elab1["Definizione"], Elab1["Ambito_riferimento"], Elab1["Autore_definizione"], Elab1["Posizione_definizione"], Elab1["Url_definizione"], Elab1["Titolo_documento_fonte"], Elab1["Autore_documento_fonte"], Elab1["Host_documento_fonte"], Elab1["Url_documento_fonte"], Elab1["Commento_entry"], Elab1["Data_inserimento_entry"], Elab1["Id_statico_entry"] ], axis=1)
 
     saving_file_name = 'Terminologia_metaglossario.xlsx'
 

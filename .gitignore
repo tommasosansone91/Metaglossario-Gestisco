@@ -2,13 +2,12 @@
 .admin.txt
 .directory.txt
 .github info.txt
-#.appunti metaglossario gestisco.txt
 .AAA - ATTIVARE VIRTUALENV.txt
-#.Log operazioni svolte metaglossario.txt
+.Log_operazioni_svolte_metaglossario.txt
 .to do.txt
 .spiegazione interfaccia metaglossario 5.jpg
 .appunti heroku.txt
-.appunti metaglossario gestisco.txt
+.appunti_metaglossario_gestisco.txt
 .appunti postgresql.txt
 .appunti docker.txt
 .passwords.txt
