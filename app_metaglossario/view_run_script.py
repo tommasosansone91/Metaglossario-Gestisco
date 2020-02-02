@@ -19,14 +19,14 @@ def run_script(request):
 
    
     # erase_glossary_entry()
-    # erase_acquired_terminology()
+    erase_acquired_terminology()
 
     # pour_entire_simple_model()
-    # pour_entire_file_model()
+    pour_entire_file_model()
     # pour_latest_file()
     
-    # algoritmo_PGI()
-    # algoritmo_SR()
+    algoritmo_PGI()
+    algoritmo_SR()
     # algoritmo_WD()
 
     # erase_database_tables()
