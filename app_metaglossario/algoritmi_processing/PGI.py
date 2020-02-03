@@ -36,8 +36,8 @@ def algoritmo_PGI():
         if not pd.isnull(element.Lemma):
             prepared_entry.Lemma = element.Lemma
 
-        if not pd.isnull(element.Id_statico_entry):
-            prepared_entry.Id_statico_entry = element.Id_statico_entry
+        if not pd.isnull(element.Acronimo):
+            prepared_entry.Acronimo = element.Acronimo
 
         if not pd.isnull(element.Definizione):    
             prepared_entry.Definizione = element.Definizione
@@ -69,6 +69,7 @@ def algoritmo_PGI():
         if not pd.isnull(element.Commento_entry):    
             prepared_entry.Commento_entry = element.Commento_entry
 
+
             
         prepared_entry.Data_inserimento_entry = element.Data_inserimento_entry
         prepared_entry.Id_statico_entry = element.Id_statico_entry               
@@ -92,8 +93,8 @@ def algoritmo_PGI():
         if not pd.isnull(prepared_entry.Lemma):
             prepared_entry.Lemma.title() # non è veramente necessario
 
-        if not pd.isnull(prepared_entry.Id_statico_entry):
-            prepared_entry.Id_statico_entry.upper()
+        if not pd.isnull(prepared_entry.Acronimo):
+            prepared_entry.Acronimo.upper()
             
         if not pd.isnull(prepared_entry.Ambito_riferimento):    
             prepared_entry.Ambito_riferimento.title() # non è veramente necessario
@@ -139,8 +140,8 @@ def algoritmo_PGI():
             if not pd.isnull(prepared_entry.Lemma):
                 prepared_entry.Lemma = prepared_entry.Lemma.replace("  ", " ")
 
-            if not pd.isnull(prepared_entry.Id_statico_entry):
-                prepared_entry.Id_statico_entry = prepared_entry.Id_statico_entry.replace("  ", " ")
+            if not pd.isnull(prepared_entry.Acronimo):
+                prepared_entry.Acronimo = prepared_entry.Acronimo.replace("  ", " ")
 
             if not pd.isnull(prepared_entry.Definizione):    
                 prepared_entry.Definizione = prepared_entry.Definizione.replace("  ", " ")
@@ -167,9 +168,13 @@ def algoritmo_PGI():
                 prepared_entry.Commento_entry = prepared_entry.Commento_entry.replace("  ", " ")                      
         
 
+            # non possono esserci doppi spazi in data, id e switch
+
             prepared_entry.save()
 
-            # elimina spazi da davanti e dietro
+
+
+    # elimina spazi da davanti e dietro
 
 
     print("Eliminazione dei doppi spazi terminata con successo!")
@@ -185,11 +190,11 @@ def algoritmo_PGI():
             if prepared_entry.Lemma[-1] == " ":
                 prepared_entry.Lemma = prepared_entry.Lemma[0:-1]
 
-        if not pd.isnull(prepared_entry.Id_statico_entry):
-            if prepared_entry.Id_statico_entry[0] == " ":
-                prepared_entry.Id_statico_entry = prepared_entry.Id_statico_entry[1:]
-            if prepared_entry.Id_statico_entry[-1] == " ":
-                prepared_entry.Id_statico_entry = prepared_entry.Id_statico_entry[0:-1]
+        if not pd.isnull(prepared_entry.Acronimo):
+            if prepared_entry.Acronimo[0] == " ":
+                prepared_entry.Acronimo = prepared_entry.Acronimo[1:]
+            if prepared_entry.Acronimo[-1] == " ":
+                prepared_entry.Acronimo = prepared_entry.Acronimo[0:-1]
 
 
         if not pd.isnull(prepared_entry.Definizione):    

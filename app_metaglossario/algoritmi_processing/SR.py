@@ -589,7 +589,7 @@ def algoritmo_SR():
     print(np.transpose(righe_eliminate_Things))
     print(np.transpose(righe_eliminate))
 
-    print("***********************************")
+
 
     
 
