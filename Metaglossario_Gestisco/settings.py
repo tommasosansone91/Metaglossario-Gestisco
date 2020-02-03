@@ -90,9 +90,12 @@ DATABASES = {
     }
 }
 
+
+database__default_credential_url= config("DATABASE_URL")
+
 # nascondi questa password
 # password 1 - .passwords.txt
-DATABASES['default']=dj_database_url.config(default='postgres://zogpunyhfdizcj:e4e8bbb8ef02572179d0ccdc1a146d4f2eba03e587525349bb4436a80b87f4ec@ec2-46-51-190-87.eu-west-1.compute.amazonaws.com:5432/dfibp7p1uu70v7')
+DATABASES['default']=dj_database_url.config(default=database__default_credential_url)
 
 # #postgres://user:password@host:porta/database_name
 
