@@ -1,4 +1,8 @@
-from app_metaglossario.entity_relationship_models import *
+from app_metaglossario.models import *
+
+
+import pandas as pd
+
 
 
 def pour_entire_simple_model():
@@ -6,9 +10,6 @@ def pour_entire_simple_model():
     # questo algoritmo va ottimizzato mettendo i cicli delle etichette delle colonne al posto di richiamare ogni elemento del database con la propria etichetta
 
     print("Inizia il riversamento di tutti i dati dal modello glossary_entry al modello acquired_terminology!")
-
-    import pandas as pd
-    from app_metaglossario.models import glossary_entry, acquired_terminology
 
     all_entries = glossary_entry.objects.all()
 
@@ -72,10 +73,6 @@ def pour_entire_file_model():
     # questo algoritmo va ottimizzato mettendo i cicli delle etichette delle colonne al posto di richiamare ogni elemento del database con la propria etichetta
 
     print("Inizia il riversamento della terminologia di tutti i file salvati nel modello glossary_file verso il modello acquired_terminology...")
-
-    import pandas as pd
-    
-    from app_metaglossario.models import glossary_file, acquired_terminology
 
     # tutti gli oggetti nel modello glossario sono salvati qui
     all_files = glossary_file.objects.all()
@@ -177,8 +174,6 @@ def pour_latest_entry():
     
     print("Il record inserito viene riversato nel modello acquired_terminology!")
 
-    import pandas as pd
-    from app_metaglossario.models import glossary_entry, acquired_terminology
 
     element = glossary_entry.objects.latest('Data_inserimento_entry')
 
@@ -234,8 +229,6 @@ def pour_latest_file():
 
     # questo algoritmo va ottimizzato mettendo i cicli delle etichette delle colonne al posto di richiamare ogni elemento del database con la propria etichetta
 
-    import pandas as pd    
-    from app_metaglossario.models import glossary_file, acquired_terminology
 
     latest_file_element = glossary_file.objects.latest('Data_inserimento_glossary')
 
@@ -326,30 +319,14 @@ def pour_latest_file():
     # elimina tutti i dati dentro acquired terminoliogy
 def erase_acquired_terminology():
 
-    from app_metaglossario.models import acquired_terminology
+    
     acquired_terminology.objects.all().delete()
     print("Eliminati tutti i dati dentro acquired_terminology!")
 
 
 # elimina tutti i dati dentro acquired terminoliogy
 def erase_glossary_entry():
-
-    from app_metaglossario.models import glossary_entry
+  
     glossary_entry.objects.all().delete()
     print("Eliminati tutti i dati dentro glossary_entry!")
 
-
-def erase_database_tables():
-
-    modelli_metaglossario = [ model_Things, model_is_Acronimo_of, model_is_Lemma_of, model_is_Ambito_riferimento_of, model_is_Autore_definizione_of, model_is_Posizione_definizione_of, model_is_Url_definizione_of, model_is_Autore_documento_fonte_of, model_is_Url_documento_fonte_of, model_is_Commento_entry_of, model_is_Data_inserimento_entry_of, model_is_Id_statico_entry_of, model_is_Admin_approval_switch_of ]
-   
-    for modello in modelli_metaglossario:
-
-        modello.objects.all().delete()
-        print("Eliminati tutti i dati dentro %s!" % modello)  
-
-    print("*********************************************") 
-    print("Eliminati tutti i dati dentro i modelli di entità e relazioni del metaglossario!") 
-
-
-# per il modello prepared la funzione di eliminazione è già insita nell'algoritmo PGI

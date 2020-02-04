@@ -26,6 +26,9 @@ voglio fare una cosa che mi metta da una parte i campi per le fonti italiane, da
 }
 
 
+/* hovering e focus distinti colori per italia e svizzera */
+
+
 .form-group input:hover{
   
   /* border-color: red; */

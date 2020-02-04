@@ -3,7 +3,6 @@ from . import views
 
 # viste separate per i template glossario e metaglossario
 from . import view_glossario
-from . import view_metaglossario
 from . import view_run_script
 
 # serve a permettere il salvataggio dei media
@@ -16,7 +15,6 @@ urlpatterns=[
     path('indice_glossario', views.indice_glossario, name="indice_glossario"),
     
     path('glossario', view_glossario.glossario, name="glossario"),
-    path('metaglossario', view_metaglossario.metaglossario, name="metaglossario"),
 
     path('aggiungi_terminologia', views.aggiungi_terminologia, name="aggiungi_terminologia"),
     path('aggiungi_terminologia_massa', views.aggiungi_glossario, name="aggiungi_glossario"),

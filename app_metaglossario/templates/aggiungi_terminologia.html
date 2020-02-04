@@ -2,6 +2,8 @@
 
 {% block content %}
 
+{% load static %}
+
     <h1>Aggiungi terminologia</h1>
     <br>
     <p id="firstpar">
@@ -19,23 +21,44 @@
 
         <div class="glossary-form"></div>
 
-            <div class="form-group">
-                  <label for="glossary_entry_input_1">Lemma</label>
-                  <input name="Lemma" type="text" class="form-control" placeholder="">
+        
+            <div class="form-group" style="display:inline-block; width:48%;">
+                  <label>Lemma <img src="{% static 'img/it_flag_icon.png' %}" style="width:20px;" align="bottom" alt="italy flag icon" ></label>
+
+                  <input name="Lemma_it" type="text" class="form-control" placeholder="">
+            </div>
+
+            <div class="form-group" style="width:48%; float: right;">
+                  <label>Lemma <img src="{% static 'img/ch_flag_icon.png' %}" style="width:20px;" align="bottom" alt="switzerland flag icon" ></label>
+                  <input name="Lemma_ch" type="text" class="form-control" placeholder="">
             </div>
 
 
-            <div class="form-group">
-                  <label for="glossary_entry_input_2">Acronimo</label>
+
+            <div class="form-group" style="display:inline-block; width:48%;">
+                  <label>Acronimo <img src="{% static 'img/it_flag_icon.png' %}" style="width:20px;" align="bottom" alt="italy flag icon" ></label>
                   <small id="inputHelp" class="form-text text-muted">Sigla abbreviativa del Lemma. Nel caso in cui il lemma sia una grandezza fisica, inserire la lettera o il simbolo che la identifica.</small>
-                  <input name="Acronimo" type="text" class="form-control" placeholder="">
+                  <input name="Acronimo_it" type="text" class="form-control" placeholder="">
+            </div>
+
+            <div class="form-group" style="width:48%; float: right;">
+                  <label>Acronimo <img src="{% static 'img/ch_flag_icon.png' %}" style="width:20px;" align="bottom" alt="switzerland flag icon" ></label>
+                  <small id="inputHelp" class="form-text text-muted">Sigla abbreviativa del Lemma. Nel caso in cui il lemma sia una grandezza fisica, inserire la lettera o il simbolo che la identifica.</small>
+                  <input name="Acronimo_ch" type="text" class="form-control" placeholder="">
             </div>
 
 
-            <div class="form-group" >
-                  <label for="glossary_entry_input_3">Definizione</label>
+
+            <div class="form-group" style="display:inline-block; width:48%;">
+                  <label>Definizione <img src="{% static 'img/it_flag_icon.png' %}" style="width:20px;" align="bottom" alt="italy flag icon" ></label>
                   <small id="inputHelp" class="form-text text-muted">Non inserire testo proveniente da due o più fonti diverse.</small>
-                  <textarea style="height:150px" name="Definizione" type="text" class="form-control" placeholder=""></textarea>
+                  <textarea style="height:150px" name="Definizione_it" type="text" class="form-control" placeholder=""></textarea>
+            </div>
+
+            <div class="form-group" style="width:48%; float: right;">
+                  <label>Definizione <img src="{% static 'img/ch_flag_icon.png' %}" style="width:20px;" align="bottom" alt="switzerland flag icon" ></label>
+                  <small id="inputHelp" class="form-text text-muted">Non inserire testo proveniente da due o più fonti diverse.</small>
+                  <textarea style="height:150px" name="Definizione_ch" type="text" class="form-control" placeholder=""></textarea>
             </div>
 
 
@@ -46,55 +69,103 @@
             <!-- </div> -->
 
 
-            <div class="form-group">
-                    <label for="glossary_entry_input_5">Autore della definizione</label>
+            <div class="form-group" style="display:inline-block; width:48%;">
+                    <label>Autore della definizione <img src="{% static 'img/it_flag_icon.png' %}" style="width:20px;" align="bottom" alt="italy flag icon" ></label>
                     <small id="inputHelp" class="form-text text-muted">Compilare solo se il testo della definizione riporta espressamente l'autore.</small>
-                    <input name="Autore_definizione" type="text" class="form-control" placeholder="">
+                    <input name="Autore_definizione_it" type="text" class="form-control" placeholder="">
+            </div>
+
+            <div class="form-group" style="width:48%; float: right;">
+                    <label>Autore della definizione <img src="{% static 'img/ch_flag_icon.png' %}" style="width:20px;" align="bottom" alt="switzerland flag icon" ></label>
+                    <small id="inputHelp" class="form-text text-muted">Compilare solo se il testo della definizione riporta espressamente l'autore.</small>
+                    <input name="Autore_definizione_ch" type="text" class="form-control" placeholder="">
             </div>
 
 
-            <div class="form-group">
-                    <label for="glossary_entry_input_6">Posizione della definizione nel documento fonte</label>
+
+            <div class="form-group" style="display:inline-block; width:48%;">
+                    <label>Posizione della definizione nel documento fonte <img src="{% static 'img/it_flag_icon.png' %}" style="width:20px;" align="bottom" alt="italy flag icon" ></label>
                     <small id="inputHelp" class="form-text text-muted">Riferimento che indichi dove è posizionata la definizione nel documento fonte.<br>Ad esempio il titolo del paragrafo, il numero di pagina, il numero di un elenco, per le leggi la sequenza [art, comma, lettera], il tempo di riproduzione se la fonte è un file audio o video, ecc.<br>Evitare informazioni generiche come "a metà documento", all'inizio", ecc.</small>
-                    <input name="Posizione_definizione" type="text" class="form-control" placeholder="">
+                    <input name="Posizione_definizione_it" type="text" class="form-control" placeholder="">
             </div>
 
 
-            <div class="form-group">
-                    <label for="glossary_entry_input_7">URL della definizione</label>
+            <div class="form-group" style="width:48%; float: right;">
+                    <label>Posizione della definizione nel documento fonte <img src="{% static 'img/ch_flag_icon.png' %}" style="width:20px;" align="bottom" alt="switzerland flag icon" ></label>
+                    <small id="inputHelp" class="form-text text-muted">Riferimento che indichi dove è posizionata la definizione nel documento fonte.<br>Ad esempio il titolo del paragrafo, il numero di pagina, il numero di un elenco, per le leggi la sequenza [art, comma, lettera], il tempo di riproduzione se la fonte è un file audio o video, ecc.<br>Evitare informazioni generiche come "a metà documento", all'inizio", ecc.</small>
+                    <input name="Posizione_definizione_ch" type="text" class="form-control" placeholder="">
+            </div>
+
+
+            <div class="form-group" style="display:inline-block; width:48%;">
+                    <label>URL della definizione <img src="{% static 'img/it_flag_icon.png' %}" style="width:20px;" align="bottom" alt="italy flag icon" ></label>
                     <small id="inputHelp" class="form-text text-muted">URL che rimanda al punto in cui è posizionata la definizione nel documento fonte. <a href="https://en.wikipedia.org/wiki/Fragment_identifier#Examples" target="_blank">Esempio</a><br>Compilare solo se il documento fonte è caricato sul web e solo se la definizione è individuata da un <a href="https://en.wikipedia.org/wiki/Fragment_identifier" target="_blank" >fragment identifier</a></small>
-                    <input name="Url_definizione" type="url" class="form-control" placeholder="">
+                    <input name="Url_definizione_it" type="url" class="form-control" placeholder="">
+            </div>
+
+            <div class="form-group" style="width:48%; float: right;">
+                    <label>URL della definizione <img src="{% static 'img/ch_flag_icon.png' %}" style="width:20px;" align="bottom" alt="switzerland flag icon" ></label>
+                    <small id="inputHelp" class="form-text text-muted">URL che rimanda al punto in cui è posizionata la definizione nel documento fonte. <a href="https://en.wikipedia.org/wiki/Fragment_identifier#Examples" target="_blank">Esempio</a><br>Compilare solo se il documento fonte è caricato sul web e solo se la definizione è individuata da un <a href="https://en.wikipedia.org/wiki/Fragment_identifier" target="_blank" >fragment identifier</a></small>
+                    <input name="Url_definizione_ch" type="url" class="form-control" placeholder="">
             </div>
 
 
-            <div class="form-group">
-                   <label for="glossary_entry_input_8">Titolo del documento fonte</label>
-                   <input name="Titolo_documento_fonte" type="text" class="form-control" placeholder="">
+
+            <div class="form-group" style="display:inline-block; width:48%;">
+                   <label>Titolo del documento fonte <img src="{% static 'img/it_flag_icon.png' %}" style="width:20px;" align="bottom" alt="italy flag icon" ></label>
+                   <input name="Titolo_documento_fonte_it" type="text" class="form-control" placeholder="">
+            </div>
+
+            <div class="form-group" style="width:48%; float: right;">
+                   <label>Titolo del documento fonte <img src="{% static 'img/ch_flag_icon.png' %}" style="width:20px;" align="bottom" alt="switzerland flag icon" ></label>
+                   <input name="Titolo_documento_fonte_ch" type="text" class="form-control" placeholder="">
             </div>
 
 
-            <div class="form-group">
-                  <label for="glossary_entry_input_9">Autore del documento fonte</label>
+
+            <div class="form-group" style="display:inline-block; width:48%;">
+                  <label>Autore del documento fonte <img src="{% static 'img/it_flag_icon.png' %}" style="width:20px;" align="bottom" alt="italy flag icon" ></label>
                   <small id="inputHelp" class="form-text text-muted">Compilare solo se il documento fonte riporta espressamente l'autore.</small>
-                  <input name="Autore_documento_fonte" type="text" class="form-control" placeholder="">
+                  <input name="Autore_documento_fonte_it" type="text" class="form-control" placeholder="">
+            </div>
+
+            <div class="form-group" style="width:48%; float: right;">
+                  <label>Autore del documento fonte <img src="{% static 'img/ch_flag_icon.png' %}" style="width:20px;" align="bottom" alt="switzerland flag icon" ></label>
+                  <small id="inputHelp" class="form-text text-muted">Compilare solo se il documento fonte riporta espressamente l'autore.</small>
+                  <input name="Autore_documento_fonte_ch" type="text" class="form-control" placeholder="">
             </div>
 
 
-            <div class="form-group">
-                  <label for="glossary_entry_input_10">Host del documento fonte</label>
+
+            <div class="form-group" style="display:inline-block; width:48%;">
+                  <label>Host del documento fonte <img src="{% static 'img/it_flag_icon.png' %}" style="width:20px;" align="bottom" alt="italy flag icon" ></label>
                   <small id="inputHelp" class="form-text text-muted">Soggetto che detiene il dominio del sito web su cui è caricato il documento fonte.<br>Ad esempio, per un glossario caricato sul sito https://www.polimi.it/, inserire Politecnico di Milano.</small>
-                  <input name="Host_documento_fonte" type="text" class="form-control" placeholder="">
+                  <input name="Host_documento_fonte_it" type="text" class="form-control" placeholder="">
+            </div>
+
+            <div class="form-group" style="width:48%; float: right;">
+                  <label>Host del documento fonte <img src="{% static 'img/ch_flag_icon.png' %}" style="width:20px;" align="bottom" alt="switzerland flag icon" ></label>
+                  <small id="inputHelp" class="form-text text-muted">Soggetto che detiene il dominio del sito web su cui è caricato il documento fonte.<br>Ad esempio, per un glossario caricato sul sito https://www.polimi.it/, inserire Politecnico di Milano.</small>
+                  <input name="Host_documento_fonte_ch" type="text" class="form-control" placeholder="">
             </div>
 
 
-            <div class="form-group">
-                  <label for="glossary_entry_input_11">URL del documento fonte</label>
-                  <input name="Url_documento_fonte" type="url" class="form-control" placeholder="">
+
+            <div class="form-group" style="display:inline-block; width:48%;">
+                  <label>URL del documento fonte <img src="{% static 'img/it_flag_icon.png' %}" style="width:20px;" align="bottom" alt="italy flag icon" ></label>
+                  <input name="Url_documento_fonte_it" type="url" class="form-control" placeholder="">
             </div>
 
+            <div class="form-group" style="width:48%; float: right;">
+                  <label >URL del documento fonte <img src="{% static 'img/ch_flag_icon.png' %}" style="width:20px;" align="bottom" alt="switzerland flag icon" ></label>
+                  <input name="Url_documento_fonte_ch" type="url" class="form-control" placeholder="">
+            </div>
+
+            
+
 
             <div class="form-group">
-                  <label for="glossary_entry_input_12">Altro/commento</label>
+                  <label>Altro/commento</label>
                   <small id="inputHelp" class="form-text text-muted">Inserire eventuali ulteriori informazioni sulla terminologia che si vuole inserire.<br>Le informazioni inserite in questo campo saranno visibili solo all'amministratore del sistema.</small>
                   <textarea style="height:80px" name="Commento_entry"  type="text" class="form-control" placeholder=""></textarea>
             </div>
