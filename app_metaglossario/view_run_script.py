@@ -9,6 +9,7 @@ from .algoritmi_processing.script_ausiliari import *
 
 # per gli script di elaborazione della terminologia
 from .algoritmi_processing.PGI import algoritmo_PGI
+from .algoritmi_processing.SR_ridotto import algoritmo_SR_ridotto
 
 # from .algoritmi_processing.WD import algoritmo_WD
 
@@ -19,11 +20,12 @@ def run_script(request):
     
     erase_acquired_terminology()
 
-    pour_entire_simple_model()
+    pour_entire_entry_model()
     pour_entire_file_model()
     
     
     algoritmo_PGI()
+    algoritmo_SR()
     
 
     

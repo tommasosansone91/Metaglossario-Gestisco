@@ -1,11 +1,10 @@
 from app_metaglossario.models import *
 
-
 import pandas as pd
 
 
 
-def pour_entire_simple_model():
+def pour_entire_entry_model():
 
     # questo algoritmo va ottimizzato mettendo i cicli delle etichette delle colonne al posto di richiamare ogni elemento del database con la propria etichetta
 
@@ -18,43 +17,77 @@ def pour_entire_simple_model():
         
     for element in all_entries:
 
-        entry = acquired_terminology.objects.create()
+        entry  =  acquired_terminology.objects.create()
         
-        if not pd.isnull(element.Lemma):
-            entry.Lemma=element.Lemma
+        if not pd.isnull(element.Lemma_it):
+            entry.Lemma_it = element.Lemma_it
 
-        if not pd.isnull(element.Acronimo):
-            entry.Acronimo=element.Acronimo
+        if not pd.isnull(element.Acronimo_it):
+            entry.Acronimo_it = element.Acronimo_it
 
-        if not pd.isnull(element.Definizione):    
-            entry.Definizione=element.Definizione
+        if not pd.isnull(element.Definizione_it):    
+            entry.Definizione_it = element.Definizione_it
 
-        if not pd.isnull(element.Ambito_riferimento):    
-            entry.Ambito_riferimento=element.Ambito_riferimento
+        if not pd.isnull(element.Ambito_riferimento_it):    
+            entry.Ambito_riferimento_it = element.Ambito_riferimento_it
 
-        if not pd.isnull(element.Autore_definizione):    
-            entry.Autore_definizione=element.Autore_definizione
+        if not pd.isnull(element.Autore_definizione_it):    
+            entry.Autore_definizione_it = element.Autore_definizione_it
 
-        if not pd.isnull(element.Posizione_definizione):    
-            entry.Posizione_definizione=element.Posizione_definizione
+        if not pd.isnull(element.Posizione_definizione_it):    
+            entry.Posizione_definizione_it = element.Posizione_definizione_it
 
-        if not pd.isnull(element.Url_definizione):    
-            entry.Url_definizione=element.Url_definizione
+        if not pd.isnull(element.Url_definizione_it):    
+            entry.Url_definizione_it = element.Url_definizione_it
 
-        if not pd.isnull(element.Titolo_documento_fonte):    
-            entry.Titolo_documento_fonte=element.Titolo_documento_fonte
+        if not pd.isnull(element.Titolo_documento_fonte_it):    
+            entry.Titolo_documento_fonte_it = element.Titolo_documento_fonte_it
 
-        if not pd.isnull(element.Autore_documento_fonte):    
-            entry.Autore_documento_fonte=element.Autore_documento_fonte
+        if not pd.isnull(element.Autore_documento_fonte_it):    
+            entry.Autore_documento_fonte_it = element.Autore_documento_fonte_it
 
-        if not pd.isnull(element.Host_documento_fonte):    
-            entry.Host_documento_fonte=element.Host_documento_fonte
+        if not pd.isnull(element.Host_documento_fonte_it):    
+            entry.Host_documento_fonte_it = element.Host_documento_fonte_it
 
         if not pd.isnull(element.Url_documento_fonte):    
-            entry.Url_documento_fonte=element.Url_documento_fonte
+            entry.Url_documento_fonte_it = element.Url_documento_fonte_it
+
+        if not pd.isnull(element.Lemma_ch):
+            entry.Lemma_ch = element.Lemma_ch
+
+        if not pd.isnull(element.Acronimo_ch):
+            entry.Acronimo_ch = element.Acronimo_ch
+
+        if not pd.isnull(element.Definizione_ch):    
+            entry.Definizione_ch = element.Definizione_ch
+
+        if not pd.isnull(element.Ambito_riferimento_ch):    
+            entry.Ambito_riferimento_ch = element.Ambito_riferimento_ch
+
+        if not pd.isnull(element.Autore_definizione_ch):    
+            entry.Autore_definizione_ch = element.Autore_definizione_ch
+
+        if not pd.isnull(element.Posizione_definizione_ch):    
+            entry.Posizione_definizione_ch = element.Posizione_definizione_ch
+
+        if not pd.isnull(element.Url_definizione_ch):    
+            entry.Url_definizione_ch = element.Url_definizione_ch
+
+        if not pd.isnull(element.Titolo_documento_fonte_ch):    
+            entry.Titolo_documento_fonte_ch = element.Titolo_documento_fonte_ch
+
+        if not pd.isnull(element.Autore_documento_fonte_ch):    
+            entry.Autore_documento_fonte_ch = element.Autore_documento_fonte_ch
+
+        if not pd.isnull(element.Host_documento_fonte_ch):    
+            entry.Host_documento_fonte_ch = element.Host_documento_fonte_ch
+
+        if not pd.isnull(element.Url_documento_fonte):    
+            entry.Url_documento_fonte_ch = element.Url_documento_fonte_ch
+
 
         if not pd.isnull(element.Commento_entry):    
-            entry.Commento_entry=element.Commento_entry
+            entry.Commento_entry = element.Commento_entry
 
             
         entry.Data_inserimento_entry = element.Data_inserimento_entry
@@ -92,70 +125,121 @@ def pour_entire_file_model():
 
         print("Sbobinatura del dataframe in vettori...")        
         
-        col_lemma = excel_sheet.Lemma
-        col_acronimo = excel_sheet.Acronimo
-        col_definizione = excel_sheet.Definizione
-        col_ambito_riferimento = excel_sheet.Ambito_riferimento
-        col_autore_definizione = excel_sheet.Autore_definizione
-        col_posizione_definizione = excel_sheet.Posizione_definizione
-        col_url_definizione = excel_sheet.Url_definizione
-        col_titolo_documento_fonte = excel_sheet.Titolo_documento_fonte
-        col_autore_documento_fonte = excel_sheet.Autore_documento_fonte
-        col_host_documento_fonte = excel_sheet.Host_documento_fonte
-        col_url_documento_fonte = excel_sheet.Url_documento_fonte
+        col_lemma_it = excel_sheet.Lemma_it
+        col_acronimo_it = excel_sheet.Acronimo_it
+        col_definizione_it = excel_sheet.Definizione_it
+        col_ambito_riferimento_it = excel_sheet.Ambito_riferimento_it
+        col_autore_definizione_it = excel_sheet.Autore_definizione_it
+        col_posizione_definizione_it = excel_sheet.Posizione_definizione_it
+        col_url_definizione_it = excel_sheet.Url_definizione_it
+        col_titolo_documento_fonte_it = excel_sheet.Titolo_documento_fonte_it
+        col_autore_documento_fonte_it = excel_sheet.Autore_documento_fonte_it
+        col_host_documento_fonte_it = excel_sheet.Host_documento_fonte_it
+        col_url_documento_fonte_it = excel_sheet.Url_documento_fonte_it
+
+        col_lemma_it = excel_sheet.Lemma_it
+        col_acronimo_ch = excel_sheet.Acronimo_ch
+        col_definizione_ch = excel_sheet.Definizione_ch
+        col_ambito_riferimento_ch = excel_sheet.Ambito_riferimento_ch
+        col_autore_definizione_ch = excel_sheet.Autore_definizione_ch
+        col_posizione_definizione_ch = excel_sheet.Posizione_definizione_ch
+        col_url_definizione_ch = excel_sheet.Url_definizione_ch
+        col_titolo_documento_fonte_ch = excel_sheet.Titolo_documento_fonte_ch
+        col_autore_documento_fonte_ch = excel_sheet.Autore_documento_fonte_ch
+        col_host_documento_fonte_ch = excel_sheet.Host_documento_fonte_ch
+        col_url_documento_fonte_ch = excel_sheet.Url_documento_fonte_ch
+
+
         col_commento_entry = excel_sheet.Commento_entry
         col_data_inserimento_entry = excel_sheet.Data_inserimento_entry
         col_id_statico_entry = excel_sheet.Id_statico_entry
         col_admin_approval_switch = excel_sheet.Admin_approval_switch
 
+
         print("Inizia il riversamento di dati dal foglio %s al modello acquired_terminology..." % file_element.Glossary_file)
 
-        for i in range(len(col_lemma)):
+        for i in range(len(col_lemma_it)):
 
         # assegna i valori agli attributi uno per uno per evitare i NaN
             
             entry = acquired_terminology.objects.create()
             
-            if not pd.isnull(col_lemma[i]):
-                entry.Lemma=col_lemma[i]
+            if not pd.isnull(col_lemma_it[i]):
+                entry.Lemma_it = col_lemma_it[i]
 
-            if not pd.isnull(col_acronimo[i]):
-                entry.Acronimo=col_acronimo[i]
+            if not pd.isnull(col_acronimo_it[i]):
+                entry.Acronimo_it = col_acronimo_it[i]
 
-            if not pd.isnull(col_definizione[i]):    
-                entry.Definizione=col_definizione[i]
+            if not pd.isnull(col_definizione_it[i]):  
+                entry.Definizione_it = col_definizione_it[i]
 
-            if not pd.isnull(col_ambito_riferimento[i]):    
-                entry.Ambito_riferimento=col_ambito_riferimento[i]
+            if not pd.isnull(col_ambito_riferimento_it[i]):  
+                entry.Ambito_riferimento_it = col_ambito_riferimento_it[i]
 
-            if not pd.isnull(col_autore_definizione[i]):    
-                entry.Autore_definizione=col_autore_definizione[i]
+            if not pd.isnull(col_autore_definizione_it[i]):  
+                entry.Autore_definizione_it = col_autore_definizione_it[i]
 
-            if not pd.isnull(col_posizione_definizione[i]):    
-                entry.Posizione_definizione=col_posizione_definizione[i]
+            if not pd.isnull(col_posizione_definizione_it[i]):  
+                entry.Posizione_definizione_it = col_posizione_definizione_it[i]
 
-            if not pd.isnull(col_url_definizione[i]):    
-                entry.Url_definizione=col_url_definizione[i]
+            if not pd.isnull(col_url_definizione_it[i]):  
+                entry.Url_definizione_it = col_url_definizione_it[i]
 
-            if not pd.isnull(col_titolo_documento_fonte[i]):    
-                entry.Titolo_documento_fonte=col_titolo_documento_fonte[i]
+            if not pd.isnull(col_titolo_documento_fonte_it[i]):  
+                entry.Titolo_documento_fonte_it = col_titolo_documento_fonte_it[i]
 
-            if not pd.isnull(col_autore_documento_fonte[i]):    
-                entry.Autore_documento_fonte=col_autore_documento_fonte[i]
+            if not pd.isnull(col_autore_documento_fonte_it[i]):  
+                entry.Autore_documento_fonte_it = col_autore_documento_fonte_it[i]
 
-            if not pd.isnull(col_host_documento_fonte[i]):    
-                entry.Host_documento_fonte=col_host_documento_fonte[i]
+            if not pd.isnull(col_host_documento_fonte_it[i]):  
+                entry.Host_documento_fonte_it = col_host_documento_fonte_it[i]
 
-            if not pd.isnull(col_url_documento_fonte[i]):    
-                entry.Url_documento_fonte=col_url_documento_fonte[i]
+            if not pd.isnull(col_url_documento_fonte_it[i]):  
+                entry.Url_documento_fonte_it = col_url_documento_fonte_it[i]
+
+
+            if not pd.isnull(col_lemma_ch[i]):
+                entry.Lemma_ch = col_lemma_ch[i]
+
+            if not pd.isnull(col_acronimo_ch[i]):
+                entry.Acronimo_ch = col_acronimo_ch[i]
+
+            if not pd.isnull(col_definizione_ch[i]):  
+                entry.Definizione_ch = col_definizione_ch[i]
+
+            if not pd.isnull(col_ambito_riferimento_ch[i]):  
+                entry.Ambito_riferimento_ch = col_ambito_riferimento_ch[i]
+
+            if not pd.isnull(col_autore_definizione_ch[i]):  
+                entry.Autore_definizione_ch = col_autore_definizione_ch[i]
+
+            if not pd.isnull(col_posizione_definizione_ch[i]):  
+                entry.Posizione_definizione_ch = col_posizione_definizione_ch[i]
+
+            if not pd.isnull(col_url_definizione_ch[i]):  
+                entry.Url_definizione_ch = col_url_definizione_ch[i]
+
+            if not pd.isnull(col_titolo_documento_fonte_ch[i]):  
+                entry.Titolo_documento_fonte_ch = col_titolo_documento_fonte_ch[i]
+
+            if not pd.isnull(col_autore_documento_fonte_ch[i]):  
+                entry.Autore_documento_fonte_ch = col_autore_documento_fonte_ch[i]
+
+            if not pd.isnull(col_host_documento_fonte_ch[i]):  
+                entry.Host_documento_fonte_ch = col_host_documento_fonte_ch[i]
+
+            if not pd.isnull(col_url_documento_fonte_ch[i]):  
+                entry.Url_documento_fonte_ch = col_url_documento_fonte_ch[i]
+
+
 
             if not pd.isnull(col_commento_entry[i]):    
-                entry.Commento_entry=col_commento_entry[i]
+                entry.Commento_entry = col_commento_entry[i]
 
                 
-            entry.Data_inserimento_entry=col_data_inserimento_entry[i]
-            entry.Id_statico_entry=col_id_statico_entry[i]               
-            entry.Admin_approval_switch=col_admin_approval_switch[i]
+            entry.Data_inserimento_entry = col_data_inserimento_entry[i]
+            entry.Id_statico_entry = col_id_statico_entry[i]               
+            entry.Admin_approval_switch = col_admin_approval_switch[i]
 
             entry.save()
 
@@ -179,38 +263,71 @@ def pour_latest_entry():
 
     entry = acquired_terminology.objects.create()
         
-    if not pd.isnull(element.Lemma):
-        entry.Lemma=element.Lemma
+    if not pd.isnull(element.Lemma_it):
+        entry.Lemma_it = element.Lemma_it
 
-    if not pd.isnull(element.Acronimo):
-        entry.Acronimo=element.Acronimo
+    if not pd.isnull(element.Acronimo_it):
+        entry.Acronimo_it = element.Acronimo_it
 
-    if not pd.isnull(element.Definizione):    
-        entry.Definizione=element.Definizione
+    if not pd.isnull(element.Definizione_it):    
+        entry.Definizione_it = element.Definizione_it
 
-    if not pd.isnull(element.Ambito_riferimento):    
-        entry.Ambito_riferimento=element.Ambito_riferimento
+    if not pd.isnull(element.Ambito_riferimento_it):    
+        entry.Ambito_riferimento_it = element.Ambito_riferimento_it
 
-    if not pd.isnull(element.Autore_definizione):    
-        entry.Autore_definizione=element.Autore_definizione
+    if not pd.isnull(element.Autore_definizione_it):    
+        entry.Autore_definizione_it = element.Autore_definizione_it
 
-    if not pd.isnull(element.Posizione_definizione):    
-        entry.Posizione_definizione=element.Posizione_definizione
+    if not pd.isnull(element.Posizione_definizione_it):    
+        entry.Posizione_definizione_it = element.Posizione_definizione_it
 
-    if not pd.isnull(element.Url_definizione):    
-        entry.Url_definizione=element.Url_definizione
+    if not pd.isnull(element.Url_definizione_it):    
+        entry.Url_definizione_it = element.Url_definizione_it
 
-    if not pd.isnull(element.Titolo_documento_fonte):    
-        entry.Titolo_documento_fonte=element.Titolo_documento_fonte
+    if not pd.isnull(element.Titolo_documento_fonte_it):    
+        entry.Titolo_documento_fonte_it = element.Titolo_documento_fonte_it
 
-    if not pd.isnull(element.Autore_documento_fonte):    
-        entry.Autore_documento_fonte=element.Autore_documento_fonte
+    if not pd.isnull(element.Autore_documento_fonte_it):    
+        entry.Autore_documento_fonte_it = element.Autore_documento_fonte_it
 
-    if not pd.isnull(element.Host_documento_fonte):    
-        entry.Host_documento_fonte=element.Host_documento_fonte
+    if not pd.isnull(element.Host_documento_fonte_it):    
+        entry.Host_documento_fonte_it = element.Host_documento_fonte_it
 
     if not pd.isnull(element.Url_documento_fonte):    
-        entry.Url_documento_fonte=element.Url_documento_fonte
+        entry.Url_documento_fonte_it = element.Url_documento_fonte_it
+
+    if not pd.isnull(element.Lemma_ch):
+        entry.Lemma_ch = element.Lemma_ch
+
+    if not pd.isnull(element.Acronimo_ch):
+        entry.Acronimo_ch = element.Acronimo_ch
+
+    if not pd.isnull(element.Definizione_ch):    
+        entry.Definizione_ch = element.Definizione_ch
+
+    if not pd.isnull(element.Ambito_riferimento_ch):    
+        entry.Ambito_riferimento_ch = element.Ambito_riferimento_ch
+
+    if not pd.isnull(element.Autore_definizione_ch):    
+        entry.Autore_definizione_ch = element.Autore_definizione_ch
+
+    if not pd.isnull(element.Posizione_definizione_ch):    
+        entry.Posizione_definizione_ch = element.Posizione_definizione_ch
+
+    if not pd.isnull(element.Url_definizione_ch):    
+        entry.Url_definizione_ch = element.Url_definizione_ch
+
+    if not pd.isnull(element.Titolo_documento_fonte_ch):    
+        entry.Titolo_documento_fonte_ch = element.Titolo_documento_fonte_ch
+
+    if not pd.isnull(element.Autore_documento_fonte_ch):    
+        entry.Autore_documento_fonte_ch = element.Autore_documento_fonte_ch
+
+    if not pd.isnull(element.Host_documento_fonte_ch):    
+        entry.Host_documento_fonte_ch = element.Host_documento_fonte_ch
+
+    if not pd.isnull(element.Url_documento_fonte):    
+        entry.Url_documento_fonte_ch = element.Url_documento_fonte_ch
 
     if not pd.isnull(element.Commento_entry):    
         entry.Commento_entry=element.Commento_entry
@@ -242,17 +359,31 @@ def pour_latest_file():
 
     print("Sbobinatura del dataframe in vettori...")        
     
-    col_lemma = excel_sheet.Lemma
-    col_acronimo = excel_sheet.Acronimo
-    col_definizione = excel_sheet.Definizione
-    col_ambito_riferimento = excel_sheet.Ambito_riferimento
-    col_autore_definizione = excel_sheet.Autore_definizione
-    col_posizione_definizione = excel_sheet.Posizione_definizione
-    col_url_definizione = excel_sheet.Url_definizione
-    col_titolo_documento_fonte = excel_sheet.Titolo_documento_fonte
-    col_autore_documento_fonte = excel_sheet.Autore_documento_fonte
-    col_host_documento_fonte = excel_sheet.Host_documento_fonte
-    col_url_documento_fonte = excel_sheet.Url_documento_fonte
+    col_lemma_it = excel_sheet.Lemma_it
+    col_acronimo_it = excel_sheet.Acronimo_it
+    col_definizione_it = excel_sheet.Definizione_it
+    col_ambito_riferimento_it = excel_sheet.Ambito_riferimento_it
+    col_autore_definizione_it = excel_sheet.Autore_definizione_it
+    col_posizione_definizione_it = excel_sheet.Posizione_definizione_it
+    col_url_definizione_it = excel_sheet.Url_definizione_it
+    col_titolo_documento_fonte_it = excel_sheet.Titolo_documento_fonte_it
+    col_autore_documento_fonte_it = excel_sheet.Autore_documento_fonte_it
+    col_host_documento_fonte_it = excel_sheet.Host_documento_fonte_it
+    col_url_documento_fonte_it = excel_sheet.Url_documento_fonte_it
+
+    col_lemma_it = excel_sheet.Lemma_it
+    col_acronimo_ch = excel_sheet.Acronimo_ch
+    col_definizione_ch = excel_sheet.Definizione_ch
+    col_ambito_riferimento_ch = excel_sheet.Ambito_riferimento_ch
+    col_autore_definizione_ch = excel_sheet.Autore_definizione_ch
+    col_posizione_definizione_ch = excel_sheet.Posizione_definizione_ch
+    col_url_definizione_ch = excel_sheet.Url_definizione_ch
+    col_titolo_documento_fonte_ch = excel_sheet.Titolo_documento_fonte_ch
+    col_autore_documento_fonte_ch = excel_sheet.Autore_documento_fonte_ch
+    col_host_documento_fonte_ch = excel_sheet.Host_documento_fonte_ch
+    col_url_documento_fonte_ch = excel_sheet.Url_documento_fonte_ch
+
+
     col_commento_entry = excel_sheet.Commento_entry
     col_data_inserimento_entry = excel_sheet.Data_inserimento_entry
     col_id_statico_entry = excel_sheet.Id_statico_entry
@@ -266,42 +397,74 @@ def pour_latest_file():
         
         entry = acquired_terminology.objects.create()
         
-        if not pd.isnull(col_lemma[i]):
-            entry.Lemma=col_lemma[i]
+        if not pd.isnull(element.Lemma_it):
+            entry.Lemma_it = element.Lemma_it
 
-        if not pd.isnull(col_acronimo[i]):
-            entry.Acronimo=col_acronimo[i]
+        if not pd.isnull(element.Acronimo_it):
+            entry.Acronimo_it = element.Acronimo_it
 
-        if not pd.isnull(col_definizione[i]):    
-            entry.Definizione=col_definizione[i]
+        if not pd.isnull(element.Definizione_it):    
+            entry.Definizione_it = element.Definizione_it
 
-        if not pd.isnull(col_ambito_riferimento[i]):    
-            entry.Ambito_riferimento=col_ambito_riferimento[i]
+        if not pd.isnull(element.Ambito_riferimento_it):    
+            entry.Ambito_riferimento_it = element.Ambito_riferimento_it
 
-        if not pd.isnull(col_autore_definizione[i]):    
-            entry.Autore_definizione=col_autore_definizione[i]
+        if not pd.isnull(element.Autore_definizione_it):    
+            entry.Autore_definizione_it = element.Autore_definizione_it
 
-        if not pd.isnull(col_posizione_definizione[i]):    
-            entry.Posizione_definizione=col_posizione_definizione[i]
+        if not pd.isnull(element.Posizione_definizione_it):    
+            entry.Posizione_definizione_it = element.Posizione_definizione_it
 
-        if not pd.isnull(col_url_definizione[i]):    
-            entry.Url_definizione=col_url_definizione[i]
+        if not pd.isnull(element.Url_definizione_it):    
+            entry.Url_definizione_it = element.Url_definizione_it
 
-        if not pd.isnull(col_titolo_documento_fonte[i]):    
-            entry.Titolo_documento_fonte=col_titolo_documento_fonte[i]
+        if not pd.isnull(element.Titolo_documento_fonte_it):    
+            entry.Titolo_documento_fonte_it = element.Titolo_documento_fonte_it
 
-        if not pd.isnull(col_autore_documento_fonte[i]):    
-            entry.Autore_documento_fonte=col_autore_documento_fonte[i]
+        if not pd.isnull(element.Autore_documento_fonte_it):    
+            entry.Autore_documento_fonte_it = element.Autore_documento_fonte_it
 
-        if not pd.isnull(col_host_documento_fonte[i]):    
-            entry.Host_documento_fonte=col_host_documento_fonte[i]
+        if not pd.isnull(element.Host_documento_fonte_it):    
+            entry.Host_documento_fonte_it = element.Host_documento_fonte_it
 
-        if not pd.isnull(col_url_documento_fonte[i]):    
-            entry.Url_documento_fonte=col_url_documento_fonte[i]
+        if not pd.isnull(element.Url_documento_fonte):    
+            entry.Url_documento_fonte_it = element.Url_documento_fonte_it
 
-        if not pd.isnull(col_commento_entry[i]):    
-            entry.Commento_entry=col_commento_entry[i]
+        if not pd.isnull(element.Lemma_ch):
+            entry.Lemma_ch = element.Lemma_ch
 
+        if not pd.isnull(element.Acronimo_ch):
+            entry.Acronimo_ch = element.Acronimo_ch
+
+        if not pd.isnull(element.Definizione_ch):    
+            entry.Definizione_ch = element.Definizione_ch
+
+        if not pd.isnull(element.Ambito_riferimento_ch):    
+            entry.Ambito_riferimento_ch = element.Ambito_riferimento_ch
+
+        if not pd.isnull(element.Autore_definizione_ch):    
+            entry.Autore_definizione_ch = element.Autore_definizione_ch
+
+        if not pd.isnull(element.Posizione_definizione_ch):    
+            entry.Posizione_definizione_ch = element.Posizione_definizione_ch
+
+        if not pd.isnull(element.Url_definizione_ch):    
+            entry.Url_definizione_ch = element.Url_definizione_ch
+
+        if not pd.isnull(element.Titolo_documento_fonte_ch):    
+            entry.Titolo_documento_fonte_ch = element.Titolo_documento_fonte_ch
+
+        if not pd.isnull(element.Autore_documento_fonte_ch):    
+            entry.Autore_documento_fonte_ch = element.Autore_documento_fonte_ch
+
+        if not pd.isnull(element.Host_documento_fonte_ch):    
+            entry.Host_documento_fonte_ch = element.Host_documento_fonte_ch
+
+        if not pd.isnull(element.Url_documento_fonte):    
+            entry.Url_documento_fonte_ch = element.Url_documento_fonte_ch
+
+        if not pd.isnull(element.Commento_entry):    
+            entry.Commento_entry=element.Commento_entry
             
         entry.Data_inserimento_entry=col_data_inserimento_entry[i]
         entry.Id_statico_entry=col_id_statico_entry[i]               
@@ -318,15 +481,14 @@ def pour_latest_file():
 
     # elimina tutti i dati dentro acquired terminoliogy
 def erase_acquired_terminology():
-
     
     acquired_terminology.objects.all().delete()
     print("Eliminati tutti i dati dentro acquired_terminology!")
 
 
 # elimina tutti i dati dentro acquired terminoliogy
-def erase_glossary_entry():
+def erase_prepared_terminology():
   
-    glossary_entry.objects.all().delete()
-    print("Eliminati tutti i dati dentro glossary_entry!")
+    prepared_terminology.objects.all().delete()
+    print("Eliminati tutti i dati dentro prepared_terminology!")
 
