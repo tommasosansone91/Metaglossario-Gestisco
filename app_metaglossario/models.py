@@ -51,7 +51,7 @@ class glossary_entry(models.Model):
     Url_documento_fonte_it = models.URLField(max_length=400, blank=True, null=True)
 
 
-    # parte italiana
+    # parte svizzera
 
     Lemma_ch = models.CharField(max_length=256, blank=True, null=True)
     
@@ -137,7 +137,7 @@ class glossary_file(models.Model):
         # in realtà per come ho definito hide e show, se metto senza il meno davanti, mi mostra per prima hide (h viene prima di s)
 
     def clean(self):
-        if not (self.Glossary_file_it or self.Data_inserimento_glossary):
+        if not (self.Glossary_file or self.Data_inserimento_glossary):
             raise ValidationError("Non è stato selezionato alcun glossario per il caricamento.")
         # non mi restituisce questa scritta ma quella messa di default nelle views
 

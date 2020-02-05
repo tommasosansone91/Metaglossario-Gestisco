@@ -3,20 +3,6 @@ import time
 
 
 
-def printout():
-
-    print("Script richiamato con successo!")
-    start_time = time.time()
-    return start_time
-
-
-def printout_input(input):
-
-    start_time = time.time()
-    script_name = "Script di conferma"
-    print("%s richiamato con successo con il seguente input: %s" % (script_name, input))
-    
-    return start_time
 
 
 def finish_sound():

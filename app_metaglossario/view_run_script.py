@@ -16,24 +16,30 @@ from .algoritmi_processing.SR_ridotto import algoritmo_SR_ridotto
 
 def run_script(request):   
 
-    start_time = printout()    
+    print("***************************************")
+    print("*** Script richiamato con successo! ***")
+
+    start_time = time.time()  
     
     erase_acquired_terminology()
 
     pour_entire_entry_model()
-    pour_entire_file_model()
+    # pour_entire_file_model()
     
     
     algoritmo_PGI()
-    algoritmo_SR()
+    algoritmo_SR_ridotto()
     
 
     
     elapsed_time = round(time.time() - start_time)
 
+    print("***************************************")
     print("*** Script eseguito fino alla fine! ***")
     print("*** Tempo impiegato: %s s ***" % elapsed_time )
+    print("***************************************")
 
     finish_sound()
+    # no, il suono va fatto lanciare nel template
 
     return render(request, 'run_script.html', {})

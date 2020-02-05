@@ -42,6 +42,7 @@ def algoritmo_PGI():
         if not pd.isnull(element.Definizione_it):    
             prepared_entry.Definizione_it = element.Definizione_it
 
+
         if not pd.isnull(element.Ambito_riferimento_it):    
             prepared_entry.Ambito_riferimento_it = element.Ambito_riferimento_it
 
@@ -188,7 +189,7 @@ def algoritmo_PGI():
 
     print("Modifica del formato del testo (uppercase/title) terminato con successo!")
 
-    # sostituzione di doppi spazi e  acapo con degli spazi
+    # sostituzione di doppi spazi e a capo con degli spazi
 
     print("Inizia l'eliminazione dei doppi spazi dal testo...")
     
@@ -196,9 +197,10 @@ def algoritmo_PGI():
 
     prepared_rows = prepared_terminology.objects.all()
 
+    # sostituzione di doppi spazi con degli spazi singoli
     for i in range(rip_doppi_spazi):    # ripeto il ciclo n volte 
 
-        for prepared_entry in prepared_rows:        
+        for prepared_entry in prepared_rows:      
             
             if not pd.isnull(prepared_entry.Lemma_it):
                 prepared_entry.Lemma_it = prepared_entry.Lemma_it.replace("  ", " ")
@@ -273,23 +275,23 @@ def algoritmo_PGI():
     print("Eliminazione dei doppi spazi terminata con successo!")
     print("Inizia l'eliminazione degli spazi all'inizio e alla fine di ogni cella...")
 
-    prepared_rows = prepared_terminology.objects.all()
+    # prepared_rows = prepared_terminology.objects.all()
 
-    for prepared_entry in prepared_rows:        
+    for prepared_entry in prepared_rows:       
         
         if not pd.isnull(prepared_entry.Lemma_it):
             if prepared_entry.Lemma_it[0] == " ":
                 prepared_entry.Lemma_it = prepared_entry.Lemma_it[1:]
             if prepared_entry.Lemma_it[-1] == " ":
                 prepared_entry.Lemma_it = prepared_entry.Lemma_it[0:-1]
-
+                
         if not pd.isnull(prepared_entry.Acronimo_it):
             if prepared_entry.Acronimo_it[0] == " ":
                 prepared_entry.Acronimo_it = prepared_entry.Acronimo_it[1:]
             if prepared_entry.Acronimo_it[-1] == " ":
                 prepared_entry.Acronimo_it = prepared_entry.Acronimo_it[0:-1]
 
-        if not pd.isnull(prepared_entry.Definizione_it):    
+        if not pd.isnull(prepared_entry.Definizione_it):   
             if prepared_entry.Definizione_it[0] == " ":
                 prepared_entry.Definizione_it = prepared_entry.Definizione_it[1:]
             if prepared_entry.Definizione_it[-1] == " ":
