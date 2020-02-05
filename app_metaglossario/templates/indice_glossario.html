@@ -26,17 +26,36 @@
         <!-- django vuole lo spazio tra gli operatori di uguaglianza o disuguaglianza -->
 
                 <!-- <div class="card"> -->
-                    <!-- <div class="card-body">                          -->
+                    <!-- <div class="card-body"> 
+                    
+                        <!-- se ci sono campi italiani e svizzeri -->
+                        {% if entry.Lemma_it and entry.Lemma_ch %}
 
-                    {% if entry.Lemma %}  
-                        <p class="card-text"><a href="{% url 'glossario' %}?q={{ entry.Id_statico_entry }}" id="current_lemma" Target= "_blank">{{ entry.Lemma }}</a></p>                           
-                        
+                            <p class="card-text"><a href="{% url 'glossario' %}?q={{ entry.Id_statico_entry }}" Target= "_blank">{{ entry.Lemma_it }}</a></p>
+
+                            <p class="card-text"><a href="{% url 'glossario' %}?q={{ entry.Id_statico_entry }}" Target= "_blank">{{ entry.Lemma_ch }}</a></p>
+
+                        {% else %}
+
+                            {% if entry.Lemma_it %}
+                                <p class="card-text"><a href="{% url 'glossario' %}?q={{ entry.Id_statico_entry }}" Target= "_blank">{{ entry.Lemma_it }}</a></p>
+                            {% endif %}
+
+
+                            {% if entry.Lemma_ch %}
+                                <p class="card-text"><a href="{% url 'glossario' %}?q={{ entry.Id_statico_entry }}" Target= "_blank">{{ entry.Lemma_ch }}</a></p>
+                            {% endif %}
+
+                        {% endif %}                        
+
+                    
+    
                         
                         <!-- # intanto mi copia il django tag come url senza trasformarlo nell'elemento
                         # poi mi funziona solo sul primo elemento in modo cicilico
                         perchè gli id non si possono sovraporre quindi lo aplica solo al primpo -->
                     
-                    {% endif %}   
+                      
 
                     
                     

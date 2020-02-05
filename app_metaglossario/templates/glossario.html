@@ -2,6 +2,8 @@
 
 {% block content %}
 
+{% load static %}
+
     <h1>Glossario</h1>
     
     <br>
@@ -13,7 +15,7 @@
 
     <div class="topnav">
         
-        <a id="pulsante_ricerca_avanzata" href="#Ricerca_avanzata" onclick="alert('Funzione non ancora disponibile.')">Ricerca avanzata</a>
+        <a id="pulsante_ricerca_avanzata" href="#Ricerca_avanzata" onclick="popup_istruzioni_ricerca_avanzata()">Ricerca avanzata</a>
         
         <!-- vai all'indice -->
         <a id="goto_index_button" href="{% url 'indice_glossario' %}"><i class="fa fa-list-ul" aria-hidden="true"></i></a>
@@ -54,109 +56,152 @@
 
         {% for entry in all_entries %}
 
-            {% if entry.Admin_approval_switch == "show" %} 
+            {% if entry.Admin_approval_switch == "show" %}
             <!-- django vuole lo spazio tra gli operatori di uguaglianza o disuguaglianza -->
 
                     <div class="card">
-                        <div class="card-body"> 
-                            
+                        <div class="card-body">
 
-                        {% if entry.Lemma %}  
-                            <p class="card-text"><h4 class="card-title">{{ entry.Lemma }}</h4></p>                           
+                            <!-- se ci sono campi italiani e svizzeri -->
+                        {% if entry.Lemma_it and entry.Lemma_ch %}
+
+                            <h5 class="card-title"><element style="font-weight: bold">Lemma <img src="{% static 'img/it_flag_icon.png' %}" style="width:20px;" align="bottom" alt="italy flag icon" >: </element>{{ entry.Lemma_it }}</h5>
+
+                            <h5 class="card-title"><element style="font-weight: bold">Lemma <img src="{% static 'img/ch_flag_icon.png' %}" style="width:20px;" align="bottom" alt="switzerland flag icon" >: </element>{{ entry.Lemma_ch }}</h5>
+
+                        {% else %}
+
+                            {% if entry.Lemma_it %}
+                                <p class="card-text"><h4 class="card-title">{{ entry.Lemma_it }}</h4></p>
+                            {% endif %}
+
+
+                            {% if entry.Lemma_ch %}
+                                <p class="card-text"><h4 class="card-title">{{ entry.Lemma_ch }}</h4></p>
+                            {% endif %}
+
                         {% endif %}
 
 
-                        {% if entry.Acronimo %}                
-                            <p class="card-text"><b>Acronimo:</b> {{ entry.Acronimo }}</p>                             
+                        {% if entry.Acronimo_it %}
+                            <p class="card-text"><b>Acronimo <img src="{% static 'img/it_flag_icon.png' %}" style="width:20px;" align="bottom" alt="italy flag icon" >:</b> {{ entry.Acronimo_it }}</p>
                         {% endif %}
 
-            
-                        {% if entry.Definizione %}                
-                            <p class="card-text"><b>Definizione:</b> {{ entry.Definizione }}</p>                             
-                        {% endif %}            
-
-            
-                        {% if entry.Ambito_riferimento %}                
-                            <p class="card-text"><b>Ambito di riferimento del concetto:</b> {{ entry.Ambito_riferimento }}</p>                             
-                        {% endif %}            
-
-            
-                        {% if entry.Autore_definizione %}                
-                            <p class="card-text"><b>Autore della definizione:</b> {{ entry.Autore_definizione }}</p>                             
-                        {% endif %}            
-
-            
-                        {% if entry.Posizione_definizione %}                
-                            <p class="card-text"><b>Posizione della definizione nel documento fonte:</b> {{ entry.Posizione_definizione }}</p>                             
-                        {% endif %}            
-
-                        
-                        {% if entry.Url_definizione %}                
-                            <p class="card-text"><b>URL della definizione:</b> <a href="{{ entry.Url_definizione }}" target="_blank">{{ entry.Url_definizione }}</a></p>                          
-                        {% endif %}            
-
-            
-                        {% if entry.Titolo_documento_fonte %}                
-                            <p class="card-text"><b>Titolo del documento fonte:</b> {{ entry.Titolo_documento_fonte }}</p>                             
-                        {% endif %}            
-
-            
-                        {% if entry.Autore_documento_fonte %}                
-                            <p class="card-text"><b>Autore del documento fonte:</b> {{ entry.Autore_documento_fonte }}</p>                             
-                        {% endif %}            
-
-            
-                        {% if entry.Host_documento_fonte %}                
-                            <p class="card-text"><b>Host del documento fonte:</b> {{ entry.Host_documento_fonte }}</p>                             
-                        {% endif %}            
-
-            
-                        {% if entry.Url_documento_fonte %}                
-                            <p class="card-text"><b>URL del documento fonte:</b> <a href="{{ entry.Url_documento_fonte }}" target="_blank">{{ entry.Url_documento_fonte }}</a></p>                           
-                        {% endif %}           
-                        
-
-                        {% if entry.Data_inserimento_entry %}                
-                            <p class="card-text"><b>Data di inserimento delle informazioni:</b> {{ entry.Data_inserimento_entry }}</p>                             
+                        {% if entry.Acronimo_ch %}
+                            <p class="card-text"><b>Acronimo <img src="{% static 'img/ch_flag_icon.png' %}" style="width:20px;" align="bottom" alt="switzerland flag icon" >:</b> {{ entry.Acronimo_ch }}</p>
                         {% endif %}
-            
-                        
-                        <!-- Il commento lo rendo visibile solo all'admin -->
-                        <!-- {% if entry.Commento_entry %}                
-                            <p class="card-text"><b>Commento/Altro:</b> {{ entry.Commento_entry }}</p>                             
-                        {% endif %} -->
 
-            
-                        {% if entry.Id_statico_entry %}                
-                            <p class="card-text"><b>ID delle informazioni:</b> {{ entry.Id_statico_entry }}</p>                             
+                        {% if entry.Definizione_it %}
+                            <p class="card-text"><b>Definizione <img src="{% static 'img/it_flag_icon.png' %}" style="width:20px;" align="bottom" alt="italy flag icon" >:</b> {{ entry.Definizione_it }}</p>
                         {% endif %}
-                        
-                        
-                        <!-- PULSANTI URL -->
-                        <!-- per ora preferisco oscurarli -->
 
-                        <!-- <p>
-                        {% if entry.Url_definizione %}  
-                            <a href="{{ entry.Url_definizione }}" Target= "_blank" class="btn btn-primary">Definizione</a> &nbsp                     
+                        {% if entry.Definizione_ch %}
+                            <p class="card-text"><b>Definizione <img src="{% static 'img/ch_flag_icon.png' %}" style="width:20px;" align="bottom" alt="switzerland flag icon" >:</b> {{ entry.Definizione_ch }}</p>
+                        {% endif %}
+
+                        {% if entry.Ambito_riferimento_it %}
+                            <p class="card-text"><b>Ambito di riferimento del concetto <img src="{% static 'img/it_flag_icon.png' %}" style="width:20px;" align="bottom" alt="italy flag icon" >:</b> {{ entry.Ambito_riferimento_it }}</p>
+                        {% endif %}
+
+                        {% if entry.Ambito_riferimento_ch %}
+                            <p class="card-text"><b>Ambito di riferimento del concetto <img src="{% static 'img/ch_flag_icon.png' %}" style="width:20px;" align="bottom" alt="switzerland flag icon" >:</b> {{ entry.Ambito_riferimento_ch }}</p>
+                        {% endif %}
+
+                        {% if entry.Autore_definizione_it %}
+                            <p class="card-text"><b>Autore della definizione <img src="{% static 'img/it_flag_icon.png' %}" style="width:20px;" align="bottom" alt="italy flag icon" >:</b> {{ entry.Autore_definizione_it }}</p>
+                        {% endif %}
+
+                        {% if entry.Autore_definizione_ch %}
+                            <p class="card-text"><b>Autore della definizione <img src="{% static 'img/ch_flag_icon.png' %}" style="width:20px;" align="bottom" alt="switzerland flag icon" >:</b> {{ entry.Autore_definizione_ch }}</p>
+                        {% endif %}
+
+                        {% if entry.Posizione_definizione_it %}
+                            <p class="card-text"><b>Posizione della definizione nel documento fonte <img src="{% static 'img/it_flag_icon.png' %}" style="width:20px;" align="bottom" alt="italy flag icon" >:</b> {{ entry.Posizione_definizione_it }}</p>
+                        {% endif %}
+
+                        {% if entry.Posizione_definizione_ch %}
+                            <p class="card-text"><b>Posizione della definizione nel documento fonte <img src="{% static 'img/ch_flag_icon.png' %}" style="width:20px;" align="bottom" alt="switzerland flag icon" >:</b> {{ entry.Posizione_definizione_ch }}</p>
+                        {% endif %}
+
+                        {% if entry.Url_definizione_it %}
+                            <p class="card-text"><b>URL della definizione <img src="{% static 'img/it_flag_icon.png' %}" style="width:20px;" align="bottom" alt="italy flag icon" >:</b> <a href="{{ entry.Url_definizione_it }}" target="_blank">{{ entry.Url_definizione_it }}</a></p>
+                        {% endif %}
+
+                        {% if entry.Url_definizione_ch %}
+                            <p class="card-text"><b>URL della definizione <img src="{% static 'img/ch_flag_icon.png' %}" style="width:20px;" align="bottom" alt="switzerland flag icon" >:</b> <a href="{{ entry.Url_definizione_ch }}" target="_blank">{{ entry.Url_definizione_ch }}</a></p>
+                        {% endif %}
+
+                        {% if entry.Titolo_documento_fonte_it %}
+                            <p class="card-text"><b>Titolo del documento fonte <img src="{% static 'img/it_flag_icon.png' %}" style="width:20px;" align="bottom" alt="italy flag icon" >:</b> {{ entry.Titolo_documento_fonte_it }}</p>
+                        {% endif %}
+
+                        {% if entry.Titolo_documento_fonte_ch %}
+                            <p class="card-text"><b>Titolo del documento fonte <img src="{% static 'img/ch_flag_icon.png' %}" style="width:20px;" align="bottom" alt="switzerland flag icon" >:</b> {{ entry.Titolo_documento_fonte_ch }}</p>
+                        {% endif %}
+
+                        {% if entry.Autore_documento_fonte_it %}
+                            <p class="card-text"><b>Autore del documento fonte <img src="{% static 'img/it_flag_icon.png' %}" style="width:20px;" align="bottom" alt="italy flag icon" >:</b> {{ entry.Autore_documento_fonte_it }}</p>
+                        {% endif %}
+
+                        {% if entry.Autore_documento_fonte_ch %}
+                            <p class="card-text"><b>Autore del documento fonte <img src="{% static 'img/ch_flag_icon.png' %}" style="width:20px;" align="bottom" alt="switzerland flag icon" >:</b> {{ entry.Autore_documento_fonte_ch }}</p>
+                        {% endif %}
+
+                        {% if entry.Host_documento_fonte_it %}
+                            <p class="card-text"><b>Host del documento fonte <img src="{% static 'img/it_flag_icon.png' %}" style="width:20px;" align="bottom" alt="italy flag icon" >:</b> {{ entry.Host_documento_fonte_it }}</p>
+                        {% endif %}
+
+                        {% if entry.Host_documento_fonte_ch %}
+                            <p class="card-text"><b>Host del documento fonte <img src="{% static 'img/ch_flag_icon.png' %}" style="width:20px;" align="bottom" alt="switzerland flag icon" >:</b> {{ entry.Host_documento_fonte_ch }}</p>
+                        {% endif %}
+
+                        {% if entry.Url_documento_fonte_it %}
+                            <p class="card-text"><b>URL del documento fonte <img src="{% static 'img/it_flag_icon.png' %}" style="width:20px;" align="bottom" alt="italy flag icon" >:</b> <a href="{{ entry.Url_documento_fonte_it }}" target="_blank">{{ entry.Url_documento_fonte_it }}</a></p>
+                        {% endif %}
+
+                        {% if entry.Url_documento_fonte_ch %}
+                            <p class="card-text"><b>URL del documento fonte <img src="{% static 'img/ch_flag_icon.png' %}" style="width:20px;" align="bottom" alt="switzerland flag icon" >:</b> <a href="{{ entry.Url_documento_fonte_ch }}" target="_blank">{{ entry.Url_documento_fonte_ch }}</a></p>
+                        {% endif %}
+
+
+                        {% if entry.Data_inserimento_entry %}
+                            <p class="card-text"><b>Data di inserimento delle informazioni:</b> {{ entry.Data_inserimento_entry }}</p>
+                        {% endif %}
+
+                        {% if entry.Id_statico_entry %}
+                            <p class="card-text"><b>ID delle informazioni:</b> {{ entry.Id_statico_entry }}</p>
+                        {% endif %}
+
+
+                        <p>
+                        {% if entry.Url_definizione_it %}
+                            <a href="{{entry.Url_definizione_it}}" Target= "_blank" class="btn btn-success">Definizione IT</a> &nbsp
+                        {% endif %}
+
+                        {% if entry.Url_definizione_ch %}
+                            <a href="{{entry.Url_definizione_ch}}" Target= "_blank" class="btn btn-danger">Definizione CH</a>
                         {% endif %}
                         </p>
-                        
-                        
-                        <p>               
-                        {% if entry.Url_documento_fonte %}  
-                            <a href="{{ entry.Url_documento_fonte }}" Target= "_blank" class="btn btn-primary">Documento fonte</a> &nbsp                   
-                        {% endif %}                                  
-                        </p> -->
 
-                     
-                    
-                    </div>        
-                </div> 
-                
-                <br> <!-- spazio tra le card -->
+                        <p>
+                        {% if entry.Url_documento_fonte_it %}
+                            <a href="{{entry.Url_documento_fonte_it}}" Target= "_blank" class="btn btn-success">Documento fonte IT</a> &nbsp
+                        {% endif %}
+
+                        {% if entry.Url_documento_fonte_ch %}
+                        <a href="{{entry.Url_documento_fonte_ch}}" Target= "_blank" class="btn btn-danger">Documento fonte CH</a>
+                        {% endif %}
+                        </p>
+
+
+
+                    </div>
+                </div>
+
+                <br>
 
             {% endif %} <!--questo if è per pubblicare il contenuto solo se lo switch della review è passata-->
-        
+
         {% endfor %}
 
     {% endif %}
@@ -320,6 +365,7 @@
 
 <!-- Javascript -->
 <script type="text/javascript" src={% static "js/delete_simple_search.js" %}></script>
-<!-- script caricato ma non runnato -->
+<script type="text/javascript" src={% static "js/popup_alert.js" %}></script>
+
 
 {% endblock %}
