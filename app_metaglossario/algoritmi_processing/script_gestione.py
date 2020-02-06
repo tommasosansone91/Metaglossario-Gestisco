@@ -225,7 +225,7 @@ def pour_entire_file_model():
         col_host_documento_fonte_it = excel_sheet.Host_documento_fonte_it
         col_url_documento_fonte_it = excel_sheet.Url_documento_fonte_it
 
-        col_lemma_ch = excel_sheet.Lemma_it
+        col_lemma_ch = excel_sheet.Lemma_ch
         col_acronimo_ch = excel_sheet.Acronimo_ch
         col_definizione_ch = excel_sheet.Definizione_ch
         col_ambito_riferimento_ch = excel_sheet.Ambito_riferimento_ch

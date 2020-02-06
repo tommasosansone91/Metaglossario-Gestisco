@@ -24,7 +24,7 @@ def run_script(request):
     erase_acquired_terminology()
 
     pour_entire_entry_model()
-    # pour_entire_file_model()
+    pour_entire_file_model()
     
     
     algoritmo_PGI()
