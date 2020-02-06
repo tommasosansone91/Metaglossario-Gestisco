@@ -109,8 +109,8 @@ class glossary_entry(models.Model):
         # in realtà per come ho definito hide e show, se metto senza il meno davanti, mi mostra per prima hide (h viene prima di s)
 
     def clean(self):
-        if not (self.Lemma_it or self.Acronimo_it or self.Definizione_it or  self.Ambito_riferimento_it or self.Autore_definizione_it or self.Posizione_definizione_it or self.Url_definizione_it or self.Titolo_documento_fonte_it or self.Autore_documento_fonte_it or self.Host_documento_fonte_it or self.Url_documento_fonte_it or self.Lemma_ch or self.Acronimo_ch or self.Definizione_ch or  self.Ambito_riferimento_ch or self.Autore_definizione_ch or self.Posizione_definizione_ch or self.Url_definizione_ch or self.Titolo_documento_fonte_ch or self.Autore_documento_fonte_ch or self.Host_documento_fonte_ch or self.Url_documento_fonte_ch or self.Commento_entry):
-            raise ValidationError("Non è stata inserita alcuna terminologia. Compilare almeno un campo del form.")
+        if not (  self.Lemma_it or self.Acronimo_it  or self.Definizione_it or self.Lemma_ch or self.Acronimo_ch  or self.Definizione_ch ):
+            raise ValidationError("Non è stata inserita alcuna terminologia. Compilare almeno un campo tra quelli di lemma, acronimo o definizione.")
         # non mi restituisce questa scritta ma quella messa di default nelle views
 
     def __str__(self):    
@@ -137,7 +137,7 @@ class glossary_file(models.Model):
         # in realtà per come ho definito hide e show, se metto senza il meno davanti, mi mostra per prima hide (h viene prima di s)
 
     def clean(self):
-        if not (self.Glossary_file or self.Data_inserimento_glossary):
+        if not (self.Glossary_file):
             raise ValidationError("Non è stato selezionato alcun glossario per il caricamento.")
         # non mi restituisce questa scritta ma quella messa di default nelle views
 
