@@ -64,7 +64,7 @@ def aggiungi_terminologia(request):
 
         else:
             insert_attempt_output="errato"
-            messages.error(request, ('ERRORE: La terminologia non è stata inserita nel glossario.\nCompilare almeno un campo e la data di inserimento.'))
+            messages.error(request, ('ERRORE: La terminologia non è stata inserita nel glossario.\nCompilare almeno un campo del form tra Lemma, Acronimo e Definizione.'))
             return render(request, 'aggiungi_terminologia.html', {'insert_attempt_output':insert_attempt_output})
 
     # se si va sulla pagina e basta

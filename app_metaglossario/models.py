@@ -109,9 +109,11 @@ class glossary_entry(models.Model):
         # in realtà per come ho definito hide e show, se metto senza il meno davanti, mi mostra per prima hide (h viene prima di s)
 
     def clean(self):
-        if not (  self.Lemma_it or self.Acronimo_it  or self.Definizione_it or self.Lemma_ch or self.Acronimo_ch  or self.Definizione_ch ):
-            raise ValidationError("Non è stata inserita alcuna terminologia. Compilare almeno un campo tra quelli di lemma, acronimo o definizione.")
+        if not (self.Lemma_it or self.Acronimo_it or self.Definizione_it or self.Lemma_ch or self.Acronimo_ch or self.Definizione_ch):
+            raise ValidationError("Non è stata inserita alcuna terminologia. Compilare almeno un campo del form.")
         # non mi restituisce questa scritta ma quella messa di default nelle views
+
+
 
     def __str__(self):    
         # print("%s is %d years old." % (name, age))    
@@ -137,7 +139,7 @@ class glossary_file(models.Model):
         # in realtà per come ho definito hide e show, se metto senza il meno davanti, mi mostra per prima hide (h viene prima di s)
 
     def clean(self):
-        if not (self.Glossary_file):
+        if not (self.Glossary_file or self.Data_inserimento_glossary):
             raise ValidationError("Non è stato selezionato alcun glossario per il caricamento.")
         # non mi restituisce questa scritta ma quella messa di default nelle views
 
