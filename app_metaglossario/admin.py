@@ -12,8 +12,8 @@ class glossary_entry_resource(resources.ModelResource):
     class Meta:
         model = glossary_entry
         
-        # fields = ('id', 'name', 'price',) # per includere i campi
-        # exclude = ('id','Data_inserimento_entry','Id_statico_entry','Admin_approval_switch' ) # per escludere i campi
+        fields = ('id', 'name', 'price',) # per includere i campi
+        exclude = ('id','Data_inserimento_entry','Id_statico_entry','Admin_approval_switch' ) # per escludere i campi
 
 # questa classe definita in questo modo mi permette di usare il tool import export
 class Controllo_import_export(ImportExportModelAdmin, admin.ModelAdmin):
