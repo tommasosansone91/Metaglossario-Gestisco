@@ -1,17 +1,32 @@
 from django.shortcuts import render, redirect
 import time
 
-# per gli script di management dei files
-from .algoritmi_processing.script_gestione import *
 
 # per gli script di calcolo tempo degli algoritmi
+# per gli script di elaborazione della terminologia
+from .algoritmi_processing import *
+
+# per gli script ausiliari
 from .algoritmi_processing.script_ausiliari import *
 
-# per gli script di elaborazione della terminologia
-from .algoritmi_processing.PGI import algoritmo_PGI
-from .algoritmi_processing.SR_ridotto import algoritmo_SR_ridotto
+# per gli script di management delle entry singole
+from .algoritmi_processing.gestione_modello_entry import *
 
-# from .algoritmi_processing.WD import algoritmo_WD
+# per gli script di management dei file glossario
+from .algoritmi_processing.gestione_modello_file import *
+
+# per gli script di svuotamento dei modelli
+from .algoritmi_processing.svuotamento_modelli import *
+
+# per l'aloritmo di preparazione del glossario di ingresso
+from .algoritmi_processing.PGI import *
+
+# per l'algoritmo di identificazione della terminologia
+from .algoritmi_processing.SR_ridotto import *
+
+
+
+
 
 
 def run_script(request):   
@@ -25,7 +40,8 @@ def run_script(request):
 
     pour_entire_entry_model()
     pour_entire_file_model()
-    
+
+    erase_prepared_terminology()    
     
     algoritmo_PGI()
     algoritmo_SR_ridotto()

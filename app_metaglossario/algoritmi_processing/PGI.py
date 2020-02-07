@@ -16,9 +16,7 @@ def algoritmo_PGI():
     # database di prima elaborazione
     # ppure uso degli spazi virtuali, ossia le variabili, per ogni scrittura
 
-    #  svuoto il database destinazione 
-
-    prepared_terminology.objects.all().delete()
+    #  il database destinazione è già stato svuotato
 
     # lista del vecchio modello
     acquired_rows = acquired_terminology.objects.all()
