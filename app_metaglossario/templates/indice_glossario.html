@@ -12,9 +12,7 @@
     
 
 
-{% load static %}   <!-- Qui il tag è obbligatorio nonostante sia stato inserito dentro base.html -->
-
-
+{% load static %}   
 
 <!-- visualizzazione glossario intero o risultati ricerca -->
 
@@ -31,19 +29,17 @@
                         <!-- se ci sono campi italiani e svizzeri -->
                         {% if entry.Lemma_it and entry.Lemma_ch %}
 
-                            <p class="card-text"><a href="{% url 'glossario' %}?q={{ entry.Id_statico_entry }}" Target= "_blank">{{ entry.Lemma_it }}</a></p>
-
-                            <p class="card-text"><a href="{% url 'glossario' %}?q={{ entry.Id_statico_entry }}" Target= "_blank">{{ entry.Lemma_ch }}</a></p>
+                            <p class="card-text"><a class="elemento-indice" href="{% url 'glossario' %}?q={{ entry.Id_statico_entry }}" Target= "_blank">{{ entry.Lemma_it }} <img src="{% static 'img/it_flag_icon.png' %}" style="width:20px;" align="bottom" alt="italy flag icon"> / {{ entry.Lemma_ch }} <img src="{% static 'img/ch_flag_icon.png' %}" style="width:20px;" align="bottom" alt="switzerland flag icon" ></a></p>
 
                         {% else %}
 
                             {% if entry.Lemma_it %}
-                                <p class="card-text"><a href="{% url 'glossario' %}?q={{ entry.Id_statico_entry }}" Target= "_blank">{{ entry.Lemma_it }}</a></p>
+                                <p class="card-text"><a class="elemento-indice" href="{% url 'glossario' %}?q={{ entry.Id_statico_entry }}" Target= "_blank">{{ entry.Lemma_it }} <img src="{% static 'img/it_flag_icon.png' %}" style="width:20px;" align="bottom" alt="italy flag icon" ></a></p>
                             {% endif %}
 
 
                             {% if entry.Lemma_ch %}
-                                <p class="card-text"><a href="{% url 'glossario' %}?q={{ entry.Id_statico_entry }}" Target= "_blank">{{ entry.Lemma_ch }}</a></p>
+                                <p class="card-text"><a class="elemento-indice" href="{% url 'glossario' %}?q={{ entry.Id_statico_entry }}" Target= "_blank">{{ entry.Lemma_ch }} <img src="{% static 'img/ch_flag_icon.png' %}" style="width:20px;" align="bottom" alt="switzerland flag icon" ></a></p>
                             {% endif %}
 
                         {% endif %}                        
@@ -75,6 +71,7 @@
 
 
 <!-- CSS -->
+<link rel="stylesheet" type="text/css" href={% static "css/indice_glossario_style.css" %}>
 
 <!-- Javascript -->
 <!-- <script type="text/javascript" src={% static "js/manage_string.js" %}></script>

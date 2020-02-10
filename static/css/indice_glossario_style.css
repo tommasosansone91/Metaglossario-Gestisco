@@ -1,0 +1,15 @@
+.elemento-indice{
+
+    color:black;
+    text-decoration: none;
+    
+    
+}
+
+.elemento-indice:hover{
+
+    /* color:black; */
+    text-decoration: none;
+    background-color:rgba(255, 255, 0, 0.733); 
+    
+}
