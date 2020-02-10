@@ -177,6 +177,7 @@ def pour_entire_entry_model():
             entry.Id_statico_entry=element.Id_statico_entry               
             entry.Admin_approval_switch=element.Admin_approval_switch
 
+            
             entry.save()
 
 

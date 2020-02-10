@@ -149,6 +149,7 @@ class glossary_file(models.Model):
         #quello che fa apparire nella sezione admin, attributo che riassume tutti gli altri, quindi una primary key presumibilmente, pouò anche esesere la combinazione degli altri
 
 
+
 # qui devo riversare la terminologia contenuta in glossary_entry e glossary_file
 class acquired_terminology(models.Model):
 
@@ -224,7 +225,7 @@ class acquired_terminology(models.Model):
     Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now )
     # Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now)
 
-    Id_statico_entry = models.CharField(max_length=256, blank=False, null=False, default="ITCH00000")
+    Id_statico_entry = models.CharField(max_length=256, blank=False, null=False, unique=True)
 
 
     # switch per far apparire le cose solo se revisionate dall'admin nella sessione del glossario.
@@ -329,7 +330,7 @@ class prepared_terminology(models.Model):
     Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now )
     # Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now)
 
-    Id_statico_entry = models.CharField(max_length=256, blank=False, null=False, default="ITCH00000")
+    Id_statico_entry = models.CharField(max_length=256, blank=False, null=False, unique=True)
 
 
     # switch per far apparire le cose solo se revisionate dall'admin nella sessione del glossario.

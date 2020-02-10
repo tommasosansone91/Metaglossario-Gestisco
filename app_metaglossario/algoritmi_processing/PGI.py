@@ -118,74 +118,7 @@ def algoritmo_PGI():
     print("Inizia l'elaborazione della terminologia contenuta nel modello prepared_terminology...")
 
 
-    # upper, lower, title
-    print("Inizia la modifica del formato del testo (uppercase/title)...")
 
-    prepared_rows = prepared_terminology.objects.all()
-
-    for prepared_entry in prepared_rows:
-
-        if not pd.isnull(prepared_entry.Lemma_it):
-            prepared_entry.Lemma_it.title() # non è veramente necessario
-
-        if not pd.isnull(prepared_entry.Acronimo_it):
-            prepared_entry.Acronimo_it.upper()
-            
-        if not pd.isnull(prepared_entry.Ambito_riferimento_it):    
-            prepared_entry.Ambito_riferimento_it.title() # non è veramente necessario
-
-        if not pd.isnull(prepared_entry.Autore_definizione_it):    
-            prepared_entry.Autore_definizione_it.title() # non è veramente necessario
-
-        if not pd.isnull(prepared_entry.Posizione_definizione_it):    
-            prepared_entry.Posizione_definizione_it.title() # non è veramente necessario
-
-        if not pd.isnull(prepared_entry.Titolo_documento_fonte_it):    
-            prepared_entry.Titolo_documento_fonte_it.title() # non è veramente necessario
-
-        if not pd.isnull(prepared_entry.Autore_documento_fonte_it):    
-            prepared_entry.Autore_documento_fonte_it.title() # non è veramente necessario
-
-        if not pd.isnull(prepared_entry.Host_documento_fonte_it):    
-            prepared_entry.Host_documento_fonte_it.title() # non è veramente necessario
-
-
-        if not pd.isnull(prepared_entry.Lemma_ch):
-            prepared_entry.Lemma_ch.title() # non è veramente necessario
-
-        if not pd.isnull(prepared_entry.Acronimo_ch):
-            prepared_entry.Acronimo_ch.upper()
-            
-        if not pd.isnull(prepared_entry.Ambito_riferimento_ch):    
-            prepared_entry.Ambito_riferimento_ch.title() # non è veramente necessario
-
-        if not pd.isnull(prepared_entry.Autore_definizione_ch):    
-            prepared_entry.Autore_definizione_ch.title() # non è veramente necessario
-
-        if not pd.isnull(prepared_entry.Posizione_definizione_ch):    
-            prepared_entry.Posizione_definizione_ch.title() # non è veramente necessario
-
-        if not pd.isnull(prepared_entry.Titolo_documento_fonte_ch):    
-            prepared_entry.Titolo_documento_fonte_ch.title() # non è veramente necessario
-
-        if not pd.isnull(prepared_entry.Autore_documento_fonte_ch):    
-            prepared_entry.Autore_documento_fonte_ch.title() # non è veramente necessario
-
-        if not pd.isnull(prepared_entry.Host_documento_fonte_ch):    
-            prepared_entry.Host_documento_fonte_ch.title() # non è veramente necessario
-
-
-
-        prepared_entry.Id_statico_entry.upper() 
-
-        prepared_entry.save()
-        
-
-    
-
-       
-
-    print("Modifica del formato del testo (uppercase/title) terminato con successo!")
 
     # sostituzione di doppi spazi e a capo con degli spazi
 
@@ -430,6 +363,77 @@ def algoritmo_PGI():
         prepared_entry.save()
 
     print("Eliminazione degli spazi all'inizio e alla fine di ogni cella terminata con successo!")
+
+
+        # upper, lower, title
+    print("Inizia la modifica del formato del testo (uppercase/title)...")
+
+    prepared_rows = prepared_terminology.objects.all()
+
+    for prepared_entry in prepared_rows:
+
+        if not pd.isnull(prepared_entry.Lemma_it):
+            prepared_entry.Lemma_it = prepared_entry.Lemma_it[:1].upper() + prepared_entry.Lemma_it[1:]
+
+        if not pd.isnull(prepared_entry.Acronimo_it):
+            prepared_entry.Acronimo_it.upper()
+            
+        if not pd.isnull(prepared_entry.Ambito_riferimento_it):    
+            prepared_entry.Ambito_riferimento_it = prepared_entry.Ambito_riferimento_it[:1].upper() + prepared_entry.Ambito_riferimento_it[1:]
+
+        if not pd.isnull(prepared_entry.Autore_definizione_it):    
+            prepared_entry.Autore_definizione_it.title() # non è veramente necessario
+
+        if not pd.isnull(prepared_entry.Posizione_definizione_it):    
+            prepared_entry.Posizione_definizione_it = prepared_entry.Posizione_definizione_it[:1].upper() + prepared_entry.Posizione_definizione_it[1:] # non è veramente necessario
+
+        if not pd.isnull(prepared_entry.Titolo_documento_fonte_it):    
+            prepared_entry.Titolo_documento_fonte_it = prepared_entry.Titolo_documento_fonte_it[:1].upper() + prepared_entry.Titolo_documento_fonte_it[1:] # non è veramente necessario
+
+        if not pd.isnull(prepared_entry.Autore_documento_fonte_it):    
+            prepared_entry.Autore_documento_fonte_it.title() # non è veramente necessario
+
+        if not pd.isnull(prepared_entry.Host_documento_fonte_it):    
+            prepared_entry.Host_documento_fonte_it.title() # non è veramente necessario
+
+
+        if not pd.isnull(prepared_entry.Lemma_ch):
+            prepared_entry.Lemma_ch = prepared_entry.Lemma_ch[:1].upper() + prepared_entry.Lemma_ch[1:]
+
+        if not pd.isnull(prepared_entry.Acronimo_ch):
+            prepared_entry.Acronimo_ch.upper()
+            
+        if not pd.isnull(prepared_entry.Ambito_riferimento_ch):    
+            prepared_entry.Ambito_riferimento_ch = prepared_entry.Ambito_riferimento_ch[:1].upper() + prepared_entry.Ambito_riferimento_ch[1:]
+
+        if not pd.isnull(prepared_entry.Autore_definizione_ch):    
+            prepared_entry.Autore_definizione_ch.title() # non è veramente necessario
+
+        if not pd.isnull(prepared_entry.Posizione_definizione_ch):    
+            prepared_entry.Posizione_definizione_ch = prepared_entry.Posizione_definizione_ch[:1].upper() + prepared_entry.Posizione_definizione_ch[1:] # non è veramente necessario
+
+        if not pd.isnull(prepared_entry.Titolo_documento_fonte_ch):    
+            prepared_entry.Titolo_documento_fonte_ch = prepared_entry.Titolo_documento_fonte_ch[:1].upper() + prepared_entry.Titolo_documento_fonte_ch[1:] # non è veramente necessario
+
+        if not pd.isnull(prepared_entry.Autore_documento_fonte_ch):    
+            prepared_entry.Autore_documento_fonte_ch.title() # non è veramente necessario
+
+        if not pd.isnull(prepared_entry.Host_documento_fonte_ch):    
+            prepared_entry.Host_documento_fonte_ch.title() # non è veramente necessario
+
+
+
+        prepared_entry.Id_statico_entry.upper() 
+
+        prepared_entry.save() 
+
+       
+
+    print("Modifica del formato del testo (uppercase/title) terminato con successo!")
+
+
+
+
 
     print("Standardizzazione del formato dei dati terminata con successo!")
 
