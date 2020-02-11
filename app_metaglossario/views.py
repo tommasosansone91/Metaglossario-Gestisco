@@ -9,7 +9,8 @@ from .forms import glossary_file_form
 from .models import acquired_terminology
 from .models import prepared_terminology
 
-# from .forms import glossary_sheet_form
+
+
 
 # questo mi consente di lanciare i messaggi da una pagina all'altra
 from django.contrib import messages
@@ -120,6 +121,10 @@ def api_glossario(request):
 
 def esporta_terminologia(request):
     return render(request, 'esporta_terminologia.html', {})
+
+
+
+
 
 
 # info pages section

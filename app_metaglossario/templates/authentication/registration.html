@@ -1,0 +1,44 @@
+{% extends 'base.html'%} <!-- vuol dire inserisci qui la navigation toolbar contenuta in base -->
+
+{% block content %}
+
+    <h1>Titolo</h1>
+    
+    <br>
+
+    <div class="jumbotron">
+
+    {% if registered %}
+
+        <h3>Utente registrato</h3>
+
+    {% else %}
+
+        <h3>Registrati qui</h3>
+        <p>riempi il form</p>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ profile_form.as_p }}
+
+            <input type="submit" name="" value="Register">
+
+        </form>
+
+
+    {% endif %}
+
+    </div>
+    
+
+
+{% load static %}  <!-- Qui il tag è obbligatorio nonostante sia stato inserito dentro base.html -->
+
+<!-- CSS -->
+{% comment %} <link rel="stylesheet" type="text/css" href={% static "css/file.css" %}> {% endcomment %}
+
+<!-- Javascript -->
+{% comment %} <script type="text/javascript" src={% static "js/file.js" %}></script> {% endcomment %}
+
+{% endblock %}

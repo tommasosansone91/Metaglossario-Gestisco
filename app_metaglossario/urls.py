@@ -5,9 +5,13 @@ from . import views
 from . import view_glossario
 from . import view_run_script
 
+# viste separate per l'autenticazione degli utenti
+from . import views_users_authentication
+
 # serve a permettere il salvataggio dei media
 from django.conf import settings
 from django.conf.urls.static import static
+
 
 urlpatterns=[
     
@@ -29,7 +33,11 @@ urlpatterns=[
     path('info/perche_un_metaglossario', views.perche_un_metaglossario, name="perche_un_metaglossario"),
     path('info/ringraziamenti', views.ringraziamenti, name="ringraziamenti"),
 
+    path('authentication/registration', views_users_authentication.registration, name="registration"),
+    # path('authentication/registration', views.login, name="login"),
+
     path('run_script', view_run_script.run_script, name="run_script"), 
+
     
 ]
 

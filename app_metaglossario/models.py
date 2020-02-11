@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError #serve per far funzionare il 
 
 
 
+
 # Create your models here.
 
 # glossary_entry, glossary_file, acquired_terminology, prepared_terminology
@@ -15,6 +16,7 @@ Admin_approval_switch_choices=[
     ("show","show"), # 1=valore da inserire negli script (=variabile), 2=valore assunto in relatà nel db
     ("hide","hide"),
     ]
+
 
 
 class glossary_entry(models.Model):
@@ -91,8 +93,9 @@ class glossary_entry(models.Model):
     Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now )
     # Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now)
 
-    Id_statico_entry = models.CharField(max_length=256, blank=False, null=False, default="ITCH00000")
 
+    Id_statico_entry = models.CharField(max_length=256, blank=False, null=False, default="ITCH00000")
+    # Id_statico_entry = models.CharField(max_length=256, blank=False, null=False, default="ITCH00000")
 
     # switch per far apparire le cose solo se revisionate dall'admin nella sessione del glossario.
     # posso avere solo due scelte per questo switch, le definisco a priori nella root del modulo

@@ -2,6 +2,11 @@ from django import forms
 from .models import glossary_entry
 from .models import glossary_file
 
+# per la gestione dei dati utente
+from django.contrib.auth.models import User
+from .models_users_authentication import UserProfileInfo
+
+
 
 class glossary_entry_form(forms.ModelForm):
                 
@@ -17,7 +22,22 @@ class glossary_file_form(forms.ModelForm):
         fields = ["Glossary_file", "Data_inserimento_glossary"]
 
 
+# form delle info utente
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+
+    class Meta():
+        model = User 
+        # è il modello preimpostato di Django
+        fields = ['username', 'email', 'password'] 
 
 
+class UserProfileInfoForm(forms.ModelForm):
+
+    class Meta():
+        model = UserProfileInfo
+        # è il modello aggiunto da me
+        fields = ["profile_pic", "user_link" ]
+        
 
 
