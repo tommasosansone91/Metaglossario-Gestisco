@@ -1,0 +1,36 @@
+{% extends 'base.html'%} <!-- vuol dire inserisci qui la navigation toolbar contenuta in base -->
+
+{% block content %}
+
+    <h1>Login</h1>
+    
+    <br>
+
+    <div class="jumbotron">
+
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+
+            <label for="username">Username:</label>
+            <input type="text" name="username" value="" placeholder="nome utente">
+
+            <label for="password">Password:</label>
+            <input type="password" name="password" value="" placeholder="password">
+
+            <input type="submit" name="" value="Login">
+
+        </form>
+
+    </div>
+    
+
+
+{% load static %}  <!-- Qui il tag è obbligatorio nonostante sia stato inserito dentro base.html -->
+
+<!-- CSS -->
+{% comment %} <link rel="stylesheet" type="text/css" href={% static "css/file.css" %}> {% endcomment %}
+
+<!-- Javascript -->
+{% comment %} <script type="text/javascript" src={% static "js/file.js" %}></script> {% endcomment %}
+
+{% endblock %}

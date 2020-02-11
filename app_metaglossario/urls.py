@@ -13,6 +13,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
+
+
 urlpatterns=[
     
     path('', views.home, name='home'),
@@ -33,8 +35,16 @@ urlpatterns=[
     path('info/perche_un_metaglossario', views.perche_un_metaglossario, name="perche_un_metaglossario"),
     path('info/ringraziamenti', views.ringraziamenti, name="ringraziamenti"),
 
+
+    # user authentication
     path('authentication/registration', views_users_authentication.registration, name="registration"),
-    # path('authentication/registration', views.login, name="login"),
+
+    # dovrebbe stare in applicazione/urls.py 
+    path('authentication/login', views_users_authentication.user_login, name="login"),
+
+    # dovrebbe stare in principale/urls.py 
+    path('logout', views_users_authentication.user_logout, name="logout"),
+    path('special', views_users_authentication.special, name="special"),
 
     path('run_script', view_run_script.run_script, name="run_script"), 
 
