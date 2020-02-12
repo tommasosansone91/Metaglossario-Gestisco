@@ -10,8 +10,9 @@ class UserProfileInfo(models.Model):
 
     # altri attributi
     profile_pic = models.ImageField(blank=True, null=True, upload_to="profile_pics")
+    user_bio = models.TextField(blank=True, null=True)
     user_link = models.URLField(blank=True, null=True)
-    # user_bio = models.TextField(blank=True)
+    
 
     def __str__(self):
         # built-in  attribute of django.contrib.auth.models.User

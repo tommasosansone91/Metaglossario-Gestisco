@@ -91,7 +91,17 @@
                 
                 <div class="dropdown-menu">
 
-                  <a class="dropdown-item" href="">profilo</a>                  
+                  <a class="dropdown-item" href="">Profilo</a>   
+
+                  {% comment %} il pannello di controllo della terminologia è accessibile solo agli admin {% endcomment %}
+                  {% if request.user.is_staff %}
+                    <a class="dropdown-item" href="{% url 'pannello_gestione_terminologia' %}">Pannello di gestione della terminologia</a>                 
+                  {% endif %}
+
+                  {% if request.user.is_staff %}
+                    <a class="dropdown-item" href="{% url 'istruzioni_gestione_terminologia' %}">Istruzioni per la gestione della terminologia</a>                 
+                  {% endif %}
+                  
                   <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
 
                 </div>

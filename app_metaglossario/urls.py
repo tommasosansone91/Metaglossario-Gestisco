@@ -1,9 +1,9 @@
 from django.urls import path
 from . import views
 
-# viste separate per i template glossario e metaglossario
+# viste separate
 from . import view_glossario
-from . import view_run_script
+from . import view_gestione
 
 # viste separate per l'autenticazione degli utenti
 from . import views_users_authentication
@@ -46,7 +46,8 @@ urlpatterns=[
     path('logout', views_users_authentication.user_logout, name="logout"),
     path('special', views_users_authentication.special, name="special"),
 
-    path('management_keyboard', view_run_script.management_keyboard, name="management_keyboard"), 
+    path('gestione/pannello_gestione_terminologia', view_gestione.pannello_gestione_terminologia, name="pannello_gestione_terminologia"), 
+    path('gestione/istruzioni_gestione_terminologia', view_gestione.istruzioni_gestione_terminologia, name="istruzioni_gestione_terminologia"), 
 
     
 ]

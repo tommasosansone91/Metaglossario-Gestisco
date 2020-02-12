@@ -1,0 +1,40 @@
+{% extends 'base.html'%} <!-- vuol dire inserisci qui la navigation toolbar contenuta in base -->
+
+{% block content %}
+
+{% load static %}
+
+    <h1>Istruzioni per la gestione della terminologia</h1>
+    
+    <br>
+
+    <p>Questa pagina spiega come gestire correttamente la terminologia salvata dagli utenti nel database, come modificarla e come renderla visibile nel glossario dell'applicazione. Questa pagina è accessibile solo agli amministratori del sistema.</p>
+    
+    <br>
+
+    <div style="text-align:center">
+        <img src="{% static 'img/schema_flusso_dati.jpg' %}" style="width:80%;" align="middle" alt="Schema flusso dati metaglossario" >
+    </div>
+
+    <br>
+
+    <h4>Le strutture che accolgono i dati</h4>
+    
+
+    <br>
+
+    <h4>Gli algoritmi che gestiscono i dati</h4>
+
+
+    
+
+
+{% load static %}  <!-- Qui il tag è obbligatorio nonostante sia stato inserito dentro base.html -->
+
+<!-- CSS -->
+{% comment %} <link rel="stylesheet" type="text/css" href={% static "css/file.css" %}> {% endcomment %}
+
+<!-- Javascript -->
+{% comment %} <script type="text/javascript" src={% static "js/file.js" %}></script> {% endcomment %}
+
+{% endblock %}

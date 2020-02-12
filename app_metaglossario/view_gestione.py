@@ -41,7 +41,7 @@ from django.urls import reverse
 # funzione vista
 # ci può accedere solo chi è admin
 @staff_member_required
-def management_keyboard(request):
+def pannello_gestione_terminologia(request):
 
     
     # se ho ricevuto il click del pulsante nel form, con valore run_script
@@ -49,17 +49,17 @@ def management_keyboard(request):
 
         # call function
         context_dict = run_script()
-        print(context_dict)
+        
 
         # return user to required page
         # return HttpResponseRedirect(reverse('management_keyboard'))
-        return render(request, 'management_keyboard.html', context_dict)
+        return render(request, 'gestione/pannello_gestione_terminologia.html', context_dict)
 
     else:
         context_dict = {}
-        print(context_dict)
+        
 
-    return render(request, 'management_keyboard.html', context_dict)
+    return render(request, 'gestione/pannello_gestione_terminologia.html', context_dict)
 
 
 
@@ -69,21 +69,21 @@ def run_script():
 
     print("***************************************")
     print("*** Script richiamato con successo! ***")
+    print("***************************************")
 
     start_time = time.time()
     
-    erase_acquired_terminology()
+    # erase_acquired_terminology()
 
-    pour_entire_entry_model()
-    pour_entire_file_model()
+    # pour_entire_entry_model()
+    # pour_entire_file_model()
 
-    erase_prepared_terminology()    
+    # erase_prepared_terminology()    
     
-    algoritmo_PGI()
-    algoritmo_SR_ridotto()
+    # algoritmo_PGI()
+    # algoritmo_SR_ridotto()
     
     elapsed_time = round(time.time() - start_time)
-
     end_time = time.ctime()
     start_time = time.ctime(start_time)
 
@@ -95,3 +95,10 @@ def run_script():
     print("***************************************")
 
     return(context_dict)
+
+
+# funzione vista
+# ci può accedere solo chi è admin
+@staff_member_required
+def istruzioni_gestione_terminologia(request):
+    return render(request, 'gestione/istruzioni_gestione_terminologia.html', {})

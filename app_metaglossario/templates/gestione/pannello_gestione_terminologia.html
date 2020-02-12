@@ -1,0 +1,75 @@
+{% extends 'base.html'%} <!-- vuol dire inserisci qui la navigation toolbar contenuta in base -->
+
+{% block content %}
+
+    <h1>Pannello di gestione della terminologia</h1>
+
+    <br>
+
+    <p>Questa pagina è una pulsantiera di comando da cui è possibile lanciare gli algoritmi per la gestione della terminologia nel database, ed è accessibile solo agli amministratori del sistema.</p>
+    <p>Di seguito sono elencati gli algoritmi disponibili, con relativa spiegazione e pulsante di avvio. Per lanciare uno script, cliccare sul relativo pulsante.</p>
+    <p><b>Attenzione:</b> Prima di avviare uno script, assicurarsi che sia terminata l'esecuzione di altri script lanciati eventualemnte in precedenza. Prima di avviare un nuovo script, assicurarsi che lo stato del pannello indichi "pronto"!</p>
+    
+
+    <br>
+
+    <div class="jumbotron">
+
+    {% if script_is_run == "yes" %}
+
+        <p><b>Stato del pannello:</b></p>
+        <h4 id="script_status" style="color:rgb(17, 216, 116)">Pronto</h4>
+
+        <br>
+
+        <p><b>Informazioni sull'ultimo script eseguito:</b></p>
+        <p>Script lanciato alle ore: {{ tempo_inizio }}</p>
+        <p>Script terminato alle ore: {{ tempo_fine }}</p>
+        <p>Tempo impiegato: {{ tempo_impiegato }} s</p>
+       
+
+
+    {% else  %}
+
+        <p><b>Stato del pannello:</b></p>
+        <h4 id="script_status" style="color:rgb(17, 216, 116)">Pronto</h4>
+
+        <br>
+
+
+        <p><b>Non è stato eseguito ancora nessuno script</b></p>
+        
+
+
+    {% endif %}
+
+    </div>
+
+    
+
+    <br>
+
+    <h4>Riversamento completo</h4>
+
+    <p>Questo script attinge alla terminologia salvata nei database "glossary_entry" e "glossary_file", in cui gli utenti hanno inserito, rispettivamente, tuple di terminologia singole e più tuple alla volta/interi glossari. Tale terminologia viene prima riversata nel database "acquired_terminology", quindi viene elaborata e poi riversata nel database "prepared_terminology", cui attinge il glossario dell'applicazione.</p>
+    <p><b>Attenzione:</b> questo algoritmo elimina il contenuto dei database "acquired_terminology" e "preparedred_terminology" per sostituirlo con quello proveniente dai database "glossary_entry" e "glossary_file".</p>
+
+    <br>
+
+    <form method="post" >
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success" onclick="script_in_corso()" name="run_script">Run script</button>
+    </form>
+
+ 
+
+{% load static %}   <!-- Qui il tag è obbligatorio nonostante sia stato inserito dentro base.html -->
+
+<!-- Javascript -->
+<script type="text/javascript" src={% static "js/update_script_status.js" %}></script>
+
+<!-- <audio controls>
+    source src="{% static 'sounds/1607.mp3' %}" type="audio/mpeg">
+</audio> -->
+
+{% endblock %}
