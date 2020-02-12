@@ -46,7 +46,7 @@ urlpatterns=[
     path('logout', views_users_authentication.user_logout, name="logout"),
     path('special', views_users_authentication.special, name="special"),
 
-    path('run_script', view_run_script.run_script, name="run_script"), 
+    path('management_keyboard', view_run_script.management_keyboard, name="management_keyboard"), 
 
     
 ]

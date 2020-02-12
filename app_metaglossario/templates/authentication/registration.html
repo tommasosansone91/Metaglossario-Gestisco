@@ -19,6 +19,15 @@
 
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
+
+            {% comment %} <label for="username">Username:</label>
+            <input type="text" name="username" value="" placeholder="nome utente">
+
+            <label for="username">Password:</label>
+            <input type="text" name="password" value="" placeholder="password"> {% endcomment %}
+
+
+
             {{ user_form.as_p }}
             {{ profile_form.as_p }}
 

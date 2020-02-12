@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 import time
 
+
 # meglio non usare la tipologia di importazione wildcard
 
 # per gli script di elaborazione della terminologia
@@ -32,17 +33,44 @@ from .algoritmi_processing.PGI import algoritmo_PGI
 # per l'algoritmo di identificazione della terminologia
 from .algoritmi_processing.SR_ridotto import algoritmo_SR_ridotto
 
+# login required per abilitare accesso e run solo agli amministratori
+from django.contrib.admin.views.decorators import staff_member_required
+from django.http import HttpResponseRedirect, HttpResponse
+from django.urls import reverse
+
+# funzione vista
+# ci può accedere solo chi è admin
+@staff_member_required
+def management_keyboard(request):
+
+    
+    # se ho ricevuto il click del pulsante nel form, con valore run_script
+    if request.method == 'POST' and 'run_script' in request.POST:
+
+        # call function
+        context_dict = run_script()
+        print(context_dict)
+
+        # return user to required page
+        # return HttpResponseRedirect(reverse('management_keyboard'))
+        return render(request, 'management_keyboard.html', context_dict)
+
+    else:
+        context_dict = {}
+        print(context_dict)
+
+    return render(request, 'management_keyboard.html', context_dict)
 
 
 
 
-
-def run_script(request):   
+# funzione che viene richiamata dall funzione vista
+def run_script():  
 
     print("***************************************")
     print("*** Script richiamato con successo! ***")
 
-    start_time = time.time()  
+    start_time = time.time()
     
     erase_acquired_terminology()
 
@@ -54,16 +82,16 @@ def run_script(request):
     algoritmo_PGI()
     algoritmo_SR_ridotto()
     
-
-    
     elapsed_time = round(time.time() - start_time)
+
+    end_time = time.ctime()
+    start_time = time.ctime(start_time)
+
+    context_dict = {'script_is_run':'yes', 'tempo_inizio':start_time, 'tempo_fine':end_time, 'tempo_impiegato':elapsed_time}
 
     print("***************************************")
     print("*** Script eseguito fino alla fine! ***")
     print("*** Tempo impiegato: %s s ***" % elapsed_time )
     print("***************************************")
 
-    finish_sound()
-    # no, il suono va fatto lanciare nel template
-
-    return render(request, 'run_script.html', {})
+    return(context_dict)

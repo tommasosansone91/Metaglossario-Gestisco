@@ -44,6 +44,7 @@ admin.site.register(UserProfileInfo)
 
 
 
+# modelli admin per la visualizzazione dei modelli aprte admin con funzioni aggiuntive
 
 
 
