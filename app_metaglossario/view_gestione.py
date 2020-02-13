@@ -94,7 +94,7 @@ def pannello_gestione_terminologia(request):
 
         context_dict.update(script_return_dict)
 
-        print(context_dict)
+        
 
         # return user to required page
         # return HttpResponseRedirect(reverse('management_keyboard'))
