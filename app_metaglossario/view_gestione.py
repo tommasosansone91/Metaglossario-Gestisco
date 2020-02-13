@@ -38,6 +38,18 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 
+# per le funzioni che permettono di ottenere il nome della funzione
+import inspect
+
+
+
+# funzione vista
+# ci può accedere solo chi è admin
+@staff_member_required
+def istruzioni_gestione_terminologia(request):
+    return render(request, 'gestione/istruzioni_gestione_terminologia.html', {})
+
+
 # funzione vista
 # ci può accedere solo chi è admin
 @staff_member_required
@@ -45,11 +57,44 @@ def pannello_gestione_terminologia(request):
 
     
     # se ho ricevuto il click del pulsante nel form, con valore run_script
-    if request.method == 'POST' and 'run_script' in request.POST:
+    if request.method == 'POST':
+        
 
         # call function
-        context_dict = run_script()
+
+        print("***************************************")
+        print("*** Script richiamato con successo! ***")
+        print("***************************************")
+
+        print("Viene lanciato lo script:")
+
+        start_time = time.time()
+
+        # scelta della funzione
+
+        if 'script_1' in request.POST:
+            script_return_dict = script_1()
         
+        if 'script_2' in request.POST:
+            script_return_dict = script_2()
+
+        end_time = time.time()
+
+        elapsed_time = round(end_time - start_time)
+
+        start_time = time.ctime(start_time)
+        end_time = time.ctime(end_time)
+
+        print("***************************************")
+        print("*** Script eseguito fino alla fine! ***")
+        print("*** Tempo impiegato: %s s ***" % elapsed_time )
+        print("***************************************")
+
+        context_dict = {'script_is_run':'yes', 'tempo_inizio':start_time, 'tempo_fine':end_time, 'tempo_impiegato':elapsed_time}
+
+        context_dict.update(script_return_dict)
+
+        print(context_dict)
 
         # return user to required page
         # return HttpResponseRedirect(reverse('management_keyboard'))
@@ -63,15 +108,15 @@ def pannello_gestione_terminologia(request):
 
 
 
+##########################################################################################################
+# elenco degli script disponibili
 
 # funzione che viene richiamata dall funzione vista
-def run_script():  
-
+def script_1():  
+    
+    print (inspect.currentframe().f_code.co_name)
     print("***************************************")
-    print("*** Script richiamato con successo! ***")
-    print("***************************************")
-
-    start_time = time.time()
+   
     
     # erase_acquired_terminology()
 
@@ -82,23 +127,30 @@ def run_script():
     
     # algoritmo_PGI()
     # algoritmo_SR_ridotto()
+
+    script_return_dict = {}
+
+    return(script_return_dict)
+
+
+def script_2():  
     
-    elapsed_time = round(time.time() - start_time)
-    end_time = time.ctime()
-    start_time = time.ctime(start_time)
-
-    context_dict = {'script_is_run':'yes', 'tempo_inizio':start_time, 'tempo_fine':end_time, 'tempo_impiegato':elapsed_time}
-
+    print (inspect.currentframe().f_code.co_name)
     print("***************************************")
-    print("*** Script eseguito fino alla fine! ***")
-    print("*** Tempo impiegato: %s s ***" % elapsed_time )
-    print("***************************************")
+   
+    
+    # erase_acquired_terminology()
 
-    return(context_dict)
+    # pour_entire_entry_model()
+    # pour_entire_file_model()
+
+    # erase_prepared_terminology()    
+    
+    # algoritmo_PGI()
+    # algoritmo_SR_ridotto()
+
+    script_return_dict = {}
+
+    return(script_return_dict)
 
 
-# funzione vista
-# ci può accedere solo chi è admin
-@staff_member_required
-def istruzioni_gestione_terminologia(request):
-    return render(request, 'gestione/istruzioni_gestione_terminologia.html', {})
