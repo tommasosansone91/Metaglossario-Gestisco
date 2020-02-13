@@ -112,30 +112,32 @@ def pannello_gestione_terminologia(request):
 # elenco degli script disponibili
 
 # funzione che viene richiamata dall funzione vista
-def script_1():  
+def Riversamento_completo():  
     
-    print (inspect.currentframe().f_code.co_name)
+    script_name = inspect.currentframe().f_code.co_name
+    print (script_name)
     print("***************************************")
    
     
-    # erase_acquired_terminology()
+    erase_acquired_terminology()
 
-    # pour_entire_entry_model()
-    # pour_entire_file_model()
+    pour_entire_entry_model()
+    pour_entire_file_model()
 
-    # erase_prepared_terminology()    
+    erase_prepared_terminology()    
     
-    # algoritmo_PGI()
-    # algoritmo_SR_ridotto()
+    algoritmo_PGI()
+    algoritmo_SR_ridotto()
 
-    script_return_dict = {}
+    script_return_dict = {'script_name':script_name}
 
     return(script_return_dict)
 
 
 def script_2():  
     
-    print (inspect.currentframe().f_code.co_name)
+    script_name = inspect.currentframe().f_code.co_name
+    print (script_name)
     print("***************************************")
    
     
@@ -149,7 +151,7 @@ def script_2():
     # algoritmo_PGI()
     # algoritmo_SR_ridotto()
 
-    script_return_dict = {}
+    script_return_dict = {'script_name':script_name}
 
     return(script_return_dict)
 

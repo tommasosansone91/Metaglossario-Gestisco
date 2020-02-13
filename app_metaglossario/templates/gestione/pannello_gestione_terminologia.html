@@ -2,13 +2,21 @@
 
 {% block content %}
 
+{% load static %}
+
     <h1>Pannello di gestione della terminologia</h1>
 
     <br>
 
-    <p>Questa pagina è una pulsantiera di comando da cui è possibile lanciare gli algoritmi per la gestione della terminologia nel database, ed è accessibile solo agli amministratori del sistema.</p>
-    <p>Di seguito sono elencati gli algoritmi disponibili, con relativa spiegazione e pulsante di avvio. Per lanciare uno script, cliccare sul relativo pulsante.</p>
-    <p><b>Attenzione:</b> Prima di avviare uno script, assicurarsi che sia terminata l'esecuzione di altri script lanciati eventualemnte in precedenza. Prima di avviare un nuovo script, assicurarsi che lo stato del pannello indichi "pronto"!</p>
+    <p>Questa pagina è una pulsantiera di comando da cui è possibile lanciare gli algoritmi per la gestione della terminologia nel database, 
+    ed è accessibile solo agli amministratori del sistema.</p>
+    <p>Di seguito sono elencati gli algoritmi disponibili, con relativa spiegazione e pulsante di avvio. 
+    Per lanciare uno script, cliccare sul relativo pulsante. 
+    Per ulteriori informazioni sul funzionamento degli algoritmi e il contenuto dei database, 
+    consultare le <a href="{% url 'istruzioni_gestione_terminologia'%}">istruzioni per la gestione della terminologia</a>.</p>
+    <p><b>Attenzione:</b> Prima di avviare uno script, 
+    assicurarsi che sia terminata l'esecuzione di altri script lanciati eventualemnte in precedenza. 
+    Prima di avviare un nuovo script, assicurarsi che lo stato del pannello indichi "pronto"!</p>
     
 
     <br>
@@ -23,7 +31,8 @@
         <br>
 
         <p><b>Informazioni sull'ultimo script eseguito:</b></p>
-        <p>Script lanciato alle ore: {{ tempo_inizio }}</p>
+        <p>Script eseguito: {{ script_name }}</p>
+        <p>Script iniziato alle ore: {{ tempo_inizio }}</p>
         <p>Script terminato alle ore: {{ tempo_fine }}</p>
         <p>Tempo impiegato: {{ tempo_impiegato }} s</p>
        
@@ -49,7 +58,7 @@
 
     <br>
 
-    <h4>Riversamento completo</h4>
+    <h4>Riversamento standard</h4>
 
     <p>Questo script attinge alla terminologia salvata nei database "glossary_entry" e "glossary_file", in cui gli utenti hanno inserito, rispettivamente, tuple di terminologia singole e più tuple alla volta/interi glossari. Tale terminologia viene prima riversata nel database "acquired_terminology", quindi viene elaborata e poi riversata nel database "prepared_terminology", cui attinge il glossario dell'applicazione.</p>
     <p><b>Attenzione:</b> questo algoritmo elimina il contenuto dei database "acquired_terminology" e "preparedred_terminology" per sostituirlo con quello proveniente dai database "glossary_entry" e "glossary_file".</p>
@@ -58,7 +67,7 @@
 
     <form method="post" >
     {% csrf_token %}
-    <button type="submit" class="btn btn-success" onclick="script_in_corso()" name="script_1">Riversamento standard</button>
+    <button type="submit" class="btn btn-success" onclick="script_in_corso()" name="script_1">Run script</button>
     </form>
 
     {% comment %} <form method="post" >

@@ -100,7 +100,7 @@ class glossary_entry(models.Model):
     # switch per far apparire le cose solo se revisionate dall'admin nella sessione del glossario.
     # posso avere solo due scelte per questo switch, le definisco a priori nella root del modulo
 
-    Admin_approval_switch = models.CharField(max_length=30,blank=False, null=False, default=Admin_approval_switch_choices[1], choices=Admin_approval_switch_choices)
+    Admin_approval_switch = models.CharField(max_length=30,blank=False, null=False, choices=Admin_approval_switch_choices, default=Admin_approval_switch_choices[1][0] )
 
 
 
@@ -234,7 +234,7 @@ class acquired_terminology(models.Model):
     # switch per far apparire le cose solo se revisionate dall'admin nella sessione del glossario.
     # posso avere solo due scelte per questo switch, le definisco a priori nella root del modulo
 
-    Admin_approval_switch = models.CharField(max_length=30,blank=False, null=False, default=Admin_approval_switch_choices[1], choices=Admin_approval_switch_choices)
+    Admin_approval_switch = models.CharField(max_length=30,blank=False, null=False, choices=Admin_approval_switch_choices, default=Admin_approval_switch_choices[1][0])
 
 
 
@@ -339,7 +339,7 @@ class prepared_terminology(models.Model):
     # switch per far apparire le cose solo se revisionate dall'admin nella sessione del glossario.
     # posso avere solo due scelte per questo switch, le definisco a priori nella root del modulo
 
-    Admin_approval_switch = models.CharField(max_length=30,blank=False, null=False, default=Admin_approval_switch_choices[1], choices=Admin_approval_switch_choices)
+    Admin_approval_switch = models.CharField(max_length=30, blank=False, null=False,  choices=Admin_approval_switch_choices, default=Admin_approval_switch_choices[1][0])
 
 
 
