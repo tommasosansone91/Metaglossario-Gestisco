@@ -73,7 +73,7 @@ def pannello_gestione_terminologia(request):
         # scelta della funzione
 
         if 'script_1' in request.POST:
-            script_return_dict = script_1()
+            script_return_dict = Riversamento_completo()
         
         if 'script_2' in request.POST:
             script_return_dict = script_2()

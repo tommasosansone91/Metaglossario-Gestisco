@@ -133,6 +133,8 @@ class glossary_file(models.Model):
     Data_inserimento_glossary = models.DateField(blank=False, null=False, default=timezone.now )
     # Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now().date)
 
+    Admin_approval_switch = models.CharField(max_length=30,blank=False, null=False, choices=Admin_approval_switch_choices, default=Admin_approval_switch_choices[1][0] )
+
 
     class Meta:
         ordering = ['Data_inserimento_glossary', 'Glossary_file']
