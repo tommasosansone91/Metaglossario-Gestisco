@@ -16,7 +16,7 @@ Admin_approval_switch_choices=[
     ("show","show"), # 1=valore da inserire negli script (=variabile), 2=valore assunto in relatà nel db
     ("hide","hide"),
     ]
-
+# è giusto così, è una lista di tuple, non un dizionario.
 
 
 class glossary_entry(models.Model):

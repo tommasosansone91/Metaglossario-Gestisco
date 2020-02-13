@@ -178,30 +178,8 @@
                   <textarea style="height:80px" name="Commento_entry"  type="text" class="form-control" placeholder=""></textarea>
             </div>
 
-        <!-- faccio una funzione save che sovrascrive la normale funzione save per il salvataggio
-            del modello, in views.py, in modo tale che la data viene generata dalla funzione di vista e
-        poi subito salvata nel modello automaticamente senza passare dal form -->
-
-        <!-- Eventualmente in futuro posso nascondere il campo data alla vista del lettore -->
-
-        {% comment %} <div class="form-group">
-              <!-- <label for="glossary_entry_input_13">Data di inserimento della terminologia</label>
-              <small id="inputHelp" class="form-text text-muted">Compilare solo se è nota la data di pubblicazione del documento fonte, altrimenti inserire la data di oggi.</small>-->
-               <input name="Data_inserimento_entry" type="hidden" class="form-control" id="mettici_data_di_oggi" >
-        </div>
 
 
-        <div class="form-group">
-            <!-- <label type="hidden" for="glossary_entry_input_13">Id statico delle informazioni</label> -->
-            <input type="hidden" name="Id_statico_entry" value="ITCH00000" type="text" class="form-control" placeholder="">
-         </div>
-
-         <!-- interruttore che rende visibile o meno il contenuto inserito
-        nei form all'inizio lo setto autmaticamente su "hide" -->
-         <div class="form-group">
-                <!-- <label type="hidden" for="glossary_entry_input_14">Interruttore dell'admin</label> -->
-                <input type="hidden" name="Admin_approval_switch" value="hide" type="text" class="form-control" placeholder="">
-        </div> {% endcomment %}
 
           <br><br><br>
 
@@ -217,8 +195,6 @@
 
 
 
-
-<!-- {% load static %} --> <!-- questa riga c'è già in base.html -->
 
 
 <!-- Javascript -->

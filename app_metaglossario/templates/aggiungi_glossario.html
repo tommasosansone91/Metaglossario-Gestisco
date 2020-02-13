@@ -2,6 +2,8 @@
 
 {% block content %}
 
+{% load static %} 
+
     <h1>Aggiungi terminologia in massa</h1>
 
     <br>
@@ -67,12 +69,12 @@
             <br><br> 
 
             <!-- entry della data è nascosto -->
-            <!-- in futuro posso rendere da forms.py il fatto che html non devono essere presi certi campi, quindi al posto di nasconderli tolgo proprio l'input. però devo far sì che nel modello si generino da soli se non specificati dall'utente -->
+            {% comment %} <!-- in futuro posso rendere da forms.py il fatto che html non devono essere presi certi campi, quindi al posto di nasconderli tolgo proprio l'input. però devo far sì che nel modello si generino da soli se non specificati dall'utente -->
             <div class="form-group">
                 <!-- <label for="glossary_entry_input_13">Data di inserimento della terminologia</label>
                 <small id="inputHelp" class="form-text text-muted">Compilare solo se è nota la data di pubblicazione del documento fonte, altrimenti inserire la data di oggi.</small>-->
                  <input name="Data_inserimento_glossary" type="hidden" class="form-control" id="mettici_data_di_oggi">              
-            </div>
+            </div> {% endcomment %}
             <!-- la data funziona - ho controllato -->
   
             <div class="container">
@@ -94,9 +96,7 @@
 
 
 
-<!-- Django tag load static -->
-{% load static %}  <!-- Qui il tag è obbligatorio nonostante sia stato inserito dentro base.html -->
-<!-- perchè??? -->
+
 
 <!-- CSS -->
 <link rel="stylesheet" type="text/css" href={% static "css/searchbar_style.css" %}>
