@@ -8,25 +8,77 @@
     
     <br>
 
-    <p>Questa pagina spiega come gestire correttamente la terminologia salvata dagli utenti nel database, come modificarla e come renderla visibile nel glossario dell'applicazione. Questa pagina è accessibile solo agli amministratori del sistema.</p>
+    <p>Questa pagina illustra le componenti del metaglossario preposte alla gestione della terminologia e il loro funzionamento; 
+    illustra inoltre come gestire correttamente la terminologia salvata dagli utenti nel database, come modificarla e come renderla visibile nel glossario dell'applicazione. 
+    </p>
+    <p>Questa pagina è accessibile solo agli amministratori del sistema.</p>
+    <p>Il metaglossario è in grado di accogliere la terminologia inserita dagli utenti e di elaborarla in maniera automatica, predisponendola alla rappresentazione nella sezione di glossario.</p>
+    <p>Di seguito vengono illustrate le componenti realizzate per ospitare e gestire la terminologia.</p>
     
+    <br>
+
+    <h4>I database che accolgono i dati</h4>
+
+    <p>L’applicazione è dotata di quattro database preposti ad ospitare e rappresentare la terminologia inserita dagli utenti:</p>
+    
+    <ul>
+    <li><b>Glossary_entry:</b> È il database preposto ad accogliere la terminologia inserita dagli utenti attraverso il form. Tale terminologia viene salvata in forma di tuple.</li>
+    <li><b>Glossary_file:</b> È il database preposto ad accogliere la terminologia inserita dagli utenti attraverso il fileform. Tale terminologia viene salvata in forma di file, in particolare in formato foglio elettronico.</li>
+    <li><b>Acquired_terminology:</b> In questo database viene copiata la terminologia presente dentro il database Glossary_entry e dentro ogni glossario salvato nel database Glossary_file.</li>
+    <li><b>Prepared_terminology:</b> È il database “destinazione” del metaglossario, in quanto la terminologia contenuta in questo database viene trasmessa al glossario dell’applicazione e al servizio di esportazione della terminologia, diventando così accessibile agli utenti. In questo database viene salvata la terminologia che viene estratta dal database Acquired_terminology ed elaborata dall’algoritmo PGI e SR_ridotto.</li>
+    </ul>
+
     <br>
 
     <div style="text-align:center">
-        <img src="{% static 'img/schema_flusso_dati.jpg' %}" style="width:80%;" align="middle" alt="Schema flusso dati metaglossario" >
+        <img src="{% static 'img/schema_flusso_database.jpg' %}" style="width:80%;" align="middle" alt="Schema flusso dati metaglossario" >
     </div>
-
-    <br>
-
-    <h4>Le strutture che accolgono i dati</h4>
-    
-
-    <br>
+        
+    <br><br>
 
     <h4>Gli algoritmi che gestiscono i dati</h4>
 
-
+    <p>L’applicazione è dotata di vari segmenti di algoritmo preposti ad elaborare la terminologia inserita dagli utenti:</p>
     
+    <ul>
+    <li><b>Erase_Acquired_terminology:</b> Questo algoritmo elimina tutti i dati dentro al database Acquired_terminology.</li>
+    <li><b>Pour_entire_simple_model:</b> Questo algoritmo copia la terminologia presente dentro il database Glossary_entry nel database Acquired_terminology.</li>
+    <li><b>Pour_entire_file_model:</b> Questo algoritmo copia la terminologia presente dentro il database Glossary_file nel database Acquired_terminology.</li>
+    <li><b>Erase_Prepared_terminology:</b> Questo algoritmo elimina tutti i dati dentro al database Prepared _terminology.</li>
+    <li><b>PGI:</b> Questo algoritmo copia la terminologia contenuta nel database Acquired_terminology nel database Prepared_terminology, quindi ne rende omogeneo il formato. 
+    In particolare, elimina eventuali doppi spazi, elimina eventuali spazi all’inizio e alla fine delle stringhe e standardizza il case delle stringhe (maiuscolo/minuscolo).</li>
+    <li><b>SR_ridotto:</b> Questo algoritmo analizza la terminologia presente nel database Prepared_terminology e assegna ID uguali agli elementi uguali, in modo da eliminare la ridondanza presente nel glossario.</li>
+    </ul>
+
+    <br>
+
+    <div style="text-align:center">
+        <img src="{% static 'img/schema_flusso_algoritmi.jpg' %}" style="width:80%;" align="middle" alt="Schema flusso dati metaglossario" >
+    </div>
+        
+    <br><br>
+
+    <h4>Come gestire la terminologia</h4>
+
+    <p>Il compito dell’amministratore del sistema è quello di assicurarsi che il metaglossario offra ai suoi utenti un dataset di terminologia adeguato.</p>
+    <p>Per far questo, egli deve inserire nel sistema la terminologia indicatagli dagli stakeholders del progetto Gestisco, e selezionare tra la terminologia suggerita dagli utenti quella che può essere inserita nel sistema.</p>
+    <p>Per esaminare la terminologia suggerita dagli utenti è necessario accedere alla sezione admin del metaglossario ed esplorare i database Glossary_entry e Glossary_file.</p>
+    <p>Per quanto riguarda il modello Glossary_entry, le tuple di terminologia possono essere accesse singolarmente e modificate nei campi desiderati.</p>
+    <p>Per quanto riguarda il modello Glossary_file, le tuple di terminologia sono scritte nel foglio elettronico, quindi possono essere controllate solo scaricando il file. 
+    Per fare questo è sufficiente cliccare sul file desiderato e poi cliccare sul link. 
+    L’amministratore di sistema può quindi modificare i file proposti in ingresso dagli utenti attraverso un editor di fogli elettronici. 
+    Il file così modificato può essere ricaricato nel database Glossary_files attraverso il pulsante “add glossary_file”, quindi eventualmente la versione non revisionata può essere eliminata.</p>
+    <p>Sia il database Glossary_entry sia il database Glossary_file possiedono uno switch (“Admin_approval_switch”) che indica se una certa tupla di terminologia o un certo file è idoneo per essere processato dagli algoritmi di gestione e inserito nel database “destinazione” Prapared_terminology. 
+    È compito dell’amministratore del sistema esaminare uno per uno gli elementi contenuti nei database Glossary_entry e Glossary_file e impostare “Admin_approval_switch” sul valore “show” per tutti gli elementi ritenuti idonei per essere mostrati agli utenti. 
+    Gli elementi aventi “Admin_approval_switch” impostato sul valore “show” saranno comunque conservati nei database Glossary_entry e Glossary_file, ma non saranno processati e dunque non risulteranno visibili agli utenti.</p>
+    <p>Quando l’amministratore di sistema ha analizzato la terminologia e selezionato gli elementi inserire nel metaglossario, egli potrà avviarne il processing accedendo al <a href={% url 'pannello_gestione_terminologia' %}>pannello di gestione della terminologia</a> e avviando l’algoritmo “riversamento completo”.</p>
+    
+    <br>
+
+        <div style="text-align:center">
+            <img src="{% static 'img/schema_flusso_admin.jpg' %}" style="width:80%;" align="middle" alt="Schema flusso dati metaglossario" >
+        </div>
+
 
 
 {% load static %}  <!-- Qui il tag è obbligatorio nonostante sia stato inserito dentro base.html -->

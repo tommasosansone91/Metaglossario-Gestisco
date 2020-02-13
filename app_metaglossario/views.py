@@ -26,6 +26,9 @@ from django.http import JsonResponse
 from django.core.files.storage import FileSystemStorage
 
 
+# per restringere l'accesso ai soli autenticati
+from django.contrib.auth.decorators import login_required
+
 
 
 # Create your views here.
@@ -43,6 +46,8 @@ def indice_glossario(request):
 
 
 # QUESTA è LA SINGOLA ENTRY
+
+@login_required
 def aggiungi_terminologia(request):
 
     #se si esegue il POST (click del pulsante submit)
@@ -75,6 +80,8 @@ def aggiungi_terminologia(request):
 
 
 # per aggiungere la terminologia in massa
+
+@login_required
 def aggiungi_glossario(request):
 
     #se si esegue il POST (click del pulsante submit)

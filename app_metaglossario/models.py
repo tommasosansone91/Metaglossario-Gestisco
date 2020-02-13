@@ -150,7 +150,7 @@ class glossary_file(models.Model):
 
     def __str__(self):    
         # print("%s is %d years old." % (name, age))    
-        return  "%s ----- [%s]"  %  (self.Glossary_file, self.Data_inserimento_glossary)  
+        return  "%s ----- [%s] - [%s]"  %  (self.Glossary_file, self.Data_inserimento_glossary, self.Admin_approval_switch)  
         #quello che fa apparire nella sezione admin, attributo che riassume tutti gli altri, quindi una primary key presumibilmente, pouò anche esesere la combinazione degli altri
 
 

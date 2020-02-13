@@ -91,7 +91,13 @@
                 
                 <div class="dropdown-menu dropdown-menu-right">
 
-                  <a class="dropdown-item" href="">Profilo</a>   
+                  <a class="dropdown-item" href="">Profilo</a>  
+
+                  {% comment %} le istruzioni di controllo della terminologia è accessibile solo agli admin {% endcomment %}
+                 
+                  {% if request.user.is_staff %}
+                    <a class="dropdown-item" href="{% url 'istruzioni_gestione_terminologia' %}">Istruzioni per la gestione della terminologia</a>                 
+                  {% endif %} 
 
                   {% comment %} il pannello di controllo della terminologia è accessibile solo agli admin {% endcomment %}
                   {% if request.user.is_staff %}
@@ -99,7 +105,7 @@
                   {% endif %}
 
                   {% if request.user.is_staff %}
-                    <a class="dropdown-item" href="{% url 'istruzioni_gestione_terminologia' %}">Istruzioni per la gestione della terminologia</a>                 
+                    <a class="dropdown-item" href="{% url 'registration' %}">Registra un nuovo utente</a>
                   {% endif %}
                   
                   <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
@@ -117,7 +123,7 @@
                 
                 <div class="dropdown-menu">
 
-                  <a class="dropdown-item" href="{% url 'registration' %}">Registrati</a>
+                  
                   <a class="dropdown-item" href="{% url 'login' %}">Accedi</a>
 
                 </div>

@@ -181,6 +181,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'uploaded_files')
 MEDIA_URL = '/uploaded_files/'
 
 # aggiunto per permettere il logi degli utenti
-LOGIN_URL = '/login'
+LOGIN_URL = 'authentication/login'
+# deve combaciare col path delle view dato alla pagina di login
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 13000 # higher than the count of fields

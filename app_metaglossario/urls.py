@@ -38,14 +38,11 @@ urlpatterns=[
 
     # user authentication
     path('authentication/registration', views_users_authentication.registration, name="registration"),
-
-    # dovrebbe stare in applicazione/urls.py 
     path('authentication/login', views_users_authentication.user_login, name="login"),
-
-    # dovrebbe stare in principale/urls.py 
     path('logout', views_users_authentication.user_logout, name="logout"),
     path('special', views_users_authentication.special, name="special"),
 
+    # sezione di amministrazione
     path('gestione/pannello_gestione_terminologia', view_gestione.pannello_gestione_terminologia, name="pannello_gestione_terminologia"), 
     path('gestione/istruzioni_gestione_terminologia', view_gestione.istruzioni_gestione_terminologia, name="istruzioni_gestione_terminologia"), 
 

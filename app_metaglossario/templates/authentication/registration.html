@@ -14,8 +14,14 @@
 
     {% else %}
 
-        <h3>Registrati qui:</h3>
-        <p>Compila il form.</p>
+        <h3>Registra nuovi utenti</h3>
+
+        <br>
+
+        <p>Questa pagina consente all'amministratore di registrare un nuovo utente al metaglossario.</p>
+        <p><b>Nota</b>: gli utenti non possono registrarsi al metaglossario. Solo l'amministratore del sistema può registrare nuovi utenti. Quindi dovrà provvedere a comunicargli username e password.</p>
+        
+        <br>
 
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}

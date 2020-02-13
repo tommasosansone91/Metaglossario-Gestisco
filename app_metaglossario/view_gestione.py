@@ -37,6 +37,8 @@ from .algoritmi_processing.SR_ridotto import algoritmo_SR_ridotto
 from django.contrib.admin.views.decorators import staff_member_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+
 
 # per le funzioni che permettono di ottenere il nome della funzione
 import inspect
@@ -77,6 +79,14 @@ def pannello_gestione_terminologia(request):
         
         if 'script_2' in request.POST:
             script_return_dict = script_2()
+
+        if 'script_3' in request.POST:
+            pass
+
+        if 'script_4' in request.POST:
+            pass
+
+
 
         end_time = time.time()
 
