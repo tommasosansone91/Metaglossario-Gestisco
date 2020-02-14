@@ -137,16 +137,22 @@ class glossary_file(models.Model):
 
 
     class Meta:
-        ordering = ['Data_inserimento_glossary', 'Glossary_file']
+        ordering = ['Data_inserimento_glossary', 'Glossary_file', 'Admin_approval_switch']
         # il meno davanti all'attributo vuol dire che ordina al contrario
         # '-Admin_approval_switch', 
         # faccio comparire per primi gli hide-> nuovi inseriti
         # in realtà per come ho definito hide e show, se metto senza il meno davanti, mi mostra per prima hide (h viene prima di s)
 
     def clean(self):
-        if not (self.Glossary_file or self.Data_inserimento_glossary):
+        if not (self.Glossary_file):
             raise ValidationError("Non è stato selezionato alcun glossario per il caricamento.")
         # non mi restituisce questa scritta ma quella messa di default nelle views
+
+        # lascia stare perchè potrebbe andar bene che l'utente mi caricca un pdf e poi ci pensa l'admin a ricaricarlo.
+        # if not self.Glossary_file.lower().endswith('.xls', '.xlsx', '.xlsm' '.csv', '.xml', '..xlt'):
+        #     raise ValidationError("Il file selezionato per lupload non è un foglio elettronico.")
+        # # non mi restituisce questa scritta ma quella messa di default nelle views
+
 
     def __str__(self):    
         # print("%s is %d years old." % (name, age))    
