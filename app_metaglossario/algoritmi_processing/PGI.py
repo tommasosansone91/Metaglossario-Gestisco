@@ -123,6 +123,9 @@ def algoritmo_PGI():
     # sostituzione di doppi spazi e a capo con degli spazi
 
     print("Inizia l'eliminazione dei doppi spazi dal testo...")
+
+    # per usare le regular expressions
+    import re
     
     rip_doppi_spazi = 3 # ripeto il ciclo 3 volte 
 
@@ -135,6 +138,9 @@ def algoritmo_PGI():
             
             if not pd.isnull(prepared_entry.Lemma_it):
                 prepared_entry.Lemma_it = prepared_entry.Lemma_it.replace("  ", " ")
+                # per usare le regex dovrei fare così, ma meglio fare le cose semplici
+                #così lascio all'utente la libertà di mettere gli acapo
+                # prepared_entry.Lemma_it = re.sub(r"  ", " ", prepared_entry.Lemma_it)
 
             if not pd.isnull(prepared_entry.Acronimo_it):
                 prepared_entry.Acronimo_it = prepared_entry.Acronimo_it.replace("  ", " ")
@@ -191,7 +197,7 @@ def algoritmo_PGI():
 
 
             if not pd.isnull(prepared_entry.Commento_entry):    
-                prepared_entry.Commento_entry = prepared_entry.Commento_entry.replace("  ", " ")                      
+                prepared_entry.Commento_entry = prepared_entry.Commento_entry.replace("  ", " ")                     
         
 
             # non possono esserci doppi spazi in data, id e switch
@@ -200,11 +206,13 @@ def algoritmo_PGI():
 
 
 
+
     # elimina spazi da davanti e dietro
 
 
     print("Eliminazione dei doppi spazi terminata con successo!")
     print("Inizia l'eliminazione degli spazi all'inizio e alla fine di ogni cella...")
+    # sembra che nelmodellov engano cancellati automaticamente gli spazi davanti e dietro
 
     # prepared_rows = prepared_terminology.objects.all()
 
@@ -364,6 +372,46 @@ def algoritmo_PGI():
 
     print("Eliminazione degli spazi all'inizio e alla fine di ogni cella terminata con successo!")
 
+
+    print("Inizia l'uniformazione di è e perchè delle virgolette e degli apostrofi inclinati...")
+
+    prepared_rows = prepared_terminology.objects.all()
+
+
+    for prepared_entry in prepared_rows:
+
+        if not pd.isnull(prepared_entry.Definizione_it): 
+
+ 
+
+            prepared_entry.Definizione_it = prepared_entry.Definizione_it.replace("’", "'")
+            prepared_entry.Definizione_it = prepared_entry.Definizione_it.replace('“', '"')
+            prepared_entry.Definizione_it = prepared_entry.Definizione_it.replace('”', '"')
+            prepared_entry.Definizione_it = prepared_entry.Definizione_it.replace(" e' ", " è ")
+            prepared_entry.Definizione_it = prepared_entry.Definizione_it.replace(" E' ", " È ")
+            prepared_entry.Definizione_it = prepared_entry.Definizione_it.replace(" perche' ", " perché ")
+            prepared_entry.Definizione_it = prepared_entry.Definizione_it.replace(" perchè ", " perché ")
+
+            # lascia perde3re perchè ci possono essere parole tra virgolettate, oppure citazioni
+            # prepared_entry.Definizione_it = prepared_entry.Definizione_it.replace("(?<! )a' ", "à ")
+            
+ 
+
+        if not pd.isnull(prepared_entry.Definizione_ch):    
+            
+            prepared_entry.Definizione_ch = prepared_entry.Definizione_ch.replace("’", "'")
+            prepared_entry.Definizione_ch = prepared_entry.Definizione_ch.replace('“', '"')
+            prepared_entry.Definizione_ch = prepared_entry.Definizione_ch.replace('”', '"')
+            prepared_entry.Definizione_ch = prepared_entry.Definizione_ch.replace(" e' ", " è ")
+            prepared_entry.Definizione_ch = prepared_entry.Definizione_ch.replace(" E' ", " È ")
+            prepared_entry.Definizione_ch = prepared_entry.Definizione_ch.replace(" perche' ", " perché ")
+            prepared_entry.Definizione_ch = prepared_entry.Definizione_ch.replace(" perchè ", " perché ")
+
+
+        prepared_entry.save()
+
+    
+    print("Uniformazione di è e perchè delle virgolette e degli apostrofi inclinati terminata con successo!")
 
         # upper, lower, title
     print("Inizia la modifica del formato del testo (uppercase/title)...")
