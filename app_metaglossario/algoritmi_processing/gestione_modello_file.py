@@ -31,7 +31,12 @@ def pour_entire_file_model():
             print(excel_sheet)
             print("*****")       
 
-            print("Sbobinatura del dataframe in vettori...")        
+            print("Sbobinatura del dataframe in vettori...")  
+
+            L_excel_sheet = len(excel_sheet.index)   
+            # print(L_excel_sheet) 
+
+                 
             
             col_lemma_it = excel_sheet.Lemma_it
             col_acronimo_it = excel_sheet.Acronimo_it
@@ -57,18 +62,67 @@ def pour_entire_file_model():
             col_host_documento_fonte_ch = excel_sheet.Host_documento_fonte_ch
             col_url_documento_fonte_ch = excel_sheet.Url_documento_fonte_ch
 
-
             col_commento_entry = excel_sheet.Commento_entry
-            col_data_inserimento_entry = excel_sheet.Data_inserimento_entry
-            col_id_statico_entry = excel_sheet.Id_statico_entry
-            col_admin_approval_switch = excel_sheet.Admin_approval_switch
+
+            
+
+            # serve un formato compatibile con il formato che usa per le colonne del dataframe, non sono liste
+            try:
+                col_id_statico_entry = excel_sheet.Id_statico_entry
+            except:
+                print("ERRORE: L'amministratore di sistema deve aggiungere manualmente al foglio excel una colonna il cui nome sia 'Id_statico_entry', in cui ogni valore sia un id a piacere che contraddistingua in modo univoco ogni riga.")
+                raise
+                # fine script
+                
+            # su queste metti colonna automatica
+                # la struttura: se esistono, allora fai, la rendo con try+except
+
+
+            try:
+                col_data_inserimento_entry = excel_sheet.Data_inserimento_entry
+            except:
+                
+                from datetime import date
+                col_data_inserimento_entry = pd.DataFrame(data=[date.today() for i in range(L_excel_sheet)], columns=["Data_inserimento_entry"])
+
+            # print(col_data_inserimento_entry)
+
+            try:
+                col_admin_approval_switch = excel_sheet.Admin_approval_switch
+            except:
+                col_admin_approval_switch = pd.DataFrame(data=["show" for i in range(L_excel_sheet)], columns=["Admin_approval_switch"])
+
+            # print(col_admin_approval_switch)
+            # print(col_lemma_it)
+
+            missing_columns_glossary_file = pd.concat([ col_data_inserimento_entry, col_admin_approval_switch ], axis=1)
+
+
+            saving_file_name = 'missing_columns_glossary_file.xlsx'
+
+            saving_folder_name = 'saved_dataframes'
+
+            import os
+            from django.contrib.staticfiles import finders
+
+            finders.find(saving_folder_name)
+            searched_locations = finders.searched_locations
+            df_dir = os.path.join(searched_locations[0]+r'\\'+saving_folder_name+r'\\'+saving_file_name)
+            missing_columns_glossary_file.to_excel(df_dir)
+
+            # ora ci sono per forza
+            col_data_inserimento_entry = missing_columns_glossary_file.Data_inserimento_entry
+            col_admin_approval_switch = missing_columns_glossary_file.Admin_approval_switch
+
 
 
             print("Inizia il riversamento di dati dal foglio %s al modello acquired_terminology..." % file_element.Glossary_file)
 
-            for i in range(len(col_lemma_it)):
+
+            for i in range(L_excel_sheet):
 
             # assegna i valori agli attributi uno per uno per evitare i NaN
+                
 
                 if col_admin_approval_switch[i] == "show": 
                     
@@ -163,7 +217,7 @@ def pour_entire_file_model():
 
 
 
-
+# algoritmo attualmente non utilizzato
 def pour_latest_file():    
 
     # questo algoritmo va ottimizzato mettendo i cicli delle etichette delle colonne al posto di richiamare ogni elemento del database con la propria etichetta
@@ -197,7 +251,7 @@ def pour_latest_file():
         col_host_documento_fonte_it = excel_sheet.Host_documento_fonte_it
         col_url_documento_fonte_it = excel_sheet.Url_documento_fonte_it
 
-        col_lemma_it = excel_sheet.Lemma_ch
+        col_lemma_ch = excel_sheet.Lemma_ch
         col_acronimo_ch = excel_sheet.Acronimo_ch
         col_definizione_ch = excel_sheet.Definizione_ch
         col_ambito_riferimento_ch = excel_sheet.Ambito_riferimento_ch
@@ -211,9 +265,56 @@ def pour_latest_file():
 
 
         col_commento_entry = excel_sheet.Commento_entry
-        col_data_inserimento_entry = excel_sheet.Data_inserimento_entry
-        col_id_statico_entry = excel_sheet.Id_statico_entry
-        col_admin_approval_switch = excel_sheet.Admin_approval_switch
+
+
+        # serve un formato compatibile con il formato che usa per le colonne del dataframe, non sono liste
+        try:
+            col_id_statico_entry = excel_sheet.Id_statico_entry
+        except:
+            print("ERRORE: L'amministratore di sistema deve aggiungere manualmente al foglio excel una colonna il cui nome sia 'Id_statico_entry', in cui ogni valore sia un id a piacere che contraddistingua in modo univoco ogni riga.")
+            raise
+            # fine script
+            
+        # su queste metti colonna automatica
+            # la struttura: se esistono, allora fai, la rendo con try+except
+
+
+        try:
+            col_data_inserimento_entry = excel_sheet.Data_inserimento_entry
+        except:
+            
+            from datetime import date
+            col_data_inserimento_entry = pd.DataFrame(data=[date.today() for i in range(L_excel_sheet)], columns=["Data_inserimento_entry"])
+
+        # print(col_data_inserimento_entry)
+
+        try:
+            col_admin_approval_switch = excel_sheet.Admin_approval_switch
+        except:
+            col_admin_approval_switch = pd.DataFrame(data=["show" for i in range(L_excel_sheet)], columns=["Admin_approval_switch"])
+
+        # print(col_admin_approval_switch)
+        # print(col_lemma_it)
+
+        missing_columns_glossary_file = pd.concat([ col_data_inserimento_entry, col_admin_approval_switch ], axis=1)
+
+
+        saving_file_name = 'missing_columns_glossary_file.xlsx'
+
+        saving_folder_name = 'saved_dataframes'
+
+        import os
+        from django.contrib.staticfiles import finders
+
+        finders.find(saving_folder_name)
+        searched_locations = finders.searched_locations
+        df_dir = os.path.join(searched_locations[0]+r'\\'+saving_folder_name+r'\\'+saving_file_name)
+        missing_columns_glossary_file.to_excel(df_dir)
+
+        # ora ci sono per forza
+        col_data_inserimento_entry = missing_columns_glossary_file.Data_inserimento_entry
+        col_admin_approval_switch = missing_columns_glossary_file.Admin_approval_switch
+
 
         print("Inizia il riversamento di dati dal foglio %s verso il modello acquired_terminology..." % latest_file_element)
 
