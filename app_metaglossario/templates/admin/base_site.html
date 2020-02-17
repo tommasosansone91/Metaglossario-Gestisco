@@ -5,9 +5,14 @@
 {% block branding %}
 <h1 id="site-name"><a href="{% url 'admin:index' %}">Metaglossario Gestisco: sezione Admin</a></h1>
 
+{% comment %} <br>
+<p><a href="{% url 'home' %}">Torna all'interfaccia utente</a></p> {% endcomment %}
+
 {% comment %} <h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Django administration') }}</a></h1> {% endcomment %}
 
 {% endblock %}
+
+
 
 {% block nav-global %}{% endblock %}
 

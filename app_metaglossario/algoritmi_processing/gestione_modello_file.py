@@ -223,7 +223,7 @@ def pour_entire_file_model():
 
 
             print("Riversamento dei dati di %s terminato con successo!" % file_element.Glossary_file)
-            print("*****")
+            print("**********")
     
         
     print("La terminologia di tutti i file salvati nel modello glossary_file è stata riversata nel modello acquired_terminology!")
@@ -436,5 +436,5 @@ def pour_latest_file():
 
 
         print("Riversamento dei dati in %s terminato con successo!" % latest_file_element)
-        print("*****")
+        print("**********")
 

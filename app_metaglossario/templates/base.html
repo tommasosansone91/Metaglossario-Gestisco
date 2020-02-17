@@ -83,6 +83,8 @@
 
               <!-- Login -->
 
+              <!-- menu visibile a chi è loggato come utente -->
+
               {% if user.is_authenticated %}
 
               <li class="nav-item dropdown">
@@ -95,17 +97,19 @@
 
                   {% comment %} le istruzioni di controllo della terminologia è accessibile solo agli admin {% endcomment %}
                  
+                 <!-- menu visibile a chi è loggato come superuser -->
+
                   {% if request.user.is_staff %}
+
+                    <a class="dropdown-item" href="{% url 'admin:index' %}">Sezione admin</a>
+
                     <a class="dropdown-item" href="{% url 'istruzioni_gestione_terminologia' %}">Istruzioni per la gestione della terminologia</a>                 
-                  {% endif %} 
-
-                  {% comment %} il pannello di controllo della terminologia è accessibile solo agli admin {% endcomment %}
-                  {% if request.user.is_staff %}
+                  
                     <a class="dropdown-item" href="{% url 'pannello_gestione_terminologia' %}">Pannello di gestione della terminologia</a>                 
-                  {% endif %}
-
-                  {% if request.user.is_staff %}
+                  
                     <a class="dropdown-item" href="{% url 'registration' %}">Registra un nuovo utente</a>
+                  
+                  
                   {% endif %}
                   
                   <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>

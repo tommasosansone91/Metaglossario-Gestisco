@@ -108,3 +108,5 @@ def user_logout(request):
 @login_required
 def special(request):
     return HttpResponse("Sei loggato!")
+
+

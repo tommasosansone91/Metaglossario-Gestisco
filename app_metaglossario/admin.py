@@ -47,6 +47,8 @@ admin.site.register(UserProfileInfo)
 
 # i titoli devono rispettare la sintassi modelloAdmin per il custom admin e modelloResource per il custom import export
 
+# ********* glossary_entry *********
+
 # questo modello controlla i field associati al tool import export, non all'admin
 class glossary_entryResource(resources.ModelResource):
 
@@ -55,7 +57,6 @@ class glossary_entryResource(resources.ModelResource):
         
         # fields = ('id', 'name', 'price') # per includere i campi
         exclude = ('id',) # per escludere i campi
-
 
 
 # modelli admin per la visualizzazione dei modelli aprte admin con funzioni aggiuntive
@@ -67,25 +68,39 @@ class glossary_entryAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     search_fields = ["Lemma_it", "Acronimo_it", "Definizione_it", "Ambito_riferimento_it", "Autore_definizione_it", "Posizione_definizione_it", "Url_definizione_it", "Titolo_documento_fonte_it", "Autore_documento_fonte_it", "Host_documento_fonte_it", "Url_documento_fonte_it", "Lemma_ch", "Acronimo_ch", "Definizione_ch", "Ambito_riferimento_ch", "Autore_definizione_ch", "Posizione_definizione_ch", "Url_definizione_ch", "Titolo_documento_fonte_ch", "Autore_documento_fonte_ch", "Host_documento_fonte_ch", "Url_documento_fonte_ch", "Commento_entry", 'Data_inserimento_entry','Id_statico_entry','Admin_approval_switch']
     list_filter = ['Admin_approval_switch']
 
+    # list_display = ['Lemma_it', 'Lemma_ch', 'Id_statico_entry', 'Data_inserimento_entry', 'Admin_approval_switch']
+    # list_editable = ['Admin_approval_switch']
 
 
 
+
+
+
+# ********* glossary_file *********
 
 class glossary_fileAdmin(admin.ModelAdmin):
 
     search_fields = ["Glossary_file"]
     list_filter = ['Admin_approval_switch']
+    
+    # list_display = ['Glossary_file', 'Data_inserimento_glossary', 'Admin_approval_switch']
+    # list_editable = ['Admin_approval_switch']
 
 # per uesto modello non è abilitato import export
 
 
+# ********* acquired_terminology *********
 
 class acquired_terminologyAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
     search_fields = ["Lemma_it", "Acronimo_it", "Definizione_it", "Ambito_riferimento_it", "Autore_definizione_it", "Posizione_definizione_it", "Url_definizione_it", "Titolo_documento_fonte_it", "Autore_documento_fonte_it", "Host_documento_fonte_it", "Url_documento_fonte_it", "Lemma_ch", "Acronimo_ch", "Definizione_ch", "Ambito_riferimento_ch", "Autore_definizione_ch", "Posizione_definizione_ch", "Url_definizione_ch", "Titolo_documento_fonte_ch", "Autore_documento_fonte_ch", "Host_documento_fonte_ch", "Url_documento_fonte_ch", "Commento_entry", 'Data_inserimento_entry','Id_statico_entry','Admin_approval_switch']
     list_filter = ['Admin_approval_switch']
+    
+    # list_display = ['Lemma_it', 'Lemma_ch', 'Id_statico_entry', 'Data_inserimento_entry', 'Admin_approval_switch']
+    # list_editable = ['Admin_approval_switch']
 
 
+# questo modello controlla i field associati al tool import export, non all'admin
 class acquired_terminologyResource(resources.ModelResource):
 
     class Meta:
@@ -96,14 +111,17 @@ class acquired_terminologyResource(resources.ModelResource):
 
 
 
-
+# ********* prepared_terminology *********
 
 class prepared_terminologyAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
     search_fields = ["Lemma_it", "Acronimo_it", "Definizione_it", "Ambito_riferimento_it", "Autore_definizione_it", "Posizione_definizione_it", "Url_definizione_it", "Titolo_documento_fonte_it", "Autore_documento_fonte_it", "Host_documento_fonte_it", "Url_documento_fonte_it", "Lemma_ch", "Acronimo_ch", "Definizione_ch", "Ambito_riferimento_ch", "Autore_definizione_ch", "Posizione_definizione_ch", "Url_definizione_ch", "Titolo_documento_fonte_ch", "Autore_documento_fonte_ch", "Host_documento_fonte_ch", "Url_documento_fonte_ch", "Commento_entry", 'Data_inserimento_entry','Id_statico_entry','Admin_approval_switch']
     list_filter = ['Admin_approval_switch']
+    
+    # list_display = ['Lemma_it', 'Lemma_ch', 'Id_statico_entry', 'Data_inserimento_entry', 'Admin_approval_switch']
+    # list_editable = ['Admin_approval_switch']
 
-
+# questo modello controlla i field associati al tool import export, non all'admin
 class prepared_terminologyResource(resources.ModelResource):
 
     class Meta:
@@ -113,7 +131,7 @@ class prepared_terminologyResource(resources.ModelResource):
         exclude = ('id') # per escludere i campi
 
 
-
+# registrazione dei modelli per renderli leggibili nella sezione admin
 admin.site.register(glossary_entry, glossary_entryAdmin)
 admin.site.register(glossary_file, glossary_fileAdmin)
 admin.site.register(acquired_terminology, acquired_terminologyAdmin)
