@@ -70,8 +70,10 @@ def pour_entire_file_model():
             try:
                 col_id_statico_entry = excel_sheet.Id_statico_entry
             except:
-                print("ERRORE: L'amministratore di sistema deve aggiungere manualmente al foglio excel una colonna il cui nome sia 'Id_statico_entry', in cui ogni valore sia un id a piacere che contraddistingua in modo univoco ogni riga.")
-                raise
+                print("L'amministratore di sistema non ha inserito una colonna coi valori di Id_statico_entry. Viene aggiunta per default una colonna di valori di ID pregenerati basati sul tempo in cui sono stati generati.")
+                from script_ausiliari import return_timestamped_id
+                col_id_statico_entry = pd.DataFrame(data=[return_timestamped_id for i in range(L_excel_sheet)], columns=["Id_statico_entry"])
+
                 # fine script
                 
             # su queste metti colonna automatica
@@ -81,7 +83,7 @@ def pour_entire_file_model():
             try:
                 col_data_inserimento_entry = excel_sheet.Data_inserimento_entry
             except:
-                
+                print("L'amministratore di sistema non ha inserito una colonna coi valori di Data_inserimento_entry. Viene aggiunta per default una colonna di valori della data di oggi.")
                 from datetime import date
                 col_data_inserimento_entry = pd.DataFrame(data=[date.today() for i in range(L_excel_sheet)], columns=["Data_inserimento_entry"])
 
@@ -90,6 +92,7 @@ def pour_entire_file_model():
             try:
                 col_admin_approval_switch = excel_sheet.Admin_approval_switch
             except:
+                print("L'amministratore di sistema non ha inserito una colonna coi valori di Admin_approval_switch. Viene aggiunta per default una colonna di valori 'show'.")
                 col_admin_approval_switch = pd.DataFrame(data=["show" for i in range(L_excel_sheet)], columns=["Admin_approval_switch"])
 
             # print(col_admin_approval_switch)

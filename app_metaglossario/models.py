@@ -2,12 +2,17 @@ from django.db import models
 from django.utils import timezone
 from django.core.exceptions import ValidationError #serve per far funzionare il "compila almeno un campo del form"
 
-
-
+# serve per richiamare la funzione di generazione dell'id con timestamp
+# from .algoritmi_processing import script_ausiliari
+from .algoritmi_processing.script_ausiliari import return_timestamped_id
 
 # Create your models here.
 
 # glossary_entry, glossary_file, acquired_terminology, prepared_terminology
+
+
+
+
 
 # Fare uno switch che permetta di inserire in modalità standard o avanzata
 # queste sono gli unici valori che puo assumere
@@ -17,6 +22,12 @@ Admin_approval_switch_choices=[
     ("hide","hide"),
     ]
 # è giusto così, è una lista di tuple, non un dizionario.
+
+
+
+
+
+
 
 
 class glossary_entry(models.Model):
@@ -94,7 +105,7 @@ class glossary_entry(models.Model):
     # Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now)
 
 
-    Id_statico_entry = models.CharField(max_length=256, blank=False, null=False, default="ITCH00000")
+    Id_statico_entry = models.CharField(max_length=256, blank=False, null=False, unique=True, default=return_timestamped_id)
     # Id_statico_entry = models.CharField(max_length=256, blank=False, null=False, default="ITCH00000")
 
     # switch per far apparire le cose solo se revisionate dall'admin nella sessione del glossario.
@@ -236,7 +247,7 @@ class acquired_terminology(models.Model):
     Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now )
     # Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now)
 
-    Id_statico_entry = models.CharField(max_length=256, blank=False, null=False, unique=True)
+    Id_statico_entry = models.CharField(max_length=256, blank=False, null=False, unique=True, default=return_timestamped_id)
 
 
     # switch per far apparire le cose solo se revisionate dall'admin nella sessione del glossario.
@@ -341,7 +352,7 @@ class prepared_terminology(models.Model):
     Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now )
     # Data_inserimento_entry = models.DateField(blank=False, null=False, default=timezone.now)
 
-    Id_statico_entry = models.CharField(max_length=256, blank=False, null=False, unique=True)
+    Id_statico_entry = models.CharField(max_length=256, blank=False, null=False, unique=True, default=return_timestamped_id)
 
 
     # switch per far apparire le cose solo se revisionate dall'admin nella sessione del glossario.

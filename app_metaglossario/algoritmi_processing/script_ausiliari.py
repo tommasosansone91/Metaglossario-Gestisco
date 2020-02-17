@@ -2,6 +2,21 @@ import sys
 import time
 
 
+def return_timestamped_id():
+
+    prefisso = "ITCH"
+    
+    import time
+
+    adesso = time.time()
+    adesso = adesso*10000000
+    adesso = int(adesso)
+
+    timestamp = str(adesso)
+
+    valore_default = prefisso + timestamp
+
+    return(valore_default)
 
 
 

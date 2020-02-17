@@ -11,7 +11,7 @@ from .models_users_authentication import UserProfileInfo
 
 # queste due funzioni sono collegate al widget import export utilizzabile solo dall'admin
 
-
+# admin.site.register(prova_oggetto)
 
 # questa classe definita in questo modo mi permette di usare il tool import export
 class Controllo_import_export(ImportExportModelAdmin, admin.ModelAdmin):
