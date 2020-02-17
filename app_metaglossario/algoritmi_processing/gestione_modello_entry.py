@@ -173,9 +173,10 @@ def pour_entire_entry_model():
                 entry.Commento_entry = element.Commento_entry
 
                 
-            entry.Data_inserimento_entry=element.Data_inserimento_entry
-            entry.Id_statico_entry=element.Id_statico_entry               
-            entry.Admin_approval_switch=element.Admin_approval_switch
+            # a questo punto, se il form è vuoto, il valore assegnato è quello di default del modello
+            entry.Data_inserimento_entry = element.Data_inserimento_entry
+            entry.Id_statico_entry = element.Id_statico_entry               
+            entry.Admin_approval_switch = element.Admin_approval_switch
 
             
             entry.save()
@@ -354,6 +355,7 @@ def pour_latest_entry():
             entry.Commento_entry = element.Commento_entry
 
             
+        # a questo punto, se il form è vuoto, il valore assegnato è quello di default del modello
         entry.Data_inserimento_entry=element.Data_inserimento_entry
         entry.Id_statico_entry=element.Id_statico_entry               
         entry.Admin_approval_switch=element.Admin_approval_switch

@@ -20,6 +20,35 @@ def return_timestamped_id():
 
 
 
+
+def return_timestamped_id_vector(L_vector):
+
+    prefisso = "ITCH"
+    
+    import time
+
+    adesso = time.time()
+    adesso = adesso*10000000
+    adesso = int(adesso)
+
+    orario_adulterato = adesso
+    vettore_valori_default = []
+
+    for i in range (L_vector):
+
+        orario_adulterato = orario_adulterato + 1
+
+        timestamp = str(orario_adulterato)
+
+        valore_default = prefisso + timestamp
+
+        vettore_valori_default.append(valore_default)
+        # le liste sono immutabili
+
+    return(vettore_valori_default)
+
+
+
 def finish_sound():
     
     # import winsound
