@@ -45,8 +45,8 @@ def glossario(request):
         #filtro intelligente: 
         elif query.lower().startswith("fonte:"):
             query = query[6:]
-            print("Ricerca '%s' tra gli autori di definizioni e di documenti fonte, tra i titoli dei documenti fonte e tra gli host dei documenti fonte." % query)
-            selected_entries = prepared_terminology.objects.filter(Q(Autore_definizione_it__icontains=query)|Q(Autore_documento_fonte_it__icontains=query)|Q(Host_documento_fonte_it__icontains=query)|Q(Titolo_documento_fonte_it__icontains=query)|Q(Autore_definizione_ch__icontains=query)|Q(Autore_documento_fonte_ch__icontains=query)|Q(Host_documento_fonte_ch__icontains=query)|Q(Titolo_documento_fonte_ch__icontains=query)    )
+            print("Ricerca '%s' tra gli autori di definizioni e di documenti fonte, tra le posizioni delle definizioni, tra i titoli dei documenti fonte e tra gli host dei documenti fonte." % query)
+            selected_entries = prepared_terminology.objects.filter(Q(Autore_definizione_it__icontains=query)|Q(Posizione_definizione_it__icontains=query)|Q(Autore_documento_fonte_it__icontains=query)|Q(Host_documento_fonte_it__icontains=query)|Q(Titolo_documento_fonte_it__icontains=query)|Q(Autore_definizione_ch__icontains=query)|Q(Posizione_definizione_ch__icontains=query)|Q(Autore_documento_fonte_ch__icontains=query)|Q(Host_documento_fonte_ch__icontains=query)|Q(Titolo_documento_fonte_ch__icontains=query)    )
 
         elif query.lower().startswith("url:"):
             query = query[4:]
