@@ -37,6 +37,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'admin_reorder',
     'import_export',
     'django_filters',
     'app_metaglossario',
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'admin_reorder.middleware.ModelAdminReorder',
     'whitenoise.middleware.WhiteNoiseMiddleware', #zips up static files
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -185,3 +187,31 @@ LOGIN_URL = 'authentication/login'
 # deve combaciare col path delle view dato alla pagina di login
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 13000 # higher than the count of fields
+
+### per admin reorder module, riordinare modelli in sezione admin
+
+ADMIN_REORDER = (
+
+    {'app': 'app_metaglossario', 'label': 'Modelli Input',
+        'models': (
+            'app_metaglossario.glossary_entry',
+            'app_metaglossario.glossary_file'
+        )
+    },
+
+    {'app': 'app_metaglossario', 'label': 'Modelli output',
+        'models': (
+            'app_metaglossario.acquired_terminology',
+            'app_metaglossario.prepared_terminology',
+        )
+    },
+
+
+    {'app': 'auth', 'label': 'Authorisation',
+        'models': (
+            'auth.Group', 
+            'auth.User',
+        )
+    },
+
+)
