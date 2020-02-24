@@ -56,10 +56,11 @@
 
     
 
-    <br>
+    <hr>
 
-    <h4>Riversamento completo</h4>
+    <h4>Riversamento standard</h4>
 
+    <p>È lo script principale per l'immissione della terminologia nel metaglossario.</p>
     <p>Questo script attinge alla terminologia salvata nei database "glossary_entry" e "glossary_file", in cui gli utenti hanno inserito, rispettivamente, tuple di terminologia singole e più tuple alla volta/interi glossari. 
     Tale terminologia viene prima riversata nel database "acquired_terminology", quindi viene elaborata e poi riversata nel database "prepared_terminology".</p>
     <p><b>Attenzione:</b> questo algoritmo elimina il contenuto dei database "acquired_terminology" e "preparedred_terminology" per sostituirlo con quello proveniente dai database "glossary_entry" e "glossary_file".</p>
@@ -69,6 +70,76 @@
     <form method="post" >
     {% csrf_token %}
     <button type="submit" class="btn btn-success" onclick="script_in_corso()" name="script_1">Run script</button>
+    </form>
+
+    <br><hr>
+
+
+    <h4>Riversamento cumulativo completo</h4>
+
+    <p>È uno script per l'immissione della terminologia nel metaglossario.</p>
+    <p>Questo script è pensato per comporre il database output "prepared_terminology" pochi elementi alla volta, in modo da evitare problemi di run out del tempo di connessionne, che si potrebbero verificare in caso si cercasse di processare troppi elementi di terminologia alla volta.
+    <p>Questo script attinge alla terminologia salvata nei database "glossary_entry" e "glossary_file", in cui gli utenti hanno inserito, rispettivamente, tuple di terminologia singole e più tuple alla volta/interi glossari. 
+    Tale terminologia viene prima riversata nel database "acquired_terminology", quindi viene elaborata e poi riversata nel database "prepared_terminology".</p>
+    <p><b>Attenzione:</b> questo algoritmo NON elimina il contenuto del database "acquired_terminology". Ciò vuol dire che se un elemento nei database di input è selezionato per l'inserimento (Admin_approval_switch = "show") e ne esiste una copia anche nei database di output, potrebbe verificarsi ridondanza della termnologia o un errore di ambiguità a causa di Id_statico_entry.</p>
+
+    <br>
+
+    <form method="post" >
+    {% csrf_token %}
+    <button type="submit" class="btn btn-warning" onclick="script_in_corso()" name="script_2">Run script</button>
+    </form>
+
+    <br><hr>
+
+
+    <h4>Riversamento cumulativo tuple</h4>
+
+    <p>È uno script per l'immissione della terminologia nel metaglossario.</p>
+    <p>Questo script è pensato per comporre il database output "prepared_terminology" pochi elementi alla volta, in modo da evitare problemi di run out del tempo di connessionne, che si potrebbero verificare in caso si cercasse di processare troppi elementi di terminologia alla volta.
+    <p>Questo script attinge alla terminologia salvata solo nel database "glossary_entry", in cui gli utenti hanno inserito tuple di terminologia singole. 
+    Tale terminologia viene prima riversata nel database "acquired_terminology", quindi viene elaborata e poi riversata nel database "prepared_terminology".</p>
+    <p><b>Attenzione:</b> questo algoritmo NON elimina il contenuto del database "acquired_terminology". Ciò vuol dire che se un elemento nei database di input è selezionato per l'inserimento (Admin_approval_switch = "show") e ne esiste una copia anche nei database di output, potrebbe verificarsi ridondanza della termnologia o un errore di ambiguità a causa di Id_statico_entry.</p>
+
+    <br>
+
+    <form method="post" >
+    {% csrf_token %}
+    <button type="submit" class="btn btn-warning" onclick="script_in_corso()" name="script_4">Run script</button>
+    </form>
+
+    <br><hr>
+
+
+    <h4>Riversamento cumulativo file</h4>
+
+    <p>È uno script per l'immissione della terminologia nel metaglossario.</p>
+    <p>Questo script è pensato per comporre il database output "prepared_terminology" pochi elementi alla volta, in modo da evitare problemi di run out del tempo di connessionne, che si potrebbero verificare in caso si cercasse di processare troppi elementi di terminologia alla volta.
+    <p>Questo script attinge alla terminologia salvata solo nel database "glossary_file", in cui gli utenti hanno inserito più tuple alla volta/interi glossari. 
+    Tale terminologia viene prima riversata nel database "acquired_terminology", quindi viene elaborata e poi riversata nel database "prepared_terminology".</p>
+    <p><b>Attenzione:</b> questo algoritmo NON elimina il contenuto del database "acquired_terminology". Ciò vuol dire che se un elemento nei database di input è selezionato per l'inserimento (Admin_approval_switch = "show") e ne esiste una copia anche nei database di output, potrebbe verificarsi ridondanza della termnologia o un errore di ambiguità a causa di Id_statico_entry.</p>
+    
+    <br>
+
+    <form method="post" >
+    {% csrf_token %}
+    <button type="submit" class="btn btn-warning" onclick="script_in_corso()" name="script_5">Run script</button>
+    </form>
+
+    <br><hr>
+
+
+    <h4>Resetta database output</h4>
+
+    <p>Questo script elimina la terminologia presente nei database "acquired_terminology e "prepared_terminology".</p>
+    <p>È pensato per essere utilizzato prima di iniziare a comporre il database output tramite lo script "Riversamento cumulativo".</p>
+    <p><b>Attenzione:</b> Non è necessario eseguire questo script prima dello script "Riversamento standard", in quanto quest'ultimo elimina già il contenuto dei database "acquired_terminology e "prepared_terminology".</p>
+
+    <br>
+
+    <form method="post" >
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger" onclick="script_in_corso()" name="script_3">Run script</button>
     </form>
 
      

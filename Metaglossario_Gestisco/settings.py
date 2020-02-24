@@ -195,7 +195,8 @@ ADMIN_REORDER = (
     {'app': 'app_metaglossario', 'label': 'Modelli Input',
         'models': (
             'app_metaglossario.glossary_entry',
-            'app_metaglossario.glossary_file'
+            'app_metaglossario.glossary_file',
+            'app_metaglossario.modello_prova'
         )
     },
 
@@ -206,7 +207,7 @@ ADMIN_REORDER = (
         )
     },
 
-
+    # attenzione: questo esegue l'overwrite dei modelli Group e User di default
     {'app': 'auth', 'label': 'Authorisation',
         'models': (
             'auth.Group', 

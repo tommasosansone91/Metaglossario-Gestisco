@@ -71,8 +71,9 @@
     <p>Sia il database Glossary_entry sia il database Glossary_file possiedono uno switch (“Admin_approval_switch”) che indica se una certa tupla di terminologia o un certo file è idoneo per essere processato dagli algoritmi di gestione e inserito nel database “destinazione” Prapared_terminology. 
     È compito dell’amministratore del sistema esaminare uno per uno gli elementi contenuti nei database Glossary_entry e Glossary_file e impostare “Admin_approval_switch” sul valore “show” per tutti gli elementi ritenuti idonei per essere mostrati agli utenti. 
     Gli elementi aventi “Admin_approval_switch” impostato sul valore “show” saranno comunque conservati nei database Glossary_entry e Glossary_file, ma non saranno processati e dunque non risulteranno visibili agli utenti.</p>
-    <p>Quando l’amministratore di sistema ha analizzato la terminologia e selezionato gli elementi inserire nel metaglossario, egli potrà avviarne il processing accedendo al <a href={% url 'pannello_gestione_terminologia' %}>pannello di gestione della terminologia</a> e avviando l’algoritmo “riversamento completo”.</p>
-    
+    <p>Quando l’amministratore di sistema ha analizzato la terminologia e selezionato gli elementi inserire nel metaglossario, egli potrà avviarne il processing accedendo al <a href={% url 'pannello_gestione_terminologia' %}>pannello di gestione della terminologia</a> e avviando l’algoritmo “riversamento standard”.</p>
+    <p>Nel pannello di gestione della terminologia sono inoltre disponibili degli altri algoritmi che consentono una gestione più specifica della terminologia.</p>
+
     <br>
 
         <div style="text-align:center">

@@ -136,7 +136,6 @@ class glossary_entry(models.Model):
 
 
 
-
 class glossary_file(models.Model):
 
     Glossary_file = models.FileField(upload_to='uploaded_glossaries/', blank=False, null=False)
