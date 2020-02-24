@@ -192,7 +192,7 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 13000 # higher than the count of fields
 
 ADMIN_REORDER = (
 
-    {'app': 'app_metaglossario', 'label': 'Modelli Input',
+    {'app': 'app_metaglossario', 'label': 'Terminologia Input',
         'models': (
             'app_metaglossario.glossary_entry',
             'app_metaglossario.glossary_file',
@@ -200,12 +200,20 @@ ADMIN_REORDER = (
         )
     },
 
-    {'app': 'app_metaglossario', 'label': 'Modelli output',
+    {'app': 'app_metaglossario', 'label': 'Terminologia Intermedia',
         'models': (
             'app_metaglossario.acquired_terminology',
+            
+        )
+    },    
+
+    {'app': 'app_metaglossario', 'label': 'Terminologia Output',
+        'models': (
+            
             'app_metaglossario.prepared_terminology',
         )
     },
+
 
     # attenzione: questo esegue l'overwrite dei modelli Group e User di default
     {'app': 'auth', 'label': 'Authorisation',
@@ -214,5 +222,15 @@ ADMIN_REORDER = (
             'auth.User',
         )
     },
+
+
+    {'app': 'app_metaglossario', 'label': 'Modelli utenti',
+        'models': (
+            'app_metaglossario.UserProfileInfo',
+            # 'app_metaglossario.prepared_terminology',
+        )
+    },
+
+
 
 )

@@ -146,6 +146,7 @@ class glossary_file(models.Model):
     Admin_approval_switch = models.CharField(max_length=30,blank=False, null=False, choices=Admin_approval_switch_choices, default=Admin_approval_switch_choices[1][0] )
 
 
+
     class Meta:
         ordering = ['Data_inserimento_glossary', 'Glossary_file', 'Admin_approval_switch']
         # il meno davanti all'attributo vuol dire che ordina al contrario
@@ -166,7 +167,14 @@ class glossary_file(models.Model):
 
     def __str__(self):    
         # print("%s is %d years old." % (name, age))    
-        return  "%s ----- [%s] - [%s]"  %  (self.Glossary_file, self.Data_inserimento_glossary, self.Admin_approval_switch)  
+        
+        # creo una funzione per estrarre da self (ossia il modello) il basename del file salvato in Glossary_file
+        def file_name(self):
+            import os
+            # ritornami il basename del file salvato dentro l'attributo Glossary_file
+            return os.path.basename(self.Glossary_file.name)
+        
+        return  "%s ----- [%s] - [%s]"  %  (file_name(self), self.Data_inserimento_glossary, self.Admin_approval_switch)  
         #quello che fa apparire nella sezione admin, attributo che riassume tutti gli altri, quindi una primary key presumibilmente, pouò anche esesere la combinazione degli altri
 
 

@@ -82,8 +82,13 @@ class glossary_fileAdmin(admin.ModelAdmin):
 
     search_fields = ["Glossary_file"]
     list_filter = ['Admin_approval_switch']
+
+    def file_name(self):
+            import os
+            return os.path.basename(self.Glossary_file.name)
     
-    list_display = ['Glossary_file', 'Data_inserimento_glossary', 'Admin_approval_switch']
+    
+    list_display = [file_name, 'Data_inserimento_glossary', 'Admin_approval_switch']
     list_editable = ['Admin_approval_switch']
 
 # per uesto modello non è abilitato import export
