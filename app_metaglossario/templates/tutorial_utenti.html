@@ -1,0 +1,33 @@
+{% extends 'base.html'%} <!-- vuol dire inserisci qui la navigation toolbar contenuta in base -->
+
+{% block content %}
+
+{% load static %}
+
+    <h1>Tutorial per utenti</h1>
+    
+    <br>
+
+    <p>Di seguito sono disponibili alcuni video-tutorial che illustrano il funzionamento delle componenti del metaglossario riservate agli utenti registrati.</p>
+
+    <br>
+
+    <h3>Le funzionalità del metaglossario</h3>
+    <p>Questa playlist offre una panoramica sulle funzionalità del metaglossario riservate agli utenti.</p>
+
+
+    <br>
+
+    <div style="text-align:center">
+    <iframe width="854" height="480" src="https://www.youtube.com/embed/videoseries?list=PL7TibDAktHgP0sBcEKa3DOQMzLtTbUuWR" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+
+
+<!-- CSS -->
+{% comment %} <link rel="stylesheet" type="text/css" href={% static "css/file.css" %}> {% endcomment %}
+
+<!-- Javascript -->
+{% comment %} <script type="text/javascript" src={% static "js/file.js" %}></script> {% endcomment %}
+
+{% endblock %}

@@ -42,10 +42,14 @@ urlpatterns=[
     path('logout', views_users_authentication.user_logout, name="logout"),
     path('special', views_users_authentication.special, name="special"),
 
+    # sezione per gli utenti autenticati
+    path('tutorial_utenti', view_gestione.tutorial_utenti, name="tutorial_utenti"), 
+
     # sezione di amministrazione
     path('gestione/pannello_gestione_terminologia', view_gestione.pannello_gestione_terminologia, name="pannello_gestione_terminologia"), 
     path('gestione/istruzioni_gestione_terminologia', view_gestione.istruzioni_gestione_terminologia, name="istruzioni_gestione_terminologia"), 
-
+    path('gestione/tutorial_admin', view_gestione.tutorial_admin, name="tutorial_admin"), 
+    
     
 ]
 

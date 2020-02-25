@@ -55,6 +55,19 @@ def istruzioni_gestione_terminologia(request):
 # funzione vista
 # ci può accedere solo chi è admin
 @staff_member_required
+def tutorial_admin(request):
+    return render(request, 'gestione/tutorial_admin.html', {})
+
+
+# funzione vista
+# ci può accedere solo chi è admin
+@login_required
+def tutorial_utenti(request):
+    return render(request, 'tutorial_utenti.html', {})
+
+# funzione vista
+# ci può accedere solo chi è admin
+@staff_member_required
 def pannello_gestione_terminologia(request):
 
     
