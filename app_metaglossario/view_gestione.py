@@ -93,14 +93,37 @@ def pannello_gestione_terminologia(request):
         if 'script_2' in request.POST:
             script_return_dict = Riversamento_cumulativo_completo()
 
+        # -----------------------------------------------------------------
+
+        # riversa in acquired terminology e poi processa prepared terminology
+
         if 'script_3' in request.POST:
-            script_return_dict = Resetta_database_output()
+            script_return_dict = Svuota_database_output()
+
 
         if 'script_4' in request.POST:
             script_return_dict = Riversamento_cumulativo_tuple()
 
         if 'script_5' in request.POST:
             script_return_dict = Riversamento_cumulativo_file()
+
+        # -----------------------------------------------------------------
+
+        # riversa in acquired terminology
+
+        if 'script_6' in request.POST:
+            script_return_dict = Acquisizione_cumulativa_tuple()
+
+        if 'script_7' in request.POST:
+            script_return_dict = Acquisizione_cumulativa_file()
+
+        if 'script_9' in request.POST:
+            script_return_dict = Acquisizione_cumulativa()
+            
+        # processa prepared terminology
+        if 'script_8' in request.POST:
+            script_return_dict = Riversamento_terminologia_acquisita()
+
 
 
 
@@ -188,6 +211,8 @@ def Riversamento_cumulativo_tuple():
     script_name = inspect.currentframe().f_code.co_name
     print (script_name)
     print("***************************************")
+
+    # non richiamato erase_acquired_terminology()
     
     pour_entire_entry_model()
     
@@ -208,6 +233,8 @@ def Riversamento_cumulativo_file():
     print (script_name)
     print("***************************************")
 
+    # non richiamato erase_acquired_terminology()
+
     pour_entire_file_model()
 
     erase_prepared_terminology()    
@@ -221,7 +248,7 @@ def Riversamento_cumulativo_file():
 
 
 
-def Resetta_database_output():  
+def Svuota_database_output():  
     
     script_name = inspect.currentframe().f_code.co_name
     print (script_name)
@@ -229,6 +256,70 @@ def Resetta_database_output():
     
     erase_acquired_terminology()
     erase_prepared_terminology()      
+
+    script_return_dict = {'script_name':script_name}
+
+    return(script_return_dict)
+
+
+
+def Acquisizione_cumulativa():  
+    
+    script_name = inspect.currentframe().f_code.co_name
+    print (script_name)
+    print("***************************************")
+
+    # non richiamato erase_acquired_terminology()
+
+    pour_entire_file_model()
+    pour_entire_entry_model()
+
+    script_return_dict = {'script_name':script_name}
+
+    return(script_return_dict)
+
+
+def Acquisizione_cumulativa_tuple():  
+    
+    script_name = inspect.currentframe().f_code.co_name
+    print (script_name)
+    print("***************************************")
+
+    # non richiamato erase_acquired_terminology()
+
+    pour_entire_entry_model()
+
+    script_return_dict = {'script_name':script_name}
+
+    return(script_return_dict)
+
+
+
+def Acquisizione_cumulativa_file():  
+    
+    script_name = inspect.currentframe().f_code.co_name
+    print (script_name)
+    print("***************************************")
+
+    # non richiamato erase_acquired_terminology()
+    
+    pour_entire_file_model()
+
+    script_return_dict = {'script_name':script_name}
+
+    return(script_return_dict)
+
+
+def Riversamento_terminologia_acquisita():  
+    
+    script_name = inspect.currentframe().f_code.co_name
+    print (script_name)
+    print("***************************************")
+
+    erase_prepared_terminology()    
+    
+    algoritmo_PGI()
+    algoritmo_SR_ridotto()
 
     script_return_dict = {'script_name':script_name}
 
