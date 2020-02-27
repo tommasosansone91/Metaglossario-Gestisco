@@ -43,6 +43,13 @@ def glossario(request):
             selected_entries = prepared_terminology.objects.filter(Q(Definizione_it__icontains=query)|Q(Definizione_ch__icontains=query))
 
         #filtro intelligente: 
+        elif query.lower().startswith("ambito:"):
+            query = query[8:]
+            print("Ricerca '%s' tra gli ambiti di rieferimento" % query)
+            selected_entries = prepared_terminology.objects.filter(Q(Ambito_riferimento_it__icontains=query)|Q(Ambito_riferimento_ch__icontains=query))
+
+
+        #filtro intelligente: 
         elif query.lower().startswith("fonte:"):
             query = query[6:]
             print("Ricerca '%s' tra gli autori di definizioni e di documenti fonte, tra le posizioni delle definizioni, tra i titoli dei documenti fonte e tra gli host dei documenti fonte." % query)
@@ -52,6 +59,12 @@ def glossario(request):
             query = query[4:]
             print("Ricerca '%s' gli URL" % query)
             selected_entries = prepared_terminology.objects.filter(Q(Url_documento_fonte_it__icontains=query)|Q(Url_documento_fonte_ch__icontains=query))
+
+        #filtro intelligente: 
+        elif query.lower().startswith("id:"):
+            query = query[3:]
+            print("Ricerca '%s' tra gli Id statici" % query)
+            selected_entries = prepared_terminology.objects.filter(Q(Id_statico_entry__icontains=query))
 
 
         else:        
