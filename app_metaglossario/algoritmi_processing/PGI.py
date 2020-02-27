@@ -424,13 +424,13 @@ def algoritmo_PGI():
             prepared_entry.Lemma_it = prepared_entry.Lemma_it[:1].upper() + prepared_entry.Lemma_it[1:]
 
         if not pd.isnull(prepared_entry.Acronimo_it):
-            prepared_entry.Acronimo_it.upper()
+            prepared_entry.Acronimo_it = prepared_entry.Acronimo_it.upper()
             
         if not pd.isnull(prepared_entry.Ambito_riferimento_it):    
             prepared_entry.Ambito_riferimento_it = prepared_entry.Ambito_riferimento_it[:1].upper() + prepared_entry.Ambito_riferimento_it[1:]
 
         if not pd.isnull(prepared_entry.Autore_definizione_it):    
-            prepared_entry.Autore_definizione_it.title() # non è veramente necessario
+            prepared_entry.Autore_definizione_it = prepared_entry.Autore_definizione_it.title() # non è veramente necessario
 
         if not pd.isnull(prepared_entry.Posizione_definizione_it):    
             prepared_entry.Posizione_definizione_it = prepared_entry.Posizione_definizione_it[:1].upper() + prepared_entry.Posizione_definizione_it[1:] # non è veramente necessario
@@ -439,23 +439,23 @@ def algoritmo_PGI():
             prepared_entry.Titolo_documento_fonte_it = prepared_entry.Titolo_documento_fonte_it[:1].upper() + prepared_entry.Titolo_documento_fonte_it[1:] # non è veramente necessario
 
         if not pd.isnull(prepared_entry.Autore_documento_fonte_it):    
-            prepared_entry.Autore_documento_fonte_it.title() # non è veramente necessario
+            prepared_entry.Autore_documento_fonte_it = prepared_entry.Autore_documento_fonte_it.title() # non è veramente necessario
 
         if not pd.isnull(prepared_entry.Host_documento_fonte_it):    
-            prepared_entry.Host_documento_fonte_it.title() # non è veramente necessario
+            prepared_entry.Host_documento_fonte_it = prepared_entry.Host_documento_fonte_it.title() # non è veramente necessario
 
 
         if not pd.isnull(prepared_entry.Lemma_ch):
             prepared_entry.Lemma_ch = prepared_entry.Lemma_ch[:1].upper() + prepared_entry.Lemma_ch[1:]
 
         if not pd.isnull(prepared_entry.Acronimo_ch):
-            prepared_entry.Acronimo_ch.upper()
+            prepared_entry.Acronimo_ch = prepared_entry.Acronimo_ch.upper()
             
         if not pd.isnull(prepared_entry.Ambito_riferimento_ch):    
             prepared_entry.Ambito_riferimento_ch = prepared_entry.Ambito_riferimento_ch[:1].upper() + prepared_entry.Ambito_riferimento_ch[1:]
 
         if not pd.isnull(prepared_entry.Autore_definizione_ch):    
-            prepared_entry.Autore_definizione_ch.title() # non è veramente necessario
+            prepared_entry.Autore_definizione_ch = prepared_entry.Autore_definizione_ch.title() # non è veramente necessario
 
         if not pd.isnull(prepared_entry.Posizione_definizione_ch):    
             prepared_entry.Posizione_definizione_ch = prepared_entry.Posizione_definizione_ch[:1].upper() + prepared_entry.Posizione_definizione_ch[1:] # non è veramente necessario
@@ -464,14 +464,14 @@ def algoritmo_PGI():
             prepared_entry.Titolo_documento_fonte_ch = prepared_entry.Titolo_documento_fonte_ch[:1].upper() + prepared_entry.Titolo_documento_fonte_ch[1:] # non è veramente necessario
 
         if not pd.isnull(prepared_entry.Autore_documento_fonte_ch):    
-            prepared_entry.Autore_documento_fonte_ch.title() # non è veramente necessario
+            prepared_entry.Autore_documento_fonte_ch = prepared_entry.Autore_documento_fonte_ch.title() # non è veramente necessario
 
         if not pd.isnull(prepared_entry.Host_documento_fonte_ch):    
-            prepared_entry.Host_documento_fonte_ch.title() # non è veramente necessario
+            prepared_entry.Host_documento_fonte_ch = prepared_entry.Host_documento_fonte_ch.title() # non è veramente necessario
 
 
 
-        prepared_entry.Id_statico_entry.upper() 
+        prepared_entry.Id_statico_entry = prepared_entry.Id_statico_entry.upper() 
 
         prepared_entry.save() 
 
