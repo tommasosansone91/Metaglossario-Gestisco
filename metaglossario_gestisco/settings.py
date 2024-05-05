@@ -11,11 +11,11 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os ###
-import django_heroku ###
-from decouple import config ###
+# import django_heroku ###
+# from decouple import config ###
 
-# per gestire user e password del database postgresql che cambiano ogni 24 ore sugli host
-import dj_database_url ###
+# # per gestire user e password del database postgresql che cambiano ogni 24 ore sugli host
+# import dj_database_url ###
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,7 +26,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # scret_key hidden in env variable files hidden from git
-SECRET_KEY = config("SECRET_KEY")
+# SECRET_KEY = config("SECRET_KEY")
+SECRET_KEY = '45y9gh347tjyhtegvrfwedq08wg98np3u'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -93,11 +94,11 @@ DATABASES = {
 }
 
 
-database__default_credential_url= config("DATABASE_URL")
+# database__default_credential_url= config("DATABASE_URL")
 
 # nascondi questa password
 # password 1 - .passwords.txt
-DATABASES['default']=dj_database_url.config(default=database__default_credential_url)
+# DATABASES['default']=dj_database_url.config(default=database__default_credential_url)
 
 # #postgres://user:password@host:porta/database_name
 
@@ -108,8 +109,8 @@ DATABASES['default']=dj_database_url.config(default=database__default_credential
 # quindi alla fine della produzione devo cancellarlo
 
 # questi sono settings minori
-db_from_env=dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
+# db_from_env=dj_database_url.config(conn_max_age=600)
+# DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -171,9 +172,12 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATICSTORAGE = "Whitenoise.storage.CompressedManifestStaticFilesStorage" #zips up static files
 
-django_heroku.settings(locals())  ###
+# django_heroku.settings(locals())  ###
 
 #aggiunto per far funzionare il modulo di importazione csv in admin
 IMPORT_EXPORT_USE_TRANSACTIONS = True
