@@ -1,5 +1,5 @@
 """
-WSGI config for Metaglossario_Gestisco project.
+WSGI config for metaglossario_gestisco project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Metaglossario_Gestisco.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'metaglossario_gestisco.settings')
 
 application = get_wsgi_application()
