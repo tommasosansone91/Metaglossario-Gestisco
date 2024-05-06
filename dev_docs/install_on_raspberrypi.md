@@ -186,33 +186,47 @@ enter the postgres shell as `postgres` user
 
 create the new database
 
-    create database aqiluftdaten;
+    create database metaglossario_gestisco;
 
 create a "main" and a "readonly" user for the app
 
-    create user luftdaten_main WITH ENCRYPTED PASSWORD 'aqimain';  # choose short one
+    create user metaglossariogestisco_main WITH ENCRYPTED PASSWORD 'metamain';  -- choose short one
 
-    create user luftdaten_readonly WITH ENCRYPTED PASSWORD 'aqireadonly';  # choose short one
+    create user metaglossariogestisco_readonly WITH ENCRYPTED PASSWORD 'metareadonly';  -- choose short one
 
 make the main user the owner of the database
 
-    alter database aqiluftdaten OWNER TO luftdaten_main;
+    alter database metaglossario_gestisco OWNER TO metaglossariogestisco_main;
 
-exit the shell and test to reopen it as the "main user of the app"
+exit the shell 
 
     exit
 
-    psql -h localhost -U luftdaten_main -d aqiluftdaten
+and test to reopen it as the "main user of the app"
+
+    psql -h localhost -U metaglossariogestisco_main -d metaglossario_gestisco
 
 
 > [!IMPORTANT]
 > The database name, the database-owner user and its password become the credentials for the Django app to access the database.
 
-    'NAME': 'aqiluftdaten',
-    'USER': 'luftdaten_main',
-    'PASSWORD': 'aqimain',
+    'NAME': 'metaglossario_gestisco',
+    'USER': 'metaglossariogestisco_main',
+    'PASSWORD': 'metamain',
 
 These credentials must be inserted in the `DATABASES` variable in `settings.py` module of the Django main app (the one created by default by django, at the same folder level of the other django apps inside that Django project).
+
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': '<db name here>',
+            'USER': '<user here>',
+            'PASSWORD': '<password here>',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
+    }
 
 
 ## Install Python
