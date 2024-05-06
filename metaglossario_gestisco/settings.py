@@ -86,12 +86,24 @@ WSGI_APPLICATION = 'metaglossario_gestisco.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        
+'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': 'metaglossario_gestisco',
+    'USER': 'metaglossariogestisco_main',
+    'PASSWORD': 'metamain',
+    'HOST': 'localhost',
+    'PORT': '5432',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        
+#     }
+# }
 
 
 # database__default_credential_url= config("DATABASE_URL")
