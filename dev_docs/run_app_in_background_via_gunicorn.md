@@ -8,10 +8,10 @@
 
 Lancia manualmente copiando lo script e incollandolo nella shell comando per comando, o non funziona.
 
-    cd /var/www/aqi_luftdaten/
+    cd /var/www/metaglossario_gestisco/
     source venv/bin/activate
 
-    sudo nohup env PYTHONPATH=`pwd`/.. venv/bin/gunicorn aqi_luftdaten.wsgi:application --bind localhost:8001 > /home/pi/aqi_luftdaten.log 2>&1 &
+    sudo nohup env PYTHONPATH=`pwd`/.. venv/bin/gunicorn metaglossario_gestisco.wsgi:application --bind localhost:8001 > /home/pi/metaglossario_gestisco.log 2>&1 &
 
 
     cd $current_dir
@@ -19,7 +19,7 @@ Lancia manualmente copiando lo script e incollandolo nella shell comando per com
 ### check that the app is up and running
 
     echo "Grepping the app name from ps aux"
-    echo "$(ps aux | grep 'aqi_luftdaten')"
+    echo "$(ps aux | grep 'metaglossario_gestisco')"
 
 ### exit gracefully
 
