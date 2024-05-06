@@ -1,0 +1,11 @@
+#-------------------------
+# cron per metaglossario_gestisco
+#-------------------------
+
+# sudo vim /etc/cron.d/metaglossario_gestisco-cron
+
+
+# tests
+# -------
+
+# * * * * * root cd /home/pi/;touch hello_time.txt;echo "hello the time is $(date)" >> hello_time.txt
