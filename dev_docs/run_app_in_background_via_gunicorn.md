@@ -11,7 +11,7 @@ Lancia manualmente copiando lo script e incollandolo nella shell comando per com
     cd /var/www/metaglossario_gestisco/
     source venv/bin/activate
 
-    sudo nohup env PYTHONPATH=`pwd`/.. venv/bin/gunicorn metaglossario_gestisco.wsgi:application --bind localhost:8001 > /home/pi/metaglossario_gestisco.log 2>&1 &
+    sudo nohup env PYTHONPATH=`pwd`/.. venv/bin/gunicorn metaglossario_gestisco.wsgi:application --bind localhost:8003 > /home/pi/metaglossario_gestisco.log 2>&1 &
 
 
     cd $current_dir

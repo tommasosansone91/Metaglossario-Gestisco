@@ -41,7 +41,7 @@ After=network.target
 
 [Service]
 WorkingDirectory=/var/www/metaglossario_gestisco/
-ExecStart=/var/www/metaglossario_gestisco/venv/bin/gunicorn metaglossario_gestisco.wsgi:application --bind localhost:8001
+ExecStart=/var/www/metaglossario_gestisco/venv/bin/gunicorn metaglossario_gestisco.wsgi:application --bind localhost:8003
 
 StandardOutput=file:/var/log/metaglossario_gestisco/metaglossario_gestisco-stdout.log
 StandardError=file:/var/log/metaglossario_gestisco/metaglossario_gestisco-stderr.log
