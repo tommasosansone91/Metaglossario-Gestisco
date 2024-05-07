@@ -280,6 +280,12 @@ ativate and deactivate the virtual environment only for testing
 
     sudo apt update
 
+### Upgrade pip
+
+If pip is not upgraded, it is possible that it will not pick the compatible versions of libraries.
+
+    pip install --upgrade pip
+
 ### Safe install of psycopg2
 
 safe install `psycopg2` before massively installing all the other python modules
