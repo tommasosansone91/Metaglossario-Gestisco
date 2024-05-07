@@ -410,11 +410,11 @@ connect via browser to both IP addresses
 
     http://<RPi_IP>
     http://<RPi_IP>:PORT_1  # e.g. the port of another app already running and exposed on the RPi
-    http://<RPi_IP>:3001
+    http://<RPi_IP>:3003
 
 **NOTE:** Make sure the prefix is **`http`** and not **`https`**.
 
-The other app should still be reachable, while on port `http://<RPi_IP>:3001` you should get `502 bad gateway`, as the HTTP WSGI server for is not installed yet.
+The other app should still be reachable, while on port `http://<RPi_IP>:3003` you should get `502 bad gateway`, as the HTTP WSGI server for is not installed yet.
 
 in case of errors, to rollback to the previous configuration, run
 
@@ -488,7 +488,7 @@ https://stackoverflow.com/a/39461113/7658051
 
 By using the browser of any other device (other than the RPi) connected to the LAN network, you should see the app running at
 
-http://192.168.1.106:3001/
+http://192.168.1.106:3003/
 
 
 ### Start the app manually in background via gunicorn (and gracefully exit the machine)
@@ -519,7 +519,7 @@ To exit the RPi gracefully, press <kbd>ctrl</kbd> + <kbd>D</kbd>
 
 By using the browser of any other device (other than the RPi) connected to the LAN network, you should see the app still running at
 
-http://192.168.1.106:3001/
+http://192.168.1.106:3003/
 
 
 ## cron files
@@ -628,7 +628,7 @@ In the end, test that the service works after the RPi booting
 
 After a while, by using the browser of any other device (other than the RPi) connected to the LAN network, you should see the app automatically booted and running at
 
-http://192.168.1.106:3001/
+http://192.168.1.106:3003/
 
 <hr>
 
