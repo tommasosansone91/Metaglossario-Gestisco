@@ -52,7 +52,7 @@ Restart=always
 
 # RestartSec=100ms # this is the default
 RestartSec=15s
-TimeoutSatrtSec=15s
+TimeoutStartSec=15s
 TimeoutSec=15s
 
 KillSignal=SIGQUIT
