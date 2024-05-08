@@ -4,10 +4,6 @@
 *.pyc
 __pycache__
 
-staticfiles
-
-metaglossario_gestisco.wsgi
-
 
 # past project
 # get an idea of waht was on the old PC
@@ -26,5 +22,9 @@ metaglossario_gestisco.wsgi
 .appunti docker.txt
 .passwords.txt
 
+# collected static files
+staticfiles/
+
+# forcing ignore og virtual envitronment
 venv
 
