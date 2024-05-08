@@ -40,7 +40,6 @@ After=network.target
 
 
 [Service]
-Type=simple
 WorkingDirectory=/var/www/metaglossario_gestisco/
 ExecStart=/var/www/metaglossario_gestisco/venv/bin/gunicorn metaglossario_gestisco.wsgi:application --bind localhost:8003
 
@@ -52,7 +51,7 @@ Restart=always
 # Automatically restart on kill
 
 # RestartSec=100ms # this is the default
-RestartSec=60s
+# RestartSec=60s
 
 KillSignal=SIGQUIT
 # Optional: To cleanly end the file on stop use this command. This sends a terminal interrupt command on the executable script
