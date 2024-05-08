@@ -4,6 +4,12 @@
 *.pyc
 __pycache__
 
+staticfiles
+
+
+# past project
+# get an idea of waht was on the old PC
+
 .env
 .admin.txt
 .directory.txt
