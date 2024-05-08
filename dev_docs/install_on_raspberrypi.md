@@ -298,6 +298,9 @@ safe install `psycopg2` before massively installing all the other python modules
 
 Once `psycopg2` is installed, launch the massive safe installation of required python modules
 
+> [!NOTE]
+> This will take a lot of time.
+
     cat requirements.txt | xargs -n 1 pip install
 
 for every package which raises problems, open the file `requirements.txt`, look up for the line including that module and remove the string `==X.X.X`, then run again the same command
@@ -339,11 +342,13 @@ In this app it is `staticfiles`.
 So, every time new static files are developed in `STATICFILES_DIRS` folders, the `STATIC_ROOT` folder must be updated.<br>
 This can be done by running the django command `collectstatic`.
 
+Also, `STATICFILES_DIRS` should be gitignored. 
+
     sudo su
     cd /var/www/metaglossario-gestisco
     source venv/bin/activate
 
-    python manage.py collectstatic   
+    python manage.py collectstatic  
 
 ## Configure the app to be hosted on the RPi
 
@@ -365,6 +370,8 @@ In the end, test that the app can be on the RPi without throwing any error.
 
     python manage.py runserver 0.0.0.0:8003
 
+> [!NOTE]
+> You will not be able to see the app running on any browser at this point, because nginx is not configured yet.
 
 ## Configure Nginx to serve the app
 
@@ -425,6 +432,9 @@ in case of errors, to rollback to the previous configuration, run
     systemctl stop nginx.service
     systemctl start nginx.service
     systemctl status nginx.service
+
+> [!NOTE]
+> You will not be able to see the app running on any browser at this point, because wsgi/gunicorn is not configured yet.
 
 ## web server for python: gunicorn
 
@@ -561,7 +571,7 @@ Just enable the execution of the files target of the cron
 
 ## Log files
 
-Create directrory to host logs
+Create directory to host logs
 
     sudo mkdir /var/log/metaglossario-gestisco/
 
@@ -584,10 +594,6 @@ Run
     sudo su
     cd /var/www/metaglossario-gestisco/
     source venv/bin/activate
-
-make the file executable 
-
-    sudo chmod +x metaglossario_gestisco.service
 
 Create the symbolic links
 
