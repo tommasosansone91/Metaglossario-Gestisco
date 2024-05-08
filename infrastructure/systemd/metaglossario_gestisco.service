@@ -52,6 +52,7 @@ Restart=always
 
 # RestartSec=100ms # this is the default
 # RestartSec=60s
+TimeoutSec=15s
 
 KillSignal=SIGQUIT
 # Optional: To cleanly end the file on stop use this command. This sends a terminal interrupt command on the executable script
