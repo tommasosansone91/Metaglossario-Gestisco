@@ -40,6 +40,7 @@ After=network.target
 
 
 [Service]
+Type=simple
 WorkingDirectory=/var/www/metaglossario_gestisco/
 ExecStart=/var/www/metaglossario_gestisco/venv/bin/gunicorn metaglossario_gestisco.wsgi:application --bind localhost:8003
 
