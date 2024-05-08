@@ -51,7 +51,8 @@ Restart=always
 # Automatically restart on kill
 
 # RestartSec=100ms # this is the default
-# RestartSec=60s
+RestartSec=15s
+TimeoutSatrtSec=15s
 TimeoutSec=15s
 
 KillSignal=SIGQUIT
