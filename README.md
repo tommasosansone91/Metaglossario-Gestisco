@@ -17,7 +17,7 @@ Per tale ragione un metaglossario generalmente possiede un corredo di metadati c
 <br>
 
 <div style="text-align:center">
-	<img src="https://github.com/tommasosansone91/Metaglossario-Gestisco/blob/master/static/img/info_SR_platform.png" style="width:60%;" align="middle" alt="Area transfrontaliera interessata dal progetto Gestisco" >
+	<img src="https://github.com/tommasosansone91/metaglossario_gestisco/blob/master/static/img/info_SR_platform.png" style="width:60%;" align="middle" alt="Area transfrontaliera interessata dal progetto Gestisco" >
 </div>
 
 <br> 
@@ -27,7 +27,7 @@ Per tale ragione un metaglossario generalmente possiede un corredo di metadati c
 <br>
 
 <div style="text-align:center">
-	<img src="https://github.com/tommasosansone91/Metaglossario-Gestisco/blob/master/static/img/piattaforma_metaglossario.png" style="width:50%;" align="middle" alt="Area transfrontaliera interessata dal progetto Gestisco" >
+	<img src="https://github.com/tommasosansone91/metaglossario_gestisco/blob/master/static/img/piattaforma_metaglossario.png" style="width:50%;" align="middle" alt="Area transfrontaliera interessata dal progetto Gestisco" >
 </div>   
 
 <br>

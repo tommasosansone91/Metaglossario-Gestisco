@@ -108,7 +108,7 @@ get the git clone link from github:
 > On development, git clone the project by using the github link starting with  `git@`.
 > This one allows to git push the project easily by using github SSH authentication method (SSH key exchange between github and the machine).
 
-    git clone https://github.com/tommasosansone91/metaglossario-gestisco.git
+    git clone https://github.com/tommasosansone91/metaglossario_gestisco.git
 
 
 ## Install Nginx as web server and reverse proxy
@@ -116,7 +116,7 @@ get the git clone link from github:
 This is the *web server* (server the static files) and *reverse proxy* (forwards the dynamic requests to Django).
 
     sudo su
-    cd /var/www/metaglossario-gestisco
+    cd /var/www/metaglossario_gestisco
     source venv/bin/activate
 
     apt-get update
@@ -258,7 +258,7 @@ These credentials must be inserted in the `DATABASES` variable in `settings.py` 
 
     sudo su
 
-    cd /var/www/metaglossario-gestisco
+    cd /var/www/metaglossario_gestisco
 
 specifically use python3 to create a virtual environment for the app in folder `venv`
 
@@ -272,7 +272,7 @@ ativate and deactivate the virtual environment only for testing
 ## Install the python modules web framework django
 
     sudo su
-    cd /var/www/metaglossario-gestisco
+    cd /var/www/metaglossario_gestisco
     source venv/bin/activate
 
 > [!WARNING]
@@ -312,7 +312,7 @@ for every package which raises problems, open the file `requirements.txt`, look 
 Once the app framework and postgres are both installed, create the tables required by the app to operate correctly.
 
     sudo su
-    cd /var/www/metaglossario-gestisco
+    cd /var/www/metaglossario_gestisco
     source venv/bin/activate
 
     python manage.py makemigrations
@@ -324,7 +324,7 @@ Once the app framework and postgres are both installed, create the tables requir
 Create superuser in order to access the admin section of the app.
 
     sudo su
-    cd /var/www/metaglossario-gestisco
+    cd /var/www/metaglossario_gestisco
     source venv/bin/activate
 
     python manage.py createsuperuser
@@ -345,7 +345,7 @@ This can be done by running the django command `collectstatic`.
 Also, `STATICFILES_DIRS` should be gitignored. 
 
     sudo su
-    cd /var/www/metaglossario-gestisco
+    cd /var/www/metaglossario_gestisco
     source venv/bin/activate
 
     python manage.py collectstatic  
@@ -365,7 +365,7 @@ to allow the app to be hosted on any server (not recommanded for security reason
 In the end, test that the app can be on the RPi without throwing any error.
 
     sudo su
-    cd /var/www/metaglossario-gestisco
+    cd /var/www/metaglossario_gestisco
     source venv/bin/activate
 
     python manage.py runserver 0.0.0.0:8003
@@ -376,7 +376,7 @@ In the end, test that the app can be on the RPi without throwing any error.
 ## Configure Nginx to serve the app
 
     sudo su
-    cd /var/www/metaglossario-gestisco
+    cd /var/www/metaglossario_gestisco
     source venv/bin/activate
 
 the default nginx configuration files are at paths
@@ -390,7 +390,7 @@ but we do not need the one in `sites-enabled`, so you can delete it
 
 Create the symbolic link
 
-    ln -s /var/www/metaglossario-gestisco/infrastructure/nginx/metaglossario_gestisco_nginx.conf /etc/nginx/conf.d/
+    ln -s /var/www/metaglossario_gestisco/infrastructure/nginx/metaglossario_gestisco_nginx.conf /etc/nginx/conf.d/
 
 Check that the symbolic link is right, run 
 
@@ -398,7 +398,7 @@ Check that the symbolic link is right, run
 
 you should see
 
-    lrwxrwxrwx 1 root root   68 May  5 21:18 metaglossario_gestisco_nginx.conf -> /var/www/metaglossario-gestisco/infrastructure/nginx/metaglossario_gestisco_nginx.conf
+    lrwxrwxrwx 1 root root   68 May  5 21:18 metaglossario_gestisco_nginx.conf -> /var/www/metaglossario_gestisco/infrastructure/nginx/metaglossario_gestisco_nginx.conf
 
 
 This allows Nginx to find the app-specific configuration file `infrastructure/nginx/metaglossario_gestisco_nginx.conf` when it searches for configuration files.
@@ -445,7 +445,7 @@ In other words, it is a web server designed to run Python web applications that 
 ### install gunicorn
 
     sudo su
-    cd /var/www/metaglossario-gestisco
+    cd /var/www/metaglossario_gestisco
     source venv/bin/activate
 
     pip install gunicorn
@@ -459,25 +459,25 @@ In other words, it is a web server designed to run Python web applications that 
 
 The files in the app folder `infrastructure/wsgi/` must be symbolically linked into the root directory of the project.
 
-    /var/www/metaglossario-gestisco/
+    /var/www/metaglossario_gestisco/
 
 Run
 
     sudo su
-    cd /var/www/metaglossario-gestisco
+    cd /var/www/metaglossario_gestisco
     source venv/bin/activate 
 
 Create the symbolic link
 
-    ln -s /var/www/metaglossario-gestisco/infrastructure/wsgi/metaglossario_gestisco.wsgi /var/www/metaglossario-gestisco/
+    ln -s /var/www/metaglossario_gestisco/infrastructure/wsgi/metaglossario_gestisco.wsgi /var/www/metaglossario_gestisco/
 
 Check that the symbolic link is right, run 
 
-    ll /var/www/metaglossario-gestisco/
+    ll /var/www/metaglossario_gestisco/
 
 you should see the symbolic link and check that it is not colored in red
 
-    lrwxrwxrwx  1 root root   74 May  5 15:26 metaglossario_gestisco.wsgi -> /var/www/metaglossario-gestisco/infrastructure/wsgi/metaglossario_gestisco.wsgi
+    lrwxrwxrwx  1 root root   74 May  5 15:26 metaglossario_gestisco.wsgi -> /var/www/metaglossario_gestisco/infrastructure/wsgi/metaglossario_gestisco.wsgi
 
 
 ### run the app manually via gunicorn
@@ -487,7 +487,7 @@ It binds the app **internal** port (8003) on which the app is exposed by the com
 The `--bind` part tells Gunicorn that it has to listen HTTP requests coming from that port (from the app).
 
     sudo su
-    cd /var/www/metaglossario-gestisco
+    cd /var/www/metaglossario_gestisco
     source venv/bin/activate
 
     PYTHONPATH=`pwd`/.. venv/bin/gunicorn metaglossario_gestisco.wsgi:application --bind localhost:8003
@@ -508,7 +508,7 @@ http://192.168.1.106:3003/
 > The starting, stopping and starting-at-boot of the app should be managed via systemd and the systemctl syntax, which should be implemented as last step of the app installation process.
 
     sudo su
-    cd /var/www/metaglossario-gestisco/
+    cd /var/www/metaglossario_gestisco/
     source venv/bin/activate
 
     sudo nohup env PYTHONPATH=`pwd`/.. venv/bin/gunicorn metaglossario_gestisco.wsgi:application --bind localhost:8003 > /home/pi/metaglossario_gestisco.log 2>&1 &
@@ -543,12 +543,12 @@ of the RPi.
 Run
 
     sudo su
-    cd /var/www/metaglossario-gestisco/
+    cd /var/www/metaglossario_gestisco/
     source venv/bin/activate
     
 Create the symbolic link
 
-    ln -s /var/www/metaglossario-gestisco/infrastructure/cron/metaglossario_gestisco-cron /etc/cron.d/
+    ln -s /var/www/metaglossario_gestisco/infrastructure/cron/metaglossario_gestisco-cron /etc/cron.d/
 
 Check that the symbolic link is right, run
 
@@ -556,7 +556,7 @@ Check that the symbolic link is right, run
 
 you should see
 
-    lrwxrwxrwx 1 root root 46 May  1 10:59 /etc/cron.d/metaglossario_gestisco-cron -> /var/www/metaglossario-gestisco/infrastructure/cron/metaglossario_gestisco-cron
+    lrwxrwxrwx 1 root root 46 May  1 10:59 /etc/cron.d/metaglossario_gestisco-cron -> /var/www/metaglossario_gestisco/infrastructure/cron/metaglossario_gestisco-cron
 
 This allows cron to find the app-specific cron file `infrastructure/cron/metaglossario_gestisco-cron` .
 
@@ -573,7 +573,7 @@ Just enable the execution of the files target of the cron
 
 Create directory to host logs
 
-    sudo mkdir /var/log/metaglossario-gestisco/
+    sudo mkdir /var/log/metaglossario_gestisco/
 
 
 ## Turn the app into a service
@@ -592,13 +592,13 @@ The second one will allow them to be automatically started as service as the mac
 Run
 
     sudo su
-    cd /var/www/metaglossario-gestisco/
+    cd /var/www/metaglossario_gestisco/
     source venv/bin/activate
 
 Create the symbolic links
 
-    ln -s /var/www/metaglossario-gestisco/infrastructure/systemd/metaglossario_gestisco.service /etc/systemd/system/
-    ln -s /var/www/metaglossario-gestisco/infrastructure/systemd/metaglossario_gestisco.service /etc/systemd/system/multi-user.target.wants/
+    ln -s /var/www/metaglossario_gestisco/infrastructure/systemd/metaglossario_gestisco.service /etc/systemd/system/
+    ln -s /var/www/metaglossario_gestisco/infrastructure/systemd/metaglossario_gestisco.service /etc/systemd/system/multi-user.target.wants/
 
 Check that the symbolic link is right, run
 
@@ -607,9 +607,9 @@ Check that the symbolic link is right, run
 
 you should see
 
-    lrwxrwxrwx 1 root root 52 May  1 11:04 /etc/systemd/system/multi-user.target.wants/metaglossario_gestisco.service -> /var/www/metaglossario-gestisco/infrastructure/systemd/metaglossario_gestisco.service
+    lrwxrwxrwx 1 root root 52 May  1 11:04 /etc/systemd/system/multi-user.target.wants/metaglossario_gestisco.service -> /var/www/metaglossario_gestisco/infrastructure/systemd/metaglossario_gestisco.service
     
-    lrwxrwxrwx 1 root root 52 May  1 11:04 /etc/systemd/system/metaglossario_gestisco.service -> /var/www/metaglossario-gestisco/infrastructure/systemd/metaglossario_gestisco.service
+    lrwxrwxrwx 1 root root 52 May  1 11:04 /etc/systemd/system/metaglossario_gestisco.service -> /var/www/metaglossario_gestisco/infrastructure/systemd/metaglossario_gestisco.service
 
 start the service 
 

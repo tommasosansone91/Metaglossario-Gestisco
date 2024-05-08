@@ -8,7 +8,7 @@
 
 Lancia manualmente copiando lo script e incollandolo nella shell comando per comando, o non funziona.
 
-    cd /var/www/metaglossario-gestisco/
+    cd /var/www/metaglossario_gestisco/
     source venv/bin/activate
 
     sudo nohup env PYTHONPATH=`pwd`/.. venv/bin/gunicorn metaglossario_gestisco.wsgi:application --bind localhost:8003 > /home/pi/metaglossario_gestisco.log 2>&1 &
