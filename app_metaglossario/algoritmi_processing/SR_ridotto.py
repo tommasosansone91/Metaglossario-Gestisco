@@ -59,7 +59,32 @@ def algoritmo_SR_ridotto():
     for element in prepared_entries:
 
         # "Lemma", "Acronimo", "Definizione", "Ambito_riferimento", "Autore_definizione", "Posizione_definizione", "Url_definizione", "Titolo_documento_fonte", "Autore_documento_fonte", "Host_documento_fonte", "Url_documento_fonte", "Commento_entry", "Data_inserimento_entry", "Id_statico_entry", "Admin_approval_switch"
-        new_entry = {"Lemma_it":element.Lemma_it, "Acronimo_it":element.Acronimo_it, "Definizione_it":element.Definizione_it, "Ambito_riferimento_it":element.Ambito_riferimento_it, "Autore_definizione_it":element.Autore_definizione_it, "Posizione_definizione_it":element.Posizione_definizione_it, "Url_definizione_it":element.Url_definizione_it, "Titolo_documento_fonte_it":element.Titolo_documento_fonte_it, "Autore_documento_fonte_it":element.Autore_documento_fonte_it, "Host_documento_fonte_it":element.Host_documento_fonte_it, "Url_documento_fonte_it":element.Url_documento_fonte_it, "Lemma_ch":element.Lemma_ch, "Acronimo_ch":element.Acronimo_ch, "Definizione_ch":element.Definizione_ch, "Ambito_riferimento_ch":element.Ambito_riferimento_ch, "Autore_definizione_ch":element.Autore_definizione_ch, "Posizione_definizione_ch":element.Posizione_definizione_ch, "Url_definizione_ch":element.Url_definizione_ch, "Titolo_documento_fonte_ch":element.Titolo_documento_fonte_ch, "Autore_documento_fonte_ch":element.Autore_documento_fonte_ch, "Host_documento_fonte_ch":element.Host_documento_fonte_ch, "Url_documento_fonte_ch":element.Url_documento_fonte_ch, "Commento_entry":element.Commento_entry, "Data_inserimento_entry":element.Data_inserimento_entry, "Id_statico_entry":element.Id_statico_entry, "Admin_approval_switch":element.Admin_approval_switch}
+        new_entry = {
+            "Lemma_it":element.Lemma_it, 
+                    "Acronimo_it":element.Acronimo_it, 
+                    "Definizione_it":element.Definizione_it, 
+                    "Ambito_riferimento_it":element.Ambito_riferimento_it, 
+                    "Autore_definizione_it":element.Autore_definizione_it, 
+                    "Posizione_definizione_it":element.Posizione_definizione_it, 
+                    "Url_definizione_it":element.Url_definizione_it, 
+                    "Titolo_documento_fonte_it":element.Titolo_documento_fonte_it, 
+                    "Autore_documento_fonte_it":element.Autore_documento_fonte_it, 
+                    "Host_documento_fonte_it":element.Host_documento_fonte_it, 
+                    "Url_documento_fonte_it":element.Url_documento_fonte_it, 
+                    "Lemma_ch":element.Lemma_ch, "Acronimo_ch":element.Acronimo_ch, 
+                    "Definizione_ch":element.Definizione_ch, 
+                    "Ambito_riferimento_ch":element.Ambito_riferimento_ch, 
+                    "Autore_definizione_ch":element.Autore_definizione_ch, 
+                    "Posizione_definizione_ch":element.Posizione_definizione_ch, 
+                    "Url_definizione_ch":element.Url_definizione_ch, 
+                    "Titolo_documento_fonte_ch":element.Titolo_documento_fonte_ch, 
+                    "Autore_documento_fonte_ch":element.Autore_documento_fonte_ch, 
+                    "Host_documento_fonte_ch":element.Host_documento_fonte_ch, 
+                    "Url_documento_fonte_ch":element.Url_documento_fonte_ch, 
+                    "Commento_entry":element.Commento_entry, 
+                    "Data_inserimento_entry":element.Data_inserimento_entry, 
+                    "Id_statico_entry":element.Id_statico_entry, 
+                    "Admin_approval_switch":element.Admin_approval_switch}
         # verifica che potrei farlo come negli script di gestione includendo il nul... inquesto modo però non viene restituito il nome
 
 
