@@ -5,6 +5,8 @@
 __pycache__
 db.sqlite3
 
+static/saved_dataframes
+
 # past project
 # get an idea of waht was on the old PC
 
