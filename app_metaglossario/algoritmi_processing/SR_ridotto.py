@@ -88,7 +88,7 @@ def algoritmo_SR_ridotto():
         # verifica che potrei farlo come negli script di gestione includendo il nul... inquesto modo però non viene restituito il nome
 
 
-        GI = GI.append(new_entry, ignore_index=True)
+        GI = pd.concat([GI, new_entry], ignore_index=True)
 
   
     GI = GI.sort_values(['Lemma_it','Lemma_ch', 'Id_statico_entry'])
