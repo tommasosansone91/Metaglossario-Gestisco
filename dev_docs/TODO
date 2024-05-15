@@ -1,0 +1,2 @@
+script of processing must be turned into async one,
+otherwise they will meet timeout of views.
